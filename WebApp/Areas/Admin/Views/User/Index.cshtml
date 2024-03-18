@@ -1,0 +1,104 @@
+﻿@model List<BusinessLogic.Dtos.Role.RoleResponse>
+@using BusinessLogic.Constants.Role
+@{
+    ViewData["Title"] = "User Management";
+}
+@section Scripts {
+
+    <script src="~/admin-app/controllers/user/index.js" asp-append-version="true"></script>
+    <script>
+        var userObj = new UserController();
+        userObj.initialize();
+    </script>
+}
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Danh sách nhân viên</li>
+                </ol>
+            </div>
+            <h4 class="page-title">Danh sách nhân viên</h4>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-10 form-group row">
+                        <label class="col-sm-auto col-form-label" for="searchRoleName">Tên vai trò</label>
+                        <div class="col-sm-3">
+                            <select class="custom-select" id="searchRoleName">
+                                <option value="">Chọn vai trò</option>
+                                @foreach (var item in Model)
+                                {
+                                    <option value="@item.Name">@item.Name</option>
+                                }
+                            </select>
+                        </div>
+                        <label class="col-sm-auto col-form-label" for="txtKeyword">Tìm kiếm</label>
+                        <div class="col-sm-3">
+                            <input type="text" id="txtKeyword" class="form-control" placeholder="Email, Tên người dùng, Họ tên...">
+                        </div>
+                    </div>
+                    <div class="col-sm-2 text-right pb-3">
+                        <button type="submit" class="btn btn-primary" id="btn-create" data-animation="fadein">
+                            <i class="fe-plus-circle"></i>
+                            Tạo nhân viên
+                        </button>
+                    </div>
+                </div>
+                <table id="datatable-buttons" class="table table-striped dt-responsive nowrap">
+                    <thead>
+                        <tr>
+                            <th>SỐ</th>
+                            <th>ẢNH</th>
+                            <th>HỌ TÊN</th>
+                            <th>EMAIL/TÊN ĐĂNG NHẬP</th>
+                            <th>VAI TRÒ</th>
+                            <th>NGÀY SINH</th>
+                            <th>ĐIỆN THOẠI</th>
+                            <th>TRẠNG THÁI</th>
+                            <th>NGÀY TẠO</th>
+                            <th class="action-columns">THAO TÁC</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbl-content"></tbody>
+                </table>
+
+                <partial name="_PaginationPartial" />
+            </div> <!-- end card body-->
+        </div> <!-- end card -->
+    </div><!-- end col-->
+</div>
+<!-- end row-->
+
+<script id="table-template" type="x-tmpl-mustache">
+    <tr>
+        <td>{{DisplayOrder}}</td>
+        <td>{{{AvatarUrl}}}</td>
+        <td>{{FullName}}</td>
+        <td>{{Email}}</td>
+        <td>{{RoleName}}</td>
+        <td>{{DateOfBirth}}</td>
+        <td>{{PhoneNumber}}</td>
+        <td>{{{Status}}}</td>
+        <td>{{{CreatedOn}}}</td>
+        <td class="text-center">
+            <a href="#" data-id="{{Id}}" class="btn btn-xs btn-info btn-change-pass" ><i class="remixicon-lock-2-line"></i></a>
+            <a href="#" data-id="{{Id}}" class="btn btn-xs btn-info btn-edit" ><i class="fe-edit-2"></i></a>
+            <a href="#" data-id="{{Id}}" class="btn btn-xs btn-danger btn-delete"><i class="fe-trash-2"></i></a>
+        </td>
+    </tr>
+</script>
+<partial name="_MemberStatus.cshtml" />
+<partial name="_AddEditUser.cshtml", model="Model" />
+<partial name="_ChangePassUser.cshtml" />

@@ -1,0 +1,45 @@
+﻿@model List<BusinessLogic.Dtos.Function.FunctionResponse>
+
+<div class="left-side-menu">
+
+    <div class="slimscroll-menu">
+
+        <!--- Sidemenu -->
+        <div id="sidebar-menu">
+
+            <ul class="metismenu" id="side-menu">
+                @foreach (var item in Model.Where(x => string.IsNullOrEmpty(x.ParentId)))
+                {
+                    var hrefParent = Model.Any(x => x.ParentId == item.FunctionId) ? "javascript: void(0);" : item.URL;
+                    <li>
+                        <a href="@hrefParent" class="waves-effect">
+                            <i class="@item.IconCss"></i>
+                            <span> @item.Name </span>
+                            @if(Model.Any(x => x.ParentId == item.FunctionId))
+                            {
+                                <span class="menu-arrow"></span>
+                            }
+                        </a>
+                        @if (Model.Any(x => x.ParentId == item.FunctionId))
+                        {
+                            <ul class="nav-second-level mm-collapse" aria-expanded="false" style="">
+                                @foreach (var jitem in Model.Where(x => x.ParentId == item.FunctionId))
+                                {
+                                    <li>
+                                        <a href="@jitem.URL"> @jitem.Name </a>
+                                    </li>
+                                }
+                            </ul>
+                        }
+                    </li>
+                }
+            </ul>
+        </div>
+        <!-- End Sidebar -->
+
+        <div class="clearfix"></div>
+
+    </div>
+    <!-- Sidebar -left -->
+
+</div>

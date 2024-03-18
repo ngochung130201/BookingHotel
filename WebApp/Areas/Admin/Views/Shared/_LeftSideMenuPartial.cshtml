@@ -1,0 +1,90 @@
+<div class="left-side-menu">
+
+    <div class="slimscroll-menu">
+
+        <!--- Sidemenu -->
+        <div id="sidebar-menu">
+
+            <ul class="metismenu" id="side-menu">
+                <li class="title-menu">
+                    <p>General</p>
+                </li>
+                <li class="mm-active">
+                    <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="waves-effect">
+                        <i class="remixicon-dashboard-line"></i>
+                        <span> Dashboards </span>
+                    </a>
+                </li>
+                <li class="title-menu">
+                    <p>Management</p>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="waves-effect" aria-expanded="false">
+                        <i class="remixicon-pages-line"></i>
+                        <span> Content </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <ul class="nav-second-level mm-collapse" aria-expanded="false" style="">
+                        <li>
+                            <a asp-area="Admin" asp-controller="Pages" asp-action="Index"> Pages </a>
+                        </li>
+                        <li>
+                            <a asp-area="Admin" asp-controller="Services" asp-action="Index"> Services </a>
+                        </li>
+                        <li>
+                            <a asp-area="Admin" asp-controller="News" asp-action="Index"> News </a>
+                        </li>
+                        <li>
+                            <a asp-area="Admin" asp-controller="Partner" asp-action="Index"> Partners </a>
+                        </li>
+                        <li>
+                            <a asp-area="Admin" asp-controller="FAQs" asp-action="Index"> FAQs </a>
+                        </li>
+                        <li>
+                            <a asp-area="Admin" asp-controller="ProjectPortfolios" asp-action="Index"> Project Portfolios </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="javascript: void(0);" class="waves-effect" aria-expanded="false">
+                        <i class="remixicon-calculator-line"></i>
+                        <span> Ticket Management </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <ul class="nav-second-level mm-collapse" aria-expanded="false" style="">
+                        <li>
+                            <a asp-area="Admin" asp-controller="Tickets" asp-action="Index">Ticket</a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <a href="javascript: void(0);" class="waves-effect" aria-expanded="false">
+                        <i class="remixicon-settings-2-line"></i>
+                        <span> System </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <ul class="nav-second-level mm-collapse" aria-expanded="false" style="">
+                        <li>
+                            <a asp-area="Admin" asp-controller="User" asp-action="Index"> Users </a>
+                        </li>
+                        <li>
+                            <a asp-area="Admin" asp-controller="Role" asp-action="Index"> Roles </a>
+                        </li>
+                        <li>
+                            <a asp-area="Admin" asp-controller="Function" asp-action="Index"> Functions </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+        <!-- End Sidebar -->
+
+        <div class="clearfix"></div>
+
+    </div>
+    <!-- Sidebar -left -->
+
+</div>

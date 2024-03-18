@@ -1,0 +1,82 @@
+﻿<div id="modal-grantpermission" class="modal fade modal-darkorange in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Assign Permission</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12 col-md-12">
+                        <input type="hidden" id="hidRoleId" />
+                        <table class="table table-hover tree" id="tblFunction">
+                            <thead class="bordered-darkorange">
+                                <tr>
+                                    <th>Function name</th>
+                                    <th>
+                                        <label>
+                                            <input type="checkbox" id="ckCheckAllView">
+                                            <span class="text">View</span>
+                                        </label>
+                                    </th>
+                                    <th>
+                                        <label>
+                                            <input type="checkbox" id="ckCheckAllCreate">
+                                            <span class="text">Create</span>
+                                        </label>
+                                    </th>
+                                    <th>
+                                        <label>
+                                            <input type="checkbox" id="ckCheckAllEdit">
+                                            <span class="text">Update</span>
+                                        </label>
+                                    </th>
+                                    <th>
+                                        <label>
+                                            <input type="checkbox" id="ckCheckAllDelete">
+                                            <span class="text">Delete</span>
+                                        </label>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="lst-data-function"></tbody>
+                        </table>
+                        <script id="result-data-function" type="x-tmpl-mustache">
+                            <tr class="treegrid-{{Id}} {{treegridparent}}" data-id="{{Id}}">
+                                <td>{{Name}}</td>
+                                <td>
+                                    <label>
+                                        <input type="checkbox" value="{{Id}}" class="ckView">
+                                        <span class="text">Allow</span>
+                                    </label>
+                                </td>
+                                <td>
+                                    <label>
+                                        <input type="checkbox" value="{{Id}}" class="ckAdd">
+                                        <span class="text">Allow</span>
+                                    </label>
+                                </td>
+                                <td>
+                                    <label>
+                                        <input type="checkbox" value="{{Id}}" class="ckEdit">
+                                        <span class="text">Allow</span>
+                                    </label>
+                                </td>
+                                <td>
+                                    <label>
+                                        <input type="checkbox" value="{{Id}}" class="ckDelete">
+                                        <span class="text">Allow</span>
+                                    </label>
+                                </td>
+                            </tr>
+                        </script>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnSavePermission" class="btn btn-success">Save</button>
+                <button type="button" id="btnCancel" data-dismiss="modal" class="btn btn-danger">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

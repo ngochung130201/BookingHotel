@@ -1,0 +1,62 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+<section class="section-contact">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center">
+            <div class="col-12 col-lg-5 contact-infor">
+                <h2 class="h2-title wow fadeInUp visibility-hidden">@Localizer["Title1"] </h2>
+                <p class="wow fadeInUp visibility-hidden" data-wow-delay="0.3s">@Localizer["Title2"]</p>
+                <p class="wow fadeInUp visibility-hidden" data-wow-delay="0.5s">
+                    <span>+84 12345678</span> <br>
+                    <span>@Localizer["Title3"]</span> <br>
+                    <span>Minmax@carbon.com</span>
+                </p>
+            </div>
+            <div class="col-12 col-lg-7 p-0">
+                <div class="form-contact">
+                    <form id="formContact">
+                        <div class="row">
+                            <div class="col-sm-6 col-12 wow fadeInUp visibility-hidden">
+                                <div class="field">
+                                    <label for="">@Localizer["Title4"]</label>
+                                    <input id="nameContact" name="name" type="text" placeholder="@Localizer["Title4"]">
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-12 wow fadeInUp visibility-hidden" data-wow-delay="0.2s">
+                                <div class="field">
+                                    <label for="">@Localizer["Title5"]</label>
+                                    <input id="emailContact" name="email" type="email" placeholder="@Localizer["Title5"]">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 col-12 wow fadeInUp visibility-hidden">
+                                <div class="field">
+                                    <label for="">@Localizer["Title6"]</label>
+                                    <input id="serviceContact" name="service" type="text" placeholder="@Localizer["Title8"]">
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-12 wow fadeInUp visibility-hidden" data-wow-delay="0.2s">
+                                <div class="field">
+                                    <label for="">@Localizer["Title7"]</label>
+                                    <input id="companyContact" name="company" type="text" placeholder="@Localizer["Title7"]">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 wow fadeInUp visibility-hidden">
+                                <div class="field">
+                                    <label for="">@Localizer["Title9"]</label>
+                                    <textarea name="description" id="descriptionContact" placeholder="@Localizer["Title10"]" cols="20" rows="3"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="submit-form wow fadeInUp visibility-hidden" data-wow-delay="0.2s">
+                            <button id="btnContact">@Localizer["Title11"]</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

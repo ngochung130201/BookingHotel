@@ -1,0 +1,48 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using BusinessLogic.Constants.Application
+@inject IViewLocalizer Localizer
+
+@{
+    var httpContext = ViewContext.HttpContext;
+    string appDomain = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}";
+}
+<section class="our-services our-services-slick">
+    <div class="container">
+        <div class="title-services">
+            <div class="">
+                <h2 class="h2-title wow fadeInUp visibility-hidden">@Localizer["Title1"]</h2>
+                <p class="wow fadeInUp visibility-hidden" data-wow-delay="0.3s">@Localizer["Title2"] <br> @Localizer["Title3"] </p>
+            </div>
+            <div class="view-all wow fadeInUp visibility-hidden">
+                <li><a asp-controller="Service" asp-action="Index">@Localizer["Title4"]</a></li>
+            </div>
+        </div>
+    </div>
+    <div class="services-slick slick-common wow fadeInUp visibility-hidden" data-wow-delay="0.5s">
+        <div class="slick-slider">
+            @if (Model.Item2 == ApplicationConstants.LanguageType.English)
+            {
+                @foreach (var item in Model.Item1)
+                {
+                    <div class="slick-item">
+                        <img src="@appDomain@item.ImageUrl" width="329px" height="341px" alt="services_image1">
+                        <p>@item.Title </p>
+                        <a href="/service-detail/@item..Item1.SeoAlias-@item.Id">@Localizer["Title5"]</a>
+                    </div>
+                }
+            }
+            else
+            {
+                @foreach (var item in Model.Item1)
+                {
+                    <div class="slick-item">
+                        <img src="@appDomain@item.ImageUrl" width="329px" height="341px" alt="services_image1">
+                        <p>@item.TitleVi </p>
+                        <a href="/service-detail/@item..Item1.SeoAlias-@item.Id">@Localizer["Title5"]</a>
+                    </div>
+                }
+            }
+            
+        </div>
+    </div>
+</section>

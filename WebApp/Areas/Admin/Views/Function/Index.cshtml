@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewData["Title"] = "Function";
+}
+
+@section Styles {
+    <link href="~/lib/jQuery-EasyUI/themes/bootstrap/easyui.css" rel="stylesheet" />
+    <link href="~/lib/jQuery-EasyUI/themes/icon.css" rel="stylesheet" />
+}
+
+@section Scripts {
+    <script src="~/lib/jQuery-EasyUI/jquery.easyui.min.js"></script>
+    <script src="~/admin-app/controllers/function/index.js" asp-append-version="true"></script>
+    <script>
+        var menu = new FunctionController();
+        menu.initialize();
+    </script>
+}
+
+
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Function Management</li>
+                </ol>
+            </div>
+            <h4 class="page-title">Function Management</h4>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-12 text-right pb-3">
+                        <button type="submit" class="btn btn-primary" id="btn-create" data-animation="fadein">Add New</button>
+                    </div>
+                </div>
+                <ul id="treeFunction"></ul>
+                <div id="contextMenu" class="easyui-menu" style="width:120px;">
+                    <div id="btn-edit" data-options="iconCls:'icon-edit'">Edit</div>
+                    <div id="btn-delete" data-options="iconCls:'icon-remove'">Delete</div>
+                </div>
+            </div> <!-- end card body-->
+        </div> <!-- end card -->
+    </div><!-- end col-->
+</div>
+<!-- end row-->
+
+
+<partial name="_AddEditModal.cshtml" />

@@ -1,0 +1,98 @@
+﻿@{
+    Layout = null;
+}
+@using Microsoft.AspNetCore.Mvc.Localization
+@model BusinessLogic.Dtos.Identity.Requests.RegisterRequest
+@inject IViewLocalizer Localizer
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "https://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <title>@Localizer["SignUp"]</title>
+    <meta name="description" content="Empowering Sustainability with Smart Environmental Accounting | Minimax" />
+    <meta name="keywords" content="Minimax" />
+
+    <link rel="icon" href="~/assets/favicon.ico" type="image/vnd.microsoft.icon">
+    <meta property="og:title" content="@Localizer["SignUp"]" />
+    <meta property="og:description" content="Empowering Sustainability with Smart Environmental Accounting | Minimax" />
+    <meta property="og:type" content="article" />
+    <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@600;700&family=Inter:wght@500;600&display=swap"
+          rel="stylesheet">
+    <link href="~/assets/landing-page/css/common.css" rel="stylesheet" media="all" />
+    <link href="~/assets/landing-page/css/login.css" rel="stylesheet" media="all" />
+</head>
+
+<body>
+    <div class="l-body" id="content">
+        <div class="login-wrap">
+            <div class="login-inner d-flex flex-wrap">
+                <div class="infor_web w-50">
+                    <p class="logo">
+                        <a href="/">
+                        <img src="~/assets/landing-page/img/logo/logo.webp" width="85px" height="80px" alt="logo" />
+                        </a>
+                    </p>
+                    <p>
+                        @Localizer["Title1"]
+                        @Localizer["Title2"]
+                    </p>
+                </div>
+                <div class="form-login w-50">
+                    <form asp-action="SignUp">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="field">
+                            <label for="Email">Email</label>
+                            <div class="field-Email">
+                                <input id="Email" type="text" class="form-control" placeholder="Email" asp-for="Email" value="@Model.Email">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="Firstname">@Localizer["FullName"]</label>
+                            <div class="d-flex wrap-col2">
+                                <input id="Firstname" type="text" class="form-control" placeholder="@Localizer["FirstName"]" asp-for="FirstName" value="@Model.FirstName">
+                                <input id="Lastname" type="text" class="form-control" placeholder="@Localizer["LastName"]" asp-for="LastName" value="@Model.LastName">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="Password">@Localizer["CompanyName"]</label>
+                            <input id="CompanyName" type="text" class="form-control" placeholder="@Localizer["CompanyName"]" asp-for="CompanyName" value="@Model.CompanyName">
+                        </div>
+                        <div class="field">
+                            <label for="Password">@Localizer["Password"]</label>
+                            <div class="field-password">
+                            <input id="Password" type="password" class="form-control" placeholder="@Localizer["Password"]" asp-for="Password" value="@Model.Password">
+                            </div>
+                            <span class="eye_icon"></span>
+                        </div>
+                        <div class="field">
+                            <label for="ConfirmPassword">@Localizer["ConfirmPassword"]</label>
+                            <div class="field-password">
+                            <input id="ConfirmPassword" type="password" class="form-control" placeholder="@Localizer["ConfirmPassword"]" asp-for="ConfirmPassword" value="@Model.ConfirmPassword">
+                            </div>
+                            <span class="eye_icon_confirm_password"></span>
+                        </div>
+                        <div class="notify-form">
+                            <p>@Localizer["TermOfRegister1"] </p>
+                            <p>
+                                <a asp-controller="Home" asp-action="TermsOfUse">@Localizer["TermOfRegister2"]</a> @Localizer["TermOfRegister3"]  <a asp-controller="Home" asp-action="PrivacyPolicy">@Localizer["TermOfRegister4"]</a>
+                            </p>
+                        </div>
+                        <div class="forgot_submit">
+                            <a asp-action="ForgotPassword">@Localizer["ForgotPassword"]</a>
+                            <button type="submit">@Localizer["SignUp"]</button>
+                        </div>
+                        <div class="not-account">
+                            <span>@Localizer["HaveAnAccount"] <a asp-action="Login">@Localizer["SignIn"]</a></span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="~/assets/landing-page/js/jquery.min.js"></script>
+<script src="~/assets/landing-page/js/main.js" defer></script>
+</html>

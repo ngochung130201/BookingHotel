@@ -1,0 +1,97 @@
+﻿@model WebApp.Areas.Admin.Models.Login.LoginViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Travico Portal - Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin which can be used to build CRM, CMS, etc." name="description">
+    <meta content="Coderthemes" name="author">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- App favicon -->
+    <link rel="icon" href="~/assets/favicon.ico" type="image/vnd.microsoft.icon">
+
+    <!-- App css -->
+    <link href="~/assets/admin/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/admin/css/icons.min.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/admin/css/app.min.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/admin/css/login.css" rel="stylesheet" />
+    <link href="~/lib/notifyjs/dist/styles/metro/notify-metro.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <div class="account-pages ">
+        <div class="justify-content-center account-pages-inner">
+            <div class="bg-login col-lg-6 col-xl-6"></div>
+            <div class="col-md-12 col-lg-6 col-xl-6">
+                <div class="login-wrap">
+                    <div class="text-center mb-4">
+                        <a href="/">
+                            <span><img src="~/assets/landing-page/img/logo/logo_header.webp" /></span>
+                        </a>
+                    </div>
+
+                    <form id="formLogin" method="post">
+                        @Html.AntiForgeryToken()
+                        <div class="field">
+                            <label for="username">Username</label>
+                            <div class="field-Email">
+                                <input class="form-control" asp-for="UserName" type="text" id="username" required="" placeholder="Enter your username">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="password">Password</label>
+                            <input class="form-control" asp-for="Password" type="password" required="" id="password" placeholder="Enter your password">
+                            <span class="eye_icon"></span>
+                        </div>
+                        <div class="forgot_submit">
+                            <button class="btn-block" id="btnLogin" type="submit"> Log In </button>
+                        </div>
+                    </form>
+                </div>
+                <!-- end card -->
+
+            </div> <!-- end col -->
+        </div>
+        <!-- end row -->
+        <!-- end container -->
+    </div>
+    <!-- end page -->
+    <!-- Vendor js -->
+    <script src="~/assets/admin/js/vendor.min.js"></script>
+
+    <!-- App js -->
+    <script src="~/assets/admin/js/app.min.js"></script>
+
+    <script src="~/lib/notifyjs/dist/notify.js"></script>
+    <script src="~/lib/notifyjs/dist/styles/metro/notify-metro.js"></script>
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/admin-app/shared/base.js"></script>
+    <script src="~/admin-app/controllers/login/index.js" asp-append-version="true"></script>
+    <script>
+        document.querySelector('.eye_icon').addEventListener('click', function () {
+            console.log(123)
+            var passwordField = document.getElementById('password');
+            var fieldType = passwordField.getAttribute('type');
+
+            if (fieldType === 'password') {
+                passwordField.setAttribute('type', 'text');
+                this.classList.add('active');
+            } else {
+                passwordField.setAttribute('type', 'password');
+                this.classList.remove('active');
+            }
+        });
+        var login = new loginController();
+        login.initialize();
+    </script>
+</body>
+</html>

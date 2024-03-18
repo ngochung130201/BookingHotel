@@ -1,0 +1,120 @@
+﻿@using WebApp.Extensions;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Booking Hotel - Admin Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description">
+    <meta content="Coderthemes" name="author">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- App favicon -->
+    <link rel="icon" href="~/assets/admin/images/users/DQ.png" type="image/vnd.microsoft.icon">
+    <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@600;700&family=Inter:wght@500;600&display=swap"
+          rel="stylesheet">
+    <!-- App css -->
+    <link href="~/assets/admin/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/admin/css/icons.min.css" rel="stylesheet" type="text/css">
+    <link href="~/lib/notifyjs/dist/styles/metro/notify-metro.css" rel="stylesheet" />
+    <link href="~/assets/admin/css/app.min.css" rel="stylesheet" type="text/css">
+    <link href="~/lib/ckeditor/skins/moono/editor.css" rel="stylesheet" />
+    <link href="~/assets/admin/css/dashboad.css" rel="stylesheet" />
+    <link href="~/assets/admin/css/custom.css" rel="stylesheet"  />
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+
+<body>
+    <!-- Pre-loader -->
+    <div id="preloader">
+        <div id="status">
+            <div class="bouncingLoader"><div></div><div></div><div></div></div>
+        </div>
+    </div>
+    <!-- End Preloader-->
+
+    <!-- Begin page -->
+    <div id="wrapper" class="custom-dashboad">
+
+        <!-- Topbar Start -->
+        @await Html.PartialAsync("_TopBarPartial")
+        <!-- end Topbar -->
+        <!-- ========== Left Sidebar Start ========== -->
+        @await Component.InvokeAsync("SideBar")
+        @* @await Html.PartialAsync("_LeftSideMenuPartial") *@
+        <!-- Left Sidebar End -->
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+        <div class="content-page">
+            <div class="content">
+                <!-- Start Content-->
+                <div class="container-fluid">
+                    @RenderBody()
+                </div> <!-- container -->
+            </div> <!-- content -->
+            <!-- Footer Start -->
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6">
+                            2024 &copy; Power by <a href="https://nineplus.com.vn">NinePlus Solution</a>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="text-md-right footer-links d-none d-sm-block">
+                                <a href="javascript:void(0);">About Us</a>
+                                <a href="javascript:void(0);">Help</a>
+                                <a href="javascript:void(0);">Contact Us</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- end Footer -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- END wrapper -->
+    <!-- Right Sidebar -->
+    @await Html.PartialAsync("_RightBarPartial")
+    <!-- /Right-bar -->
+    <!-- Right bar overlay-->
+    <div class="rightbar-overlay"></div>
+
+    <!-- Vendor js -->
+    <script src="~/assets/admin/js/vendor.min.js"></script>
+
+    <script src="~/assets/admin/libs/jquery-knob/jquery.knob.min.js"></script>
+    <script src="~/assets/admin/libs/peity/jquery.peity.min.js"></script>
+
+    <!-- Sparkline charts -->
+    <script src="~/assets/admin/libs/jquery-sparkline/jquery.sparkline.min.js"></script>
+
+    <!-- init js -->
+    <script src="~/assets/admin/js/pages/dashboard-1.init.js"></script>
+    
+    <script src="~/lib/mustache/mustache.js"></script>
+
+    <!-- jQuery Sparklines -->
+    <script src="~/lib/twbs-pagination/jquery.twbsPagination.js"></script>
+    <script src="~/lib/jquery-sparkline/dist/jquery.sparkline.js"></script>
+    
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/lib/ckeditor/ckeditor.js"></script>
+    
+    <script src="~/lib/moment/moment.js"></script>
+
+    <script src="~/lib/notifyjs/dist/notify.js"></script>
+    <script src="~/lib/notifyjs/dist/styles/metro/notify-metro.js"></script>
+    <script src="~/lib/bootbox/src/bootbox.js"></script>
+    <script src="~/admin-app/shared/base.js" asp-append-version="true"></script>
+    <!-- App js -->
+    <script src="~/assets/admin/js/app.min.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

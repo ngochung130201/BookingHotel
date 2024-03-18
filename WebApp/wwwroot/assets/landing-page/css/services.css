@@ -1,0 +1,420 @@
+/* ----------------- Serrvice ----------------------*/
+.detail-title h2 {
+    font-family: Arimo;
+    font-size: 60px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 72px; /* 120% */
+    letter-spacing: -1.2px;
+    text-align:center;
+    margin-bottom:24px;
+}
+.slick-common .slick-item a {
+    display: inline-block;
+    position: relative;
+    /* 187.5% */
+    color: #0F723A;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 30px;
+    text-decoration: none;
+}
+
+.slick-common .slick-item a::before {
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 100%;
+    height: 2px;
+    transform: translateX(-50%);
+    background-color: #0F723A;
+    content: "";
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.slick-common .slick-item p {
+    margin-bottom: 24px;
+    color: #171717;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 30px;
+    word-break: keep-all;
+}
+
+.our-services .title-services p {
+    color: #646464;
+}
+
+.slick-common .slick-item a:hover::before {
+    width: 0%;
+}
+
+.wrap-services {
+    padding: 60px 0;
+}
+
+.our-services .title-services {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 48px;
+}
+
+.wrap-services .services-list {
+    padding: 0 40px;
+}
+
+.wrap-services .services-list .services-item {
+    margin-bottom: 60px;
+}
+
+.row-reverse {
+    flex-direction: row-reverse;
+}
+
+.slick-common .slick-item {
+    width: 329px !important;
+    border-radius: 16px;
+}
+.breadcrumb-common {
+    margin-bottom: 20px;
+    padding-top: 60px;
+}
+
+.breadcrumb-common .breadcrumb-inner a {
+    display: inline-block;
+    margin-right: 20px;
+    padding-right: 20px;
+    background: url("../img/icon/breadcrumb_arrow.png") no-repeat right center;
+    color: #646464;
+    font-size: 14px;
+}
+
+
+.section-sustainable .sustainable-item {
+    padding: 60px 0;
+}
+.our-story {
+    padding: 60px 0;
+}
+
+.our-story .our-story-title h2 {
+    margin-bottom: 20px;
+}
+
+.our-story .our-story-title p {
+    color: #646464;
+    font-size: 20px;
+    text-align: justify;
+}
+
+.our-story .our-story-image {
+    padding: 0;
+    text-align: right;
+}
+
+.our-story .our-story-image img {
+    border-radius: 16px;
+}
+
+.our-mission {
+    padding: 60px 0;
+    background-color: #0F723A;
+}
+
+.our-mission .our-mission-content {
+    display: flex;
+    position: relative;
+    flex-direction: row-reverse;
+    align-items: center;
+    background: url(../img/about-us/ellipse.png) no-repeat right 125px center;
+}
+
+.our-mission .our-mission-title {
+    width: 50%;
+    padding: 60px;
+    border-radius: 16px;
+    background-color: #0F723A;
+}
+
+.our-mission .our-mission-title h2 {
+    margin-bottom: 20px;
+    color: #fff;
+    font-family: Arimo;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 700;
+    text-align: right;
+}
+
+.our-mission .our-mission-title p {
+    color: #fff;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    text-align: justify;
+}
+
+.our-mission .our-mission-image {
+    width: 50%;
+}
+
+.our-mission .our-mission-image .our-mission-image1 {
+    z-index: 1;
+    position: relative;
+    margin: 209px 0 0 -25px;
+}
+.features-Uses {
+    padding: 80px 0;
+    background-color: #0F723A;
+  }
+  
+  .features-Uses h2 {
+    margin-bottom: 20px;
+    /* 133.333% */
+    color: #26B625;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 32px;
+  }
+  
+  .features-Uses .features-content .features-content-item {
+    width: 30%;
+  }
+  
+  .features-Uses .features-content .features-content-item h3 {
+    margin-bottom: 20px;
+    padding-bottom: 60px;
+    border-bottom: 1px solid #fff;
+    color: #fff;
+    line-height: 50px;
+  }
+  
+  .features-Uses .features-content .features-content-item p {
+    color: #fff;
+  }
+  .service-description .block-description .read-more-content {
+    margin-bottom: 10px;
+    color: #646464;
+    text-align: justify;
+  }
+  
+  .service-description .service-process {
+    padding-top: 40px;
+    border-top: 1px solid #F4F2F7;
+    border-bottom: 1px solid #F4F2F7;
+  }
+  
+  .service-description .service-process .image {
+    margin-right: 16px;
+  }
+  
+  .service-description .service-process .image img {
+    min-width: 80px;
+  }
+  
+  .service-description .service-process h3 {
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    /* 150% */
+    letter-spacing: -0.4px;
+    line-height: 30px;
+  }
+  
+  .service-description .service-process p {
+    color: #646464;
+  }
+  
+  .service-description .service-process .service-process-item {
+    margin-bottom: 60px;
+  }
+  .service-description {
+    padding: 60px 0;
+  }
+  
+  .service-description .block-description {
+    padding-bottom: 60px;
+  }
+  
+  .service-description .block-description #btnSeeMore {
+    display: none;
+    position: relative;
+    text-align: center;
+  }
+  
+  .service-description .block-description #btnSeeMore a {
+    display: inline-block;
+    color: #097DB9;
+  }
+  
+  .service-description .block-description #textContainer {
+    max-height: 170px;
+    overflow: hidden;
+  }
+  
+  .service-description .block-description .textContainer {
+    overflow: inherit !important;
+  }
+  
+  .service-description .block-description h2 {
+    margin-bottom: 24px;
+    /* 150% */
+    color: #0F723A;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 30px;
+    text-align: center;
+  }
+  
+  .service-description .block-description .read-more-content {
+    margin-bottom: 10px;
+    color: #646464;
+    text-align: justify;
+  }
+.our-values {
+    padding: 60px 0;
+}
+
+.our-values h2 {
+    margin-bottom: 24px;
+}
+
+.our-values .button-control-slick {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.section-sustainable .sustainable-item .sustainable-content h3 {
+    margin-bottom: 25px;
+    color: #0F723A;
+    font-family: Arimo;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: -0.72px;
+}
+
+.section-sustainable .sustainable-item .sustainable-content p {
+    color: #646464;
+}
+
+.row-4 {
+    margin-top: 60px;
+}
+
+.row-4 .row-4-inner {
+    min-height: 190px;
+    padding: 16px;
+    border-radius: 16px;
+    background-color: #F4F2F7;
+}
+
+.row-4 .row-4-inner h3 {
+    margin-bottom: 8px;
+    /* 150% */
+    color: #171717;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+}
+
+.row-4 .row-4-inner p {
+    color: #646464;
+    font-size: 14px;
+}
+
+.load-more {
+    text-align: center;
+}
+    .load-more button {
+        color: #171717;
+        padding: 14px 24px;
+        background: #0F723A;
+        color: #fff;
+        border-radius: 6px;
+        border: 0px;
+    }
+
+@media screen and (max-width: 1024px) {
+    .services-list {
+        justify-content: space-around !important;
+    }
+
+    .wrap-services .services-list {
+        padding: 0 0;
+    }
+
+    .sustainable-item .image {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .row-4-inner {
+        margin-bottom: 30px;
+    }
+}
+
+.mg-015 {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+@media screen and (max-width: 640px) {
+    .our-story .our-story-image{
+        margin-bottom:20px;
+    }
+    .our-story {
+        padding: 30px 0;
+    }
+    .breadcrumb-common {
+        padding-top: 10px;
+    }
+    .detail-title h2 {
+        font-family: Arimo;
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 25px; /* 120% */
+        letter-spacing: -1.2px;
+        text-align: center;
+        margin-bottom: 24px;
+    }
+    .wrap-services {
+        padding: 30px 0;
+    }
+
+    .wrap-services h2 {
+        margin-bottom: 10px;
+    }
+
+    .wrap-services .services-list .services-item {
+        margin-bottom: 40px;
+        padding: 0;
+    }
+
+    .section-sustainable .sustainable-item .sustainable-content h3 {
+        margin-bottom: 15px;
+        font-size: 22px;
+    }
+
+    .section-sustainable .sustainable-item {
+        padding: 30px 0;
+    }
+    .features-Uses .features-content .features-content-item{
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .features-Uses .features-content .features-content-item h3 {
+        padding-bottom: 10px;
+    }
+    .features-Uses{
+        padding: 40px 0;
+    }
+}
+
+/* ----------------- Serrvice ----------------------*/

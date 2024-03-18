@@ -1,0 +1,34 @@
+.dataTables_info {
+    width: 60%;
+    float: left
+}
+
+.dataTables_paginate {
+    float: right;
+    text-align: right
+}
+
+.header-table-button {
+    float: right;
+}
+
+.group-button-modal {
+    float: right;
+}
+
+#ddl-show-page{
+    max-width: 65px;
+}
+
+.action-columns {
+    max-width: 150px;
+    width: 150px;
+    text-align: center;
+}
+
+.long-col {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 0;
+}

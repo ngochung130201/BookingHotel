@@ -1,0 +1,139 @@
+﻿.contaner {
+    width: 1300px;
+    margin: 0 auto 0;
+    font-family: "Noto Serif", serif;
+    font-size: 11px;
+}
+
+.caption-header {
+    padding-left: 25px;
+}
+
+    .caption-header h1 {
+        text-align: center;
+        text-transform: uppercase;
+        font-size: 17px;
+        color: rgb(17, 156, 236);
+        margin-bottom: 15px;
+    }
+
+.wrap-inner {
+    padding: 3px;
+    border: 1px solid;
+    position: relative;
+    width: 48%;
+    height: 350px;
+    margin: 0 0 1px 1px;
+    margin-bottom: 25px;
+}
+
+.caption-header .issuing-unit span {
+    text-transform: uppercase;
+}
+
+.sub-infor {
+    width: 400px;
+    margin: 0 auto;
+    font-size: 12px;
+}
+
+    .sub-infor .date span small {
+        position: relative;
+        top: -3px;
+        left: 3px;
+        font-size: 10px;
+    }
+
+.body-price {
+    transform: rotateZ(-90deg);
+    position: absolute;
+    bottom: 65px;
+    left: -30px;
+}
+
+    .body-price .price {
+        font-size: 25px;
+        color: rgb(17, 156, 236);
+        margin: 0;
+        font-weight: bold;
+    }
+
+    .body-price .note {
+        font-style: italic;
+        font-size: 11px;
+        color: #8d8585;
+    }
+
+    .body-price p {
+        margin: 0 0 3px;
+    }
+
+.include {
+    display: flex;
+    font-size: 11px;
+}
+
+    .include span {
+        margin-right: 3px;
+    }
+
+.image {
+    padding-left: 135px;
+    display: flex;
+}
+
+.image-big img {
+    height: 230px;
+}
+
+.image-small {
+    width: 45px;
+}
+
+    .image-small img {
+        width: 80px;
+        margin-bottom: 7px;
+        margin-left: 7px;
+    }
+
+.copyright {
+    bottom: 160px;
+    left: auto;
+    right: -115px;
+    font-size: 8px;
+}
+
+.logo {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+    .logo img {
+        width: 70px;
+    }
+.page-break {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 1300px;
+    margin: 0 auto 0;
+    font-family: "Noto Serif", serif;
+    font-size: 12px;
+}
+
+@media print {
+    @page {
+        margin: 0 0; /* Loại bỏ các viền */
+        size: landscape;
+    }
+
+    body {
+        margin: 0; /* Loại bỏ margin của body */
+    }
+
+    .page-break {
+        padding-top: 100px;
+        page-break-before: always;
+    }
+}

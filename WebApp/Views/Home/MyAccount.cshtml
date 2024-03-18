@@ -1,0 +1,117 @@
+﻿@model BusinessLogic.Dtos.Home.MyAccountResponse
+@{
+    ViewData["Title"] = "My account";
+    var httpContext = ViewContext.HttpContext;
+    string appDomain = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}";
+}
+@section Styles {
+
+    <link href="~/assets/landing-page/css/my-account.css" rel="stylesheet" media="all" />
+}
+<div class="container">
+    <div class="my-account-content">
+        <div class="breadcrumb-flex">
+            <div class="breadcrumb-inner">
+                <a href="./services.html">Home</a><span>My Account</span>
+            </div>
+        </div>
+        <div class="tabs-body">
+            <div class="tabs">
+                <ul class="tab-links">
+                    <li class="active"><a href="#tab1">Account</a></li>
+                    <li><a href="#tab2">Subscription</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="tab1" class="tab active">
+                        <div class="row d-flex justify-content-between wrap-conntent-account">
+                            <div class="col-6">
+                                <h2>Information</h2>
+                                <form class="form-wrap" id="my-account-form">
+                                    <div class="field upload-image">
+                                        @if (string.IsNullOrEmpty(Model.AvatarUrl))
+                                        {
+                                            <img width="78px" id="showImageMyAccount" height="78px" src="~/assets/landing-page/img/logo/no-avatar.webp" alt="no-avatar" />
+                                        }
+                                        else
+                                        {
+                                            <img width="78px" id="showImageMyAccount" height="78px" src="@appDomain@Model.AvatarUrl" alt="no-avatar" />
+                                        }
+                                        <input type="file" id="fileInputImage" hidden>
+                                        <input type="text" id="appDomain" value="@appDomain" hidden>
+                                        <input type="text" id="txtImage" name="txtImage" value="@Model.AvatarUrl" hidden>
+                                        <label for="txtImage" id="btnSelectImg">
+                                            Change
+                                        </label>
+                                    </div>
+                                    <div class="field">
+                                        <label for="fullname">Full Name</label>
+                                        <input id="fullname" type="text" class="form-control" name="fullname" value="@Model.FullName" placeholder="Full name">
+                                    </div>
+                                    <div class="field">
+                                        <label for="email">Email</label>
+                                        <input id="email" value="@Model.Email" disabled type="text" class="form-control" placeholder="Email">
+                                    </div>
+                                    <div class="field">
+                                        <label for="address">Address</label>
+                                        <textarea name="" id="address" name="address" cols="30" rows="5">@Model.Address</textarea>
+                                    </div>
+                                    <div class="field">
+                                        <label for="phonenumber">Phone Number</label>
+                                        <input id="phonenumber" value="@Model.PhoneNumber" name="phonenumber" type="text" class="form-control keypress" placeholder="Phone Number">
+                                    </div>
+                                    <div class="field">
+                                        <label for="company">Company(optional)</label>
+                                        <input id="company" type="text" class="form-control" value="@Model.CompanyName" name="company" placeholder="Company">
+                                    </div>
+                                </form>
+                                <div class="submit-button">
+                                    <button class="Cancel">Cancel</button>
+                                    <button class="Save" id="btnMyAccountSave">Save</button>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <h2>Change Password</h2>
+                                <div id="error-change-password" style="color:red;"></div>
+                                <form class="form-wrap form-login" id="change-password-form">
+                                    <div class="field">
+                                        <label for="currentpassword">Current Password</label>
+                                        <div class="field-password">
+                                            <input id="currentpassword" name="currentpassword" type="password" class="form-control" placeholder="Password">
+                                        </div>
+                                        <span class="eye_icon"></span>
+                                    </div>
+                                    <div class="field">
+                                        <label for="password">New Password</label>
+                                        <div class="field-password">
+                                            <input id="password" type="password" name="password" class="form-control" placeholder="Password">
+                                        </div>
+                                        <span class="eye_icon"></span>
+                                    </div>
+                                    <div class="field">
+                                        <label for="confirmPassword">Confirm Password</label>
+                                        <div class="field-password">
+                                            <input id="confirmPassword" type="password" name="confirmPassword" class="form-control" placeholder="Confirm Password">
+                                        </div>
+                                        <span class="eye_icon"></span>
+                                    </div>
+                                </form>
+                                <div class="submit-button">
+                                    <button class="Cancel">Cancel</button>
+                                    <button class="Save" id="btnChangePassword">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab2" class="tab">
+                        <h2>Coming Soon!</h2>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <script src="~/client-app/controllers/home/my-account.js"></script>
+}

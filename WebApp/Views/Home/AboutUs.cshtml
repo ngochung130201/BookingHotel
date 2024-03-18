@@ -1,0 +1,141 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model BusinessLogic.Dtos.Home.HomeResponse
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Title"] = Localizer["AboutUs"];
+    var httpContext = ViewContext.HttpContext;
+    string appDomain = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}";
+}
+@section Styles {
+    <link href="~/assets/landing-page/css/about.css" rel="stylesheet" media="all" />
+}
+<div class="wrap-carbon-calculate wrap-about">
+    <div class="introduce">
+        <div class="container">
+            <div class="introduce-inner">
+                <h2>@Localizer["AboutUs"]</h2>
+                <p class="text-center">
+                    <span>MinMax Green </span>@Localizer["Title1"] <br> @Localizer["Title2"]
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="our-story">
+    <div class="container">
+        <div class="our-story-content d-flex align-items-center row-reverse flex-wrap">
+            <div class="our-story-image col-12 col-xl-7 col-lg-6">
+                <img src="~/assets/landing-page/img/about-us/our-story_image.webp" width="640px" height="453px" alt="story_image">
+            </div>
+            <div class="our-story-title col-12 col-xl-5 col-lg-6">
+                <h2 class="h2-title">@Localizer["OurStory"]</h2>
+                <p>
+                    @Localizer["Title3"]
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="our-mission">
+    <div class="container">
+        <div class="our-mission-content">
+            <div class="our-mission-title">
+                <h2>@Localizer["OurMission"]</h2>
+                <p>
+                    @Localizer["Title4"]
+                </p>
+            </div>
+            <div class="our-mission-image d-flex justify-content-center">
+                <p class="our-mission-image2">
+                    <img src="~/assets/landing-page/img/about-us/our-mission2.webp" height="360px" width="360px" alt="mission2">
+                </p>
+                <p class="our-mission-image1">
+                    <img src="~/assets/landing-page/img/about-us/our-mission1.webp" width="280px" height="280px" alt="mission1">
+                </p>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="our-story">
+    <div class="container">
+        <div class="our-story-content d-flex align-items-center row-reverse flex-wrap">
+            <div class="our-story-image col-12 col-xl-7 col-lg-6">
+                <img src="~/assets/landing-page/img/about-us/our-story_image2.webp" width="640px" height="453px" alt="story_image">
+            </div>
+            <div class="our-story-title col-12 col-xl-5 col-lg-6">
+                <h2 class="h2-title">@Localizer["OurVision"]</h2>
+                <p>@Localizer["Title5"]</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="our-values">
+    <div class="container">
+        <div class="our-values-title text-center">
+            <h2 class="h2-title">@Localizer["OurValues"]</h2>
+        </div>
+        <div class="our-values-slick">
+            <div class="button-control-slick">
+                <button class="slider-btn active" data-slide="0">@Localizer["Sustainability"]</button>
+                <button class="slider-btn" data-slide="1">@Localizer["Innovation"]</button>
+                <button class="slider-btn" data-slide="2">@Localizer["Integrity"]</button>
+            </div>
+            <div class="our-values-list">
+                <div class="our-values-item">
+                    <div class="values-list-image">
+                        <img src="~/assets/landing-page/img/about-us/our-story_image2.webp" width="640px" height="453px" alt="story_image">
+                    </div>
+                    <div class="values-list-content">
+                        <h3>@Localizer["SubTitle"]</h3>
+                        <p>@Localizer["Title6"]</p>
+                    </div>
+                </div>
+                <div class="our-values-item">
+                    <div class="values-list-image">
+                        <img src="~/assets/landing-page/img/about-us/our-story_image2.webp" width="640px" height="453px" alt="story_image">
+                    </div>
+                    <div class="values-list-content">
+                        <h3>@Localizer["SubTitle"]</h3>
+                        <p>@Localizer["Title6"]</p>
+                    </div>
+                </div>
+                <div class="our-values-item">
+                    <div class="values-list-image">
+                        <img src="~/assets/landing-page/img/about-us/our-story_image2.webp" width="640px" height="453px" alt="story_image">
+                    </div>
+                    <div class="values-list-content">
+                        <h3>@Localizer["SubTitle"]</h3>
+                        <p>@Localizer["Title6"]</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="our-partners ">
+    <div class="container">
+        <div class="title-partners">
+            <div class="">
+                <h2 class="h2-title">@Localizer["Ourpartners"]</h2>
+            </div>
+        </div>
+        <div class="d-flex flex-wrap our-partners-wrap flex-wrap">
+            @foreach (var item in Model.Partners)
+            {
+                <div class="our-partners-item">
+                    <img src="@appDomain@item.ImageUrl" width="130px" height="73px" alt="partner">
+                </div>
+            }
+        </div>
+
+    </div>
+</div>
+@await Html.PartialAsync("_ContactPartial")
+<div class="loading-block">
+    <div class="loading-block_logo">
+        <img src="~/assets/landing-page/img/logo/logo_header.webp" width="160px" height="42px" alt="" class="fadeUp">
+    </div>
+</div>
+<div class="loadingbg"></div>

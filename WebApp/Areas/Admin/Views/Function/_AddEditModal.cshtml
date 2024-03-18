@@ -1,0 +1,60 @@
+﻿<div id="modal-add-edit" class="modal fade modal-darkorange in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" id="formMaintainance">
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" id="hidId" name="hidId">
+                        <label for="txtFunctionId" class="col-sm-auto control-label no-padding-right">FunctionId(*)</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="txtFunctionId" name="txtFunctionId" placeholder="Function Id">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="txtName" class="col-sm-auto control-label no-padding-right">Name(*)</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="txtName" name="txtName" placeholder="Name">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="txtUrl" class="col-sm-auto control-label no-padding-right">URL</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="txtUrl" name="txtUrl" placeholder="URL">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="txtParentId" class="col-sm-auto control-label no-padding-right">ParentId</label>
+                        <div class="col-sm-12">
+                            <input class="form-control" id="txtParentId" name="txtParentId" placeholder="ParentId">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="txtIconCss" class="col-sm-auto control-label no-padding-right">Icon Css</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="txtIconCss" name="txtIconCss" placeholder="Icon Css">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="txtSortOrder" class="col-sm-auto control-label no-padding-right">Sort Order</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="txtSortOrder" name="txtSortOrder" placeholder="txtSortOrder">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnSave" class="btn btn-success">Save</button>
+                <button type="button" id="btnCancel" data-dismiss="modal" class="btn btn-danger">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

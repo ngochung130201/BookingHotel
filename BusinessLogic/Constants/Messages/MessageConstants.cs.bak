@@ -1,0 +1,13 @@
+﻿namespace BusinessLogic.Constants.Messages
+{
+    public static class MessageConstants
+    {
+        public const string NotFound = "Item not found.";
+        public const string UpdateSuccess = "Updated successfully.";
+        public const string UpdateFail = "Updated Fail.";
+        public const string AddSuccess = "Added successfully.";
+        public const string AddFail = "Add Fail.";
+        public const string DeleteSuccess = "Deleted successfully.";
+
+    }
+}

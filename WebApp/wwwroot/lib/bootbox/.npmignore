@@ -1,0 +1,11 @@
+*.swo
+*.swp
+node_modules
+npm-debug.log
+.idea
+.vscode/*
+.vs/*
+src/*
+tests/*
+build/*
+dist/bootbox.zip

@@ -1,0 +1,166 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using BusinessLogic.Constants.Application
+@model BusinessLogic.Dtos.Home.HomeResponse
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Title"] = Localizer["HomePage"];
+    var httpContext = ViewContext.HttpContext;
+    string appDomain = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/assets/landing-page/css/index.css" media="all">
+}
+<div class="contentPage">
+    <div class="container">
+        <div class="content-inner">
+            <div class="tab-links">
+                <ul>
+                    <li><a href="#tab1">Tìm kiếm hóa đơn</a></li>
+                    <li><a href="#tab2">Tìm kiếm chứng từ</a></li>
+                    <li><a href="#tab3">Tìm kiếm phiếu xuất kho</a></li>
+                    <li><a href="#tab4">Tìm kiếm biên lai</a></li>
+                </ul>
+            </div>
+            <div class="tabs">
+                <div class="tab-content active" id="tab1">
+                    <h2>NHẬP THÔNG TIN TÌM KIẾM HÓA ĐƠN ĐIỆN TỬ</h2>
+                    <div class="row">
+                        <div class="control-label col-md-3">
+                            Mã số thuế bên bán 
+                            <span class="required" style="color:red">(*)</span>
+                        </div>
+                        <div class="col-md-7">
+                            <input class="form-control" value="" tabindex="2" name="taxcode" id="taxcode" required="" maxlength="20">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="control-label col-md-3">
+                            Mã nhận HĐ
+                            <span class="required" style="color:red">(*)</span>
+                        </div>
+                        <div class="col-md-7">
+                            <input class="form-control" value="" tabindex="2" name="taxcode" id="taxcode" required="" maxlength="20">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="control-label col-md-3">
+                            Số lượng sản phẩm trên một trang:
+                        </div>
+                        <div class="col-md-7">
+                            <input class="form-control" value="" tabindex="2" name="taxcode" id="taxcode" required="" maxlength="20">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <button class="btn btn-success" type="submit">Tìm hóa đơn</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-content" id="tab2">
+                    <h2>NHẬP THÔNG TIN TÌM KIẾM CHỨNG TỪ ĐIỆN TỬ</h2>
+                    <div class="row">
+                        <div class="control-label col-md-3">
+                            Mã số thuế bên bán
+                            <span class="required" style="color:red">(*)</span>
+                        </div>
+                        <div class="col-md-7">
+                            <input class="form-control" value="" tabindex="2" name="taxcode" id="taxcode" required="" maxlength="20">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="control-label col-md-3">
+                            Mã nhận HĐ
+                            <span class="required" style="color:red">(*)</span>
+                        </div>
+                        <div class="col-md-7">
+                            <input class="form-control" value="" tabindex="2" name="taxcode" id="taxcode" required="" maxlength="20">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="control-label col-md-3">
+                            Số lượng sản phẩm trên một trang:
+                        </div>
+                        <div class="col-md-7">
+                            <input class="form-control" value="" tabindex="2" name="taxcode" id="taxcode" required="" maxlength="20">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <button class="btn btn-success" type="submit">Tìm chứng từ</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-content" id="tab3">
+                    <h2>NHẬP THÔNG TIN TÌM KIẾM PHIẾU XUẤT KHO</h2>
+                    <div class="row">
+                        <div class="control-label col-md-3">
+                            Mã số thuế bên bán
+                            <span class="required" style="color:red">(*)</span>
+                        </div>
+                        <div class="col-md-7">
+                            <input class="form-control" value="" tabindex="2" name="taxcode" id="taxcode" required="" maxlength="20">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="control-label col-md-3">
+                            Mã nhận HĐ
+                            <span class="required" style="color:red">(*)</span>
+                        </div>
+                        <div class="col-md-7">
+                            <input class="form-control" value="" tabindex="2" name="taxcode" id="taxcode" required="" maxlength="20">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="control-label col-md-3">
+                            Số lượng sản phẩm trên một trang:
+                        </div>
+                        <div class="col-md-7">
+                            <input class="form-control" value="" tabindex="2" name="taxcode" id="taxcode" required="" maxlength="20">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <button class="btn btn-success" type="submit">Tìm phiếu xuất kho</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-content" id="tab4">
+                    <h2>NHẬP THÔNG TIN TÌM KIẾM BIÊN LAI ĐIỆN TỬ</h2>
+                    <div class="row">
+                        <div class="control-label col-md-3">
+                            Mã số thuế bên bán
+                            <span class="required" style="color:red">(*)</span>
+                        </div>
+                        <div class="col-md-7">
+                            <input class="form-control" value="" tabindex="2" name="taxcode" id="taxcode" required="" maxlength="20">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="control-label col-md-3">
+                            Mã nhận HĐ
+                            <span class="required" style="color:red">(*)</span>
+                        </div>
+                        <div class="col-md-7">
+                            <input class="form-control" value="" tabindex="2" name="taxcode" id="taxcode" required="" maxlength="20">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="control-label col-md-3">
+                            Số lượng sản phẩm trên một trang:
+                        </div>
+                        <div class="col-md-7">
+                            <input class="form-control" value="" tabindex="2" name="taxcode" id="taxcode" required="" maxlength="20">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <button class="btn btn-success" type="submit">Tìm biên lai</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             
+         
+        </div>
+    </div>
+</div>

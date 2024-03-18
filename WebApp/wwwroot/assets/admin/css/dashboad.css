@@ -1,0 +1,66 @@
+﻿
+body {
+    font-family: Inter !important;
+}
+.custom-dashboad .logo-box,
+.custom-dashboad .navbar-wrap {
+    height: 95px;
+    background-color: #fff;
+}
+.custom-dashboad .navbar-wrap .logo span.logo-lg img {
+    margin-top: 12px;
+    width:70px;
+}
+.custom-dashboad .navbar-custom .topnav-menu .nav-link {
+    max-height: 95px;
+    line-height: 95px;
+    color: #000;
+}
+.navbar-custom .dropdown.show .nav-link {
+    color: #000;
+}
+.custom-dashboad .navbar-custom .app-search,
+.custom-dashboad .navbar-custom .button-menu-mobile {
+    height: 95px;
+}
+.custom-dashboad .notification-list .noti-icon-badge {
+    top: 30px;
+}
+.custom-dashboad .content-page {
+    margin-top: 95px;
+}
+.custom-dashboad .left-side-menu {
+    top:95px;
+}
+.custom-dashboad .navbar-custom .button-menu-mobile {
+    color: #0F723A;
+}
+.title-menu p {
+    padding: 13px 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 0;
+    color: #646464;
+    font-size: 12px;
+    margin-top: 10px;
+}
+.slimscroll-menu{
+    padding: 0 16px;
+}
+#sidebar-menu > ul > li > a:hover {
+    color: #0F723A !important;
+}
+#sidebar-menu > ul > li > a.active {
+    background: rgba(15, 114, 58, 0.08);
+    color: #0F723A !important;
+    border-radius: 8px;
+}
+.custom-dashboad .metismenu li a[aria-expanded=true] {
+    color: inherit !important;
+}
+.enlarged .left-side-menu .slimscroll-menu {
+    padding: 0;
+}
+.enlarged .title-menu p {
+    display:none;
+}

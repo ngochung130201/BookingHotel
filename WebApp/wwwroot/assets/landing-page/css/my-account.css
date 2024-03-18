@@ -1,0 +1,236 @@
+.my-account-content {
+    padding: 30px;
+    box-shadow: 1px 1px 40px 0px rgba(132, 132, 132, 0.16);
+    border-radius: 8px;
+    background-color:#fff;
+}
+.l-body {
+    background-color: #F2F7F4;
+    padding:70px 0 30px
+}
+.p-header {
+    background-color: #fff;
+}
+.breadcrumb-flex {
+    margin-bottom: 30px;
+}
+
+.breadcrumb-inner a {
+    display: inline-block;
+    margin-right: 20px;
+    padding-right: 20px;
+    background: url("../img/icon/breadcrumb_arrow.png") no-repeat right center;
+    color: #646464;
+    font-size: 14px;
+}
+
+.tabs-body .tab-content .tab {
+    display: none;
+}
+
+    .tabs-body .tab-content .tab.active {
+        display: block;
+    }
+
+.tab-links {
+    display: flex;
+    border-bottom: 3px solid #0F723A;
+    margin-bottom: 36px;
+    flex-wrap: wrap;
+}
+
+    .tab-links li a {
+        padding: 10px 20px;
+        display: block;
+        color: #646464;
+        cursor: pointer;
+        font-weight: bold;
+        transition: 0.2s ease-in-out;
+    }
+
+    .tab-links li.active a {
+        background-color: #0F723A;
+        color: #fff;
+    }
+
+.wrap-conntent-account {
+    padding: 30px;
+}
+
+    .wrap-conntent-account h2 {
+        font-size: 24px;
+        margin-bottom: 25px;
+    }
+
+    .wrap-conntent-account .col-6 {
+        width: 45%;
+    }
+
+.form-wrap input {
+    height: 52px;
+    padding: 0 20px;
+    border: 1px solid #E1E2E3;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    margin-bottom: 20px;
+}
+
+.form-wrap textarea {
+    padding: 20px;
+    border: 1px solid #E1E2E3;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.form-wrap .wrap-col2 .input-wrap {
+    margin: 0 10px;
+}
+
+.wrap-col2 {
+    margin: 0 -10px;
+}
+
+.form-wrap label {
+    font-size: 14px;
+    color: #646464;
+}
+
+.form-login .field-password:before {
+    content: "";
+    position: absolute;
+    left: 16px;
+    width: 24px;
+    height: 24px;
+    top: 14px;
+    background: url("../img/icon/pass_icon.png");
+}
+
+.form-login .field-password {
+    position: relative;
+}
+
+.form-login input {
+    padding: 0 56px;
+}
+
+.form-login .field {
+    position: relative;
+}
+
+.form-login .eye_icon {
+    position: absolute;
+    right: 15px;
+    bottom: 12px;
+    width: 24px;
+    height: 24px;
+    background: url(../img/icon/eye_show.svg) no-repeat left center;
+    cursor: pointer;
+}
+
+    .form-login .eye_icon.active {
+        background: url(../img/icon/eye_hide.svg) no-repeat left center;
+    }
+
+#tab1 {
+    position: relative;
+}
+
+    #tab1::before {
+        content: "";
+        height: 665px;
+        width: 1px;
+        background-color: #E1E2E3;
+        position: absolute;
+        top: 40px;
+        left: 50%;
+    }
+
+.submit-button {
+    border-top: 1px solid #E1E2E3;
+    text-align: right;
+    padding: 30px;
+}
+
+    .submit-button button {
+        border: none;
+        padding: 12px 36px 13px 36px;
+        font-size: 14px;
+        font-weight: bold;
+        background-color: #fff;
+        display: inline-block;
+        border: 1px solid #E1E2E3;
+        border-radius: 8px;
+    }
+
+        .submit-button button.Save {
+            background-color: #0F723A;
+            color: #fff;
+            border: 1px solid #0F723A;
+        }
+
+.upload-image {
+    margin-bottom: 20px;
+}
+
+    .upload-image label {
+        font-weight: bold;
+        font-size: 16px;
+        padding: 10px 20px;
+        background-color: #F2F7F4;
+        border-radius: 50px;
+        color: #000;
+        cursor: pointer;
+    }
+    .upload-image img {
+        height: 78px;
+        display: inline-block;
+        vertical-align: middle;
+        width: 78px;
+        margin-right:10px;
+    }
+    @media screen and (max-width: 768px) {
+        .wrap-conntent-account {
+        flex-wrap: wrap;
+        padding: 20px;
+    }
+
+        .wrap-conntent-account .col-6 {
+            width: 100%;
+        }
+
+    #tab1::before {
+        display: none;
+    }
+
+    .form-wrap .wrap-col2 .input-wrap {
+        width: 50%;
+    }
+    .l-body {
+        background-color: #F2F7F4;
+        padding: 40px 0 30px
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .wrap-conntent-account {
+        padding: 0;
+    }
+
+    .submit-button {
+        padding: 30px 0;
+    }
+    .form-wrap .wrap-col2 .input-wrap{
+        width:100%
+    }
+    .wrap-col2{
+        flex-wrap:wrap;
+    }
+    .form-wrap textarea,
+    .form-wrap input {
+        font-size: 14px;
+    }
+}

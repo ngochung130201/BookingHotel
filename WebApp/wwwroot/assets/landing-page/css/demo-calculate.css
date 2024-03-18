@@ -1,0 +1,393 @@
+/* Slider */
+.slick-slider {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    box-sizing: border-box;
+    display: block;
+    position: relative;
+    touch-action: pan-y;
+    user-select: none;
+}
+
+.slick-list {
+    display: block;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.slick-list:focus {
+    outline: none;
+}
+
+.slick-list.dragging {
+    cursor: pointer;
+    cursor: hand;
+}
+
+.slick-slider .slick-track,
+.slick-slider .slick-list {
+    transform: translate3d(0, 0, 0);
+}
+
+.slick-track {
+    display: block;
+    position: relative;
+    top: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.slick-track:before,
+.slick-track:after {
+    display: table;
+    content: "";
+}
+
+.slick-track:after {
+    clear: both;
+}
+
+.slick-loading .slick-track {
+    visibility: hidden;
+}
+
+.slick-slide {
+    display: none;
+    height: 100%;
+    min-height: 1px;
+    float: left;
+}
+
+[dir="rtl"] .slick-slide {
+    float: right;
+}
+
+.slick-slide img {
+    display: block;
+}
+
+.slick-slide.slick-loading img {
+    display: none;
+}
+
+.slick-slide.dragging img {
+    pointer-events: none;
+}
+
+.slick-initialized .slick-slide {
+    display: block;
+}
+
+.slick-loading .slick-slide {
+    visibility: hidden;
+}
+
+.slick-vertical .slick-slide {
+    display: block;
+    height: auto;
+    border: 1px solid transparent;
+}
+
+.slick-arrow.slick-hidden {
+    display: none;
+}
+.main-visual{
+    width: 100%;
+    height: 1200px;
+    background:url(../img/carbon-calculate/Subtract.png),url(../img/carbon-calculate/BG_demo.png);
+    background-repeat: no-repeat;
+    background-size: 1920px  auto, 1409px auto;
+    background-position: center bottom -1px, center bottom 145px;
+    background-color: #0F723A;
+}
+.visual-title{
+    padding: 200px  0 0;
+    color: #fff;
+    position: relative;
+}
+.visual-title h2{
+    font-size: 42px;
+    color: #fff;
+    font-weight: bold;
+    margin-bottom: 30px;
+    font-family: Arimo;
+}
+.visual-title p{
+    margin-bottom: 30px;
+}
+.visual-title a{
+    display: inline-block;
+    background-color: #26B625;
+    padding: 10px 40px 10px 40px;
+    color: #fff;
+    transition: 0.2s ease-in-out;
+}
+.visual-title::after{
+    content: "";
+    position: absolute;
+    top:0;
+    right: 0;
+    background: url(../img/carbon-calculate/bg-mainvs.webp) no-repeat;
+    width: 1018px;
+    height: 725px;
+}
+.calculate-quickly{
+    padding: 50px 0 70px;
+}
+.calculate-quickly h2{
+    font-size: 48px;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 70px;
+    font-family: Arimo;
+}
+
+.calculate-quickly-list{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 70px;
+}
+.calculate-quickly-list .calculate-quickly-item{
+        width: 26%;
+      padding: 30px;
+      background-color: #F2F7F4;
+      border-radius: 30px;
+}
+.calculate-quickly-list .calculate-quickly-item img{
+    margin-bottom: 15px;
+}
+.calculate-quickly-list .calculate-quickly-item h3{
+    color: #0F723A;
+    font-size: 36px;
+    font-weight: bold;
+    line-height: 48px;
+    margin-bottom: 10px;
+}
+.quickly-media{
+    display: flex;
+    align-items: center;
+}
+.quickly-media .media-image{
+    margin-right: 30px;
+    min-width: 640px;
+}
+.quickly-media h3{
+    line-height: 74px;
+    font-weight: bold;
+    font-size: 48px;
+    letter-spacing: -2px;
+    margin-bottom: 20px;
+    font-family: Arimo;
+}
+
+.quickly-media ul{
+    padding-left: 30px;
+}
+.quickly-media ul li{
+    font-size: 20px;
+    color: #646464;
+    list-style: disc;
+    margin-bottom: 20px;
+}
+.process-title h2{
+    font-size: 48px;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-family: Arimo;
+}
+.process-title p{
+    text-align: center;
+    color: #646464;
+}
+.calculate-process{
+    padding:20px 0 70px;
+}
+.process-slick{
+    display: flex;
+    justify-content: space-between;
+}
+.process-list{
+    width: 50%;
+}
+.button-control-slick{
+    width: 45%;
+}
+.process-title{
+    margin-bottom: 40px;
+}
+.process-slick .slider-btn{
+    background-color: #F8F8F8;
+    border-radius: 8px;
+    padding: 12px 12px 16px;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    border: 2px solid #F8F8F8;
+}
+.process-slick .slider-btn.active{
+    border: 2px solid #78E378;
+}
+.process-slick .number{
+    min-width: 48px;
+    height: 48px;
+    background-color: #FF7875;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    margin-right: 20px;
+}
+.process-slick h3{
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 48px;
+    font-family: Arimo;
+    color: #0F723A;
+}
+@media screen and (max-width: 1000px) {
+    .visual-title::after{
+        width: 600px;
+        height: 420px;    
+        background-size: 100%;
+        top: 170px;
+    }
+    .quickly-media .media-image{
+        min-width: 450px;
+    }
+    .quickly-media h3{
+        line-height: 42px;
+        font-weight: bold;
+        font-size: 36px;
+    }
+    .calculate-quickly h2{
+        font-size: 40px;
+    }
+    .calculate-quickly-list .calculate-quickly-item{
+        width: 30%;
+    }
+    .calculate-quickly-list .calculate-quickly-item h3{
+        font-size: 30px;
+    }
+    .quickly-media ul li{
+        font-size: 18px;
+    }
+    
+}
+@media screen and (max-width: 768px) {
+    .calculate-quickly-list{
+        flex-wrap: wrap;
+    }
+    .calculate-quickly-list .calculate-quickly-item{
+        width: 45%;
+        margin-bottom: 30px;
+    }
+    .main-visual{
+        background-size: 1000px auto, 693px auto;
+        background-position: center bottom -1px, center bottom 86px;
+        height: 1000px;
+    }
+    .visual-title{
+        padding: 150px 0 0;
+    }
+    .visual-title::after{
+        top: 240px;
+    }
+    .quickly-media{
+        flex-wrap: wrap;
+    }
+    .quickly-media .media-image{
+        width: 100%;
+        min-width: 100%;
+        margin-right: 0;
+        margin-bottom: 25px;
+
+    }
+    .process-title h2,
+    .calculate-quickly h2{
+        font-size: 36px;
+    }
+    .process-slick{
+        flex-wrap: wrap;
+    }
+
+    .button-control-slick{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .process-slick .slider-btn{
+        width: 48%;
+    }
+    .process-list{
+        width: 100%;
+    }
+}
+@media screen and (max-width: 640px) {
+    .visual-title h2{
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+    .visual-title{
+        padding: 50px 0 0; 
+    }
+    .visual-title::after{
+        width: 400px;
+        height: 265px;
+    }
+    .main-visual{
+        height: 700px;
+        background-size: 653px auto, 403px auto;
+        background-position: center bottom -1px, center bottom 53px;
+    }
+    .process-title h2, 
+    .calculate-quickly h2 {
+        font-size: 20px;
+    }
+    .calculate-quickly h2{
+        margin-bottom: 40px;
+    }
+    .calculate-quickly-list .calculate-quickly-item{
+        width: 100%;
+    }
+    .calculate-quickly-list .calculate-quickly-item img {
+        margin-bottom: 5px;
+        width: 85px;
+        height: 85px;
+        display: block;
+        margin: 0 auto 5px;
+    }
+    .calculate-quickly-list .calculate-quickly-item h3{
+        font-size: 20px;
+        margin-bottom: 0;
+    }
+    .quickly-media h3{
+        line-height: 37px;
+        font-weight: bold;
+        font-size: 26px;
+    }
+    .quickly-media ul li {
+        font-size: 16px;
+    }
+    .calculate-quickly {
+        padding: 50px 0 50px;
+    }
+    .process-slick .slider-btn{
+        width: 100%;
+    }
+    .process-slick h3{
+        font-size: 18px;
+        line-height: 30px;
+        margin-bottom: 10px;
+    }
+    .calculate-quickly-list{
+        margin-bottom: 40px;
+    }
+}

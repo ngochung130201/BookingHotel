@@ -1,0 +1,192 @@
+﻿@using WebApp.Extensions
+@using Microsoft.AspNetCore.Mvc.Localization
+@using BusinessLogic.Enums
+@inject IViewLocalizer Localizer
+@{
+    var httpContext = ViewContext.HttpContext;
+    string appDomain = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}";
+}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "https://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <title>@ViewData["Title"]</title>
+    <meta name="description" content="Empowering Sustainability with Smart Environmental Accounting | Minimax">
+    <meta name="keywords" content="Minimax">
+
+    <link rel="icon" href="~/assets/favicon.ico" type="image/vnd.microsoft.icon">
+    <meta property="og:title" content="@ViewData["Title"]">
+    <meta property="og:description" content="Empowering Sustainability with Smart Environmental Accounting | Minimax">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="~/assets/landing-page/img/logo/logo.webp">
+    <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@600;700&family=Inter:wght@500;600;700&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="~/assets/landing-page/css/common.css" media="all">
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+
+<body>
+
+    <!--==is common header==-->
+    <header class="p-header" data-label="header">
+        <div class="container">
+            <nav class="navbar-expand-lg navbar-light p-0">
+                <h1><a href="/"><img src="~/assets/landing-page/img/logo/logo_header.webp" width="160px" height="42px" alt="logo"></a></h1>
+                <div class="d-flex ">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="d-flex">
+                            <li><a class="active">Tra cứu hóa đơn</a></li>
+                            <li><a >Danh sách hóa đơn</a></li>
+                            <li><a>Biên bản điện tử</a></li>
+                            <li><a >Phần mềm xem hóa đơn</a></li>
+                            <li><a >Phần mềm ký số</a></li>
+@*                             <li>
+                                <div class="custom-dropdown">
+                                    @await Html.PartialAsync("_SelectLanguagePartial")
+                                </div>
+                            </li> *@
+
+                            @if (User.Identity is { IsAuthenticated: false })
+                            {
+                                <li>
+                                    <a class="btn-green">Đăng nhập</a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    @if (User.Identity is { IsAuthenticated: true })
+                    {
+                        <div class="d-flex user-login-wrap">
+                            <div class="icon-avartar">
+                                @if (string.IsNullOrEmpty(User.GetSpecificClaim("Avatar")))
+                                {
+                                    <img src="~/assets/admin/images/users/avatar-1.jpg" />
+                                }
+                                else
+                                {
+                                    <img width="78px" id="showImage" height="78px" src="@appDomain@User.GetSpecificClaim("Avatar")" alt="no-avatar" />
+                                }
+                            </div>
+                            <div class="dropdown-user">
+                                <p>@User.GetSpecificClaim("FullName")</p>
+                                <ul>
+                                    <li>
+                                        <a href="/my-account">My account</a>
+                                    </li>
+                                    <li>
+                                        <form asp-controller="Identity" asp-action="Logout" method="post" id="logoutForm">
+                                            @Html.AntiForgeryToken()
+                                            <a href="#" onclick="document.getElementById('logoutForm').submit();return false;">@Localizer["Logout"]</a>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!--==is common header==-->
+    <!--==Content==-->
+    <div class="l-body" id="content">
+        @RenderBody()
+    </div>
+    <!--==Content==-->
+    <!--==Footer==-->
+  @*   <footer class="p-footer">
+        <div class="container">
+            <div class="footer-inner d-flex flex-wrap justify-content-between">
+                <div class="footer-lft col-12 col-lg-7 d-flex ">
+                    <div class="footer-logo">
+                        <img src="~/assets/landing-page/img/logo/logo_footer.webp" width="106px" height="112px" alt="">
+                    </div>
+                    <div class="footer-content">
+                        <p>
+                            @Localizer["Title1"]
+                        </p>
+                        <div class="address">
+                            <span><img src="~/assets/landing-page/img/icon/mapPoint.webp" width="24px" height="24px" alt="mapPoint">@Localizer["Title2"]</span>
+                        </div>
+                        <div class="phone-mail">
+                            <span class="line"><img src="~/assets/landing-page/img/icon/letter.webp" width="24px" height="24px" alt="letter">minmaxgreen@gmail.com</span>
+                            <span><img src="~/assets/landing-page/img/icon/phone.webp" width="24px" height="24px" alt="phone">+84 123444455</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-rgt col-12 col-lg-4">
+                    <ul>
+                        <li><a asp-controller="Home" asp-action="AboutUs">@Localizer["AboutUs"]</a></li>
+                        <li><a asp-controller="Project" asp-action="Index">Project</a></li>
+                        <li><a asp-controller="FAQs" asp-action="Index">FAQs</a></li><br />
+                        <li><a asp-controller="News" asp-action="Index">@Localizer["NewsBlog"]</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-copyright d-flex align-items-center justify-content-between flex-wrap">
+                <div class="copyright d-flex flex-wrap">
+                    <p class="mr-60">@Localizer["Title3"]</p>
+                    <a asp-controller="Home" asp-action="PrivacyPolicy" class="mr-60">@Localizer["Title4"]</a>
+                    <a asp-controller="Home" asp-action="TermsOfUse">@Localizer["Title5"]</a>
+                </div>
+                <div class="footer-social">
+                    <ul class="d-flex">
+                        <li>
+                            <a target="_blank"  href="https://www.facebook.com/minmaxgreen"><img src="~/assets/landing-page/img/icon/facebook.webp" width="44px" height="45px" alt="facebook"></a>
+                        </li>
+                        <li>
+                            <a href=""><img src="~/assets/landing-page/img/icon/youtube.webp" width="44px" height="45px" alt="youtube"></a>
+                        </li>
+                        <li>
+                            <a href=""><img src="~/assets/landing-page/img/icon/intagram.webp" width="44px" height="45px" alt="intagram"></a>
+                        </li>
+                        <li>
+                            <a target ="_blank" href="https://www.linkedin.com/company/minmax-imex-jsc "><img src="~/assets/landing-page/img/icon/inlink.webp" width="44px" height="45px" alt="inlink"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer> *@
+    <!--==Footer==-->
+@*     <div class="wrap-cat">
+        <input type="checkbox" id="click">
+        <label for="click" class="share-btn">
+            <span class="fas fa-share-alt"><img src="~/assets/landing-page/img/icon/share_network.webp" width="38px" height="38px" alt="share_network" /></span>
+            <a target="_blank" href="https://m.me/173294695871404"><span><img src="~/assets/landing-page/img/icon/messenger_icon.png" width="30px" height="30px" alt="share_network" /></span></a>
+            <a href="#"><span><img src="~/assets/landing-page/img/icon/zalo_icon.png" width="30px" height="30px" alt="zalo_icon" /></span></a>
+            <a href="#"><span><img src="~/assets/landing-page/img/icon/call_icon.png" width="30px" height="30px" alt="call_icon" /></span></a>
+        </label>
+    </div> *@
+    <script src="~/assets/landing-page/js/jquery.min.js"></script>
+    <script src="~/assets/landing-page/js/bootstrap.min.js"></script>
+    <script src="~/assets/landing-page/js/slick.min.js"></script>
+    <script src="~/assets/landing-page/js/main.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/client-app/controllers/contact/index.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var currentUrl = window.location.href;
+            // Remove active class from all links
+            $('li a').removeClass('active');
+            // Find the link that matches the current URL and add active class
+            $('li a').filter(function () {
+                return this.href === currentUrl;
+            }).addClass('active');
+        });
+    </script>
+    <script src="~/assets/landing-page/js/wow.min.js" defer></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>
