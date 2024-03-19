@@ -39,7 +39,7 @@ namespace BusinessLogic.Services
         Task<IResult> UpdateProfile(AccountRequest request);
     }
 
-    public class UserService(ApplicationDbContext dbContext, IMapper mapper, UserManager<AppUser> userManager, RoleManager<AppRole> roleManager, SignInManager<AppUser> signInManager) : IUserService
+    public class UserService(ApplicationDbContext dbContext, UserManager<AppUser> userManager, RoleManager<AppRole> roleManager, SignInManager<AppUser> signInManager) : IUserService
     {
         public async Task<PaginatedResult<UserResponse>> GetAllPaginationAsync(UserRequest request)
         {
@@ -48,7 +48,7 @@ namespace BusinessLogic.Services
                             on u.Id equals ur.UserId
                         join r in dbContext.Roles.Where(x => string.IsNullOrEmpty(request.RoleName) || x.Name!.Equals(request.RoleName))
                             on ur.RoleId equals r.Id
-                        where string.IsNullOrEmpty(request.Keyword) || u.FullName.ToLower().Contains(request.Keyword.ToLower()) || u.Email.ToLower().Contains(request.Keyword.ToLower())
+                        where string.IsNullOrEmpty(request.Keyword) || u.FullName.ToLower().Contains(request.Keyword.ToLower()) || (!string.IsNullOrEmpty(u.Email) && u.Email.ToLower().Contains(request.Keyword.ToLower()))
                         select new UserResponse
                         {
                             Id = u.Id,
@@ -85,7 +85,7 @@ namespace BusinessLogic.Services
                           select new UserDetailDto()
                           {
                               Id = u.Id,
-                              Email = u.Email,
+                              Email = string.IsNullOrEmpty(u.Email) ? string.Empty : u.Email,
                               FullName = u.FullName,
                               AvatarUrl = u.AvatarUrl,
                               IsActive = u.IsActive,
@@ -93,7 +93,7 @@ namespace BusinessLogic.Services
                               DateOfBirth = u.DateOfBirth,
                               PhoneNumber = u.PhoneNumber,
                               Address = u.Address,
-                              Roles = r.Name,
+                              Roles = string.IsNullOrEmpty(r.Name) ? string.Empty : r.Name,
                           }).AsNoTracking().FirstOrDefaultAsync();
             return await Result<UserDetailDto>.SuccessAsync(result.Result ?? new UserDetailDto());
         }
@@ -110,8 +110,8 @@ namespace BusinessLogic.Services
                 return await Result.FailAsync(MessageConstants.IsInvalidEmail);
             }
 
-            var checkExistEmail = await dbContext.Users.AnyAsync(x => x.Email.Contains(request.Email) && x.Id != request.Id);
-            if (checkExistEmail) return await Result.FailAsync(MessageConstants.CheckEmailExists);
+            var checkExistEmail = await dbContext.Users.AnyAsync(x => !string.IsNullOrEmpty(x.Email) && x.Email.Contains(request.Email) && x.Id != request.Id);
+            if (checkExistEmail) return await Result.FailAsync(string.Format(MessageConstants.CheckExists, "Email"));
 
             user.Id = request.Id;
             user.FullName = request.FullName;
@@ -174,10 +174,10 @@ namespace BusinessLogic.Services
             {
                 return await Result.FailAsync(MessageConstants.IsInvalidEmail);
             }
-            var checkEmailExists = await dbContext.Users.AnyAsync(x => x.Email.Contains(request.Email) && !x.IsDeleted);
+            var checkEmailExists = await dbContext.Users.AnyAsync(x => !string.IsNullOrEmpty(x.Email) && x.Email.Contains(request.Email) && !x.IsDeleted);
             if (checkEmailExists)
             {
-                return await Result.FailAsync(MessageConstants.CheckEmailExists);
+                return await Result.FailAsync(string.Format(MessageConstants.CheckExists, "Email"));
             }
             var user = new AppUser
             {
@@ -201,7 +201,7 @@ namespace BusinessLogic.Services
                 if (request.Roles.Any())
                 {
                     var roleById = await roleManager.FindByIdAsync(request.Roles);
-                    if (roleById != null)
+                    if (roleById != null && !string.IsNullOrEmpty(roleById.Name))
                     {
                         await userManager.AddToRoleAsync(user, roleById.Name);
                     }
@@ -220,14 +220,14 @@ namespace BusinessLogic.Services
 
         public async Task<IResult<List<RoleResponse>>> GetAllRole()
         {
-            var result = await roleManager.Roles.Where(x => !x.IsDeleted && !x.Name.Equals("Admin"))
+            var result = await roleManager.Roles.Where(x => !x.IsDeleted && !string.IsNullOrEmpty(x.Name) && !x.Name.Equals("Admin"))
                 .Select(a => new RoleResponse()
                 {
                     Id = a.Id,
                     CreatedBy = a.CreatedBy,
                     CreatedOn = a.CreatedOn,
                     Description = a.Description,
-                    Name = a.Name
+                    Name = string.IsNullOrEmpty(a.Name) ? string.Empty : a.Name
                 }).ToListAsync();
             if (result.Any())
             {
@@ -245,6 +245,7 @@ namespace BusinessLogic.Services
             var user = await userManager.Users.Where(x => x.Id == changePasswordUser.Id && !x.IsDeleted).FirstOrDefaultAsync();
             if (user != null)
             {
+                if (user.Password == null) user.Password = string.Empty;
                 var changePasswordResult = await userManager.ChangePasswordAsync(user, user.Password, changePasswordUser.ConfirmPasswordNew);
 
                 if (changePasswordResult.Succeeded)
@@ -281,14 +282,14 @@ namespace BusinessLogic.Services
                 await dbContext.SaveChangesAsync();
 
                 // Change Password
-                if (request.PasswordCurrent != null || request.PasswordNew != null)
+                if (request.PasswordCurrent != null && request.PasswordNew != null)
                 {
                     if (!request.PasswordNew.Equals(request.ConfirmPassword))
                     {
                         return Result<string>.Fail(MessageConstants.PasswordNotMatch);
                     }
                     var passwordHasher = new PasswordHasher<AppUser>();
-
+                    if (user.PasswordHash == null) user.PasswordHash = string.Empty;
                     var result = passwordHasher.VerifyHashedPassword(user, user.PasswordHash, request.PasswordCurrent);
                     if (result == PasswordVerificationResult.Success)
                     {

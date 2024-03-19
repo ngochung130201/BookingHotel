@@ -158,7 +158,7 @@
                         DateOfBirth: dateOfBirth,
                         phoneNumber: phoneNumber,
                         roles: roles,
-                        isActive : isActive,
+                        isActive: isActive,
                         password: password,
                         confirmPassword: confirmPassword,
                         address: address
@@ -256,7 +256,7 @@
                     $('#dateOfBirth').val(base.dateFormatDateOfBirthJson(response.data.dateOfBirth));
                     $('#phoneNumber').val(response.data.phoneNumber);
                     $('#address').val(response.data.address);
-                    $("#ddlRoleName option[value='" + response.data.roleName +"']").prop("selected", true);
+                    $("#ddlRoleName option[value='" + response.data.roleName + "']").prop("selected", true);
                     $('#ckStatus').val(response.data.ckStatus);
                     $('#modal-add-edit').modal('show');
                     base.stopLoading();
@@ -503,11 +503,11 @@
 
     var getMemberStatus = function (status, id) {
         if (status == 1)
-            return '<button class="btn btn-sm btn-success btn-memberStatus" data-id="'+ id +'" data-status="1">Trial</button>';
-        else if (status == 2)                                                                               
-            return '<button class="btn btn-sm btn-warning btn-memberStatus" data-id="'+ id +'" data-status="2">Vip1</button>';
-        else if (status == 3)                                                                               
-            return '<button class="btn btn-sm btn-danger btn-memberStatus" data-id="'+ id +'" data-status="3">Vip2</button>';
+            return '<button class="btn btn-sm btn-success btn-memberStatus" data-id="' + id + '" data-status="1">Trial</button>';
+        else if (status == 2)
+            return '<button class="btn btn-sm btn-warning btn-memberStatus" data-id="' + id + '" data-status="2">Vip1</button>';
+        else if (status == 3)
+            return '<button class="btn btn-sm btn-danger btn-memberStatus" data-id="' + id + '" data-status="3">Vip2</button>';
     }
 
     var resetFormMaintainance = function () {

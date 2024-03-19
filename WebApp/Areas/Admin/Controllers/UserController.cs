@@ -14,7 +14,7 @@ namespace WebApp.Areas.Admin.Controllers
         public async Task<IActionResult> IndexAsync()
         {
             var result = await userService.GetAllRole();
-            if(result.Data == null) { return View(new List<RoleResponse>()); }
+            if (result.Data == null) { return View(new List<RoleResponse>()); }
             return View(result.Data);
         }
 
