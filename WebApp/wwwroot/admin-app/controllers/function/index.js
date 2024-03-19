@@ -90,7 +90,8 @@
         // Event button delete
         $('body').on('click', '#btn-delete', function (e) {
             e.preventDefault();
-            var id = $(this).data('id');
+            var id = $('#txtFunctionId').val();
+
             base.confirm('Are you sure want to delete?', function () {
                 deteleItem(id);
             });
@@ -150,6 +151,7 @@
                         // select the node
                         //$('#tt').tree('select', node.target);
                         $('#txtFunctionId').val(node.id);
+                        console.log('id', node)
                         // display context menu
                         $('#contextMenu').menu('show', {
                             left: e.pageX,

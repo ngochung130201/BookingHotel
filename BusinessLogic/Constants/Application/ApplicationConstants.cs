@@ -8,7 +8,7 @@
         public const string DISPLAY_ORDER_ASC = "DisplayOrder Ascending";
         public enum DISPLAY_ORDER
         {
-            DESCENDING = 1,ASCENDING = 2
+            DESCENDING = 1, ASCENDING = 2
         }
 
         public class UserClaims

@@ -18,7 +18,7 @@ namespace BusinessLogic.Services
 
         Task<IResult> Update(FunctionDetailDto request);
 
-        Task<IResult> Delete(int id);
+        Task<IResult> Delete(string id);
 
         Task<IResult> UpdateParentId(string sourceId, string targetId, Dictionary<string, int> items);
 
@@ -71,9 +71,9 @@ namespace BusinessLogic.Services
             return await Result.SuccessAsync(MessageConstants.UpdateSuccess);
         }
 
-        public async Task<IResult> Delete(int id)
+        public async Task<IResult> Delete(string id)
         {
-            var function = await dbContext.Functions.AsNoTracking().FirstOrDefaultAsync(x => !x.IsDeleted && x.Id == id);
+            var function = await dbContext.Functions.AsNoTracking().FirstOrDefaultAsync(x => !x.IsDeleted && x.FunctionId == id);
 
             if (function == null) return await Result.FailAsync(MessageConstants.NotFound);
 
@@ -150,7 +150,7 @@ namespace BusinessLogic.Services
                                     on f.FunctionId equals p.FunctionId
                                 join r in dbContext.Roles
                                     on p.RoleId equals r.Id
-                                where r.Name.Contains(roleName)
+                                where !string.IsNullOrEmpty(r.Name) && r.Name.Contains(roleName)
                                     && ((p.CanCreate == true)
                                         || (p.CanUpdate == true)
                                         || (p.CanDelete == true)
@@ -164,7 +164,7 @@ namespace BusinessLogic.Services
                                     SortOrder = f.SortOrder,
                                     URL = f.URL,
                                     CreatedOn = f.CreatedOn
-                                }).OrderBy(x=> x.SortOrder).ToListAsync();
+                                }).OrderBy(x => x.SortOrder).ToListAsync();
             return await Result<List<FunctionResponse>>.SuccessAsync(result);
         }
     }

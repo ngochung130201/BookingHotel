@@ -69,7 +69,7 @@ namespace WebApp.Areas.Admin.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(string id)
         {
             if (!ModelState.IsValid)
             {
