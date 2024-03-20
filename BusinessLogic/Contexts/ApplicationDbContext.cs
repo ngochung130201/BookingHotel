@@ -21,9 +21,29 @@ namespace BusinessLogic.Contexts
         public virtual DbSet<CronJob> CronJobs { get; set; } = default!;
         public virtual DbSet<Function> Functions { get; set; } = default!;
         public virtual DbSet<Pages> Pages { get; set; } = default!;
-        public virtual DbSet<Entities.Permission> Permissions { get; set; } = default!;
+        public virtual DbSet<Permission> Permissions { get; set; } = default!;
         public virtual DbSet<Partners> Partners { get; set; } = default!;
         public virtual DbSet<Invoices> Invoices { get; set; } = default!;
+        public virtual DbSet<Audits> Audits { get; set; } = default!;
+        public virtual DbSet<BookingDetail> BookingDetail { get; set; } = default!;
+        public virtual DbSet<Bookings> Bookings { get; set; } = default!;
+        public virtual DbSet<CostBooking> CostBooking { get; set; } = default!;
+        public virtual DbSet<CostOverrun> CostOverrun { get; set; } = default!;
+        public virtual DbSet<FeedBacks> FeedBacks { get; set; } = default!;
+        public virtual DbSet<Member> Member { get; set; } = default!;
+        public virtual DbSet<News> News { get; set; } = default!;
+        public virtual DbSet<Notifications> Notifications { get; set; } = default!;
+        public virtual DbSet<PriceManager> PriceManager { get; set; } = default!;
+        public virtual DbSet<RoomImages> RoomImages { get; set; } = default!;
+        public virtual DbSet<Rooms> Rooms { get; set; } = default!;
+        public virtual DbSet<RoomService> RoomService { get; set; } = default!;
+        public virtual DbSet<RoomTag> RoomTag { get; set; } = default!;
+        public virtual DbSet<RoomTypes> RoomTypes { get; set; } = default!;
+        public virtual DbSet<Entities.Services> Services { get; set; } = default!;
+        public virtual DbSet<SpecialDayBooking> SpecialDayBooking { get; set; } = default!;
+        public virtual DbSet<Tags> Tags { get; set; } = default!;
+        public virtual DbSet<VoteBooking> VoteBooking { get; set; } = default!;
+
         #endregion Entities
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
