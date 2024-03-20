@@ -197,9 +197,9 @@
     },
     setTitleModal: function (type) {
         if (type === 'add') {
-            $('#modal-add-edit .modal-title').text('Add New');
+            $('#modal-add-edit .modal-title').text('Tạo mới');
         } else if (type === 'edit') {
-            $('#modal-add-edit .modal-title').text('Edit');
+            $('#modal-add-edit .modal-title').text('Sửa');
         }
     },
     getOrigin: function () {
