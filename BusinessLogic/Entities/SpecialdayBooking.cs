@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BusinessLogic.Entities
 {
-    internal class SpecialDayBooking : AuditableBaseEntity<int>
+    public class SpecialDayBooking : AuditableBaseEntity<int>
     {
         [Required]
         public int BookingId { get; set; } // Đơn đợt phòng
