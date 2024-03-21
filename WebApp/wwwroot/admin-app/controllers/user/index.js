@@ -489,9 +489,9 @@
 
     var getUserStatus = function (status, id) {
         if (status == true)
-            return '<button class="btn btn-sm btn-success btn-active" data-id="' + id + '">Active</button>';
+            return '<button class="btn btn-sm btn-success btn-active" data-id="' + id + '">Hoạt động</button>';
         else
-            return '<button class="btn btn-sm btn-danger btn-active" data-id="' + id + '">Block</button>';
+            return '<button class="btn btn-sm btn-danger btn-active" data-id="' + id + '">Chặn</button>';
     }
 
     var getEmailConfirmed = function (emailConfirm) {

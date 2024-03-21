@@ -137,9 +137,9 @@
     },
     getStatus: function (status) {
         if (status == 1)
-            return '<span class="badge bg-green">Active</span>';
+            return '<span class="badge bg-green">Hoạt động</span>';
         else
-            return '<span class="badge bg-red">Block</span>';
+            return '<span class="badge bg-red">Chặn</span>';
     },
     formatNumber: function (number, precision) {
         if (!isFinite(number)) {
