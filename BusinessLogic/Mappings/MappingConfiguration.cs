@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using BusinessLogic.Dtos.Function;
-using BusinessLogic.Dtos.Pages;
-using BusinessLogic.Dtos.Partners;
 using BusinessLogic.Dtos.Role;
+using BusinessLogic.Dtos.RoomTypes;
+using BusinessLogic.Dtos.Service;
 using BusinessLogic.Dtos.User;
 using BusinessLogic.Entities;
 using BusinessLogic.Entities.Identity;
@@ -18,11 +18,11 @@ namespace BusinessLogic.Mappings
             CreateMap<AppRole, RoleResponse>().ReverseMap();
             CreateMap<Function, FunctionResponse>().ReverseMap();
             CreateMap<Function, FunctionDetailDto>().ReverseMap();
-            CreateMap<Pages, PagesDetailDto>().ReverseMap();
-            CreateMap<Pages, PagesResponse>().ReverseMap();
             CreateMap<FunctionWithRoleDto, Permission>().ReverseMap();
-            CreateMap<Partners, PartnerDetailDto>().ReverseMap();
-            CreateMap<Partners, PartnerResponse>().ReverseMap();
+            CreateMap<RoomTypes, RoomTypesDto>().ReverseMap();
+            CreateMap<RoomTypes, RoomTypesResponse>().ReverseMap();
+            CreateMap<Entities.Services, ServiceDto>().ReverseMap();
+            CreateMap<Entities.Services, ServiceResponse>().ReverseMap();
         }
     }
 }

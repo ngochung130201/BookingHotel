@@ -26,15 +26,14 @@ namespace BusinessLogic.Extensions
             services.AddTransient<IFunctionService, FunctionService>();
             // User
             services.AddTransient<IUserService, UserService>();
-            // Pages
-            services.AddTransient<IPagesService, PagesService>();
-            // Partner
-            services.AddTransient<IPartnerService, PartnerService>();
             // Invoice
             services.AddTransient<IInvoiceService, InvoiceService>();
             // DashboardService
             services.AddTransient<IDashboardService, DashboardService>();
-
+            // RoomTypesService
+            services.AddTransient<IRoomTypesService, RoomTypesService>();
+            // ServicesServices
+            services.AddTransient<IServicesServices, ServicesServices>();
             services.AddAuthorizationCore(options =>
             {
                 options.AddPolicy("Admin", policy =>

@@ -41,11 +41,11 @@
             message: message,
             buttons: {
                 confirm: {
-                    label: 'Yes',
+                    label: 'Có',
                     className: 'btn-success'
                 },
                 cancel: {
-                    label: 'No',
+                    label: 'Không',
                     className: 'btn-danger'
                 }
             },
@@ -177,16 +177,16 @@
         if ($('#paginationUL a').length === 0 || changePageSize === true) {
             $('#paginationUL').empty();
             $('#paginationUL').removeData("twbs-pagination");
-            $('#paginationUL').unbind("page");
+            $('#paginationUL').off("page");
         }
         //Bind Pagination Event
         $('#paginationUL').twbsPagination({
             totalPages: totalsize,
             visiblePages: 7,
-            first: 'First',
-            prev: 'Prev',
-            next: 'Next',
-            last: 'Last',
+            first: '<<',
+            prev: '<',
+            next: '>',
+            last: '>>',
             onPageClick: function (event, p) {
                 if (base.configs.pageIndex !== p) {
                     base.configs.pageIndex = p;
@@ -197,9 +197,9 @@
     },
     setTitleModal: function (type) {
         if (type === 'add') {
-            $('#modal-add-edit .modal-title').text('Tạo mới');
+            $('#modal-add-edit .modal-title').text('Thêm mới');
         } else if (type === 'edit') {
-            $('#modal-add-edit .modal-title').text('Sửa');
+            $('#modal-add-edit .modal-title').text('Chỉnh sửa');
         }
     },
     getOrigin: function () {
@@ -212,6 +212,98 @@
             return 'Invalid input';
         }
         return price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+    },
+    convertDecimal: function (input) {
+        var stringNumber = input.toString();
+        if (stringNumber.indexOf('.') !== -1) {
+            var roundedNumber = parseFloat(input).toFixed(2);
+            var replacedNumber = roundedNumber.replace('.', ',');
+            return replacedNumber;
+        } else {
+            return input;
+        }
+    },
+    getDistrict: function (id) {
+        return new Promise(function (resolve, reject) {
+            $.ajax({
+                type: "GET",
+                url: "/Admin/Common/GetDistrict",
+                data: {
+                    id: id
+                },
+                dataType: "json",
+                success: function (response) {
+                    resolve(response);
+                },
+                error: function (status) {
+                    reject(status);
+                }
+            });
+        });
+    },
+    getWard: function (id) {
+        return new Promise(function (resolve, reject) {
+            $.ajax({
+                type: "GET",
+                url: "/Admin/Common/GetWard",
+                data: {
+                    id: id
+                },
+                dataType: "json",
+                success: function (response) {
+                    resolve(response);
+                },
+                error: function (status) {
+                    reject(status);
+                }
+            });
+        });
+    },
+    showError: function (errorList) {
+        $.each(errorList, function (index, error) {
+            // Tìm phần tử input có id tương ứng
+            var inputElement = $('#txt' + error.fieldName);
+
+            // Kiểm tra xem phần tử input có tồn tại không
+            if (inputElement.length > 0) {
+                // Tạo một thẻ <span> chứa thông báo lỗi
+                var errorMessage = $('<label>').addClass('text-danger').text(error.message);
+
+                // Thêm thông báo lỗi dưới phần tử input
+                inputElement.after(errorMessage);
+
+                inputElement.on('change', function () {
+                    errorMessage.remove();
+                });
+            }
+        });
+    },
+    isValidDate: function (dateString) {
+        // Phân tách ngày, tháng và năm từ chuỗi
+        var parts = dateString.split('/');
+        var day = parseInt(parts[0], 10);
+        var month = parseInt(parts[1], 10);
+        var year = parseInt(parts[2], 10);
+
+        // Tạo đối tượng Date từ ngày, tháng và năm
+        var date = new Date(year, month - 1, day);
+
+        // Kiểm tra xem ngày tạo thành từ chuỗi có giống với ngày tạo từ chuỗi gốc không
+        // và kiểm tra xem ngày, tháng và năm trích xuất ra có giống với ngày, tháng và năm ban đầu không
+        return date && (date.getMonth() + 1) === month && date.getDate() === day && date.getFullYear() === year;
+    },
+    convertToISODateString: function (dateString) {
+        // Chia chuỗi thành các phần riêng biệt (ngày, tháng, năm)
+        var dateParts = dateString.split('/');
+        var day = parseInt(dateParts[0]);
+        var month = parseInt(dateParts[1]) - 1; // Trừ 1 vì JavaScript tính tháng từ 0 đến 11
+        var year = parseInt(dateParts[2]);
+
+        // Tạo đối tượng Date từ các phần đã chia
+        var dateObject = new Date(year, month, day);
+
+        // Chuyển đổi thành chuỗi định dạng ISO 8601 và trả về
+        return dateObject.toISOString();
     }
 }
 
@@ -230,3 +322,15 @@ $.validator.addMethod("customNumber", function (value, element) {
     // Checks if it is a number and is greater than or equal to 0
     return !isNaN(parseFloat(value)) && parseFloat(value) >= 0;
 }, "Requires entering a number greater than or equal to 0");
+
+$.validator.addMethod("customRequired", function (value, element) {
+    if (value == null || value.trim() === "") {
+        return false;
+    }
+    return true;
+}, "Vui lòng nhập trường này.");
+
+// Thêm phương thức kiểm tra ngày tháng hợp lệ
+$.validator.addMethod("validDate", function (value, element) {
+    return base.isValidDate(value);
+}, "Vui lòng nhập ngày hợp lệ (DD/MM/YYYY)");
