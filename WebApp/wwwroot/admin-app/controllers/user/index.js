@@ -179,7 +179,7 @@
                         }
                     },
                     error: function () {
-                        base.notify('Has an error in progress', 'error');
+                        base.notify('Đang xảy ra lỗi! ', 'error');
                         base.stopLoading();
                     }
                 });
@@ -376,7 +376,7 @@
                             Email: item.email,
                             FullName: item.fullName,
                             Id: item.id,
-                            AvatarUrl: item.avatarUrl === undefined || item.avatarUrl === null || item.avatarUrl === '' ? '<img src="/assets/images/user.png" width=25 />' : '<img src="' + base.getOrigin() + item.avatarUrl + '" width=25 />',
+                            AvatarUrl: item.avatarUrl === undefined || item.avatarUrl === null || item.avatarUrl === '' ? '<img src="/assets/images/user.png" width=50 />' : '<img src="' + base.getOrigin() + item.avatarUrl + '" width=50 />',
                             CreatedOn: base.dateTimeFormatJson(item.createdOn),
                             Status: getUserStatus(item.isActive, item.id),
                             EmailConfirmed: getEmailConfirmed(item.emailConfirmed),
