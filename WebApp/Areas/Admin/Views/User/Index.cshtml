@@ -18,10 +18,10 @@
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item"><a href="javascript: void(0);">Bảng điều khiển</a></li>
-                    <li class="breadcrumb-item active">Danh sách nhân viên</li>
+                    <li class="breadcrumb-item active">Danh sách người dùng</li>
                 </ol>
             </div>
-            <h4 class="page-title">Danh sách nhân viên</h4>
+            <h4 class="page-title">Danh sách người dùng</h4>
         </div>
     </div>
 </div>
@@ -44,9 +44,11 @@
                                 }
                             </select>
                         </div>
-                        <label class="col-sm-auto col-form-label" for="txtKeyword">Tìm kiếm</label>
-                        <div class="col-sm-3">
-                            <input type="text" id="txtKeyword" class="form-control" placeholder="Email, Tên người dùng, Họ tên...">
+                        <div class="col-12 col-lg-6 col-md-4 col-sm-12 form-group d-flex flex-wrap align-items-center">
+                            <label class="col-sm-auto col-12 col-form-label" for="txtKeyword">Tìm kiếm</label>
+                            <div class="col-sm-6 col-lg-6 col-12">
+                                <input type="text" id="txtKeyword" class="form-control" placeholder="Email, Họ tên...">
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-2 text-right pb-3">
@@ -58,7 +60,7 @@
                 </div>
                 <table id="datatable-buttons" class="table table-striped dt-responsive nowrap">
                     <thead>
-                        <tr>
+                        <tr class="font-weight-bold text-dark">
                             <th>Stt</th>
                             <th>Ảnh</th>
                             <th>Họ tên</th>
@@ -67,6 +69,7 @@
                             <th>Ngày sinh</th>
                             <th>Điện thoại</th>
                             <th>Trạng thái</th>
+                            <th>Ngày tạo</th>
                             <th class="action-columns">Thao tác</th>
                         </tr>
                     </thead>
@@ -90,6 +93,7 @@
         <td>{{DateOfBirth}}</td>
         <td>{{PhoneNumber}}</td>
         <td>{{{Status}}}</td>
+        <td>{{{CreatedOn}}}</td>
         <td class="text-center">
             <a href="#" data-id="{{Id}}" class="btn btn-xs btn-info btn-change-pass" ><i class="remixicon-lock-2-line"></i></a>
             <a href="#" data-id="{{Id}}" class="btn btn-xs btn-info btn-edit" ><i class="fe-edit-2"></i></a>
