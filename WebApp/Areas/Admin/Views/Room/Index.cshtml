@@ -1,0 +1,89 @@
+﻿@model List<BusinessLogic.Dtos.RoomTypes.RoomTypesResponse>
+@{
+    ViewData["Title"] = "Quản lý phòng";
+}
+@section Scripts {
+    <script src="~/admin-app/controllers/rooms/index.js" asp-append-version="true"></script>
+    <script>
+        var roomsObj = new RoomsController();
+        roomsObj.initialize();
+    </script>
+}
+
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">Bảng điều khiển</a></li>
+                    <li class="breadcrumb-item active">Quản lý phòng</li>
+                </ol>
+            </div>
+            <h4 class="page-title">Quản lý phòng</h4>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 col-lg-6 col-md-4 col-sm-12 form-group d-flex flex-wrap align-items-center">
+                        <label class="col-sm-auto col-12 col-form-label" for="txtKeyword">Tìm kiếm</label>
+                        <div class="col-sm-6 col-lg-6 col-12">
+                            <input type="text" id="txtKeyword" class="form-control" placeholder="Tên phòng, loại phòng, mã phòng">
+                        </div>
+                    </div>
+
+                    <div class=" col-12 col-lg-6  col-md-8 col-sm-12 text-lg-right text-md-right text-sm-left list-btn">
+                        <button type="submit" class="btn btn-primary mr-2" id="btn-create">
+                            <i class="fe-plus-circle"></i> Thêm mới
+                        </button>
+                    </div>
+                </div>
+
+                <div class="table-wrap">
+                    <table id="datatable-buttons" class="table table-striped dt-responsive nowrap">
+                        <thead>
+                            <tr class="font-weight-bold text-dark">
+                                <th>Stt</th>
+                                <th>Phòng</th>
+                                <th>Ảnh</th>
+                                <th>Loại phòng</th>
+                                <th>Mã phòng</th>
+                                <th>Giá phòng</th>
+                                <th>Trạng thái</th>
+                                <th class="action-columns">Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbl-content"></tbody>
+                    </table>
+                    <partial name="_PaginationPartial" />
+                </div>
+            </div> <!-- end card body-->
+        </div> <!-- end card -->
+    </div><!-- end col-->
+</div>
+<!-- end row-->
+
+<script id="table-template" type="x-tmpl-mustache">
+    <tr>
+        <td>{{Order}}</td>
+        <td>{{Name}}</td>
+        <td>{{{Thumbnail}}}</td>
+        <td>{{RoomTypeName}}</td>
+        <td>{{RoomCode}}</td>
+        <td>{{Price}}</td>
+        <td>{{{Status}}}</td>
+        <td class="text-center action-columns">
+            <a href="#" data-id="{{Id}}" class="btn btn-xs btn-info btn-edit" ><i class="fe-edit-2"></i></a>
+            <a href="#" data-id="{{Id}}" class="btn btn-xs btn-danger btn-delete"><i class="fe-trash-2"></i></a>
+        </td>
+    </tr>
+</script>
+
+<partial name="_AddEditModal.cshtml" />

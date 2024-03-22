@@ -34,6 +34,8 @@ namespace BusinessLogic.Extensions
             services.AddTransient<IRoomTypesService, RoomTypesService>();
             // ServicesServices
             services.AddTransient<IServicesServices, ServicesServices>();
+            // RoomsServices
+            services.AddTransient<IRoomsService, RoomsService>();
             services.AddAuthorizationCore(options =>
             {
                 options.AddPolicy("Admin", policy =>
