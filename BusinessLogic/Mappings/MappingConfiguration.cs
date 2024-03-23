@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BusinessLogic.Dtos.Function;
+using BusinessLogic.Dtos.News;
 using BusinessLogic.Dtos.Role;
 using BusinessLogic.Dtos.Rooms;
 using BusinessLogic.Dtos.RoomTypes;
@@ -26,6 +27,8 @@ namespace BusinessLogic.Mappings
             CreateMap<Entities.Services, ServiceResponse>().ReverseMap();
             CreateMap<Rooms, RoomsDto>().ReverseMap();
             CreateMap<Rooms, RoomsResponse>().ReverseMap();
+            CreateMap<News, NewsDto>().ReverseMap();
+            CreateMap<News, NewsResponse>().ReverseMap();
         }
     }
 }

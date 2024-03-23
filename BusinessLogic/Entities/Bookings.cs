@@ -27,15 +27,6 @@ namespace BusinessLogic.Entities
         public string? Payment { get; set; } // Hình thức thanh toán
 
         [StringLength(255)]
-        public string? FullName { get; set; } // Tên khách hành nhận phòng
-
-        [StringLength(255)]
-        public string? Phone { get; set; } // Số điện thoại người nhận phòng
-
-        [StringLength(255)]
-        public string? Email { get; set; } // Email người nhận phòng
-
-        [StringLength(255)]
         public string? Message { get; set; } // Lời nhắn
 
         [Required]

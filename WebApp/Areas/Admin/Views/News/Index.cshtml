@@ -1,12 +1,12 @@
 ﻿@{
-    ViewData["Title"] = "Pages Management";
+    ViewData["Title"] = "Quản lý tin tức";
 }
 
 @section Scripts {
-    <script src="~/admin-app/controllers/pages/index.js" asp-append-version="true"></script>
+    <script src="~/admin-app/controllers/news/index.js" asp-append-version="true"></script>
     <script>
-        var pageObj = new PagesController();
-        pageObj.initialize();
+        var newsObj = new NewsController();
+        newsObj.initialize();
     </script>
 }
 
@@ -16,11 +16,11 @@
         <div class="page-title-box">
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
-                    <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
-                    <li class="breadcrumb-item active">Pages Management</li>
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">Bảng điều khiển</a></li>
+                    <li class="breadcrumb-item active">Quản lý tin tức</li>
                 </ol>
             </div>
-            <h4 class="page-title">Pages Management</h4>
+            <h4 class="page-title">Quản lý tin tức</h4>
         </div>
     </div>
 </div>
@@ -33,32 +33,34 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-10 form-group row">
-                        <label class="col-sm-auto col-form-label" for="txtKeyword">Keyword</label>
+                        <label class="col-sm-auto col-form-label" for="txtKeyword">Tìm kiếm</label>
                         <div class="col-sm-3">
-                            <input type="text" id="txtKeyword" class="form-control" placeholder="Title, Title Vietnamese...">
+                            <input type="text" id="txtKeyword" class="form-control" placeholder="Tiêu đề">
                         </div>
                     </div>
+
                     <div class="col-sm-2 text-right pb-3">
-                        <button type="submit" class="btn btn-primary" id="btn-create" data-animation="fadein">Add New</button>
+                        <button type="submit" class="btn btn-primary" id="btn-create" data-animation="fadein">
+                            <i class="fe-plus-circle"></i>
+                            Thêm mới
+                        </button>
                     </div>
                 </div>
 
                 <table id="datatable-buttons" class="table table-striped dt-responsive nowrap">
                     <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Title</th>
-                            <th>Title Vietnamese</th>
-                            <th>Alias</th>
-                            <th>Status</th>
-                            <th>Created User</th>
-                            <th>Created Date</th>
-                            <th class="action-columns">Action</th>
+                        <tr class="font-weight-bold text-dark">
+                            <th>Stt</th>
+                            <th>Tiêu đề</th>
+                            <th>Hình ảnh</th>
+                            <th>Nội dung</th>
+                            <th>Bài viết</th>
+                            <th>Trạng thái</th>
+                            <th class="action-columns">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody id="tbl-content"></tbody>
                 </table>
-
                 <partial name="_PaginationPartial" />
             </div> <!-- end card body-->
         </div> <!-- end card -->
@@ -69,16 +71,16 @@
 <script id="table-template" type="x-tmpl-mustache">
     <tr>
         <td>{{Order}}</td>
-        <td class="long-col" title="{{Title}}">{{Title}}</td>
-        <td class="long-col" title="{{TitleVi}}">{{TitleVi}}</td>
-        <td>{{Alias}}</td>
+        <td>{{Title}}</td>
+        <td>{{{Thumbnail}}}</td>
+        <td>{{Content}}</td>
+        <td>{{Hot}}</td>
         <td>{{{Status}}}</td>
-        <td>{{CreatedBy}}</td>
-        <td>{{{CreatedOn}}}</td>
         <td class="text-center action-columns">
             <a href="#" data-id="{{Id}}" class="btn btn-xs btn-info btn-edit" ><i class="fe-edit-2"></i></a>
             <a href="#" data-id="{{Id}}" class="btn btn-xs btn-danger btn-delete"><i class="fe-trash-2"></i></a>
         </td>
     </tr>
 </script>
+
 <partial name="_AddEditModal.cshtml" />

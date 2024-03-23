@@ -7,13 +7,13 @@ namespace BusinessLogic.Entities
     {
         [Required]
         [StringLength(255)]
-        public string? Name { get; set; } // Tên dịch vụ phát sinh
+        public string? Name { get; set; } // Tên chi phí phát sinh
 
-        public string? Description { get; set; } // Mô tả dịch vụ phát sinh
+        public string? Description { get; set; } // Mô tả chi phí phát sinh
 
-        public decimal Price { get; set; } // Giá tiền của dịch vụ phát sinh
+        public decimal Price { get; set; } // Giá tiền của chi phí phát sinh
 
         [StringLength(255)]
-        public string? Image { get; set; } // Ảnh của dịch vụ phát sinh
+        public string? Image { get; set; } // Ảnh của chi phí phát sinh
     }
 }
