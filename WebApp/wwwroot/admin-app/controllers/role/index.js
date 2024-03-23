@@ -70,7 +70,7 @@
                         }
                     },
                     error: function () {
-                        base.notify('Has an error in progress', 'error');
+                        base.notify('Đang xảy ra lỗi!', 'error');
                         base.stopLoading();
                     }
                 });
@@ -91,7 +91,7 @@
         $('body').on('click', '.btn-delete', function (e) {
             e.preventDefault();
             var id = $(this).data('id');
-            base.confirm('Are you sure want to delete?', function () {
+            base.confirm('Bạn có chắc chắn muốn xóa?', function () {
                 deteleItem(id);
             });
         });
@@ -133,7 +133,7 @@
                     base.stopLoading();
                 },
                 error: function () {
-                    base.notify('Has an error in save permission progress', 'error');
+                    base.notify('Đang xảy ra lỗi! ', 'error');
                     base.stopLoading();
                 }
             });
@@ -209,7 +209,7 @@
                 base.stopLoading();
             },
             error: function (status) {
-                base.notify('Has an error in progress', 'error');
+                base.notify('Đang xảy ra lỗi! ', 'error');
                 base.stopLoading();
             }
         });
@@ -237,7 +237,7 @@
                 }
             },
             error: function (status) {
-                base.notify('Has an error in progress', 'error');
+                base.notify('Đang xảy ra lỗi! ', 'error');
                 base.stopLoading();
             }
         });
