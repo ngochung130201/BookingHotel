@@ -4,6 +4,10 @@
     {
         public int Id { get; set; } = default!;
 
+        public string? BookingCode { get; set; }
+
+        public string? FullName { get; set; }
+
         public short Star { get; set; } 
 
         public string? Title { get; set; } 

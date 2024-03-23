@@ -40,6 +40,10 @@ namespace BusinessLogic.Extensions
             services.AddTransient<INewsService, NewsService>();
             // FeedBackService
             services.AddTransient<IFeedBackService, FeedBackService>();
+            // VoteBookingServices
+            services.AddTransient<IVoteBookingServices, VoteBookingServices>();
+            // CostBookingService
+            services.AddTransient<ICostBookingService, CostBookingService>();
 
             services.AddAuthorizationCore(options =>
             {
