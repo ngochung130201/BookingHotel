@@ -20,6 +20,10 @@ namespace BusinessLogic.Services
         Task<IResult> Update(NewsDto request);
 
         Task<IResult> Delete(int id);
+
+        Task<IResult> ChangeStatusAsync(int id);
+
+        Task<IResult> ChangeHotAsync(int id);
     }
 
     public class NewsService : INewsService
@@ -39,7 +43,6 @@ namespace BusinessLogic.Services
         {
             var query = from n in _dbContext.News
                         where !n.IsDeleted && (string.IsNullOrEmpty(request.Keyword)
-                            && (request.Status == null || request.Status == n.Status) 
                             || n.Title!.ToLower().Contains(request.Keyword!.ToLower()))
                         select new NewsResponse
                         {
@@ -131,6 +134,30 @@ namespace BusinessLogic.Services
                 _logger.LogError(ex, "Lỗi khi xóa: {Id}", id);
                 return await Result.FailAsync(MessageConstants.DeleteFail);
             }
+        }
+
+        public async Task<IResult> ChangeStatusAsync(int id)
+        {
+            var news = await _dbContext.News.Where(x => !x.IsDeleted && x.Id == id).FirstOrDefaultAsync();
+
+            if (news == null) return await Result.FailAsync(MessageConstants.NotFound);
+
+            news.Status = !news.Status;
+            _dbContext.News.Update(news);
+            await _dbContext.SaveChangesAsync();
+            return await Result.SuccessAsync(MessageConstants.UpdateSuccess);
+        }
+
+        public async Task<IResult> ChangeHotAsync(int id)
+        {
+            var news = await _dbContext.News.Where(x => !x.IsDeleted && x.Id == id).FirstOrDefaultAsync();
+
+            if (news == null) return await Result.FailAsync(MessageConstants.NotFound);
+
+            news.Hot = !news.Hot;
+            _dbContext.News.Update(news);
+            await _dbContext.SaveChangesAsync();
+            return await Result.SuccessAsync(MessageConstants.UpdateSuccess);
         }
     }
 }

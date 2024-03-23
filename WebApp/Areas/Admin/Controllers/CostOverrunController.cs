@@ -1,12 +1,11 @@
-﻿using BusinessLogic.Services;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
+﻿using BusinessLogic.Dtos.CostOverrun;
+using BusinessLogic.Services;
 using Microsoft.AspNetCore.Mvc;
-using BusinessLogic.Dtos.News;
-using BusinessLogic.Entities;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace WebApp.Areas.Admin.Controllers
 {
-    public class NewsController(INewsService newsService) : AdminBaseController
+    public class CostOverrunController(ICostBookingService costBookingService) : AdminBaseController
     {
         public IActionResult Index()
         {
@@ -18,9 +17,9 @@ namespace WebApp.Areas.Admin.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> GetAllPaging(NewRequest request)
+        public async Task<IActionResult> GetAllPaging(CostOverrunRequest request)
         {
-            var result = await newsService.GetPagination(request);
+            var result = await costBookingService.GetPagination(request);
             return Json(result);
         }
 
@@ -32,7 +31,7 @@ namespace WebApp.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> GetById(int id)
         {
-            var result = await newsService.GetById(id);
+            var result = await costBookingService.GetById(id);
 
             return Json(result);
         }
@@ -43,7 +42,7 @@ namespace WebApp.Areas.Admin.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> SaveEntity(NewsDto request)
+        public async Task<IActionResult> SaveEntity(CostOverrunDto request)
         {
             if (!ModelState.IsValid)
             {
@@ -53,12 +52,12 @@ namespace WebApp.Areas.Admin.Controllers
 
             if (request.Id == 0)
             {
-                var result = await newsService.Add(request);
+                var result = await costBookingService.Add(request);
                 return Json(result);
             }
             else
             {
-                var result = await newsService.Update(request);
+                var result = await costBookingService.Update(request);
                 return Json(result);
             }
         }
@@ -76,30 +75,8 @@ namespace WebApp.Areas.Admin.Controllers
                 return new BadRequestObjectResult(ModelState);
             }
 
-            var result = await newsService.Delete(id);
+            var result = await costBookingService.Delete(id);
 
-            return Json(result);
-        }
-
-        /// <summary>
-        /// Change Status
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public async Task<IActionResult> ChangeStatus(int id)
-        {
-            var result = await newsService.ChangeStatusAsync(id);
-            return Json(result);
-        }
-
-        /// <summary>
-        /// Change Hot
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public async Task<IActionResult> ChangeHot(int id)
-        {
-            var result = await newsService.ChangeHotAsync(id);
             return Json(result);
         }
     }

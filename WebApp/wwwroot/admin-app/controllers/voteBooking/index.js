@@ -1,23 +1,12 @@
 ﻿
-var FeedBackController = function () {
+
+var VoteBookingController = function () {
     this.initialize = function () {
         loadData();
         registerEvents();
     }
 
     var registerEvents = function () {
-        //Init validation
-        $('#formMaintainance').validate({
-            errorClass: 'text-danger',
-            ignore: [],
-            lang: 'en',
-            rules: {
-                txtReplyBy: {
-                    maxlength: 255,
-                }
-            }
-        });
-
         // Event search 
         $('#txtKeyword').on('focusout', function (e) {
             e.preventDefault();
@@ -37,21 +26,6 @@ var FeedBackController = function () {
             loadData(true);
         });
 
-        // Event save
-        $('#btnSave').on('click', function (e) {
-            e.preventDefault();
-            saveData(false);
-        });
-
-        // Event button edit
-        $('body').on('click', '.btn-edit', function (e) {
-            e.preventDefault();
-            var id = $(this).data('id');
-            base.setTitleModal('edit');
-            $("#formMaintainance").validate().resetForm();
-            loadDetail(id);
-        });
-
         // Event button delete
         $('body').on('click', '.btn-delete', function (e) {
             e.preventDefault();
@@ -62,10 +36,43 @@ var FeedBackController = function () {
         });
     }
 
+    // Event change status 
+    $('body').on('click', '.btn-status', function (e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        changeStatus(id);
+    });
+    var changeStatus = function (id) {
+        $.ajax({
+            type: "POST",
+            url: "/admin/News/ChangeStatus",
+            data: {
+                id: id
+            },
+            dataType: "json",
+            beforeSend: function () {
+                base.startLoading();
+            },
+            success: function (response) {
+                if (response.succeeded) {
+                    base.notify(response.messages[0], 'success');
+                    loadData(true);
+                }
+                else {
+                    base.notify(response.messages[0], 'error');
+                }
+                base.stopLoading();
+            },
+            error: function (status) {
+                console.log(status);
+            }
+        });
+    }
+
     var loadData = function (isPageChanged) {
         $.ajax({
             type: "GET",
-            url: "/Admin/FeedBack/GetAllPaging",
+            url: "/Admin/VoteBooking/GetAllPaging",
             data: {
                 keyword: $('#txtKeyword').val(),
                 pageNumber: base.configs.pageIndex,
@@ -85,11 +92,12 @@ var FeedBackController = function () {
                         render += Mustache.render(template, {
                             Order: stt,
                             Id: item.id,
-                            Email: item.email,
+                            FullName: item.fullName,
+                            BookingCode: item.bookingCode,
                             Title: item.title,
-                            Content: item.content,
-                            Reply: item.reply,
-                            ReplyBy: item.replyBy,
+                            Star: item.star,
+                            Comment: item.comment,
+                            Status: getStatus(item.status, item.id),
                             CreatedBy: item.createdBy,
                             CreatedOn: base.dateTimeFormatJson(item.createdOn)
                         });
@@ -112,38 +120,10 @@ var FeedBackController = function () {
         });
     }
 
-
-    var loadDetail = function (id) {
-        $.ajax({
-            type: "GET",
-            url: "/Admin/FeedBack/GetById",
-            data: {
-                id: id
-            },
-            dataType: "json",
-            beforeSend: function () {
-                base.startLoading();
-            },
-            success: function (response) {
-                var data = response.data;
-                $('#hidId').val(data.id);
-                $('#txtReply').val(data.reply);
-                $('#txtReplyBy').val(data.replyBy);
-
-                $('#modal-add-edit').modal('show');
-                base.stopLoading();
-            },
-            error: function (status) {
-                base.notify('Đang xảy ra lỗi!', 'error');
-                base.stopLoading();
-            }
-        });
-    }
-
     var deteleItem = function (id) {
         $.ajax({
             type: "POST",
-            url: "/Admin/FeedBack/Delete",
+            url: "/Admin/News/Delete",
             data: {
                 id: id
             },
@@ -168,45 +148,10 @@ var FeedBackController = function () {
         });
     }
 
-    var resetFormMaintainance = function () {
-        $('#hidId').val(0);
-        $('#txtReply').val('');
-        $('#txtReplyBy').val('');
-    }
-    var saveData = function (continueFlg) {
-        if ($('#formMaintainance').valid()) {
-            var id = $('#hidId').val();
-            var reply = $('#txtReply').val();
-            var replyBy = $('#txtReplyBy').val();
-            $.ajax({
-                type: "POST",
-                url: "/Admin/FeedBack/SaveEntity",
-                data: {
-                    Id: id,
-                    Reply: reply,
-                    ReplyBy: replyBy,
-                },
-                dataType: "json",
-                beforeSend: function () {
-                    base.startLoading();
-                },
-                success: function (response) {
-                    if (response.succeeded) {
-                        base.notify(response.messages[0], 'success');
-                        (continueFlg === true) ? resetFormMaintainance() : $('#modal-add-edit').modal('hide');
-                        resetFormMaintainance();
-                        base.stopLoading();
-                        loadData(true);
-                    } else {
-                        base.notify(response.messages[0], 'error');
-                    }
-                },
-                error: function () {
-                    base.notify('Đang xảy ra lỗi!', 'error');
-                    base.stopLoading();
-                }
-            });
-            return false;
-        }
+    var getStatus = function (status, id) {
+        if (status == true)
+            return '<button class="btn btn-sm btn-success btn-status" data-id="' + id + '">Kích hoạt</button>';
+        else
+            return '<button class="btn btn-sm btn-danger btn-status" data-id="' + id + '">Chặn</button>';
     }
 }

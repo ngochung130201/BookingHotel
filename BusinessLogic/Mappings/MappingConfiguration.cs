@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BusinessLogic.Dtos.CostOverrun;
 using BusinessLogic.Dtos.FeedBacks;
 using BusinessLogic.Dtos.Function;
 using BusinessLogic.Dtos.News;
@@ -7,6 +8,7 @@ using BusinessLogic.Dtos.Rooms;
 using BusinessLogic.Dtos.RoomTypes;
 using BusinessLogic.Dtos.Service;
 using BusinessLogic.Dtos.User;
+using BusinessLogic.Dtos.VoteBooking;
 using BusinessLogic.Entities;
 using BusinessLogic.Entities.Identity;
 
@@ -32,6 +34,10 @@ namespace BusinessLogic.Mappings
             CreateMap<News, NewsResponse>().ReverseMap();
             CreateMap<FeedBacks, FeedBacksDto>().ReverseMap();
             CreateMap<FeedBacks, FeedBacksResponse>().ReverseMap();
+            CreateMap<VoteBooking, VoteBookingDto>().ReverseMap();
+            CreateMap<VoteBooking, VoteBookingResponse>().ReverseMap();
+            CreateMap<CostBooking, CostOverrunDto>().ReverseMap();
+            CreateMap<CostBooking, CostOverrunResponse>().ReverseMap();
         }
     }
 }
