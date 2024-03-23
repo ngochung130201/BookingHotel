@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BusinessLogic.Dtos.FeedBacks;
 using BusinessLogic.Dtos.Function;
 using BusinessLogic.Dtos.News;
 using BusinessLogic.Dtos.Role;
@@ -29,6 +30,8 @@ namespace BusinessLogic.Mappings
             CreateMap<Rooms, RoomsResponse>().ReverseMap();
             CreateMap<News, NewsDto>().ReverseMap();
             CreateMap<News, NewsResponse>().ReverseMap();
+            CreateMap<FeedBacks, FeedBacksDto>().ReverseMap();
+            CreateMap<FeedBacks, FeedBacksResponse>().ReverseMap();
         }
     }
 }

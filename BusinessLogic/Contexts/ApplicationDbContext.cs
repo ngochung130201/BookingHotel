@@ -20,9 +20,7 @@ namespace BusinessLogic.Contexts
         public virtual DbSet<ContactInfo> ContactInfos { get; set; } = default!;
         public virtual DbSet<CronJob> CronJobs { get; set; } = default!;
         public virtual DbSet<Function> Functions { get; set; } = default!;
-        public virtual DbSet<Pages> Pages { get; set; } = default!;
         public virtual DbSet<Permission> Permissions { get; set; } = default!;
-        public virtual DbSet<Partners> Partners { get; set; } = default!;
         public virtual DbSet<Invoices> Invoices { get; set; } = default!;
         public virtual DbSet<Audits> Audits { get; set; } = default!;
         public virtual DbSet<BookingDetail> BookingDetail { get; set; } = default!;

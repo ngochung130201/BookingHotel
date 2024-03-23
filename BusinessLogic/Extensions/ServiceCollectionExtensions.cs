@@ -38,6 +38,9 @@ namespace BusinessLogic.Extensions
             services.AddTransient<IRoomsService, RoomsService>();
             // NewsService
             services.AddTransient<INewsService, NewsService>();
+            // FeedBackService
+            services.AddTransient<IFeedBackService, FeedBackService>();
+
             services.AddAuthorizationCore(options =>
             {
                 options.AddPolicy("Admin", policy =>

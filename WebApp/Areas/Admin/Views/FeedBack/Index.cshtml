@@ -1,12 +1,12 @@
 ﻿@{
-    ViewData["Title"] = "Quản lý tin tức";
+    ViewData["Title"] = "Quản lý phản hồi";
 }
 
 @section Scripts {
-    <script src="~/admin-app/controllers/news/index.js" asp-append-version="true"></script>
+    <script src="~/admin-app/controllers/feedBack/index.js" asp-append-version="true"></script>
     <script>
-        var newsObj = new NewsController();
-        newsObj.initialize();
+        var feedBackObj = new FeedBackController();
+        feedBackObj.initialize();
     </script>
 }
 
@@ -17,10 +17,10 @@
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item"><a href="javascript: void(0);">Bảng điều khiển</a></li>
-                    <li class="breadcrumb-item active">Quản lý tin tức</li>
+                    <li class="breadcrumb-item active">Quản lý phản hồi</li>
                 </ol>
             </div>
-            <h4 class="page-title">Quản lý tin tức</h4>
+            <h4 class="page-title">Quản lý phản hồi</h4>
         </div>
     </div>
 </div>
@@ -38,24 +38,19 @@
                             <input type="text" id="txtKeyword" class="form-control" placeholder="Tiêu đề">
                         </div>
                     </div>
-
-                    <div class="col-sm-2 text-right pb-3">
-                        <button type="submit" class="btn btn-primary" id="btn-create" data-animation="fadein">
-                            <i class="fe-plus-circle"></i>
-                            Thêm mới
-                        </button>
-                    </div>
                 </div>
 
                 <table id="datatable-buttons" class="table table-striped dt-responsive nowrap">
                     <thead>
                         <tr class="font-weight-bold text-dark">
                             <th>Stt</th>
+                            <th>Tên</th>
+                            <th>Email</th>
                             <th>Tiêu đề</th>
-                            <th>Hình ảnh</th>
                             <th>Nội dung</th>
-                            <th>Bài viết</th>
-                            <th>Trạng thái</th>
+                            <th>Trả lời</th>
+                            <th>Người trả lời</th>
+                            <th>Ngày tạo</th>
                             <th class="action-columns">Thao tác</th>
                         </tr>
                     </thead>
@@ -71,11 +66,13 @@
 <script id="table-template" type="x-tmpl-mustache">
     <tr>
         <td>{{Order}}</td>
+        <td>{{Name}}</td>
+        <td>{{Email}}</td>
         <td>{{Title}}</td>
-        <td>{{{Thumbnail}}}</td>
         <td>{{Content}}</td>
-        <td>{{{Hot}}}</td>
-        <td>{{{Status}}}</td>
+        <td>{{Reply}}</td>
+        <td>{{ReplyBy}}</td>
+        <td>{{CreatedOn}}</td>
         <td class="text-center action-columns">
             <a href="#" data-id="{{Id}}" class="btn btn-xs btn-info btn-edit" ><i class="fe-edit-2"></i></a>
             <a href="#" data-id="{{Id}}" class="btn btn-xs btn-danger btn-delete"><i class="fe-trash-2"></i></a>
