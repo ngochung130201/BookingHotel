@@ -44,7 +44,8 @@ namespace BusinessLogic.Extensions
             services.AddTransient<IVoteBookingServices, VoteBookingServices>();
             // CostBookingService
             services.AddTransient<ICostBookingService, CostBookingService>();
-
+            // BookingService
+            services.AddTransient<IBookingService, BookingService>();
             services.AddAuthorizationCore(options =>
             {
                 options.AddPolicy("Admin", policy =>

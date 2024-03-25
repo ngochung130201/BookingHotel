@@ -8,7 +8,6 @@ using BusinessLogic.Wrapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Linq.Dynamic.Core;
-using static Microsoft.AspNetCore.Hosting.Internal.HostingApplication;
 
 namespace BusinessLogic.Services
 {
