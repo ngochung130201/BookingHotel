@@ -38,19 +38,19 @@
                     <form id="formLogin" method="post">
                         @Html.AntiForgeryToken()
                         <div class="field">
-                            <label for="username">Username</label>
+                            <label for="username">Tài khoảng</label>
                             <div class="field-Email">
-                                <input class="form-control" asp-for="UserName" type="text" id="username" required="" placeholder="Enter your username">
+                                <input class="form-control" asp-for="UserName" type="text" id="username" required="" placeholder="Tài khoảng">
                             </div>
                         </div>
 
                         <div class="field">
-                            <label for="password">Password</label>
-                            <input class="form-control" asp-for="Password" type="password" required="" id="password" placeholder="Enter your password">
+                            <label for="password">Mật khẩu</label>
+                            <input class="form-control" asp-for="Password" type="password" required="" id="password" placeholder="Mật khẩu">
                             <span class="eye_icon"></span>
                         </div>
                         <div class="forgot_submit">
-                            <button class="btn-block" id="btnLogin" type="submit"> Log In </button>
+                            <button class="btn-block" id="btnLogin" type="submit"> Đăng nhập </button>
                         </div>
                     </form>
                 </div>
