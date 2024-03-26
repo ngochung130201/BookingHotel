@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BusinessLogic.Dtos.Booking;
 using BusinessLogic.Dtos.CostOverrun;
 using BusinessLogic.Dtos.FeedBacks;
 using BusinessLogic.Dtos.Function;
@@ -38,6 +39,8 @@ namespace BusinessLogic.Mappings
             CreateMap<VoteBooking, VoteBookingResponse>().ReverseMap();
             CreateMap<CostBooking, CostOverrunDto>().ReverseMap();
             CreateMap<CostBooking, CostOverrunResponse>().ReverseMap();
+            CreateMap<Bookings, BookingDto>().ReverseMap();
+            CreateMap<Bookings, BookingResponse>().ReverseMap();
         }
     }
 }

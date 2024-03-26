@@ -14,7 +14,7 @@ namespace BusinessLogic.Entities
 
         public DateTime? CheckOutDate { get; set; } // Ngày trả phòng
 
-        public bool? Status { get; set; } // Trạng thái đơn đặt phòng
+        public short? Status { get; set; } // Trạng thái đơn đặt phòng
 
         public short? Adult { get; set; } // Số lượng người lớn
 
@@ -22,6 +22,8 @@ namespace BusinessLogic.Entities
 
         [Required]
         public decimal TotalAmount { get; set; } // Tổng tiền đơn đặt phòng
+
+        public decimal? DownPayment { get; set; } // Tiền đặt cọc phòng
 
         [StringLength(255)]
         public string? Payment { get; set; } // Hình thức thanh toán
