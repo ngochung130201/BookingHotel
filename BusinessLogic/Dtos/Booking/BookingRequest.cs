@@ -4,6 +4,6 @@ namespace BusinessLogic.Dtos.Booking
 {
     public class BookingRequest : RequestParameter
     {
-        public bool? Status { get; set; }
+        public short? Status { get; set; }
     }
 }

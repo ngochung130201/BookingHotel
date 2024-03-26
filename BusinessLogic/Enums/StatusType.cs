@@ -1,15 +1,10 @@
 ﻿namespace BusinessLogic.Enums
 {
-    public enum StatusType : short
+    public enum StatusBooking : short
     {
-        Draft = 0,
-        Active = 1,
-    }
-    public enum StatusTicket : short
-    {
-        New = 1, 
-        Sold = 2, // Ticket sales
-        Return = 3, // Return the ticket
-        Cancel = 4 //ticket cancellation
+        NewBooking = 1, // Đơn mới
+        DownPayment = 2, // Đã đặt cọc
+        CheckIn = 3, // Đã nhận phòng
+        CheckOut = 4 // Đã trả phòng
     }
 }
