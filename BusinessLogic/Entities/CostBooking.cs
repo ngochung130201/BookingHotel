@@ -10,8 +10,5 @@ namespace BusinessLogic.Entities
 
         [Required]
         public int CostId { get; set; } // Dịch vụ phát sinh
-
-        [Required]
-        public decimal Price { get; set; } // Giá tiền dịch vụ phát sinh
     }
 }

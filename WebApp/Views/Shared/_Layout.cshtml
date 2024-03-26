@@ -1,191 +1,153 @@
 ﻿@using WebApp.Extensions
-@using Microsoft.AspNetCore.Mvc.Localization
-@using BusinessLogic.Enums
-@inject IViewLocalizer Localizer
 @{
     var httpContext = ViewContext.HttpContext;
     string appDomain = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}";
 }
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "https://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
+    <title>Deluxe</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>@ViewData["Title"]</title>
-    <meta name="description" content="Empowering Sustainability with Smart Environmental Accounting | Minimax">
-    <meta name="keywords" content="Minimax">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i" rel="stylesheet">
 
-    <link rel="icon" href="~/assets/favicon.ico" type="image/vnd.microsoft.icon">
-    <meta property="og:title" content="@ViewData["Title"]">
-    <meta property="og:description" content="Empowering Sustainability with Smart Environmental Accounting | Minimax">
-    <meta property="og:type" content="article">
-    <meta property="og:image" content="~/assets/landing-page/img/logo/logo.webp">
-    <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@600;700&family=Inter:wght@500;600;700&display=swap"
-          rel="stylesheet">
-    <link rel="stylesheet" href="~/assets/landing-page/css/common.css" media="all">
+    <link href="~/assets/landing-page/css/open-iconic-bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/landing-page/css/animate.css" rel="stylesheet">
+
+    <link href="~/assets/landing-page/css/owl.carousel.min.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/landing-page/css/owl.theme.default.min.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/landing-page/css/magnific-popup.css">
+
+    <link href="~/assets/landing-page/css/aos.css" rel="stylesheet">
+
+    <link href="~/assets/landing-page/css/ionicons.min.css" rel="stylesheet" type="text/css">
+
+    <link href="~/assets/landing-page/css/bootstrap-datepicker.css" rel="stylesheet">
+    <link href="~/assets/landing-page/css/jquery.timepicker.css" rel="stylesheet">
+
+
+    <link href="~/assets/landing-page/css/flaticon.css" rel="stylesheet">
+    <link href="~/assets/landing-page/css/icomoon.css" rel="stylesheet">
+    <link href="~/assets/landing-page/css/style.css" rel="stylesheet">
     @await RenderSectionAsync("Styles", required: false)
+
 </head>
 
 <body>
-
-    <!--==is common header==-->
-    <header class="p-header" data-label="header">
+    <!-- START nav -->
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
-            <nav class="navbar-expand-lg navbar-light p-0">
-                <h1><a href="/"><img src="~/assets/landing-page/img/logo/logo_header.webp" width="160px" height="42px" alt="logo"></a></h1>
-                <div class="d-flex ">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse"
-                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                            aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="d-flex">
-                            <li><a class="active">Tra cứu hóa đơn</a></li>
-                            <li><a >Danh sách hóa đơn</a></li>
-                            <li><a>Biên bản điện tử</a></li>
-                            <li><a >Phần mềm xem hóa đơn</a></li>
-                            <li><a >Phần mềm ký số</a></li>
-@*                             <li>
-                                <div class="custom-dropdown">
-                                    @await Html.PartialAsync("_SelectLanguagePartial")
-                                </div>
-                            </li> *@
+            <a class="navbar-brand" href="index.html">Deluxe</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span> Menu
+            </button>
 
-                            @if (User.Identity is { IsAuthenticated: false })
-                            {
-                                <li>
-                                    <a class="btn-green">Đăng nhập</a>
-                                </li>
-                            }
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="rooms.html" class="nav-link">Rooms</a></li>
+                    <li class="nav-item"><a href="restaurant.html" class="nav-link">Restaurant</a></li>
+                    <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+                    <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- END nav -->
+
+    @RenderBody()
+
+    <footer class="ftco-footer ftco-bg-dark ftco-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Deluxe Hotel</h2>
+                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                        <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                            <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
                         </ul>
                     </div>
-                    @if (User.Identity is { IsAuthenticated: true })
-                    {
-                        <div class="d-flex user-login-wrap">
-                            <div class="icon-avartar">
-                                @if (string.IsNullOrEmpty(User.GetSpecificClaim("Avatar")))
-                                {
-                                    <img src="~/assets/admin/images/users/avatar-1.jpg" />
-                                }
-                                else
-                                {
-                                    <img width="78px" id="showImage" height="78px" src="@appDomain@User.GetSpecificClaim("Avatar")" alt="no-avatar" />
-                                }
-                            </div>
-                            <div class="dropdown-user">
-                                <p>@User.GetSpecificClaim("FullName")</p>
-                                <ul>
-                                    <li>
-                                        <a href="/my-account">My account</a>
-                                    </li>
-                                    <li>
-                                        <form asp-controller="Identity" asp-action="Logout" method="post" id="logoutForm">
-                                            @Html.AntiForgeryToken()
-                                            <a href="#" onclick="document.getElementById('logoutForm').submit();return false;">@Localizer["Logout"]</a>
-                                        </form>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    }
                 </div>
-            </nav>
-        </div>
-    </header>
-    <!--==is common header==-->
-    <!--==Content==-->
-    <div class="l-body" id="content">
-        @RenderBody()
-    </div>
-    <!--==Content==-->
-    <!--==Footer==-->
-  @*   <footer class="p-footer">
-        <div class="container">
-            <div class="footer-inner d-flex flex-wrap justify-content-between">
-                <div class="footer-lft col-12 col-lg-7 d-flex ">
-                    <div class="footer-logo">
-                        <img src="~/assets/landing-page/img/logo/logo_footer.webp" width="106px" height="112px" alt="">
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4 ml-md-5">
+                        <h2 class="ftco-heading-2">Useful Links</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="py-2 d-block">Blog</a></li>
+                            <li><a href="#" class="py-2 d-block">Rooms</a></li>
+                            <li><a href="#" class="py-2 d-block">Amenities</a></li>
+                            <li><a href="#" class="py-2 d-block">Gift Card</a></li>
+                        </ul>
                     </div>
-                    <div class="footer-content">
-                        <p>
-                            @Localizer["Title1"]
-                        </p>
-                        <div class="address">
-                            <span><img src="~/assets/landing-page/img/icon/mapPoint.webp" width="24px" height="24px" alt="mapPoint">@Localizer["Title2"]</span>
-                        </div>
-                        <div class="phone-mail">
-                            <span class="line"><img src="~/assets/landing-page/img/icon/letter.webp" width="24px" height="24px" alt="letter">minmaxgreen@gmail.com</span>
-                            <span><img src="~/assets/landing-page/img/icon/phone.webp" width="24px" height="24px" alt="phone">+84 123444455</span>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Privacy</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="py-2 d-block">Career</a></li>
+                            <li><a href="#" class="py-2 d-block">About Us</a></li>
+                            <li><a href="#" class="py-2 d-block">Contact Us</a></li>
+                            <li><a href="#" class="py-2 d-block">Services</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Have a Questions?</h2>
+                        <div class="block-23 mb-3">
+                            <ul>
+                                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
+                                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
+                                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-                <div class="footer-rgt col-12 col-lg-4">
-                    <ul>
-                        <li><a asp-controller="Home" asp-action="AboutUs">@Localizer["AboutUs"]</a></li>
-                        <li><a asp-controller="Project" asp-action="Index">Project</a></li>
-                        <li><a asp-controller="FAQs" asp-action="Index">FAQs</a></li><br />
-                        <li><a asp-controller="News" asp-action="Index">@Localizer["NewsBlog"]</a></li>
-                    </ul>
-                </div>
             </div>
-            <div class="footer-copyright d-flex align-items-center justify-content-between flex-wrap">
-                <div class="copyright d-flex flex-wrap">
-                    <p class="mr-60">@Localizer["Title3"]</p>
-                    <a asp-controller="Home" asp-action="PrivacyPolicy" class="mr-60">@Localizer["Title4"]</a>
-                    <a asp-controller="Home" asp-action="TermsOfUse">@Localizer["Title5"]</a>
-                </div>
-                <div class="footer-social">
-                    <ul class="d-flex">
-                        <li>
-                            <a target="_blank"  href="https://www.facebook.com/minmaxgreen"><img src="~/assets/landing-page/img/icon/facebook.webp" width="44px" height="45px" alt="facebook"></a>
-                        </li>
-                        <li>
-                            <a href=""><img src="~/assets/landing-page/img/icon/youtube.webp" width="44px" height="45px" alt="youtube"></a>
-                        </li>
-                        <li>
-                            <a href=""><img src="~/assets/landing-page/img/icon/intagram.webp" width="44px" height="45px" alt="intagram"></a>
-                        </li>
-                        <li>
-                            <a target ="_blank" href="https://www.linkedin.com/company/minmax-imex-jsc "><img src="~/assets/landing-page/img/icon/inlink.webp" width="44px" height="45px" alt="inlink"></a>
-                        </li>
-                    </ul>
+            <div class="row">
+                <div class="col-md-12 text-center">
+
+                    <p>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
                 </div>
             </div>
         </div>
-    </footer> *@
-    <!--==Footer==-->
-@*     <div class="wrap-cat">
-        <input type="checkbox" id="click">
-        <label for="click" class="share-btn">
-            <span class="fas fa-share-alt"><img src="~/assets/landing-page/img/icon/share_network.webp" width="38px" height="38px" alt="share_network" /></span>
-            <a target="_blank" href="https://m.me/173294695871404"><span><img src="~/assets/landing-page/img/icon/messenger_icon.png" width="30px" height="30px" alt="share_network" /></span></a>
-            <a href="#"><span><img src="~/assets/landing-page/img/icon/zalo_icon.png" width="30px" height="30px" alt="zalo_icon" /></span></a>
-            <a href="#"><span><img src="~/assets/landing-page/img/icon/call_icon.png" width="30px" height="30px" alt="call_icon" /></span></a>
-        </label>
-    </div> *@
+    </footer>
+
+
+
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg></div>
+
+
+
     <script src="~/assets/landing-page/js/jquery.min.js"></script>
+    <script src="~/assets/landing-page/js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="~/assets/landing-page/js/popper.min.js"></script>
     <script src="~/assets/landing-page/js/bootstrap.min.js"></script>
-    <script src="~/assets/landing-page/js/slick.min.js"></script>
-    <script src="~/assets/landing-page/js/main.js" asp-append-version="true"></script>
-    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
-    <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
-    <script src="~/client-app/controllers/contact/index.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            var currentUrl = window.location.href;
-            // Remove active class from all links
-            $('li a').removeClass('active');
-            // Find the link that matches the current URL and add active class
-            $('li a').filter(function () {
-                return this.href === currentUrl;
-            }).addClass('active');
-        });
-    </script>
-    <script src="~/assets/landing-page/js/wow.min.js" defer></script>
+    <script src="~/assets/landing-page/js/jquery.easing.1.3.js"></script>
+    <script src="~/assets/landing-page/js/jquery.waypoints.min.js"></script>
+    <script src="~/assets/landing-page/js/jquery.stellar.min.js"></script>
+    <script src="~/assets/landing-page/js/owl.carousel.min.js"></script>
+    <script src="~/assets/landing-page/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/assets/landing-page/js/aos.js"></script>
+    <script src="~/assets/landing-page/js/jquery.animateNumber.min.js"></script>
+    <script src="~/assets/landing-page/js/bootstrap-datepicker.js"></script>
+    <script src="~/assets/landing-page/js/jquery.timepicker.min.js"></script>
+    <script src="~/assets/landing-page/js/scrollax.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="~/assets/landing-page/js/google-map.js"></script>
+    <script src="~/assets/landing-page/js/main.js"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 

@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using System.Threading.Tasks;
-
-namespace WebApp.Middlewares
+﻿namespace WebApp.Middlewares
 {
     public class AdminRedirectMiddleware
     {
@@ -16,7 +13,7 @@ namespace WebApp.Middlewares
         {
             if (context.Request.Path == "/")
             {
-                context.Response.Redirect("/Admin/Login");
+                context.Response.Redirect("/Home");
                 return;
             }
 

@@ -1,13 +1,7 @@
 ﻿using BusinessLogic.Contexts;
 using BusinessLogic.Dtos.Dashboard;
-using BusinessLogic.Dtos.Function;
 using BusinessLogic.Wrapper;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLogic.Services
 {
@@ -20,7 +14,8 @@ namespace BusinessLogic.Services
         public async Task<DashboardResponse> GetDashboard()
         {
             var response = new DashboardResponse();
-            response.CountEmployee = await dbContext.Users.Where(x => !x.IsDeleted).CountAsync();
+            response.CountUser = await dbContext.Users.Where(x => !x.IsDeleted).CountAsync();
+            response.CountEmployee = await dbContext.Bookings.Where(x => !x.IsDeleted).CountAsync();
             var result =  await Result<DashboardResponse>.SuccessAsync(response);
             return result.Data;
         }

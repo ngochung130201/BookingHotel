@@ -10,9 +10,5 @@ namespace BusinessLogic.Entities
 
         [Required]
         public int ServiceId { get; set; }
-
-        [Required]
-        [StringLength(255)]
-        public string? UserId { get; set; }
     }
 }
