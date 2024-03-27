@@ -12,11 +12,11 @@
     margin: 0 auto;
 }
 .bg-login {
-    background-image: url('../images/bg_login.webp');
-    background-repeat:no-repeat;
-    background-size:cover;
-    background-position:center;
-    height:100%;
+    background-image: url('../images/Hotel.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100%;
 }
 .login-wrap .infor_web {
     padding-right: 24px;

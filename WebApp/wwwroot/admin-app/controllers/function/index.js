@@ -71,7 +71,7 @@
                         }
                     },
                     error: function () {
-                        base.notify('Has an error in progress', 'error');
+                        base.notify('Đang xảy ra lỗi!', 'error');
                         base.stopLoading();
                     }
                 });
@@ -92,7 +92,7 @@
             e.preventDefault();
             var id = $('#txtFunctionId').val();
 
-            base.confirm('Are you sure want to delete?', function () {
+            base.confirm('Bạn có chắc chắn muốn xóa?', function () {
                 deteleItem(id);
             });
         });
@@ -227,9 +227,9 @@
 
                 $('#modal-add-edit').modal('show');
                 base.stopLoading();
-            },
+            }, 
             error: function (status) {
-                base.notify('Has an error in progress', 'error');
+                base.notify('Đang xảy ra lỗi!', 'error');
                 base.stopLoading();
             }
         });
@@ -257,7 +257,7 @@
                 }
             },
             error: function (status) {
-                base.notify('Has an error in progress', 'error');
+                base.notify('Đang xảy ra lỗi!', 'error');
                 base.stopLoading();
             }
         });

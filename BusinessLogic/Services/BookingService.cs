@@ -116,7 +116,7 @@ namespace BusinessLogic.Services
                                                        {
                                                            CostId = c.Id,
                                                            Name = c.Name,
-                                                           Price = cb.Price,
+                                                           Price = c.Price,
                                                        }).ToList(),
                                      SpecialDayBookingDto = new SpecialDayBookingDto()
                                      {
