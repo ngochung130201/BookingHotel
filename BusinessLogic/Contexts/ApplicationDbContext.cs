@@ -21,7 +21,6 @@ namespace BusinessLogic.Contexts
         public virtual DbSet<CronJob> CronJobs { get; set; } = default!;
         public virtual DbSet<Function> Functions { get; set; } = default!;
         public virtual DbSet<Permission> Permissions { get; set; } = default!;
-        public virtual DbSet<Invoices> Invoices { get; set; } = default!;
         public virtual DbSet<Audits> Audits { get; set; } = default!;
         public virtual DbSet<BookingDetail> BookingDetail { get; set; } = default!;
         public virtual DbSet<Bookings> Bookings { get; set; } = default!;
@@ -35,11 +34,9 @@ namespace BusinessLogic.Contexts
         public virtual DbSet<RoomImages> RoomImages { get; set; } = default!;
         public virtual DbSet<Rooms> Rooms { get; set; } = default!;
         public virtual DbSet<RoomService> RoomService { get; set; } = default!;
-        public virtual DbSet<RoomTag> RoomTag { get; set; } = default!;
         public virtual DbSet<RoomTypes> RoomTypes { get; set; } = default!;
         public virtual DbSet<Entities.Services> Services { get; set; } = default!;
         public virtual DbSet<SpecialDayBooking> SpecialDayBooking { get; set; } = default!;
-        public virtual DbSet<Tags> Tags { get; set; } = default!;
         public virtual DbSet<VoteBooking> VoteBooking { get; set; } = default!;
 
         #endregion Entities

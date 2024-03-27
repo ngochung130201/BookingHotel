@@ -18,8 +18,15 @@
         });
 
         // Event search by keyword
-        $("#txtKeyword").on('focusout', function () {
+        $("#txtKeyword").on('focusout', function (e) {
+            e.preventDefault();
             loadData(true);
+        });
+        $('#txtKeyword').on('keypress', function (e) {
+            if (e.which === 13) {
+                e.preventDefault();
+                loadData(true);
+            }
         });
 
         // Event change status IsActive of User
@@ -33,7 +40,7 @@
         $('body').on('click', '.btn-delete', function (e) {
             e.preventDefault();
             var id = $(this).data('id');
-            base.confirm('Are you sure want to delete?', function () {
+            base.confirm('Bạn có chắc chắn muốn xóa dữ liệu này?', function () {
                 deleteUser(id);
             });
         });
@@ -69,6 +76,7 @@
             base.setTitleModal('add');
             resetFormMaintainance();
             $("#formAddUser").validate().resetForm();
+            $("#passwordMessage").html("");
             $('#modal-add-edit').modal('show');
             var password = $("#password").val();
             if (password.length === 0) {
@@ -85,7 +93,16 @@
             var files = fileUpload.files;
             var data = new FormData();
             for (var i = 0; i < files.length; i++) {
-                data.append(files[i].name, files[i]);
+                var file = files[i];
+                var fileType = file.type;
+                // Kiểm tra nếu loại tệp là hình ảnh
+                if (fileType.startsWith('image/')) {
+                    data.append(file.name, file);
+                } else {
+                    alert("Chỉ được phép chọn các tệp hình ảnh!");
+                    $(this).val('');
+                    return;
+                }
             }
             $.ajax({
                 type: "POST",
@@ -96,10 +113,10 @@
                 success: function (path) {
                     $('#txtImage').val(path);
                     $('#txtImageShow').val(path);
-                    base.notify('Uploaded successful!', 'success');
+                    base.notify('Cập nhật thành công!', 'success');
                 },
                 error: function () {
-                    base.notify('Has an error in progress', 'error');
+                    base.notify('Đang xảy ra lỗi', 'error');
                 }
             });
         });
@@ -130,6 +147,19 @@
             } else {
                 $("#passwordMessage").html("Mật khẩu trùng khớp.").css("color", "green");
             }
+            if (confirmPassword.length == 0) {
+                $("#passwordMessage").html("");
+            }
+        });
+
+        // Event button edit
+        $('body').on('click', '.btn-edit', function (e) {
+            e.preventDefault();
+            $('.removePass').css('display', 'none');
+            var id = $(this).data('id');
+            base.setTitleModal('edit');
+            $("#formAddUser").validate().resetForm();
+            loadDetail(id);
         });
 
         // Event save
@@ -155,7 +185,7 @@
                         email: email,
                         fullName: fullName,
                         avatarUrl: avatarUrl,
-                        DateOfBirth: dateOfBirth,
+                        DateOfBirth: dateOfBirth.length != 0 ? base.convertToISODateString(dateOfBirth) : null,
                         phoneNumber: phoneNumber,
                         roles: roles,
                         isActive: isActive,
@@ -179,7 +209,7 @@
                         }
                     },
                     error: function () {
-                        base.notify('Đang xảy ra lỗi! ', 'error');
+                        base.notify('Đang xảy ra lỗi', 'error');
                         base.stopLoading();
                     }
                 });
@@ -188,12 +218,35 @@
         });
 
         $('#dateOfBirth').change(function () {
-            var selectedDate = new Date($(this).val());
-            var currentDate = new Date();
-            if (selectedDate > currentDate) {
-                $(this).val('');
-                alert('Ngày sinh không thể sau ngày hiện tại.');
+            // Lấy giá trị ngày tháng từ trường input
+            var inputDate = $(this).val();
+            if (inputDate) {
+                // Tách ngày, tháng và năm từ chuỗi ngày tháng
+                var parts = inputDate.split('/');
+                var day = parseInt(parts[0], 10);
+                var month = parseInt(parts[1], 10) - 1; // Trừ đi 1 vì JavaScript đếm tháng từ 0 đến 11
+                var year = parseInt(parts[2], 10);
+
+                var selectedDate = new Date(year, month, day);
+
+                var currentDate = new Date();
+                if (selectedDate > currentDate) {
+                    $(this).val('');
+                    alert('Ngày sinh không thể sau ngày hiện tại.');
+                }
             }
+        });
+
+        $("#dateOfBirth").datepicker({
+            dateFormat: "dd/mm/yy"
+        });
+
+        $("#openDatePicker").on('click', function () {
+            $("#dateOfBirth").datepicker("show");
+        });
+
+        $("#dateOfBirth").on('focus', function () {
+            $(this).datepicker("show");
         });
 
         $('#formAddUser').validate({
@@ -207,9 +260,13 @@
                 email: {
                     required: true,
                 },
+                phoneNumber: {
+                    digits: true
+                },
                 password: {
                     required: true,
                     maxlength: 255,
+                    strongPassword: true
                 },
                 confirmPassword: {
                     required: true,
@@ -222,15 +279,9 @@
             }
         });
 
-        // Event button edit
-        $('body').on('click', '.btn-edit', function (e) {
-            e.preventDefault();
-            $('.removePass').css('display', 'none');
-            var id = $(this).data('id');
-            base.setTitleModal('edit');
-            $("#formAddUser").validate().resetForm();
-            loadDetail(id);
-        });
+        $.validator.addMethod("strongPassword", function (value, element) {
+            return this.optional(element) || /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/.test(value);
+        }, "Mật khẩu phải có ít nhất 8 ký tự, bao gồm ít nhất một chữ thường, một chữ hoa, một số và một ký tự đặc biệt.");
 
         var loadDetail = function (id) {
             $.ajax({
@@ -248,32 +299,41 @@
                     $('#hidId').val(response.data.id);
                     $('#email').val(response.data.email);
                     $('#fullName').val(response.data.fullName);
-                    $('#password').val("*");
-                    $('#confirmPassword').val("*");
+                    $('#password').val("Abc123!@#");
+                    $('#confirmPassword').val("Abc123!@#");
                     $('#txtImageShow').val(response.data.avatarUrl);
                     $('#txtImage').val(response.data.avatarUrl);
                     $('#imagePreview').attr('src', response.data.avatarUrl != null ? base.getOrigin() + response.data.avatarUrl : "/assets/images/user.png");
-                    $('#dateOfBirth').val(base.dateFormatDateOfBirthJson(response.data.dateOfBirth));
+                    $('#dateOfBirth').val(base.dateFormatJson(response.data.dateOfBirth));
                     $('#phoneNumber').val(response.data.phoneNumber);
                     $('#address').val(response.data.address);
                     $("#ddlRoleName option[value='" + response.data.roleName + "']").prop("selected", true);
-                    $('#ckStatus').val(response.data.ckStatus);
+                    $('#ckStatus').prop('checked', response.data.isActive);
                     $('#modal-add-edit').modal('show');
                     base.stopLoading();
                 },
                 error: function (status) {
-                    base.notify('Has an error in progress', 'error');
+                    base.notify('Đang xảy ra lỗi', 'error');
                     base.stopLoading();
                 }
             });
         }
+
         //Change Password User 
         $('body').on('click', '.btn-change-pass', function (e) {
             e.preventDefault();
+            resetFormChangePassword();
+            $("#formChangePassword").validate().resetForm();
             var id = $(this).data('id');
             $('#hidId').val(id);
             $('#modal-change-password-user').modal('show');
+            var password = $("#passwordNew").val();
+            if (password.length === 0) {
+                $("#confirmPasswordNew").prop("disabled", true).val("");
+            }
+            $("#passwordMessageChange").html("");
         });
+
 
         $('#formChangePassword').validate({
             errorClass: 'text-danger',
@@ -282,9 +342,13 @@
             rules: {
                 passwordNew: {
                     required: true,
+                    maxlength: 255,
+                    strongPassword: true
                 },
                 confirmPasswordNew: {
                     required: true,
+                    maxlength: 255,
+                    equalTo: passwordNew
                 }
             }
         });
@@ -293,7 +357,6 @@
                 var password = $("#passwordNew").val();
                 if (password.length > 0) {
                     $("#confirmPasswordNew").prop("disabled", false).val("");
-                    $("#passwordMessageChange").html("");
                 }
             });
 
@@ -305,6 +368,9 @@
                 } else {
                     $("#passwordMessageChange").html("Mật khẩu trùng khớp.").css("color", "green");
                 }
+                if (confirmPassword.length == 0) {
+                    $("#passwordMessage").html("");
+                }
             });
 
             $('#btn-save-change-password').on('click', function (e) {
@@ -313,10 +379,6 @@
                     var id = $('#hidId').val();
                     var passwordNew = $('#passwordNew').val();
                     var confirmPasswordNew = $('#confirmPasswordNew').val();
-                    if (password !== confirmPassword) {
-                        $("#passwordMessageChange").html("Mật khẩu không trùng khớp!").css("color", "red");
-                        return false;
-                    }
                     $.ajax({
                         type: "POST",
                         url: "/Admin/User/ChangePasswordUser",
@@ -340,7 +402,7 @@
                             }
                         },
                         error: function () {
-                            base.notify('Has an error in progress', 'error');
+                            base.notify('Đang xảy ra lỗi', 'error');
                             base.stopLoading();
                         }
                     });
@@ -395,7 +457,7 @@
                     }, isPageChanged);
                 }
                 else {
-                    $('#tbl-content').html('');
+                    $('#tbl-content').html('<tr><td colspan="10" style="text-align: center; vertical-align: middle;">Danh sách trống</td></tr>');
                 }
                 base.stopLoading();
             },
@@ -489,9 +551,9 @@
 
     var getUserStatus = function (status, id) {
         if (status == true)
-            return '<button class="btn btn-sm btn-success btn-active" data-id="' + id + '">Hoạt động</button>';
+            return '<button class="btn btn-sm btn-success btn-active" data-id="' + id + '">Kích hoạt</button>';
         else
-            return '<button class="btn btn-sm btn-danger btn-active" data-id="' + id + '">Chặn</button>';
+            return '<button class="btn btn-sm btn-danger btn-active" data-id="' + id + '">Khóa</button>';
     }
 
     var getEmailConfirmed = function (emailConfirm) {

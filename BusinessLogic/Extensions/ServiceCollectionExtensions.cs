@@ -26,8 +26,6 @@ namespace BusinessLogic.Extensions
             services.AddTransient<IFunctionService, FunctionService>();
             // User
             services.AddTransient<IUserService, UserService>();
-            // Invoice
-            services.AddTransient<IInvoiceService, InvoiceService>();
             // DashboardService
             services.AddTransient<IDashboardService, DashboardService>();
             // RoomTypesService
@@ -46,6 +44,8 @@ namespace BusinessLogic.Extensions
             services.AddTransient<ICostBookingService, CostBookingService>();
             // BookingService
             services.AddTransient<IBookingService, BookingService>();
+            // SpecialDayRatesService
+            services.AddTransient<ISpecialDayRatesService, SpecialDayRatesService>();
             services.AddAuthorizationCore(options =>
             {
                 options.AddPolicy("Admin", policy =>

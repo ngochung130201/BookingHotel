@@ -8,6 +8,7 @@ using BusinessLogic.Dtos.Role;
 using BusinessLogic.Dtos.Rooms;
 using BusinessLogic.Dtos.RoomTypes;
 using BusinessLogic.Dtos.Service;
+using BusinessLogic.Dtos.SpecialDayRates;
 using BusinessLogic.Dtos.User;
 using BusinessLogic.Dtos.VoteBooking;
 using BusinessLogic.Entities;
@@ -41,6 +42,10 @@ namespace BusinessLogic.Mappings
             CreateMap<CostBooking, CostOverrunResponse>().ReverseMap();
             CreateMap<Bookings, BookingDto>().ReverseMap();
             CreateMap<Bookings, BookingResponse>().ReverseMap();
+            CreateMap<PriceManager, SpecialDayRatesDto>().ReverseMap();
+            CreateMap<PriceManager, SpecialDayRatesResponse>().ReverseMap();
+            CreateMap<CostOverrun, CostOverrunDto>().ReverseMap();
+            CreateMap<CostOverrun, CostOverrunResponse>().ReverseMap();
         }
     }
 }

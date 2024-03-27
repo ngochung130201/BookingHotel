@@ -140,7 +140,7 @@ namespace BusinessLogic.Services
 
                 var percentDiscount = await (from sb in _dbContext.SpecialDayBooking
                                                join pm in _dbContext.PriceManager.Where(x => !x.IsDeleted) on sb.SpecialDayId equals pm.Id
-                                               where !sb.IsDeleted && (pm.Date.AddHours(7) >= request.CheckInDate && pm.Date.AddHours(7) <= request.CheckOutDate)
+                                               where !sb.IsDeleted && (pm.SinceDay.AddHours(7) >= request.CheckInDate && pm.ToDay.AddHours(7) >= request.CheckOutDate)
                                                select new PriceManager() { PercentDiscount = pm.PercentDiscount ,Id = pm.Id }).FirstOrDefaultAsync();
 
                 foreach (var id in request.RoomId!)

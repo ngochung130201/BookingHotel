@@ -3,8 +3,12 @@
 @{
     ViewData["Title"] = "User Management";
 }
+@section Styles {
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link href="~/admin-app/shared/importexcelmodal.css" rel="stylesheet" type="text/css" />
+}
 @section Scripts {
-
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="~/admin-app/controllers/user/index.js" asp-append-version="true"></script>
     <script>
         var userObj = new UserController();
@@ -54,7 +58,7 @@
                     <div class="col-sm-2 text-right pb-3">
                         <button type="submit" class="btn btn-primary" id="btn-create" data-animation="fadein">
                             <i class="fe-plus-circle"></i>
-                            Tạo người dùng
+                            Tạo nhân viên
                         </button>
                     </div>
                 </div>
@@ -66,8 +70,8 @@
                             <th>Họ tên</th>
                             <th>Email/Tên đăng nhập</th>
                             <th>Vai trò</th>
-                           @*  <th>Ngày sinh</th> *@
-                            <th>Điện thoại</th>
+                            <th>Ngày sinh</th>
+                            <th>Điện thoại</th>s
                             <th>Trạng thái</th>
                             <th class="action-columns">Thao tác</th>
                         </tr>
@@ -89,7 +93,7 @@
         <td>{{FullName}}</td>
         <td>{{Email}}</td>
         <td>{{RoleName}}</td>
-       @*  <td>{{DateOfBirth}}</td> *@
+        <td>{{DateOfBirth}}</td>
         <td>{{PhoneNumber}}</td>
         <td>{{{Status}}}</td>
         <td class="text-center">

@@ -41,7 +41,6 @@
 	  <Folder Include="Areas\Admin\Data\" />
 	  <Folder Include="Resources\Controllers\" />
 	  <Folder Include="Resources\Models\" />
-	  <Folder Include="wwwroot\admin-app\controllers\costOverrun\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <None Include="wwwroot\lib\ckeditor\.github\ISSUE_TEMPLATE" />

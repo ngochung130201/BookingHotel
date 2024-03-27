@@ -50,13 +50,13 @@
                             <div class="form-group">
                                 <div class="row removePass">
                                     <div class="col-sm-6">
-                                        <label for="password" class="col-sm-auto control-label no-padding-right">Mật khẩu <span class="text-danger"></label>
+                                        <label for="password" class="col-sm-auto control-label no-padding-right">Mật khẩu <span class="text-danger">*</span></label>
                                         <div class="col-sm-12">
                                             <input type="text" class="form-control" id="password" name="password">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
-                                        <label for="confirmPassword" class="col-sm-auto control-label no-padding-right">Nhập lại mật khẩu <span class="text-danger"></label>
+                                        <label for="confirmPassword" class="col-sm-auto control-label no-padding-right">Nhập lại mật khẩu <span class="text-danger">*</span></label>
                                         <div class="col-sm-12">
                                             <input type="text" class="form-control" id="confirmPassword" name="confirmPassword">
                                             <span id="passwordMessage"></span>
@@ -73,9 +73,16 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
-                                        <label for="dateOfBirth" class="col-sm-auto control-label no-padding-right">Ngày sinh </label>
-                                        <div class="col-sm-12">
-                                            <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth">
+                                        <div class="form-group">
+                                            <label for="dateOfBirth" class="col-sm-auto control-label no-padding-right">Ngày sinh </label>
+                                            <div class="col-sm-12">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" id="dateOfBirth" name="dateOfBirth" placeholder="dd/mm/yyyy ">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text" id="openDatePicker"><i class="far fa-calendar-alt"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

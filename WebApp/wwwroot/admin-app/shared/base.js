@@ -137,9 +137,9 @@
     },
     getStatus: function (status) {
         if (status == 1)
-            return '<span class="badge bg-green">Hoạt động</span>';
+            return '<span class="badge bg-green">Active</span>';
         else
-            return '<span class="badge bg-red">Chặn</span>';
+            return '<span class="badge bg-red">Block</span>';
     },
     formatNumber: function (number, precision) {
         if (!isFinite(number)) {
@@ -302,7 +302,15 @@
         // Tạo đối tượng Date từ các phần đã chia
         var dateObject = new Date(year, month, day);
 
-        // Chuyển đổi thành chuỗi định dạng ISO 8601 và trả về
+        // Chuyển đổi sang múi giờ hiện tại
+        var currentTimeZoneOffsetInMinutes = dateObject.getTimezoneOffset();
+        dateObject.setMinutes(dateObject.getMinutes() - currentTimeZoneOffsetInMinutes);
+
+        if (isNaN(dateObject.getTime())) {
+            base.notify('Vui lòng nhập đúng định dạng ngày tháng năm!', 'error');
+            return false;
+        }
+        // Chuyển đổi sang chuỗi định dạng ISO 8601 với múi giờ hiện tại
         return dateObject.toISOString();
     }
 }

@@ -4,7 +4,9 @@ namespace BusinessLogic.Entities
 {
     public class PriceManager : AuditableBaseEntity<int>
     {
-        public DateTime Date { get; set; } // Ngày đặc biệt (ngày lễ)
+        public DateTime SinceDay { get; set; } // Ngày từ ngày
+
+        public DateTime ToDay { get; set; } // Ngày đến ngày
 
         public string? Title { get; set; } // Tiêu đề
 
