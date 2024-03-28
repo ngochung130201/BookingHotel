@@ -3,10 +3,13 @@ using BusinessLogic.Constants.Messages;
 using BusinessLogic.Contexts;
 using BusinessLogic.Dtos.Booking;
 using BusinessLogic.Entities;
+using BusinessLogic.Migrations;
+using BusinessLogic.Services.Common;
 using BusinessLogic.Wrapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Linq.Dynamic.Core;
+using static Microsoft.AspNetCore.Hosting.Internal.HostingApplication;
 
 namespace BusinessLogic.Services
 {
@@ -30,13 +33,15 @@ namespace BusinessLogic.Services
         private readonly ApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
         private readonly ILogger<BookingService> _logger;
+        private readonly ICurrentUserService _currentUserService;
 
 
-        public BookingService(ApplicationDbContext dbContext, IMapper mapper, ILogger<BookingService> logger)
+        public BookingService(ApplicationDbContext dbContext, IMapper mapper, ILogger<BookingService> logger, ICurrentUserService currentUserService)
         {
             _dbContext = dbContext;
             _mapper = mapper;
             _logger = logger;
+            _currentUserService = currentUserService;
         }
 
         public async Task<PaginatedResult<BookingResponse>> GetPagination(BookingRequest request)
@@ -56,10 +61,10 @@ namespace BusinessLogic.Services
                             TransactionDate = b.TransactionDate,
                             CheckInDate = b.CheckInDate,
                             BookedRoomNumber = (from r in _dbContext.Rooms
-                                               join br in _dbContext.BookingDetail.Where(x => !x.IsDeleted) on r.Id equals br.RoomId
-                                               join rb in _dbContext.Bookings.Where(x => !x.IsDeleted) on br.BookingId equals rb.Id
-                                               where !r.IsDeleted
-                                               select r).Count(),
+                                                join br in _dbContext.BookingDetail.Where(x => !x.IsDeleted) on r.Id equals br.RoomId
+                                                join rb in _dbContext.Bookings.Where(x => !x.IsDeleted) on br.BookingId equals rb.Id
+                                                where !r.IsDeleted
+                                                select r).Count(),
                             ServicesArising = (from c in _dbContext.CostOverrun
                                                join cb in _dbContext.CostBooking.Where(x => !x.IsDeleted) on c.Id equals cb.CostId
                                                join bc in _dbContext.Bookings.Where(x => !x.IsDeleted) on cb.BookingId equals bc.Id
@@ -83,11 +88,12 @@ namespace BusinessLogic.Services
 
         public async Task<Result<BookingDto>> GetById(int id)
         {
-            var booking = await (from b in _dbContext.Bookings 
+            var booking = await (from b in _dbContext.Bookings
                                  join u in _dbContext.Users.Where(x => !x.IsDeleted) on b.UserId equals u.Id
                                  join sb in _dbContext.SpecialDayBooking.Where(x => !x.IsDeleted) on b.Id equals sb.BookingId
                                  join pm in _dbContext.PriceManager.Where(x => !x.IsDeleted) on sb.SpecialDayId equals pm.Id
-                                 where !b.IsDeleted select new BookingDto()
+                                 where !b.IsDeleted 
+                                 select new BookingDto()
                                  {
                                      BookingCode = b.BookingCode,
                                      TransactionDate = b.TransactionDate,
@@ -134,15 +140,16 @@ namespace BusinessLogic.Services
 
         public async Task<IResult> Add(BookingDto request)
         {
+            var result = _mapper.Map<Bookings>(request);
+
+            var percentDiscount = await (from sb in _dbContext.SpecialDayBooking
+                                         join pm in _dbContext.PriceManager.Where(x => !x.IsDeleted) on sb.SpecialDayId equals pm.Id
+                                         where !sb.IsDeleted && (pm.SinceDay.AddHours(7) >= request.CheckInDate && pm.ToDay.AddHours(7) >= request.CheckOutDate)
+                                         select new PriceManager() { PercentDiscount = pm.PercentDiscount, Id = pm.Id }).FirstOrDefaultAsync();
+
+            await using var transaction = await _dbContext.Database.BeginTransactionAsync();
             try
             {
-                var result = _mapper.Map<Bookings>(request);
-
-                var percentDiscount = await (from sb in _dbContext.SpecialDayBooking
-                                               join pm in _dbContext.PriceManager.Where(x => !x.IsDeleted) on sb.SpecialDayId equals pm.Id
-                                               where !sb.IsDeleted && (pm.SinceDay.AddHours(7) >= request.CheckInDate && pm.ToDay.AddHours(7) >= request.CheckOutDate)
-                                               select new PriceManager() { PercentDiscount = pm.PercentDiscount ,Id = pm.Id }).FirstOrDefaultAsync();
-
                 foreach (var id in request.RoomId!)
                 {
                     var roomsPrice = await (from r in _dbContext.Rooms.Where(x => !x.IsDeleted && x.Id == id) select r.Price).FirstOrDefaultAsync();
@@ -163,7 +170,6 @@ namespace BusinessLogic.Services
                         {
                             RoomId = id,
                             BookingId = result.Id,
-                            Price = await (from r in _dbContext.Rooms.Where(x => !x.IsDeleted && x.Id == id) select r.Price).FirstOrDefaultAsync(),
                         };
                         await _dbContext.BookingDetail.AddAsync(bookingDetail);
                     }
@@ -183,24 +189,80 @@ namespace BusinessLogic.Services
             }
             catch (Exception ex)
             {
+                await transaction.RollbackAsync();
                 _logger.LogError(ex, "Lỗi khi tạo mới: {Id}", request.Id);
                 return await Result.FailAsync(MessageConstants.AddFail);
             }
+            finally
+            {
+                await transaction.DisposeAsync();
+            }
+        }
+    
+
+        public async Task<IResult> Update(BookingDto request)
+        {
+            var booking = await _dbContext.Bookings.Where(b => !b.IsDeleted && b.Id == request.Id).FirstOrDefaultAsync();
+            if (booking == null) { return await Result.FailAsync(MessageConstants.NotFound); };
+
+            await using var transaction = await _dbContext.Database.BeginTransactionAsync();
+            try
+            {
+                if (request.RoomId != null)
+                {
+                    foreach (var id in request.RoomId)
+                    {
+                        var roomsPrice = await (from r in _dbContext.Rooms.Where(x => !x.IsDeleted && x.Id == id) select r.Price).FirstOrDefaultAsync();
+                        booking.TotalAmount += roomsPrice;
+                    }
+                }
+
+                await transaction.CommitAsync();
+                return await Result.SuccessAsync(MessageConstants.AddSuccess);
+            }
+            catch (Exception e)
+            {
+                await transaction.RollbackAsync();
+                _logger.LogError(e, "Lỗi khi cập nhật: {Id}", request.Id);
+                return await Result.FailAsync(MessageConstants.AddFail);
+            }
+            finally
+            {
+                await transaction.DisposeAsync();
+            }
         }
 
-        public Task<IResult> Update(BookingDto request)
+        public async Task<IResult> Delete(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _dbContext.Bookings.AsNoTracking().FirstOrDefaultAsync(x => !x.IsDeleted && x.Id == id);
+
+                if (result == null) return await Result.FailAsync(MessageConstants.NotFound);
+
+                result.IsDeleted = true;
+                _dbContext.Bookings.Update(result);
+                await _dbContext.SaveChangesAsync();
+                return await Result.SuccessAsync(MessageConstants.DeleteSuccess);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Lỗi khi xóa: {Id}", id);
+                return await Result.FailAsync(MessageConstants.DeleteFail);
+            }
         }
 
-        public Task<IResult> Delete(int id)
+        public async Task<IResult> ChangeStatusAsync(int id)
         {
-            throw new NotImplementedException();
-        }
+            var booking = await _dbContext.Bookings.Where(x => !x.IsDeleted && x.Id == id).FirstOrDefaultAsync();
 
-        public Task<IResult> ChangeStatusAsync(int id)
-        {
-            throw new NotImplementedException();
+            if (booking == null) return await Result.FailAsync(MessageConstants.NotFound);
+
+            booking.Status = 1;   
+
+            _dbContext.Bookings.Update(booking);
+            await _dbContext.SaveChangesAsync();
+            return await Result.SuccessAsync(MessageConstants.UpdateSuccess);
         }
     }
 }

@@ -10,8 +10,5 @@ namespace BusinessLogic.Entities
 
         [Required]
         public int BookingId { get; set; } // Đơn đặt phòng
-
-        [Required]
-        public decimal Price { get; set; } // Giá phòng
     }
 }
