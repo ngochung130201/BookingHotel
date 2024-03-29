@@ -13,7 +13,7 @@
         {
             if (context.Request.Path == "/")
             {
-                context.Response.Redirect("/Home");
+                context.Response.Redirect("/home");
                 return;
             }
 
