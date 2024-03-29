@@ -7,148 +7,158 @@
 <html lang="en">
 
 <head>
-    <title>Deluxe</title>
+    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i" rel="stylesheet">
-
-    <link href="~/assets/landing-page/css/open-iconic-bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="~/assets/landing-page/css/animate.css" rel="stylesheet">
-
-    <link href="~/assets/landing-page/css/owl.carousel.min.css" rel="stylesheet" type="text/css">
-    <link href="~/assets/landing-page/css/owl.theme.default.min.css" rel="stylesheet" type="text/css">
-    <link href="~/assets/landing-page/css/magnific-popup.css">
-
-    <link href="~/assets/landing-page/css/aos.css" rel="stylesheet">
-
-    <link href="~/assets/landing-page/css/ionicons.min.css" rel="stylesheet" type="text/css">
-
-    <link href="~/assets/landing-page/css/bootstrap-datepicker.css" rel="stylesheet">
-    <link href="~/assets/landing-page/css/jquery.timepicker.css" rel="stylesheet">
-
-
-    <link href="~/assets/landing-page/css/flaticon.css" rel="stylesheet">
-    <link href="~/assets/landing-page/css/icomoon.css" rel="stylesheet">
-    <link href="~/assets/landing-page/css/style.css" rel="stylesheet">
+    <link rel="icon" href="~/assets/landing-page/image/favicon.png" type="image/png">
+    <title>Royal Hotel</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/assets/landing-page/css/bootstrap.css">
+    <link rel="stylesheet" href="~/assets/landing-page/vendors/linericon/style.css">
+    <link rel="stylesheet" href="~/assets/landing-page/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/assets/landing-page/vendors/owl-carousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/assets/landing-page/vendors/bootstrap-datepicker/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="~/assets/landing-page/vendors/nice-select/css/nice-select.css">
+    <link rel="stylesheet" href="~/assets/landing-page/vendors/owl-carousel/owl.carousel.min.css">
+    <!-- main css -->
+    <link rel="stylesheet" href="~/assets/landing-page/css/style.css">
+    <link rel="stylesheet" href="~/assets/landing-page/css/responsive.css">
     @await RenderSectionAsync("Styles", required: false)
 
 </head>
 
 <body>
-    <!-- START nav -->
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <!--================Header Area =================-->
+    <header class="header_area">
         <div class="container">
-            <a class="navbar-brand" href="Home">Deluxe</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="oi oi-menu"></span> Menu
-            </button>
-
-            <div class="collapse navbar-collapse" id="ftco-nav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="rooms.html" class="nav-link">Rooms</a></li>
-                    <li class="nav-item"><a href="restaurant.html" class="nav-link">Restaurant</a></li>
-                    <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-                    <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-                    <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-                    <li class="nav-item"><a href="contact.html" class="nav-link">Login</a></li>
-                </ul>
-            </div>
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <a class="navbar-brand logo_h" href="Home"><img src="~/assets/landing-page/image/Logo.png" alt=""></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav menu_nav ml-auto">
+                        <li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">About us</a></li>
+                        <li class="nav-item"><a class="nav-link" href="accomodation.html">Accomodation</a></li>
+                        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                        <li class="nav-item submenu dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                                <li class="nav-item"><a class="nav-link" href="blog-single.html">Blog Details</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="elements.html">Elemests</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </nav>
         </div>
-    </nav>
-    <!-- END nav -->
-
+    </header>
+    <!--================Header Area =================-->
     @RenderBody()
 
-    <footer class="ftco-footer ftco-bg-dark ftco-section">
+    <!--================ start footer Area  =================-->
+    <footer class="footer-area section_gap">
         <div class="container">
-            <div class="row mb-5">
-                <div class="col-md">
-                    <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Deluxe Hotel</h2>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                        <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-                            <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                            <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                            <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-                        </ul>
+            <div class="row">
+                <div class="col-lg-3  col-md-6 col-sm-6">
+                    <div class="single-footer-widget">
+                        <h6 class="footer_title">About Agency</h6>
+                        <p>The world has become so fast paced that people don’t want to stand by reading a page of information, they would much rather look at a presentation and understand the message. It has come to a point </p>
                     </div>
                 </div>
-                <div class="col-md">
-                    <div class="ftco-footer-widget mb-4 ml-md-5">
-                        <h2 class="ftco-heading-2">Useful Links</h2>
-                        <ul class="list-unstyled">
-                            <li><a href="#" class="py-2 d-block">Blog</a></li>
-                            <li><a href="#" class="py-2 d-block">Rooms</a></li>
-                            <li><a href="#" class="py-2 d-block">Amenities</a></li>
-                            <li><a href="#" class="py-2 d-block">Gift Card</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md">
-                    <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Privacy</h2>
-                        <ul class="list-unstyled">
-                            <li><a href="#" class="py-2 d-block">Career</a></li>
-                            <li><a href="#" class="py-2 d-block">About Us</a></li>
-                            <li><a href="#" class="py-2 d-block">Contact Us</a></li>
-                            <li><a href="#" class="py-2 d-block">Services</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md">
-                    <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Have a Questions?</h2>
-                        <div class="block-23 mb-3">
-                            <ul>
-                                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-                                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
-                                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
-                            </ul>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="single-footer-widget">
+                        <h6 class="footer_title">Navigation Links</h6>
+                        <div class="row">
+                            <div class="col-4">
+                                <ul class="list_style">
+                                    <li><a href="#">Home</a></li>
+                                    <li><a href="#">Feature</a></li>
+                                    <li><a href="#">Services</a></li>
+                                    <li><a href="#">Portfolio</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-4">
+                                <ul class="list_style">
+                                    <li><a href="#">Team</a></li>
+                                    <li><a href="#">Pricing</a></li>
+                                    <li><a href="#">Blog</a></li>
+                                    <li><a href="#">Contact</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="single-footer-widget">
+                        <h6 class="footer_title">Newsletter</h6>
+                        <p>For business professionals caught between high OEM price and mediocre print and graphic output, </p>
+                        <div id="mc_embed_signup">
+                            <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="subscribe_form relative">
+                                <div class="input-group d-flex flex-row">
+                                    <input name="EMAIL" placeholder="Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address '" required="" type="email">
+                                    <button class="btn sub-btn"><span class="lnr lnr-location"></span></button>
+                                </div>
+                                <div class="mt-10 info"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="single-footer-widget instafeed">
+                        <h6 class="footer_title">InstaFeed</h6>
+                        <ul class="list_style instafeed d-flex flex-wrap">
+                            <li><img src="image/instagram/Image-01.jpg" alt=""></li>
+                            <li><img src="image/instagram/Image-02.jpg" alt=""></li>
+                            <li><img src="image/instagram/Image-03.jpg" alt=""></li>
+                            <li><img src="image/instagram/Image-04.jpg" alt=""></li>
+                            <li><img src="image/instagram/Image-05.jpg" alt=""></li>
+                            <li><img src="image/instagram/Image-06.jpg" alt=""></li>
+                            <li><img src="image/instagram/Image-07.jpg" alt=""></li>
+                            <li><img src="image/instagram/Image-08.jpg" alt=""></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div class="row">
-                <div class="col-md-12 text-center">
-
-                    <p>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    </p>
+            <div class="border_line"></div>
+            <div class="row footer-bottom d-flex justify-content-between align-items-center">
+                <p class="col-lg-8 col-sm-12 footer-text m-0">
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                </p>
+                <div class="col-lg-4 col-sm-12 footer-social">
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-dribbble"></i></a>
+                    <a href="#"><i class="fa fa-behance"></i></a>
                 </div>
             </div>
         </div>
     </footer>
+    <!--================ End footer Area  =================-->
 
-
-
-    <!-- loader -->
-    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg></div>
-
-
-
-    <script src="~/assets/landing-page/js/jquery.min.js"></script>
-    <script src="~/assets/landing-page/js/jquery-migrate-3.0.1.min.js"></script>
-    <script src="~/assets/landing-page/js/popper.min.js"></script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="~/assets/landing-page/js/jquery-3.2.1.min.js"></script>
+    <script src="~/assets/landing-page/js/popper.js"></script>
     <script src="~/assets/landing-page/js/bootstrap.min.js"></script>
-    <script src="~/assets/landing-page/js/jquery.easing.1.3.js"></script>
-    <script src="~/assets/landing-page/js/jquery.waypoints.min.js"></script>
-    <script src="~/assets/landing-page/js/jquery.stellar.min.js"></script>
-    <script src="~/assets/landing-page/js/owl.carousel.min.js"></script>
-    <script src="~/assets/landing-page/js/jquery.magnific-popup.min.js"></script>
-    <script src="~/assets/landing-page/js/aos.js"></script>
-    <script src="~/assets/landing-page/js/jquery.animateNumber.min.js"></script>
-    <script src="~/assets/landing-page/js/bootstrap-datepicker.js"></script>
-    <script src="~/assets/landing-page/js/jquery.timepicker.min.js"></script>
-    <script src="~/assets/landing-page/js/scrollax.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-    <script src="~/assets/landing-page/js/google-map.js"></script>
-    <script src="~/assets/landing-page/js/main.js"></script>
-
+    <script src="~/assets/landing-page/vendors/owl-carousel/owl.carousel.min.js"></script>
+    <script src="~/assets/landing-page/js/jquery.ajaxchimp.min.js"></script>
+    <script src="~/assets/landing-page/js/mail-script.js"></script>
+    <script src="~/assets/landing-page/vendors/bootstrap-datepicker/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/assets/landing-page/vendors/nice-select/js/jquery.nice-select.js"></script>
+    <script src="~/assets/landing-page/js/mail-script.js"></script>
+    <script src="~/assets/landing-page/js/stellar.js"></script>
+    <script src="~/assets/landing-page/vendors/lightbox/simpleLightbox.min.js"></script>
+    <script src="~/assets/landing-page/js/custom.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 
