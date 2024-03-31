@@ -1,0 +1,98 @@
+﻿@using WebApp.Extensions
+@{
+    var httpContext = ViewContext.HttpContext;
+    string appDomain = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}";
+}
+<!--================Header Area =================-->
+<header class="header_area">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <a class="navbar-brand logo_h" href="Home"><img src="~/assets/landing-page/image/Logo.png" alt=""></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                <ul class="nav navbar-nav menu_nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/about-us">About us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/room">Room</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/#">Gallery</a></li>
+                    <li class="nav-item submenu dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-item"><a class="nav-link" href="/blog">Blog</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/blog-details">Blog Details</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="/#">Elemests</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+
+                    @{
+                        bool isLoggedIn = !string.IsNullOrEmpty(User.GetSpecificClaim("UserId"));
+                    }
+
+                    @if (isLoggedIn)
+                    {
+                        <li class="nav-item dropdown notification-list">
+                            <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                @if (!string.IsNullOrEmpty(User.GetSpecificClaim("Avatar")))
+                                {
+                                    <img src="@appDomain@User.GetSpecificClaim("Avatar")" alt="user-image" class="rounded-circle" style="width: 30px; height: 30px;">
+                                }
+                                else
+                                {
+                                    <img src="~/assets/images/user.png" alt="user-image" class="rounded-circle" style="width: 30px; height: 30px;">
+                                }
+                                @* <span class="pro-user-name ml-1">
+                                    @User.GetSpecificClaim("FullName") <i class="mdi mdi-chevron-down"></i>
+                                </span> *@
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right profile-dropdown">
+                                <!-- item-->
+                                <a href="#" class="dropdown-item notify-item">
+                                    <i class="remixicon-account-circle-line"></i>
+                                    <span>My Booking </span>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <!-- item-->
+                                <a href="/HomeAccount?UserId=@User.GetSpecificClaim("UserId")" class="dropdown-item notify-item">
+                                    <i class="remixicon-account-circle-line"></i>
+                                    <span>My Account</span>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <!-- item-->
+                                <a href="javascript:void(0);" onclick="logout();" class="dropdown-item notify-item">
+                                    <i class="remixicon-logout-box-line"></i>
+                                    <span>Logout</span>
+                                </a>
+                            </div>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="/identity/login">Login</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>
+<!--================Header Area =================-->
+
+<script>
+    function logout() {
+        $.ajax({
+            type: "POST",
+            url: "/Admin/Login/Logout",
+            success: function () {
+                window.location.href = "/home";
+            }
+        });
+    };
+</script>

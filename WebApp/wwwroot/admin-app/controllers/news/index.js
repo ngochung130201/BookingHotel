@@ -3,6 +3,7 @@ var NewsController = function () {
     this.initialize = function () {
         loadData();
         registerEvents();
+        registerControls();
     }
 
     var registerEvents = function () {
@@ -309,6 +310,26 @@ var NewsController = function () {
             return '<button class="btn btn-sm btn-success btn-hot" data-id="' + id + '">Nổi bật</button>';
         else
             return '<button class="btn btn-sm btn-info btn-hot" data-id="' + id + '">Thường</button>';
+    }
+
+    var registerControls = function () {
+        CKEDITOR.replace('txtContent', {});
+
+        //Fix: cannot click on element ck in modal
+        $.fn.modal.Constructor.prototype.enforceFocus = function () {
+            $(document)
+                .off('focusin.bs.modal') // guard against infinite focus loop
+                .on('focusin.bs.modal', $.proxy(function (e) {
+                    if (
+                        this.$element[0] !== e.target && !this.$element.has(e.target).length
+                        // CKEditor compatibility fix start.
+                        && !$(e.target).closest('.cke_dialog, .cke').length
+                        // CKEditor compatibility fix end.
+                    ) {
+                        this.$element.trigger('focus');
+                    }
+                }, this));
+        };
     }
 
     var resetFormMaintainance = function () {

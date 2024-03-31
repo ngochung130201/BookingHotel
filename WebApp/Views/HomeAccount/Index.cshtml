@@ -1,0 +1,297 @@
+﻿@model BusinessLogic.Dtos.User.UserDetailDto;
+@{
+    ViewData["Title"] = "Home Account";
+    var httpContext = ViewContext.HttpContext;
+    string appDomain = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}";
+}
+@section Scripts {
+    <script src="~/admin-app/controllers/account/index.js" asp-append-version="true"></script>
+    <script>
+        var account = new AccountController();
+        account.initialize();
+    </script>
+    <style>
+        .my-account-content {
+            padding: 30px;
+            box-shadow: 1px 1px 40px 0px rgba(132, 132, 132, 0.16);
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .breadcrumb-flex {
+            margin-bottom: 30px;
+        }
+
+        .breadcrumb-inner a {
+            display: inline-block;
+            margin-right: 20px;
+            padding-right: 20px;
+            background: url("../img/icon/breadcrumb_arrow.png") no-repeat right center;
+            color: #646464;
+            font-size: 14px;
+        }
+
+        .tabs-body .tab-content .tab {
+            display: none;
+        }
+
+            .tabs-body .tab-content .tab.active {
+                display: block;
+            }
+
+        .tab-links {
+            display: flex;
+            border-bottom: 3px solid #0F723A;
+            margin-bottom: 36px;
+            flex-wrap: wrap;
+        }
+
+            .tab-links li a {
+                padding: 10px 20px;
+                display: block;
+                color: #646464;
+                cursor: pointer;
+                font-weight: bold;
+                transition: 0.2s ease-in-out;
+            }
+
+            .tab-links li.active a {
+                background-color: #0F723A;
+                color: #fff;
+            }
+
+        .wrap-conntent-account {
+            padding: 30px;
+        }
+
+            .wrap-conntent-account h2 {
+                font-size: 24px;
+                margin-bottom: 25px;
+            }
+
+            .wrap-conntent-account .col-6 {
+                width: 45%;
+            }
+
+        .form-wrap input {
+            height: 52px;
+            padding: 0 20px;
+            border: 1px solid #E1E2E3;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            margin-bottom: 20px;
+        }
+
+        .form-wrap textarea {
+            padding: 0 20px;
+            border: 1px solid #E1E2E3;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .form-wrap .wrap-col2 .input-wrap {
+            margin: 0 10px;
+        }
+
+        .wrap-col2 {
+            margin: 0 -10px;
+        }
+
+        .form-wrap label {
+            font-size: 14px;
+            color: #646464;
+        }
+
+        .form-login .field-password:before {
+            content: "";
+            position: absolute;
+            left: 16px;
+            width: 24px;
+            height: 24px;
+            top: 14px;
+            background: url("../assets/landing-page/img/icon/pass_icon.png");
+        }
+
+        .form-login .field-password {
+            position: relative;
+        }
+
+        .form-login input {
+            padding: 0 56px;
+        }
+
+        .form-login .field {
+            position: relative;
+        }
+
+        .form-login .eye_icon {
+            position: absolute;
+            right: 15px;
+            bottom: 12px;
+            width: 24px;
+            height: 24px;
+            background: url(../assets/landing-page/img/icon/eye_show.svg) no-repeat left center;
+            cursor: pointer;
+        }
+
+            .form-login .eye_icon.active {
+                background: url(../assets/landing-page/img/icon/eye_hide.svg) no-repeat left center;
+            }
+
+        #tab1 {
+            position: relative;
+        }
+
+            #tab1::before {
+                content: "";
+                height: 930px;
+                width: 1px;
+                background-color: #E1E2E3;
+                position: absolute;
+                top: 40px;
+                left: 50%;
+            }
+
+        .submit-button {
+            border-top: 1px solid #E1E2E3;
+            text-align: right;
+            padding: 30px;
+        }
+
+            .submit-button button {
+                border: none;
+                padding: 12px 36px 13px 36px;
+                font-size: 14px;
+                font-weight: bold;
+                display: inline-block;
+                border: 1px solid #E1E2E3;
+                border-radius: 8px;
+            }
+
+                .submit-button button.Save {
+                    background-color: #0F723A;
+                    color: #fff;
+                    border: 1px solid #0F723A;
+                }
+
+        .upload-image {
+            margin-bottom: 20px;
+        }
+
+            .upload-image label {
+                font-weight: bold;
+                font-size: 16px;
+                padding: 10px 20px;
+                background-color: #F2F7F4;
+                border-radius: 7px;
+                color: #000;
+                cursor: pointer;
+                display: block;
+                width: 109px;
+                margin-top: 14px;
+            }
+
+    </style>
+}
+<!--================Breadcrumb Area =================-->
+<section class="breadcrumb_area">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+    <div class="container">
+        <div class="page-cover text-center">
+            <h2 class="page-cover-tittle">User information</h2>
+            <ol class="breadcrumb">
+                <li><a href="/home">Home</a></li>
+                <li class="active">My Account</li>
+            </ol>
+        </div>
+    </div>
+</section>
+<!--================Breadcrumb Area =================-->
+<div class="container">
+    <div class="tab-content">
+        <div id="tab1" class="tab active">
+            <div class="row d-flex justify-content-between wrap-conntent-account">
+                <div class="col-6">
+                    <h2>User information</h2>
+                    <form class="form-wrap" id="formAddUser">
+                        <input type="hidden" id="hidId" value="@Model.Id" />
+                        <div class="field upload-image">
+                            @if (Model.AvatarUrl != null)
+                            {
+                                <img src="@(appDomain + Model.AvatarUrl)" id="txtImageShow" alt="" style="width: 320px;">
+                            }
+                            else
+                            {
+                                <img src="~/assets/images/user.png" alt="" id="txtImageShow" style="width: 326px;">
+                            }
+
+                            <input type="text" class="form-control" id="txtImage" name="txtImage" hidden value="@Model.AvatarUrl" />
+                            <input type="text" class="form-control" id="appDomain" hidden value="@appDomain" />
+                            <input type="file" name="" id="fileInputImage" hidden>
+                            <label for="fileInputImage">Change</label>
+                        </div>
+
+                        <div class="field">
+                            <label for="Roles">Role</label>
+                            <input id="Roles" name="Roles" disabled value="@Model.Roles" type="text" class="form-control">
+                        </div>
+                        <div class="field">
+                            <label for="fullName">FullName</label>
+                            <input id="fullName" name="fullName" value="@Model.FullName" type="text" class="form-control">
+                        </div>
+                        <div class="field">
+                            <label for="email">Email</label>
+                            <input id="email" name="email" value="@Model.Email" disabled type="text" class="form-control">
+                        </div>
+                        <div class="field">
+                            <label for="address">Address</label>
+                            <textarea name="address" id="address" value="@Model.Address" class="form-control">@Model.Address</textarea>
+                        </div>
+                        <div class="field">
+                            <label for="phoneNumber">Phone Number</label>
+                            <input id="phoneNumber" name="phoneNumber" type="text" value="@Model.PhoneNumber" class="form-control keypress">
+                        </div>
+                        <div class="field">
+                            <label for="dateOfBirth">Date of birth</label>
+                            <input id="dateOfBirth" name="dateOfBirth" value="@(Model.DateOfBirth != null ? Model.DateOfBirth.Value.ToString("dd/MM/yyyy") : string.Empty)" type="text" class="form-control keypress">
+                        </div>
+                    </form>
+                </div>
+                <div class="col-6" style="flex: 0 0 47%;">
+                    <h2>Change password</h2>
+                    <form class="form-wrap form-login">
+                        <div class="field">
+                            <label for="currentPassword">Current password</label>
+                            <div class="field-password">
+                                <input id="currentPassword" type="password" class="form-control" placeholder="Password">
+                            </div>
+                            <span class="eye_icon"></span>
+                        </div>
+                        <div class="field">
+                            <label for="passwordNew">New password</label>
+                            <div class="field-password">
+                                <input id="passwordNew" type="password" class="form-control" placeholder="Password">
+                            </div>
+                            <span class="eye_icon"></span>
+                        </div>
+                        <div class="field">
+                            <label for="confirmPassword">Confirm password</label>
+                            <div class="field-password">
+                                <input id="confirmPassword" type="password" class="form-control" placeholder="Confirm Password">
+                            </div>
+                            <span class="eye_icon"></span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="submit-button">
+                <button type="button" id="btnSave" class="btn btn-success">Save</button>
+                <button type="button" id="btnCancel" data-dismiss="modal" class="btn btn-danger">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

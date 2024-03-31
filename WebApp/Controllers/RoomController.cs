@@ -13,5 +13,17 @@ namespace WebApp.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// Room details
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        //[Route("room-details/{id}")]
+        [Route("blog-details")]
+        public IActionResult RoomDetails(int id)
+        {
+            return View();
+        }
     }
 }

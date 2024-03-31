@@ -134,16 +134,17 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                 <!-- item-->
-                <div class="dropdown-header noti-title">
-                    <h6 class="text-overflow m-0">Chào mừng!</h6>
-                </div>
+                <a href="/home" class="dropdown-item notify-item">
+                    <i class="fe-home"></i>
+                    <span>Web Hotel</span>
+                </a>
+                <div class="dropdown-divider"></div>
 
                 <!-- item-->
                 <a href="/Admin/Account?UserId=@User.GetSpecificClaim("UserId")" class="dropdown-item notify-item">
                     <i class="remixicon-account-circle-line"></i>
                     <span>Tài khoản của tôi</span>
                 </a>
-
                 <div class="dropdown-divider"></div>
 
                 <!-- item-->
@@ -151,25 +152,20 @@
                     <i class="remixicon-logout-box-line"></i>
                     <span>Đăng xuất</span>
                 </a>
-
             </div>
         </li>
-
-
-
-
     </ul>
 
     <!-- LOGO -->
     <div class="logo-box">
         <a href="Dashboard" class="logo text-center">
             <span class="logo-lg">
-                <img src="~/assets/admin/images/users/DQ.png" />
+                <img src="~/assets/landing-page/image/Logo.png" />
                 <!-- <span class="logo-lg-text-light">Xeria</span> -->
             </span>
             <span class="logo-sm">
                 <!-- <span class="logo-sm-text-dark">X</span> -->
-                <img src="~/assets/admin/images/logo-sm.png" alt="" height="24">
+                <img src="~/assets/landing-page/image/Logo.png" alt="" height="24">
             </span>
         </a>
     </div>
