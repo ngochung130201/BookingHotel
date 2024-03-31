@@ -32,12 +32,24 @@ $("#fileInputImage").on('change', function () {
             var imgElement = document.getElementById('showImageMyAccount');
             var appDomain = document.getElementById('appDomain');
             imgElement.src = appDomain.value + path;
+            base.notify('Uploaded successful!', 'success');
         },
         error: function () {
-            console.log("hello1")
-
+            base.notify('Has an error in progress', 'error');
         }
     });
+});
+
+$('.eye_icon').on('click', function () {
+    var passwordField = $(this).parent().find('input')
+    var fieldType = passwordField.attr('type');
+    if (fieldType === 'password') {
+        passwordField.attr('type', 'text');
+        $(this).addClass('active');
+    } else {
+        passwordField.attr('type', 'password');
+        $(this).removeClass('active');
+    }
 });
 
 $('#btnMyAccountSave').on('click', function (e) {
@@ -63,11 +75,15 @@ var SaveEntity = function (data) {
         url: '/save-my-account',
         success: function (res) {
             if (res) {
-                alert("Success");
-                location.reload();
+                base.notify(response.messages[0], 'success');
+                base.stopLoading();
+                setTimeout(function () {
+                    location.reload(true);
+                }, 1000);
             }
-            else {
-                alert("Error");
+            error: function () {
+                base.notify('Has an error in progress', 'error');
+                base.stopLoading();
             }
         }
     })
@@ -126,10 +142,16 @@ var ChangePassword = function (data) {
         success: function (res) {
             if (res.succeeded) {
                 $('#error-change-password').text("");
-                alert("Success");
+                base.notify(response.messages[0], 'success');
+                base.stopLoading();
+                setTimeout(function () {
+                    location.reload(true);
+                }, 1000);
             }
             else {
                 $('#error-change-password').text(res.messages);
+                base.notify('Has an error in progress', 'error');
+                base.stopLoading();
             }
         }
     })

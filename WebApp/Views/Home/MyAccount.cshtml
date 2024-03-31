@@ -1,15 +1,11 @@
-﻿@model BusinessLogic.Dtos.User.UserDetailDto;
+﻿@model BusinessLogic.Dtos.Home.MyAccountResponse
 @{
-    ViewData["Title"] = "Home Account";
+    ViewData["Title"] = "My Account";
     var httpContext = ViewContext.HttpContext;
     string appDomain = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}";
 }
 @section Scripts {
-    <script src="~/admin-app/controllers/account/index.js" asp-append-version="true"></script>
-    <script>
-        var account = new AccountController();
-        account.initialize();
-    </script>
+    <script src="~/client-app/controllers/home/my-account.js"></script>
     <style>
         .my-account-content {
             padding: 30px;
@@ -217,8 +213,7 @@
             <div class="row d-flex justify-content-between wrap-conntent-account">
                 <div class="col-6">
                     <h2>User information</h2>
-                    <form class="form-wrap" id="formAddUser">
-                        <input type="hidden" id="hidId" value="@Model.Id" />
+                    <form class="form-wrap" id="my-account-form">
                         <div class="field upload-image">
                             @if (Model.AvatarUrl != null)
                             {
@@ -232,65 +227,60 @@
                             <input type="text" class="form-control" id="txtImage" name="txtImage" hidden value="@Model.AvatarUrl" />
                             <input type="text" class="form-control" id="appDomain" hidden value="@appDomain" />
                             <input type="file" name="" id="fileInputImage" hidden>
-                            <label for="fileInputImage">Change</label>
+                            <label for="txtImage" id="btnSelectImg">Change</label>
                         </div>
 
                         <div class="field">
-                            <label for="Roles">Role</label>
-                            <input id="Roles" name="Roles" disabled value="@Model.Roles" type="text" class="form-control">
-                        </div>
-                        <div class="field">
                             <label for="fullName">FullName</label>
-                            <input id="fullName" name="fullName" value="@Model.FullName" type="text" class="form-control">
+                            <input id="fullname" type="text" class="form-control" name="fullname" value="@Model.FullName" placeholder="Full name">
                         </div>
                         <div class="field">
                             <label for="email">Email</label>
-                            <input id="email" name="email" value="@Model.Email" disabled type="text" class="form-control">
+                            <input id="email" value="@Model.Email" disabled type="text" class="form-control" placeholder="Email">
                         </div>
                         <div class="field">
                             <label for="address">Address</label>
-                            <textarea name="address" id="address" value="@Model.Address" class="form-control">@Model.Address</textarea>
+                            <textarea name="" id="address" name="address" cols="30" rows="5">@Model.Address</textarea>
                         </div>
                         <div class="field">
                             <label for="phoneNumber">Phone Number</label>
-                            <input id="phoneNumber" name="phoneNumber" type="text" value="@Model.PhoneNumber" class="form-control keypress">
-                        </div>
-                        <div class="field">
-                            <label for="dateOfBirth">Date of birth</label>
-                            <input id="dateOfBirth" name="dateOfBirth" value="@(Model.DateOfBirth != null ? Model.DateOfBirth.Value.ToString("dd/MM/yyyy") : string.Empty)" type="text" class="form-control keypress">
+                            <input id="phonenumber" value="@Model.PhoneNumber" name="phonenumber" type="text" class="form-control keypress" placeholder="Phone Number">
                         </div>
                     </form>
+                    <div class="submit-button">
+                        <button class="Save" id="btnMyAccountSave">Save</button>
+                    </div>
                 </div>
+
                 <div class="col-6" style="flex: 0 0 47%;">
                     <h2>Change password</h2>
-                    <form class="form-wrap form-login">
+                    <form class="form-wrap form-login" id="change-password-form">
                         <div class="field">
                             <label for="currentPassword">Current password</label>
                             <div class="field-password">
-                                <input id="currentPassword" type="password" class="form-control" placeholder="Password">
+                                <input id="currentpassword" name="currentpassword" type="password" class="form-control" placeholder="Password">
                             </div>
                             <span class="eye_icon"></span>
                         </div>
                         <div class="field">
                             <label for="passwordNew">New password</label>
                             <div class="field-password">
-                                <input id="passwordNew" type="password" class="form-control" placeholder="Password">
+                                <input id="password" type="password" name="password" class="form-control" placeholder="Password">
                             </div>
                             <span class="eye_icon"></span>
                         </div>
                         <div class="field">
                             <label for="confirmPassword">Confirm password</label>
                             <div class="field-password">
-                                <input id="confirmPassword" type="password" class="form-control" placeholder="Confirm Password">
+                                <input id="confirmPassword" type="password" name="confirmPassword" class="form-control" placeholder="Confirm Password">
                             </div>
                             <span class="eye_icon"></span>
                         </div>
                     </form>
+                    <div class="submit-button">
+                        <button class="Save" id="btnChangePassword">Save</button>
+                    </div>
                 </div>
-            </div>
-            <div class="submit-button">
-                <button type="button" id="btnSave" class="btn btn-success">Save</button>
-                <button type="button" id="btnCancel" data-dismiss="modal" class="btn btn-danger">Cancel</button>
             </div>
         </div>
     </div>

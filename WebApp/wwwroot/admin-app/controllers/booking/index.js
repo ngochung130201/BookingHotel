@@ -1,6 +1,4 @@
-﻿
-
-var VoteBookingController = function () {
+﻿var VoteBookingController = function () {
     this.initialize = function () {
         loadData();
         registerEvents();
