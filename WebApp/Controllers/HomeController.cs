@@ -1,5 +1,7 @@
 ﻿using BusinessLogic.Dtos.Home;
 using BusinessLogic.Dtos.News;
+using BusinessLogic.Dtos.Rooms;
+using BusinessLogic.Dtos.RoomTypes;
 using BusinessLogic.Entities.Identity;
 using BusinessLogic.Services;
 using BusinessLogic.Services.Identity;
@@ -10,7 +12,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApp.Controllers
 {
-    public class HomeController(INewsService newsService, 
+    public class HomeController(INewsService newsService,
+                                IRoomTypesService roomTypesService, 
                                 ITokenService tokenService,
                                 IUserClaimsPrincipalFactory<AppUser> userClaimsPrincipalFactory,
                                 SignInManager<AppUser> signInManager,
@@ -31,7 +34,14 @@ namespace WebApp.Controllers
                 Status = true
             });
 
+            var resultRoomTypes = await roomTypesService.GetPagination(new RoomTypesRequest
+            {
+                PageNumber = 1,
+                PageSize = 4,
+            });
+
             result.News = resultNews.Data;
+            result.RoomTypes = resultRoomTypes.Data;
             return View(result);
         }
         /// <summary>

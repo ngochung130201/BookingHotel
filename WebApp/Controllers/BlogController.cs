@@ -22,7 +22,7 @@ namespace WebApp.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         //[Route("blog-details/{id}")]
-        [Route("blog-details")]
+        [Route("/blog/blog-details")]
         public IActionResult BlogDetails(int id)
         {
             return View();
