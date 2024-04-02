@@ -123,8 +123,8 @@
   <data name="EmailOnTheWay" xml:space="preserve">
     <value>Email đã được gửi</value>
   </data>
-  <data name="ForgotPassword" xml:space="preserve">
-    <value>Quên mật khẩu</value>
+  <data name="EmailVerify" xml:space="preserve">
+    <value>Xác nhận Email</value>
   </data>
   <data name="ForgotYourPassword" xml:space="preserve">
     <value>Quên mật khẩu?</value>

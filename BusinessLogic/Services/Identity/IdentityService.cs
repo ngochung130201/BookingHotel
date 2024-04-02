@@ -61,7 +61,7 @@ namespace BusinessLogic.Services.Identity
                     {
                         From = "admin@nineplus.com.vn",
                         To = user.Email,
-                        Body = $"Please confirm your account by <a href='{verificationUri}'>clicking here</a>.",
+                        Body = $"Welcome to Royal Hotel! Please confirm your account by <a href='{verificationUri}'>clicking here</a>.",
                         Subject = "Confirm Registration"
                     };
                     BackgroundJob.Enqueue(() => mailService.SendAsync(mailRequest));

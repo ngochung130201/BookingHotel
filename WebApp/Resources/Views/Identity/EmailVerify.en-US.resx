@@ -123,8 +123,8 @@
   <data name="EmailOnTheWay1" xml:space="preserve">
     <value>Email on the way</value>
   </data>
-  <data name="ForgotPassword" xml:space="preserve">
-    <value>Forgot password</value>
+  <data name="EmailVerify" xml:space="preserve">
+    <value>Email Verify</value>
   </data>
   <data name="ForgotYourPassword" xml:space="preserve">
     <value>Forgot your password?</value>
