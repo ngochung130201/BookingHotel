@@ -33,10 +33,7 @@ namespace BusinessLogic.Services.Identity
 
     }
 
-    public class IdentityService(
-        UserManager<AppUser> userManager,
-        IEmailService mailService)
-        : ITokenService
+    public class IdentityService( UserManager<AppUser> userManager, IEmailService mailService) : ITokenService
     {
         public async Task<IResult> RegisterAsync(RegisterRequest request, string origin)
         {
@@ -46,7 +43,6 @@ namespace BusinessLogic.Services.Identity
                 FullName = request.FirstName + " " + request.LastName,
                 UserName = request.Email,
                 PhoneNumber = request.PhoneNumber,
-                CompanyName = request.CompanyName,
                 IsActive = true,
                 EmailConfirmed = false,
                 MemberStatus = MemberStatus.Trial
@@ -58,7 +54,7 @@ namespace BusinessLogic.Services.Identity
                 var result = await userManager.CreateAsync(user, request.Password);
                 if (result.Succeeded)
                 {
-                    await userManager.AddToRoleAsync(user, RoleConstants.User);
+                    await userManager.AddToRoleAsync(user, RoleConstants.Customer);
                     // Send email to user for confirmation
                     var verificationUri = await SendVerificationEmail(user, origin);
                     var mailRequest = new MailRequest
@@ -168,7 +164,7 @@ namespace BusinessLogic.Services.Identity
                 var result = await userManager.CreateAsync(user, request.Password);
                 if (result.Succeeded)
                 {
-                    await userManager.AddToRoleAsync(user, RoleConstants.User);
+                    await userManager.AddToRoleAsync(user, RoleConstants.Customer);
                     return await Result<AppUser>.SuccessAsync(user);
                 }
 

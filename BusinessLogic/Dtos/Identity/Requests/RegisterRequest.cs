@@ -25,14 +25,18 @@ namespace BusinessLogic.Dtos.Identity.Requests
     {
         [Required]
         public string Email { get; set; } = default!;
+
         public string? PhoneNumber { get; set; }
+
         [Required]
         public string FirstName { get; set; } = default!;
+
         [Required]
         public string LastName { get; set; } = default!;
-        public string? CompanyName { get; set; }
+
         [Required]
         public string Password { get; set; } = default!;
+
         [Required]
         public string ConfirmPassword { get; set; } = default!;
     }
