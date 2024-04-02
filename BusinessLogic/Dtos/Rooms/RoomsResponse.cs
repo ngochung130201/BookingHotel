@@ -1,4 +1,6 @@
-﻿namespace BusinessLogic.Dtos.Rooms
+﻿using BusinessLogic.Dtos.RoomTypes;
+
+namespace BusinessLogic.Dtos.Rooms
 {
     public class RoomsResponse
     {
@@ -33,5 +35,11 @@
         public DateTime CreatedOn { get; set; }
 
         public string CreatedBy { get; set; } = default!;
+    }
+
+    public class ClientRoomsResponse
+    {
+        public List<RoomsResponse> Rooms { get; set; } = new();
+        public List<RoomTypesResponse> RoomTypes { get; set; } = new();
     }
 }

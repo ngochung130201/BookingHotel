@@ -1,6 +1,5 @@
 ﻿using BusinessLogic.Dtos.Home;
 using BusinessLogic.Dtos.News;
-using BusinessLogic.Dtos.Rooms;
 using BusinessLogic.Dtos.RoomTypes;
 using BusinessLogic.Entities.Identity;
 using BusinessLogic.Services;
@@ -44,6 +43,7 @@ namespace WebApp.Controllers
             result.RoomTypes = resultRoomTypes.Data;
             return View(result);
         }
+
         /// <summary>
         /// my account
         /// </summary>

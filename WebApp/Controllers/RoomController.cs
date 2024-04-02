@@ -1,17 +1,38 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BusinessLogic.Dtos.Home;
+using BusinessLogic.Dtos.News;
+using BusinessLogic.Dtos.Rooms;
+using BusinessLogic.Dtos.RoomTypes;
+using BusinessLogic.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebApp.Controllers
 {
-    public class RoomController() : Controller
+    public class RoomController(IRoomTypesService roomTypesService,
+                                 IRoomsService roomsService) : Controller
     {
         /// <summary>
         /// Room
         /// </summary>
         /// <returns></returns>
         [Route("room")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var result = new ClientRoomsResponse();
+            var resultRoomTypes = await roomTypesService.GetPagination(new RoomTypesRequest
+            {
+                PageNumber = 1,
+                PageSize = 4
+            });
+
+            var resultRooms = await roomsService.GetPagination(new RoomsRequest
+            {
+                PageNumber = 1,
+                PageSize = 8,
+            });
+
+            result.Rooms = resultRooms.Data;
+            result.RoomTypes = resultRoomTypes.Data;
+            return View(result);
         }
 
         /// <summary>

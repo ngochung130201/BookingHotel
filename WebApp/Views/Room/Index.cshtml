@@ -1,5 +1,8 @@
-﻿@{
+﻿@model BusinessLogic.Dtos.Rooms.ClientRoomsResponse
+@{
     ViewData["Title"] = "Room";
+    var httpContext = ViewContext.HttpContext;
+    string appDomain = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}";
 }
 
 @section Scripts {
@@ -20,58 +23,32 @@
     </div>
 </section>
 <!--================Breadcrumb Area =================-->
+
 <!--================ Accomodation Area  =================-->
 <section class="accomodation_area section_gap">
     <div class="container">
         <div class="section_title text-center">
-            <h2 class="title_color">Special Room</h2>
-            <p>We all live in an age that belongs to the young at heart. Life that is becoming extremely fast,</p>
+            <h2 class="title_color">Room Types</h2>
+            <p>Types of rooms available at the hotel</p>
         </div>
         <div class="row mb_30">
-            <div class="col-lg-3 col-sm-6">
-                <div class="accomodation_item text-center">
-                    <div class="hotel_img">
-                        <img src="~/assets/landing-page/image/room1.jpg" alt="">
-                        <a href="#" class="btn theme_btn button_hover">Book Now</a>
+            @foreach (var item in Model.RoomTypes)
+            {
+                <div class="col-lg-3 col-sm-6">
+                    <div class="accomodation_item text-center">
+                        <div class="hotel_img">
+                            <img src="@appDomain@item.Image" width="263px" height="270px" alt="post">
+                            <a href="#" class="btn theme_btn button_hover">Book Now</a>
+                        </div>
+                        <a href="#"><h4 class="sec_h4">@item.Name</h4></a>
                     </div>
-                    <a href="#"><h4 class="sec_h4">Double Deluxe Room</h4></a>
-                    <h5>$250<small>/night</small></h5>
                 </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="accomodation_item text-center">
-                    <div class="hotel_img">
-                        <img src="~/assets/landing-page/image/room2.jpg" alt="">
-                        <a href="#" class="btn theme_btn button_hover">Book Now</a>
-                    </div>
-                    <a href="#"><h4 class="sec_h4">Single Deluxe Room</h4></a>
-                    <h5>$200<small>/night</small></h5>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="accomodation_item text-center">
-                    <div class="hotel_img">
-                        <img src="~/assets/landing-page/image/room3.jpg" alt="">
-                        <a href="#" class="btn theme_btn button_hover">Book Now</a>
-                    </div>
-                    <a href="#"><h4 class="sec_h4">Honeymoon Suit</h4></a>
-                    <h5>$750<small>/night</small></h5>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="accomodation_item text-center">
-                    <div class="hotel_img">
-                        <img src="~/assets/landing-page/image/room4.jpg" alt="">
-                        <a href="#" class="btn theme_btn button_hover">Book Now</a>
-                    </div>
-                    <a href="#"><h4 class="sec_h4">Economy Double</h4></a>
-                    <h5>$200<small>/night</small></h5>
-                </div>
-            </div>
+            } 
         </div>
     </div>
 </section>
 <!--================ Accomodation Area  =================-->
+
 <!--================Booking Tabel Area =================-->
 <section class="hotel_booking_area">
     <div class="container">
@@ -142,94 +119,28 @@
     </div>
 </section>
 <!--================Booking Tabel Area  =================-->
+
 <!--================ Accomodation Area  =================-->
 <section class="accomodation_area section_gap">
     <div class="container">
         <div class="section_title text-center">
-            <h2 class="title_color">Normal Accomodation</h2>
-            <p>We all live in an age that belongs to the young at heart. Life that is becoming extremely fast,</p>
+            <h2 class="title_color">All Rooms At The Hotel</h2>
+            <p>We all live in an age that belongs to the young at heart. Life that is becoming extremely fast</p>
         </div>
         <div class="row accomodation_two">
-            <div class="col-lg-3 col-sm-6">
-                <div class="accomodation_item text-center">
-                    <div class="hotel_img">
-                        <img src="~/assets/landing-page/image/room1.jpg" alt="">
-                        <a href="#" class="btn theme_btn button_hover">Book Now</a>
+            @foreach (var item in Model.Rooms)
+            {
+                <div class="col-lg-3 col-sm-6">
+                    <div class="accomodation_item text-center">
+                        <div class="hotel_img">
+                            <img src="@appDomain@item.Thumbnail" width="263px" height="270px" alt="post">
+                            <a href="#" class="btn theme_btn button_hover">Book Now</a>
+                        </div>
+                        <a href="#"><h4 class="sec_h4">@item.Name</h4></a>
+                        <h5>@string.Format("{0:N0} VND", item.Price)<small>/night</small></h5>
                     </div>
-                    <a href="#"><h4 class="sec_h4">Double Deluxe Room</h4></a>
-                    <h5>$250<small>/night</small></h5>
                 </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="accomodation_item text-center">
-                    <div class="hotel_img">
-                        <img src="~/assets/landing-page/image/room2.jpg" alt="">
-                        <a href="#" class="btn theme_btn button_hover">Book Now</a>
-                    </div>
-                    <a href="#"><h4 class="sec_h4">Single Deluxe Room</h4></a>
-                    <h5>$200<small>/night</small></h5>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="accomodation_item text-center">
-                    <div class="hotel_img">
-                        <img src="~/assets/landing-page/image/room3.jpg" alt="">
-                        <a href="#" class="btn theme_btn button_hover">Book Now</a>
-                    </div>
-                    <a href="#"><h4 class="sec_h4">Honeymoon Suit</h4></a>
-                    <h5>$750<small>/night</small></h5>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="accomodation_item text-center">
-                    <div class="hotel_img">
-                        <img src="~/assets/landing-page/image/room4.jpg" alt="">
-                        <a href="#" class="btn theme_btn button_hover">Book Now</a>
-                    </div>
-                    <a href="#"><h4 class="sec_h4">Economy Double</h4></a>
-                    <h5>$200<small>/night</small></h5>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="accomodation_item text-center">
-                    <div class="hotel_img">
-                        <img src="~/assets/landing-page/image/room1.jpg" alt="">
-                        <a href="#" class="btn theme_btn button_hover">Book Now</a>
-                    </div>
-                    <a href="#"><h4 class="sec_h4">Double Deluxe Room</h4></a>
-                    <h5>$250<small>/night</small></h5>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="accomodation_item text-center">
-                    <div class="hotel_img">
-                        <img src="~/assets/landing-page/image/room2.jpg" alt="">
-                        <a href="#" class="btn theme_btn button_hover">Book Now</a>
-                    </div>
-                    <a href="#"><h4 class="sec_h4">Single Deluxe Room</h4></a>
-                    <h5>$200<small>/night</small></h5>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="accomodation_item text-center">
-                    <div class="hotel_img">
-                        <img src="~/assets/landing-page/image/room3.jpg" alt="">
-                        <a href="#" class="btn theme_btn button_hover">Book Now</a>
-                    </div>
-                    <a href="#"><h4 class="sec_h4">Honeymoon Suit</h4></a>
-                    <h5>$750<small>/night</small></h5>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="accomodation_item text-center">
-                    <div class="hotel_img">
-                        <img src="~/assets/landing-page/image/room4.jpg" alt="">
-                        <a href="#" class="btn theme_btn button_hover">Book Now</a>
-                    </div>
-                    <a href="#"><h4 class="sec_h4">Economy Double</h4></a>
-                    <h5>$200<small>/night</small></h5>
-                </div>
-            </div>
+            }
         </div>
     </div>
 </section>
