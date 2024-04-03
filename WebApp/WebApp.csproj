@@ -5,6 +5,12 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 	</PropertyGroup>
 	<ItemGroup>
+	  <Compile Remove="Areas\Admin\Data\**" />
+	  <Content Remove="Areas\Admin\Data\**" />
+	  <EmbeddedResource Remove="Areas\Admin\Data\**" />
+	  <None Remove="Areas\Admin\Data\**" />
+	</ItemGroup>
+	<ItemGroup>
 		<PackageReference Include="ClosedXML" Version="0.102.2" />
 		<PackageReference Include="Cronos" Version="0.8.2" />
 		<PackageReference Include="Hangfire" Version="1.8.9" />
@@ -38,7 +44,6 @@
 	  <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Areas\Admin\Data\" />
 	  <Folder Include="Resources\Controllers\" />
 	  <Folder Include="Resources\Models\" />
 	</ItemGroup>
