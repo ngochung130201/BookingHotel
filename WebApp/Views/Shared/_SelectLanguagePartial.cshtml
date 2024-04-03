@@ -1,0 +1,24 @@
+﻿@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.Extensions.Options
+
+@inject IOptions<RequestLocalizationOptions> LocOptions
+
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    var selectedCulture = requestCulture?.RequestCulture.UICulture.Name;
+    var cultureItems = LocOptions.Value.SupportedUICultures!
+        .Select(c => new SelectListItem { Value = c.Name, Text = c.DisplayName.Split("(")[0].Trim() })
+        .ToList();
+}
+
+<div class="custom-dropdown">
+    <div class="selected-option">
+        <span id="selected-value"><img src="~/assets/images/unitedStates.webp" width="24px" height="24px" alt="unitedStates" /></span>
+    </div>
+    <input class="returnUrl" type="type" name="name" value="@Context.Request.Path" hidden />
+    <div class="dropdown-list">
+        <span data-value="en-US" class="active"><img src="~/assets/landing-page/img/logo/unitedStates.webp" width="24px" height="24px" alt="unitedStates">English</span>
+        <span data-value="vi-VN"><img src="~/assets/images/vietnam.webp" width="24px" height="24px" alt="vietnam">Vietnamese</span>
+    </div>
+</div>

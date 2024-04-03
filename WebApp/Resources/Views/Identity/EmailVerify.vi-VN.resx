@@ -130,13 +130,13 @@
     <value>Quên mật khẩu?</value>
   </data>
   <data name="InputEmail" xml:space="preserve">
-    <value>Nhập địa chỉ email của bạn và chúng tôi sẽ gửi cho bạn liên kết để đặt lại mật khẩu của bạn</value>
+    <value>Nhập địa chỉ email của bạn và chúng tôi sẽ gửi cho bạn liên kết để xác thực</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Đăng nhập</value>
   </data>
   <data name="SendMailSuccess1" xml:space="preserve">
-    <value>Chúng tôi vừa gửi email hướng dẫn và liên kết đặt lại mật khẩu tới</value>
+    <value>Chúng tôi vừa gửi email xác thực tới</value>
   </data>
   <data name="SendMailSuccess2" xml:space="preserve">
     <value>Vui lòng kiểm tra.</value>

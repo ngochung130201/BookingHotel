@@ -134,6 +134,18 @@
     <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
     <script src="~/client-app/shared/base.js" asp-append-version="true"></script>
+    <script src="~/assets/landing-page/js/main.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var currentUrl = window.location.href;
+            // Remove active class from all links
+            $('li a').removeClass('active');
+            // Find the link that matches the current URL and add active class
+            $('li a').filter(function () {
+                return this.href === currentUrl;
+            }).addClass('active');
+        });
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 

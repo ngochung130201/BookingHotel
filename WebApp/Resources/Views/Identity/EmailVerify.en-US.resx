@@ -130,13 +130,13 @@
     <value>Forgot your password?</value>
   </data>
   <data name="InputEmail" xml:space="preserve">
-    <value>Enter your email address adress and we’ll send you the link to reset your pasword</value>
+    <value>Enter your email address and we'll send you a link to authenticate</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Back to Log In</value>
   </data>
   <data name="SendMailSuccess1" xml:space="preserve">
-    <value>We've just emailed instructions and a reset password link to</value>
+    <value>We have just sent you a confirmation email</value>
   </data>
   <data name="SendMailSuccess2" xml:space="preserve">
     <value>Please check it now.</value>

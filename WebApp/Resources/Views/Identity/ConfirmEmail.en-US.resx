@@ -121,8 +121,8 @@
     <value>Back to Log In</value>
     <comment>Back to Log In</comment>
   </data>
-  <data name="ResetPassword" xml:space="preserve">
-    <value>Reset Password</value>
+  <data name="EmailAuthentication" xml:space="preserve">
+    <value>Email authentication</value>
     <comment>Reset Password</comment>
   </data>
   <data name="Title1" xml:space="preserve">

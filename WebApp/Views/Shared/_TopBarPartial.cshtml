@@ -1,8 +1,20 @@
 ﻿@using WebApp.Extensions
+@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.Extensions.Options
+
+@inject IOptions<RequestLocalizationOptions> LocOptions
+
 @{
     var httpContext = ViewContext.HttpContext;
     string appDomain = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}";
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    var selectedCulture = requestCulture?.RequestCulture.UICulture.Name;
+    var cultureItems = LocOptions.Value.SupportedUICultures!
+        .Select(c => new SelectListItem { Value = c.Name, Text = c.DisplayName.Split("(")[0].Trim() })
+        .ToList();
 }
+
 <!--================Header Area =================-->
 <header class="header_area">
     <div class="container">
@@ -24,17 +36,21 @@
                     <li class="nav-item"><a class="nav-link" href="/blog">Blog</a></li>
                     <li class="nav-item"><a class="nav-link" href="/#">Elemests</a></li>
                     <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
-                    <li class="nav-item dropdown d-none d-lg-block">
-                        <a class="nav-link dropdown-toggle mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                            <img src="~/assets/images/flags/us.jpg" alt="user-image" class="mr-1" height="12"> <span class="align-middle">English <i class="mdi mdi-chevron-down"></i> </span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <img src="~/assets/images/flags/italy.jpg" alt="user-image" class="mr-1" height="12"> <span class="align-middle">Italian</span>
+                    <li class="nav-item dropdown notification-list">
+                        <div class="selected-option nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span id="selected-value"><img src="~/assets/images/unitedStates.webp" width="24px" height="24px" alt="unitedStates" /></span>
+                        </div>
+                        <input class="returnUrl" type="hidden" name="name" value="@Context.Request.Path" />
+                        <div class="dropdown-list dropdown-menu dropdown-menu-right">
+                            <a href="#" class="dropdown-item notify-item">
+                                <span data-value="en-US" class="active"><img src="~/assets/images/unitedStates.webp" alt="user-image" class="mr-1" width="24px" height="24px">English</span>
+                            </a>
+                            <a href="#" class="dropdown-item notify-item">
+                                <span data-value="vi-VN"><img src="~/assets/images/vietnam.webp" alt="user-image" class="mr-1" width="24px" height="24px">Vietnamese</span>
                             </a>
                         </div>
                     </li>
+
                     @{
                         bool isLoggedIn = !string.IsNullOrEmpty(User.GetSpecificClaim("UserId"));
                     }
@@ -50,9 +66,9 @@
                                 {
                                     <img src="~/assets/images/user.png" alt="user-image" class="rounded-circle" style="width: 30px; height: 30px;">
                                 }
-                                @* <span class="pro-user-name ml-1">
+                                <span class="pro-user-name ml-1">
                                     @User.GetSpecificClaim("FullName") <i class="mdi mdi-chevron-down"></i>
-                                </span> *@
+                                </span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right profile-dropdown">
                                 <!-- item-->

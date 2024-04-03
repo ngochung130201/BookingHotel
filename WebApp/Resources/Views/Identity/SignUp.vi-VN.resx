@@ -117,14 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CompanyName" xml:space="preserve">
-    <value>Tên công ty (nếu có)</value>
-  </data>
   <data name="ConfirmPassword" xml:space="preserve">
     <value>Xác nhận mật khẩu</value>
   </data>
   <data name="FirstName" xml:space="preserve">
-    <value>Họt lót</value>
+    <value>Họ</value>
   </data>
   <data name="ForgotPassword" xml:space="preserve">
     <value>Quên mật khẩu?</value>
@@ -146,23 +143,5 @@
   </data>
   <data name="SignUp" xml:space="preserve">
     <value>Đăng ký</value>
-  </data>
-  <data name="TermOfRegister1" xml:space="preserve">
-    <value>Bằng cách nhấp vào nút bên dưới, bạn đồng ý điều khoản với chúng tôi</value>
-  </data>
-  <data name="TermOfRegister2" xml:space="preserve">
-    <value>Điều khoản dịch vụ</value>
-  </data>
-  <data name="TermOfRegister3" xml:space="preserve">
-    <value>và xác nhận với chúng tôi</value>
-  </data>
-  <data name="TermOfRegister4" xml:space="preserve">
-    <value>Chính sách bảo mật toàn cầu</value>
-  </data>
-  <data name="Title1" xml:space="preserve">
-    <value>Trao quyền cho sự bền vững</value>
-  </data>
-  <data name="Title2" xml:space="preserve">
-    <value>với Kế toán môi trường thông minh</value>
   </data>
 </root>

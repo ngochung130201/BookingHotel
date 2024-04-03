@@ -190,6 +190,7 @@ namespace WebApp.Controllers
             var result = await tokenService.RegisterAsync(request, origin!);
             if (result.Succeeded)
             {
+                TempData["EmailVerify"] = request.Email;
                 return RedirectToAction("EmailVerify");
             }
 

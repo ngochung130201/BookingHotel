@@ -118,11 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BackLogin" xml:space="preserve">
-    <value>Quay về Đăng nhập</value>
+    <value>Quay về đăng nhập</value>
     <comment>Quay về Đăng nhập</comment>
   </data>
-  <data name="ResetPassword" xml:space="preserve">
-    <value>Đặt lại mật khẩu</value>
+  <data name="EmailAuthentication" xml:space="preserve">
+    <value>Xác thực email</value>
     <comment>Đặt lại mật khẩu</comment>
   </data>
   <data name="Title1" xml:space="preserve">

@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CompanyName" xml:space="preserve">
-    <value>Company Name(Optional)</value>
-  </data>
   <data name="ConfirmPassword" xml:space="preserve">
     <value>Confirm Password</value>
   </data>
@@ -146,23 +143,5 @@
   </data>
   <data name="SignUp" xml:space="preserve">
     <value>Sign Up</value>
-  </data>
-  <data name="TermOfRegister1" xml:space="preserve">
-    <value>By clicking the button below, you agree to our</value>
-  </data>
-  <data name="TermOfRegister2" xml:space="preserve">
-    <value>Terms of Service</value>
-  </data>
-  <data name="TermOfRegister3" xml:space="preserve">
-    <value>and acknowledge our</value>
-  </data>
-  <data name="TermOfRegister4" xml:space="preserve">
-    <value>Global Privacy Policy</value>
-  </data>
-  <data name="Title1" xml:space="preserve">
-    <value>Empowering Sustainability</value>
-  </data>
-  <data name="Title2" xml:space="preserve">
-    <value>with Smart Environmental Accounting</value>
   </data>
 </root>
