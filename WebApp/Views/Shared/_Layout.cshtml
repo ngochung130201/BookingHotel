@@ -3,10 +3,11 @@
 @using System.Globalization
 @inject IViewLocalizer Localizer
 @{
+    ViewData["Title"] = Localizer["Layout"];
     var httpContext = ViewContext.HttpContext;
     string appDomain = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}";
 }
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "https://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -44,7 +45,7 @@
                 <div class="col-lg-3  col-md-6 col-sm-6">
                     <div class="single-footer-widget">
                         <h6 class="footer_title">@Localizer["AboutAgency"]</h6>
-                        <p>@Localizer["Text1"] </p>
+                        <p>@Localizer["Text1"]</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6">
@@ -105,7 +106,7 @@
             <div class="row footer-bottom d-flex justify-content-between align-items-center">
                 <p class="col-lg-8 col-sm-12 footer-text m-0">
                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    Copyright &copy;<script>document.write(new Date().getFullYear()); All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                 </p>
                 <div class="col-lg-4 col-sm-12 footer-social">
@@ -118,8 +119,8 @@
         </div>
     </footer>
     <!--================ End footer Area  =================-->
-
     <!-- Optional JavaScript -->
+
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="~/assets/landing-page/js/jquery-3.2.1.min.js"></script>
     <script src="~/assets/landing-page/js/popper.js"></script>
