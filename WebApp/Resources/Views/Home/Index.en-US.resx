@@ -117,85 +117,91 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="HomeContactUs" xml:space="preserve">
-    <value>Contact Us</value>
+  <data name="Bar" xml:space="preserve">
+    <value>Bar</value>
   </data>
-  <data name="HomePage" xml:space="preserve">
-    <value>Home Page</value>
+  <data name="BookNow" xml:space="preserve">
+    <value>Book Now</value>
+  </data>
+  <data name="Gymnesium" xml:space="preserve">
+    <value>Gymnesium</value>
+  </data>
+  <data name="HomeText1" xml:space="preserve">
+    <value>If you are looking at blank cassettes on the web, you may be very confused at the&lt;br&gt; difference in price. You may see some for as low as $.17 each.</value>
+  </data>
+  <data name="HomeText10" xml:space="preserve">
+    <value>Usage of the Internet is becoming more common due to rapid advancement of technology and power.</value>
+  </data>
+  <data name="HomeText11" xml:space="preserve">
+    <value>Usage of the Internet is becoming more common due to rapid advancement of technology and power.</value>
+  </data>
+  <data name="HomeText12" xml:space="preserve">
+    <value>About Us &lt;br&gt;Our History&lt;br&gt;Mission &amp; Vision</value>
+  </data>
+  <data name="HomeText13" xml:space="preserve">
+    <value>inappropriate behavior is often laughed off as “boys will be boys,” women face higher conduct standards especially in the workplace. That’s why it’s crucial that, as women, our behavior on the job is beyond reproach. inappropriate behavior is often laughed.</value>
+  </data>
+  <data name="HomeText14" xml:space="preserve">
+    <value>Testimonial from our Clients</value>
+  </data>
+  <data name="HomeText15" xml:space="preserve">
+    <value>The French Revolution constituted for the conscience of the dominant aristocratic class a fall from</value>
+  </data>
+  <data name="HomeText16" xml:space="preserve">
+    <value>Latest Posts From Blog</value>
+  </data>
+  <data name="HomeText17" xml:space="preserve">
+    <value>The French Revolution constituted for the conscience of the dominant aristocratic class a fall from</value>
+  </data>
+  <data name="HomeText2" xml:space="preserve">
+    <value>Get Started</value>
+  </data>
+  <data name="HomeText3" xml:space="preserve">
+    <value>Book&lt;br&gt; Your Room</value>
+  </data>
+  <data name="HomeText4" xml:space="preserve">
+    <value>We all live in an age that belongs to the young at heart. Life that is becoming extremely fast</value>
+  </data>
+  <data name="HomeText5" xml:space="preserve">
+    <value>Who are in extremely love with eco friendly system.</value>
+  </data>
+  <data name="HomeText6" xml:space="preserve">
+    <value>Usage of the Internet is becoming more common due to rapid advancement of technology and power.</value>
+  </data>
+  <data name="HomeText7" xml:space="preserve">
+    <value>Usage of the Internet is becoming more common due to rapid advancement of technology and power.</value>
+  </data>
+  <data name="HomeText8" xml:space="preserve">
+    <value>Usage of the Internet is becoming more common due to rapid advancement of technology and power.</value>
+  </data>
+  <data name="HomeText9" xml:space="preserve">
+    <value>Usage of the Internet is becoming more common due to rapid advancement of technology and power.</value>
   </data>
   <data name="HomeTitle1" xml:space="preserve">
-    <value>Empowering Sustainability</value>
-  </data>
-  <data name="HomeTitle10" xml:space="preserve">
-    <value>Minimax, a company specializing in</value>
-  </data>
-  <data name="HomeTitle11" xml:space="preserve">
-    <value>CO2 calculation, takes its name</value>
-  </data>
-  <data name="HomeTitle12" xml:space="preserve">
-    <value>Why choose us?</value>
-  </data>
-  <data name="HomeTitle13" xml:space="preserve">
-    <value>Minimax, a company specializing in CO2 calculation, takes its name</value>
-  </data>
-  <data name="HomeTitle14" xml:space="preserve">
-    <value>We make it promising effective solutions for carbon management</value>
+    <value>Away from monotonous life</value>
   </data>
   <data name="HomeTitle2" xml:space="preserve">
-    <value>with Smart Environmental Accounting</value>
+    <value>Relax Your Mind</value>
   </data>
-  <data name="HomeTitle3" xml:space="preserve">
-    <value>Gasoline-powered cars:</value>
+  <data name="HotelAccomodation" xml:space="preserve">
+    <value>Hotel Accomodation</value>
   </data>
-  <data name="HomeTitle4" xml:space="preserve">
-    <value>Diesel-powered cars:</value>
+  <data name="RentACar" xml:space="preserve">
+    <value>Rent a Car</value>
   </data>
-  <data name="HomeTitle5" xml:space="preserve">
-    <value>Electricity:</value>
+  <data name="RequestCustomPrice" xml:space="preserve">
+    <value>Request Custom Price</value>
   </data>
-  <data name="HomeTitle6" xml:space="preserve">
-    <value>Animal food production:</value>
+  <data name="Restaurant" xml:space="preserve">
+    <value>Restaurant</value>
   </data>
-  <data name="HomeTitle7" xml:space="preserve">
-    <value>Who we are?</value>
+  <data name="RoyalFacilities" xml:space="preserve">
+    <value>Royal Facilities</value>
   </data>
-  <data name="HomeTitle8" xml:space="preserve">
-    <value>"Minimax, a company specializing in CO2 calculation, takes its name from the artificial intelligence algorithm, promising effective ."</value>
+  <data name="SportsCLub" xml:space="preserve">
+    <value>Sports CLub</value>
   </data>
-  <data name="HomeTitle9" xml:space="preserve">
-    <value>Minimax, a company specializing in CO2 calculation</value>
-  </data>
-  <data name="LatestNews" xml:space="preserve">
-    <value>Latest News</value>
-  </data>
-  <data name="LearnMore" xml:space="preserve">
-    <value>Learn More</value>
-  </data>
-  <data name="Ourpartners" xml:space="preserve">
-    <value>Our partners</value>
-  </data>
-  <data name="OurProjects" xml:space="preserve">
-    <value>Our Projects</value>
-  </data>
-  <data name="Per" xml:space="preserve">
-    <value>Per</value>
-  </data>
-  <data name="ReadMore" xml:space="preserve">
-    <value>Read More</value>
-  </data>
-  <data name="Reseacrh" xml:space="preserve">
-    <value>Reseacrh</value>
-  </data>
-  <data name="Security" xml:space="preserve">
-    <value>Security</value>
-  </data>
-  <data name="Solutions" xml:space="preserve">
-    <value>Solutions</value>
-  </data>
-  <data name="Support" xml:space="preserve">
-    <value>Support</value>
-  </data>
-  <data name="ViewAll" xml:space="preserve">
-    <value>View All</value>
+  <data name="SwimmingPool" xml:space="preserve">
+    <value>Swimming Pool</value>
   </data>
 </root>

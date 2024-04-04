@@ -117,85 +117,91 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="HomeContactUs" xml:space="preserve">
-    <value>Liên hệ chúng tôi</value>
+  <data name="Bar" xml:space="preserve">
+    <value>Bar</value>
   </data>
-  <data name="HomePage" xml:space="preserve">
-    <value>Trang chủ</value>
+  <data name="BookNow" xml:space="preserve">
+    <value>Đặt bây giờ</value>
+  </data>
+  <data name="Gymnesium" xml:space="preserve">
+    <value>Phòng Gym</value>
+  </data>
+  <data name="HomeText1" xml:space="preserve">
+    <value>Nếu bạn đang xem các băng cassette trống trên web, bạn có thể rất bối rối trước&lt;br&gt; sự chênh lệch về giá. Bạn có thể thấy một số với giá thấp nhất là 0,17 USD mỗi cái.</value>
+  </data>
+  <data name="HomeText10" xml:space="preserve">
+    <value>Việc sử dụng Internet ngày càng trở nên phổ biến hơn do sự tiến bộ nhanh chóng của công nghệ và sức mạnh.</value>
+  </data>
+  <data name="HomeText11" xml:space="preserve">
+    <value>Việc sử dụng Internet ngày càng trở nên phổ biến hơn do sự tiến bộ nhanh chóng của công nghệ và sức mạnh.</value>
+  </data>
+  <data name="HomeText12" xml:space="preserve">
+    <value>Giới thiệu về chúng tôi &lt;br&gt;Lịch sử của chúng tôi&lt;br&gt;Sứ mệnh và tầm nhìn</value>
+  </data>
+  <data name="HomeText13" xml:space="preserve">
+    <value>Hành vi không phù hợp thường bị cười nhạo vì “con trai vẫn là con trai”, phụ nữ phải đối mặt với những tiêu chuẩn ứng xử cao hơn, đặc biệt là ở nơi làm việc. Đó là lý do tại sao điều quan trọng là, với tư cách là phụ nữ, hành vi của chúng ta trong công việc là không thể chê trách được. hành vi không phù hợp thường bị cười nhạo.</value>
+  </data>
+  <data name="HomeText14" xml:space="preserve">
+    <value>Lời chứng thực từ khách hàng của chúng tôi</value>
+  </data>
+  <data name="HomeText15" xml:space="preserve">
+    <value>Cách mạng Pháp đã làm cho lương tâm của giai cấp quý tộc thống trị rơi khỏi</value>
+  </data>
+  <data name="HomeText16" xml:space="preserve">
+    <value>Bài viết mới nhất từ Blog</value>
+  </data>
+  <data name="HomeText17" xml:space="preserve">
+    <value>Cách mạng Pháp đã làm cho lương tâm của giai cấp quý tộc thống trị rơi khỏi</value>
+  </data>
+  <data name="HomeText2" xml:space="preserve">
+    <value>Bắt đầu</value>
+  </data>
+  <data name="HomeText3" xml:space="preserve">
+    <value>Đặt&lt;br&gt; Phòng của bạn</value>
+  </data>
+  <data name="HomeText4" xml:space="preserve">
+    <value>Tất cả chúng ta đều sống trong một thời đại thuộc về tâm hồn người trẻ. Cuộc sống đang trở nên cực kỳ nhanh chóng</value>
+  </data>
+  <data name="HomeText5" xml:space="preserve">
+    <value>Những người cực kỳ yêu thích hệ thống thân thiện với môi trường.</value>
+  </data>
+  <data name="HomeText6" xml:space="preserve">
+    <value>Việc sử dụng Internet ngày càng trở nên phổ biến hơn do sự tiến bộ nhanh chóng của công nghệ và sức mạnh.</value>
+  </data>
+  <data name="HomeText7" xml:space="preserve">
+    <value>Việc sử dụng Internet ngày càng trở nên phổ biến hơn do sự tiến bộ nhanh chóng của công nghệ và sức mạnh.</value>
+  </data>
+  <data name="HomeText8" xml:space="preserve">
+    <value>Việc sử dụng Internet ngày càng trở nên phổ biến hơn do sự tiến bộ nhanh chóng của công nghệ và sức mạnh.</value>
+  </data>
+  <data name="HomeText9" xml:space="preserve">
+    <value>Việc sử dụng Internet ngày càng trở nên phổ biến hơn do sự tiến bộ nhanh chóng của công nghệ và sức mạnh.</value>
   </data>
   <data name="HomeTitle1" xml:space="preserve">
-    <value>Trao quyền cho sự bền vững</value>
-  </data>
-  <data name="HomeTitle10" xml:space="preserve">
-    <value>Minimax, một công ty chuyên về </value>
-  </data>
-  <data name="HomeTitle11" xml:space="preserve">
-    <value>Tính toán CO2, lấy tên của nó</value>
-  </data>
-  <data name="HomeTitle12" xml:space="preserve">
-    <value>Tại sao chọn chúng tôi?</value>
-  </data>
-  <data name="HomeTitle13" xml:space="preserve">
-    <value>Minimax, công ty chuyên tính toán lượng CO2 lấy tên của mình</value>
-  </data>
-  <data name="HomeTitle14" xml:space="preserve">
-    <value>Chúng tôi biến nó thành những giải pháp hiệu quả đầy hứa hẹn để quản lý carbon</value>
+    <value>Rời xa cuộc sống đơn điệu</value>
   </data>
   <data name="HomeTitle2" xml:space="preserve">
-    <value>với Kế toán môi trường thông minh</value>
+    <value>Thư giãn tâm trí của bạn</value>
   </data>
-  <data name="HomeTitle3" xml:space="preserve">
-    <value>Ôtô chạy bằng xăng:</value>
+  <data name="HotelAccomodation" xml:space="preserve">
+    <value>Chỗ ở khách sạn</value>
   </data>
-  <data name="HomeTitle4" xml:space="preserve">
-    <value>Ô tô chạy bằng động cơ diesel:</value>
+  <data name="RentACar" xml:space="preserve">
+    <value>Thuê xe</value>
   </data>
-  <data name="HomeTitle5" xml:space="preserve">
-    <value>Điện:</value>
+  <data name="RequestCustomPrice" xml:space="preserve">
+    <value>Yêu cầu giá tùy chỉnh</value>
   </data>
-  <data name="HomeTitle6" xml:space="preserve">
-    <value>Sản xuất thức ăn chăn nuôi:</value>
+  <data name="Restaurant" xml:space="preserve">
+    <value>Nhà hàng</value>
   </data>
-  <data name="HomeTitle7" xml:space="preserve">
-    <value>Chúng ta là ai?</value>
+  <data name="RoyalFacilities" xml:space="preserve">
+    <value>Cơ sở Hoàng gia</value>
   </data>
-  <data name="HomeTitle8" xml:space="preserve">
-    <value>"Minimax, công ty chuyên tính toán lượng CO2, lấy tên từ thuật toán trí tuệ nhân tạo, hứa hẹn mang lại hiệu quả."</value>
+  <data name="SportsCLub" xml:space="preserve">
+    <value>Câu lạc bộ thể thao</value>
   </data>
-  <data name="HomeTitle9" xml:space="preserve">
-    <value>Minimax, công ty chuyên tính toán CO2</value>
-  </data>
-  <data name="LatestNews" xml:space="preserve">
-    <value>Tin mới nhất</value>
-  </data>
-  <data name="LearnMore" xml:space="preserve">
-    <value>Tìm hiểu thêm</value>
-  </data>
-  <data name="Ourpartners" xml:space="preserve">
-    <value>Những cộng sự của chúng ta</value>
-  </data>
-  <data name="OurProjects" xml:space="preserve">
-    <value>Các dự án của chúng tôi</value>
-  </data>
-  <data name="Per" xml:space="preserve">
-    <value>mỗi</value>
-  </data>
-  <data name="ReadMore" xml:space="preserve">
-    <value>Đọc thêm</value>
-  </data>
-  <data name="Reseacrh" xml:space="preserve">
-    <value>Nghiên cứu</value>
-  </data>
-  <data name="Security" xml:space="preserve">
-    <value>Bảo vệ</value>
-  </data>
-  <data name="Solutions" xml:space="preserve">
-    <value>Các giải pháp</value>
-  </data>
-  <data name="Support" xml:space="preserve">
-    <value>Ủng hộ</value>
-  </data>
-  <data name="ViewAll" xml:space="preserve">
-    <value>Xem tất cả</value>
+  <data name="SwimmingPool" xml:space="preserve">
+    <value>Hồ bơi</value>
   </data>
 </root>
