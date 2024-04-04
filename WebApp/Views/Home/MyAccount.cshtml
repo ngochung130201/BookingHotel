@@ -1,6 +1,8 @@
 ﻿@model BusinessLogic.Dtos.Home.MyAccountResponse
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @{
-    ViewData["Title"] = "My Account";
+    ViewData["Title"] = Localizer["My Account"];
     var httpContext = ViewContext.HttpContext;
     string appDomain = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}";
 }
@@ -198,10 +200,10 @@
     <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
     <div class="container">
         <div class="page-cover text-center">
-            <h2 class="page-cover-tittle">User information</h2>
+            <h2 class="page-cover-tittle">@Localizer["UserInformation"]</h2>
             <ol class="breadcrumb">
-                <li><a href="/home">Home</a></li>
-                <li class="active">My Account</li>
+                <li><a asp-controller="Home" asp-action="Index">@Localizer["Home"]</a></li>
+                <li class="active">@Localizer["MyAccount"]</li>
             </ol>
         </div>
     </div>
@@ -212,7 +214,7 @@
         <div id="tab1" class="tab active">
             <div class="row d-flex justify-content-between wrap-conntent-account">
                 <div class="col-6">
-                    <h2>User information</h2>
+                    <h2>@Localizer["UserInformation"]</h2>
                     <form class="form-wrap" id="my-account-form">
                         <div class="field upload-image">
                             @if (Model.AvatarUrl != null)
@@ -227,58 +229,58 @@
                             <input type="text" class="form-control" id="txtImage" name="txtImage" hidden value="@Model.AvatarUrl" />
                             <input type="text" class="form-control" id="appDomain" hidden value="@appDomain" />
                             <input type="file" name="" id="fileInputImage" hidden>
-                            <label for="txtImage" id="btnSelectImg">Change</label>
+                            <label for="txtImage" id="btnSelectImg">@Localizer["Change"]</label>
                         </div>
 
                         <div class="field">
-                            <label for="fullName">FullName</label>
-                            <input id="fullname" type="text" class="form-control" name="fullname" value="@Model.FullName" placeholder="Full name">
+                            <label for="fullName">@Localizer["FullName"]</label>
+                            <input id="fullname" type="text" class="form-control" name="fullname" value="@Model.FullName" placeholder="@Localizer["FullName"]">
                         </div>
                         <div class="field">
                             <label for="email">Email</label>
                             <input id="email" value="@Model.Email" disabled type="text" class="form-control" placeholder="Email">
                         </div>
                         <div class="field">
-                            <label for="address">Address</label>
+                            <label for="address">@Localizer["Address"]</label>
                             <textarea name="" id="address" name="address" cols="30" rows="5">@Model.Address</textarea>
                         </div>
                         <div class="field">
-                            <label for="phoneNumber">Phone Number</label>
-                            <input id="phonenumber" value="@Model.PhoneNumber" name="phonenumber" type="text" class="form-control keypress" placeholder="Phone Number">
+                            <label for="phoneNumber">@Localizer["PhoneNumber"]</label>
+                            <input id="phonenumber" value="@Model.PhoneNumber" name="phonenumber" type="text" class="form-control keypress" placeholder="@Localizer["PhoneNumber"]">
                         </div>
                     </form>
                     <div class="submit-button">
-                        <button class="Save" id="btnMyAccountSave">Save</button>
+                        <button class="Save" id="btnMyAccountSave">@Localizer["Save"]</button>
                     </div>
                 </div>
 
                 <div class="col-6" style="flex: 0 0 47%;">
-                    <h2>Change password</h2>
+                    <h2>@Localizer["CurrentPassword"]</h2>
                     <form class="form-wrap form-login" id="change-password-form">
                         <div class="field">
-                            <label for="currentPassword">Current password</label>
+                            <label for="currentPassword">@Localizer["CurrentPassword"]</label>
                             <div class="field-password">
-                                <input id="currentpassword" name="currentpassword" type="password" class="form-control" placeholder="Password">
+                                <input id="currentpassword" name="currentpassword" type="password" class="form-control" placeholder="@Localizer["Password"]">
                             </div>
                             <span class="eye_icon"></span>
                         </div>
                         <div class="field">
-                            <label for="passwordNew">New password</label>
+                            <label for="passwordNew">@Localizer["NewPassword"]</label>
                             <div class="field-password">
-                                <input id="password" type="password" name="password" class="form-control" placeholder="Password">
+                                <input id="password" type="password" name="password" class="form-control" placeholder="@Localizer["Password"]">
                             </div>
                             <span class="eye_icon"></span>
                         </div>
                         <div class="field">
-                            <label for="confirmPassword">Confirm password</label>
+                            <label for="confirmPassword">@Localizer["ConfirmPassword"]</label>
                             <div class="field-password">
-                                <input id="confirmPassword" type="password" name="confirmPassword" class="form-control" placeholder="Confirm Password">
+                                <input id="confirmPassword" type="password" name="confirmPassword" class="form-control" placeholder="@Localizer["ConfirmPassword"]">
                             </div>
                             <span class="eye_icon"></span>
                         </div>
                     </form>
                     <div class="submit-button">
-                        <button class="Save" id="btnChangePassword">Save</button>
+                        <button class="Save" id="btnChangePassword">@Localizer["Save"]</button>
                     </div>
                 </div>
             </div>

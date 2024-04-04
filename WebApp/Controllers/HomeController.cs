@@ -97,7 +97,6 @@ namespace WebApp.Controllers
                     result.PhoneNumber = userWithSameEmail.PhoneNumber;
                 }
             }
-
             return View(result);
         }
 

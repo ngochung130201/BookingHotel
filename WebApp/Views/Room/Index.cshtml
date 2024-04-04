@@ -1,6 +1,8 @@
 ﻿@model BusinessLogic.Dtos.Rooms.ClientRoomsResponse
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @{
-    ViewData["Title"] = "Room";
+    ViewData["Title"] = Localizer["Room"];
     var httpContext = ViewContext.HttpContext;
     string appDomain = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}";
 }
@@ -14,10 +16,10 @@
     <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
     <div class="container">
         <div class="page-cover text-center">
-            <h2 class="page-cover-tittle">Room</h2>
+            <h2 class="page-cover-tittle">@Localizer["Room"]</h2>
             <ol class="breadcrumb">
-                <li><a href="/home">Home</a></li>
-                <li class="active">Room</li>
+                <li><a href="/home">@Localizer["Home"]</a></li>
+                <li class="active">@Localizer["Room"]</li>
             </ol>
         </div>
     </div>
@@ -28,8 +30,8 @@
 <section class="accomodation_area section_gap">
     <div class="container">
         <div class="section_title text-center">
-            <h2 class="title_color">Room Types</h2>
-            <p>Types of rooms available at the hotel</p>
+            <h2 class="title_color">@Localizer["RoomTypes"]</h2>
+            <p>@Localizer["Text1"]</p>
         </div>
         <div class="row mb_30">
             @foreach (var item in Model.RoomTypes)
@@ -38,7 +40,7 @@
                     <div class="accomodation_item text-center">
                         <div class="hotel_img">
                             <img src="@appDomain@item.Image" width="263px" height="270px" alt="post">
-                            <a href="#" class="btn theme_btn button_hover">Book Now</a>
+                            <a href="#" class="btn theme_btn button_hover">@Localizer["BookNow"]</a>
                         </div>
                         <a href="#"><h4 class="sec_h4">@item.Name</h4></a>
                     </div>
@@ -54,7 +56,7 @@
     <div class="container">
         <div class="row hotel_booking_table">
             <div class="col-md-3">
-                <h2>Book<br> Your Room</h2>
+                <h2>@Localizer["BookYourRoom"]</h2>
             </div>
             <div class="col-md-9">
                 <div class="boking_table">
@@ -103,13 +105,13 @@
                             <div class="book_tabel_item">
                                 <div class="input-group">
                                     <select class="wide">
-                                        <option data-display="Room Types">Room Types</option>
+                                        <option data-display="Room Types">@Localizer["RoomTypes"]</option>
                                         <option value="1">Room 01</option>
                                         <option value="2">Room 02</option>
                                         <option value="3">Room 03</option>
                                     </select>
                                 </div>
-                                <a class="book_now_btn button_hover" href="#">Book Now</a>
+                                <a class="book_now_btn button_hover" href="#">@Localizer["BookNow"]</a>
                             </div>
                         </div>
                     </div>
@@ -124,8 +126,8 @@
 <section class="accomodation_area section_gap">
     <div class="container">
         <div class="section_title text-center">
-            <h2 class="title_color">All Rooms At The Hotel</h2>
-            <p>We all live in an age that belongs to the young at heart. Life that is becoming extremely fast</p>
+            <h2 class="title_color">@Localizer["Text2"]</h2>
+            <p>@Localizer["Text3"]</p>
         </div>
         <div class="row accomodation_two">
             @foreach (var item in Model.Rooms)
@@ -134,10 +136,10 @@
                     <div class="accomodation_item text-center">
                         <div class="hotel_img">
                             <img src="@appDomain@item.Thumbnail" width="263px" height="270px" alt="post">
-                            <a href="#" class="btn theme_btn button_hover">Book Now</a>
+                            <a href="#" class="btn theme_btn button_hover">@Localizer["BookNow"]</a>
                         </div>
                         <a href="#"><h4 class="sec_h4">@item.Name</h4></a>
-                        <h5>@string.Format("{0:N0} VND", item.Price)<small>/night</small></h5>
+                        <h5>@string.Format("{0:N0} VND", item.Price)<small>@Localizer["/night"]</small></h5>
                     </div>
                 </div>
             }

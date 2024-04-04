@@ -117,22 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AboutAgency" xml:space="preserve">
-    <value>About Agency</value>
+  <data name="/night" xml:space="preserve">
+    <value>/night</value>
   </data>
-  <data name="InstaFeed" xml:space="preserve">
-    <value>InstaFeed</value>
+  <data name="BookNow" xml:space="preserve">
+    <value>Book Now</value>
   </data>
-  <data name="NavigationLinks" xml:space="preserve">
-    <value>Navigation Links</value>
+  <data name="BookYourRoom" xml:space="preserve">
+    <value>Book&lt;br&gt; Your Room</value>
   </data>
-  <data name="Newsletter" xml:space="preserve">
-    <value>Newsletter</value>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Room" xml:space="preserve">
+    <value>Room</value>
+  </data>
+  <data name="RoomTypes" xml:space="preserve">
+    <value>Room Types</value>
   </data>
   <data name="Text1" xml:space="preserve">
-    <value>The world has become so fast paced that people don’t want to stand by reading a page of information, they would much rather look at a presentation and understand the message. It has come to a point</value>
+    <value>Types of rooms available at the hotel</value>
   </data>
   <data name="Text2" xml:space="preserve">
-    <value>For business professionals caught between high OEM price and mediocre print and graphic output</value>
+    <value>All Rooms At The Hotel</value>
+  </data>
+  <data name="Text3" xml:space="preserve">
+    <value>We all live in an age that belongs to the young at heart. Life that is becoming extremely fast</value>
   </data>
 </root>

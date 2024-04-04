@@ -117,22 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AboutAgency" xml:space="preserve">
-    <value>About Agency</value>
+  <data name="/night" xml:space="preserve">
+    <value>/đêm</value>
   </data>
-  <data name="InstaFeed" xml:space="preserve">
-    <value>InstaFeed</value>
+  <data name="BookNow" xml:space="preserve">
+    <value>Đặt bây giờ</value>
   </data>
-  <data name="NavigationLinks" xml:space="preserve">
-    <value>Navigation Links</value>
+  <data name="BookYourRoom" xml:space="preserve">
+    <value>Đặt&lt;br&gt; Phòng của bạn</value>
   </data>
-  <data name="Newsletter" xml:space="preserve">
-    <value>Newsletter</value>
+  <data name="Home" xml:space="preserve">
+    <value>Trang chủ</value>
+  </data>
+  <data name="Room" xml:space="preserve">
+    <value>Phòng</value>
+  </data>
+  <data name="RoomTypes" xml:space="preserve">
+    <value>Loại phòng</value>
   </data>
   <data name="Text1" xml:space="preserve">
-    <value>The world has become so fast paced that people don’t want to stand by reading a page of information, they would much rather look at a presentation and understand the message. It has come to a point</value>
+    <value>Các loại phòng hiện có tại khách sạn</value>
   </data>
   <data name="Text2" xml:space="preserve">
-    <value>For business professionals caught between high OEM price and mediocre print and graphic output</value>
+    <value>Tất cả các phòng tại khách sạn</value>
+  </data>
+  <data name="Text3" xml:space="preserve">
+    <value>Tất cả chúng ta đều sống trong một thời đại thuộc về tâm hồn người trẻ. Cuộc sống đang trở nên cực kỳ nhanh chóng</value>
   </data>
 </root>

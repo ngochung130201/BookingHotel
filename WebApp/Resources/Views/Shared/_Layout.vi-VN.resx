@@ -117,50 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AboutUs" xml:space="preserve">
-    <value>Giới thiệu</value>
+  <data name="AboutAgency" xml:space="preserve">
+    <value>Giới thiệu đại lý</value>
   </data>
-  <data name="Calculate" xml:space="preserve">
-    <value>Tính toán</value>
+  <data name="InstaFeed" xml:space="preserve">
+    <value>Nguồn cấp dữ liệu Insta</value>
   </data>
-  <data name="Contact" xml:space="preserve">
-    <value>Liên hệ</value>
+  <data name="NavigationLinks" xml:space="preserve">
+    <value>Liên kết điều hướng</value>
   </data>
-  <data name="Home" xml:space="preserve">
-    <value>Trang chủ</value>
+  <data name="Newsletter" xml:space="preserve">
+    <value>Bản tin</value>
   </data>
-  <data name="Login" xml:space="preserve">
-    <value>Đăng nhập</value>
+  <data name="Text1" xml:space="preserve">
+    <value>Thế giới đã phát triển với nhịp độ nhanh đến mức mọi người không muốn đứng đọc một trang thông tin mà thay vào đó họ nhìn vào phần trình bày và hiểu thông điệp. Nó đã đến một điểm</value>
   </data>
-  <data name="Logout" xml:space="preserve">
-    <value>Đăng xuất</value>
-  </data>
-  <data name="News" xml:space="preserve">
-    <value>Tin tức</value>
-  </data>
-  <data name="NewsBlog" xml:space="preserve">
-    <value>Tin tức/Bài viết</value>
-  </data>
-  <data name="Services" xml:space="preserve">
-    <value>Dịch vụ</value>
-  </data>
-  <data name="SignUp" xml:space="preserve">
-    <value>Đăng ký</value>
-  </data>
-  <data name="Title1" xml:space="preserve">
-    <value>Đây là đàn accordion mở rộng có thể có một hoặc nhiều hàng. Đây là đàn accordion mở rộng có thể có một hoặc nhiều hàng.
-Đây là một đàn accordion mở rộng Đây là một đàn accordion mở rộng có thể có một hoặc nhiều hàng. Đây là một bản mở rộng</value>
-  </data>
-  <data name="Title2" xml:space="preserve">
-    <value>Thành phố Đà Nẵng, Việt Nam</value>
-  </data>
-  <data name="Title3" xml:space="preserve">
-    <value>Bản quyền © 2023 Co2 Project Mọi quyền được bảo lưu.</value>
-  </data>
-  <data name="Title4" xml:space="preserve">
-    <value>Chính sách bảo mật</value>
-  </data>
-  <data name="Title5" xml:space="preserve">
-    <value>Điều khoản sử dụng</value>
+  <data name="Text2" xml:space="preserve">
+    <value>Dành cho các chuyên gia kinh doanh bị phân vân giữa giá OEM cao và sản lượng in ấn và đồ họa tầm thường</value>
   </data>
 </root>
