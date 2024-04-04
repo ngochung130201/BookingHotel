@@ -141,10 +141,9 @@
 				// Cập nhật hình ảnh của tùy chọn đã chọn
 				$('#selected-value img').attr('src', selectedImageUrl);
 				$('.dropdown-list').slideUp();
-
 				$.ajax({
 					type: "POST",
-					url: "Home/SetLanguage",
+					url: "/Home/SetLanguage",
 					data: { culture: selectedValue, returnUrl: cultureReturnUrl },
 					success: function (result, status, xhr) {
 						window.location.href = cultureReturnUrl;

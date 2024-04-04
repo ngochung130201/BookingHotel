@@ -7,7 +7,9 @@ using BusinessLogic.Services.Identity;
 using BusinessLogic.Wrapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using System.Globalization;
 
 namespace WebApp.Controllers
 {
@@ -41,7 +43,27 @@ namespace WebApp.Controllers
 
             result.News = resultNews.Data;
             result.RoomTypes = resultRoomTypes.Data;
+            result.LanguageType = CultureInfo.CurrentCulture.Name;
+
             return View(result);
+        }
+
+        /// <summary>
+        /// Set language
+        /// </summary>
+        /// <param name="culture"></param>
+        /// <param name="returnUrl"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult SetLanguage(string culture, string returnUrl)
+        {
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+            );
+
+            return LocalRedirect(returnUrl);
         }
 
         /// <summary>
@@ -57,13 +79,23 @@ namespace WebApp.Controllers
             if (currentUserIdentity.IsAuthenticated)
             {
                 var userWithSameEmail = await userManager.FindByEmailAsync(currentUserIdentity.Name!);
+                if (userWithSameEmail == null)
+                {
+                    if (currentUserIdentity.Name == "superadmin")
+                    {
+                        userWithSameEmail = await userManager.FindByEmailAsync("superadmin@gmail.com");
+                    }
+                }
 
-                result.CompanyName = userWithSameEmail!.CompanyName;
-                result.Address = userWithSameEmail.Address;
-                result.AvatarUrl = userWithSameEmail.AvatarUrl;
-                result.Email = userWithSameEmail.Email!;
-                result.FullName = userWithSameEmail.FullName;
-                result.PhoneNumber = userWithSameEmail.PhoneNumber;
+                if (userWithSameEmail != null)
+                {
+                    result.CompanyName = userWithSameEmail!.CompanyName;
+                    result.Address = userWithSameEmail.Address;
+                    result.AvatarUrl = userWithSameEmail.AvatarUrl;
+                    result.Email = userWithSameEmail.Email!;
+                    result.FullName = userWithSameEmail.FullName;
+                    result.PhoneNumber = userWithSameEmail.PhoneNumber;
+                }
             }
 
             return View(result);
@@ -97,9 +129,12 @@ namespace WebApp.Controllers
         public async Task<IActionResult> SaveEntityAccount(ChangePasswordRequest request)
         {
             var currentUserIdentity = User.Identity!;
+            var email = string.Empty;
             if (currentUserIdentity.IsAuthenticated)
             {
-                var result = await tokenService.ChangePasswordAsync(request, currentUserIdentity.Name!);
+                if (currentUserIdentity.Name == "superadmin") email = "superadmin@gmail.com";
+                else email = currentUserIdentity.Name;
+                var result = await tokenService.ChangePasswordAsync(request, email);
                 return Json(result);
             }
 
