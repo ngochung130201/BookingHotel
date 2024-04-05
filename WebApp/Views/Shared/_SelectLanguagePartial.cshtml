@@ -10,15 +10,30 @@
     var cultureItems = LocOptions.Value.SupportedUICultures!
         .Select(c => new SelectListItem { Value = c.Name, Text = c.DisplayName.Split("(")[0].Trim() })
         .ToList();
+    var queryString = ViewContext.HttpContext.Request.QueryString.Value;
 }
 
 <div class="custom-dropdown">
     <div class="selected-option">
-        <span id="selected-value"><img src="~/assets/images/unitedStates.webp" width="24px" height="24px" alt="unitedStates" /></span>
+        <span id="selected-value"><img src="~/assets/landing-page/img/logo/unitedStates.webp" width="24px" height="24px" alt="unitedStates" /></span>
     </div>
-    <input class="returnUrl" type="type" name="name" value="@Context.Request.Path" hidden />
+    <input class="returnUrl" type="type" name="name" value="@Context.Request.Path@queryString" hidden />
     <div class="dropdown-list">
         <span data-value="en-US" class="active"><img src="~/assets/landing-page/img/logo/unitedStates.webp" width="24px" height="24px" alt="unitedStates">English</span>
-        <span data-value="vi-VN"><img src="~/assets/images/vietnam.webp" width="24px" height="24px" alt="vietnam">Vietnamese</span>
+        <span data-value="vi-VN"><img src="~/assets/landing-page/img/logo/vietnam.webp" width="24px" height="24px" alt="vietnam">Vietnamese</span>
     </div>
 </div>
+
+
+@* <form class="form-horizontal" id="selectLanguage" asp-controller="Home" asp-action="SetLanguage" asp-route-returnUrl="@Context.Request.Path"
+      method="post" role="form">
+    <select name="culture" onchange="this.form.submit()" asp-for="@requestCulture!.RequestCulture.UICulture.Name" class="language-select" style="padding: 5px; border: none;">
+        @foreach (var cultureItem in cultureItems)
+        {
+            var selected = (cultureItem.Value == selectedCulture) ? "selected" : null;
+            <option value="@cultureItem.Value" selected="@selected">
+                @cultureItem.Text
+            </option>
+        }
+    </select>
+</form> *@

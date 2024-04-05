@@ -39,7 +39,8 @@ builder.Services.Configure<RequestLocalizationOptions>(
         opts.SupportedCultures = supportedCultures;
         // UI strings that we have localized.
         opts.SupportedUICultures = supportedCultures;
-    });
+    }
+);
 
 builder.Services.Configure<CookiePolicyOptions>(options =>
 {

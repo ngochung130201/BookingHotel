@@ -13,6 +13,7 @@
     var cultureItems = LocOptions.Value.SupportedUICultures!
         .Select(c => new SelectListItem { Value = c.Name, Text = c.DisplayName.Split("(")[0].Trim() })
         .ToList();
+    var queryString = ViewContext.HttpContext.Request.QueryString.Value;
 }
 
 <!--================Header Area =================-->
@@ -36,11 +37,11 @@
                     <li class="nav-item"><a class="nav-link" href="/blog">Blog</a></li>
                     <li class="nav-item"><a class="nav-link" href="/#">Elemests</a></li>
                     <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
-                    <li class="nav-item dropdown notification-list">
+                    <li class="nav-item dropdown custom-dropdown notification-list">
                         <div class="selected-option nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span id="selected-value"><img src="~/assets/images/unitedStates.webp" width="24px" height="24px" alt="unitedStates" /></span>
                         </div>
-                        <input class="returnUrl" type="hidden" name="name" value="@Context.Request.Path" />
+                        <input class="returnUrl" type="type" name="name" value="@Context.Request.Path@queryString" hidden />
                         <div class="dropdown-list dropdown-menu dropdown-menu-right">
                             <a href="#" class="dropdown-item notify-item">
                                 <span data-value="en-US" class="active"><img src="~/assets/images/unitedStates.webp" alt="user-image" class="mr-1" width="24px" height="24px">English</span>
