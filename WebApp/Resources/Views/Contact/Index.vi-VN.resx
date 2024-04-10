@@ -117,19 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Title1" xml:space="preserve">
-    <value>Dịch vụ của chúng tôi</value>
+  <data name="ContactUs" xml:space="preserve">
+    <value>Liên hệ với chúng tôi</value>
   </data>
-  <data name="Title2" xml:space="preserve">
-    <value>Minimax, một công ty chuyên về</value>
+  <data name="EnterEmailAddress" xml:space="preserve">
+    <value>Nhập địa chỉ email</value>
   </data>
-  <data name="Title3" xml:space="preserve">
-    <value>Tính toán CO2, lấy tên của nó</value>
+  <data name="EnterMessage" xml:space="preserve">
+    <value>Nhập tin nhắn</value>
   </data>
-  <data name="Title4" xml:space="preserve">
-    <value>Xem tất cả</value>
+  <data name="EnterSubject" xml:space="preserve">
+    <value>Nhập chủ đề</value>
   </data>
-  <data name="Title5" xml:space="preserve">
-    <value>Xem thêm</value>
+  <data name="EnterYourName" xml:space="preserve">
+    <value>Nhập tên của bạn</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Trang chủ</value>
+  </data>
+  <data name="SendMessage" xml:space="preserve">
+    <value>Gửi tin nhắn</value>
+  </data>
+  <data name="Text1" xml:space="preserve">
+    <value>Thứ Hai đến Thứ Sáu 9 giờ sáng đến 6 giờ chiều</value>
+  </data>
+  <data name="Text2" xml:space="preserve">
+    <value>Gửi cho chúng tôi bất cứ lúc nào!</value>
   </data>
 </root>

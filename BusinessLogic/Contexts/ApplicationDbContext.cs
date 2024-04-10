@@ -38,6 +38,7 @@ namespace BusinessLogic.Contexts
         public virtual DbSet<Entities.Services> Services { get; set; } = default!;
         public virtual DbSet<SpecialDayBooking> SpecialDayBooking { get; set; } = default!;
         public virtual DbSet<VoteBooking> VoteBooking { get; set; } = default!;
+        public virtual DbSet<ReplyComment> ReplyFeedbacks { get; set; } = default!;
 
         #endregion Entities
 

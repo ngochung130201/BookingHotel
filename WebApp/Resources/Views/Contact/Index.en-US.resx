@@ -117,19 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Title1" xml:space="preserve">
-    <value>Our Services</value>
+  <data name="ContactUs" xml:space="preserve">
+    <value>Contact Us</value>
   </data>
-  <data name="Title2" xml:space="preserve">
-    <value>Minimax, a company specializing in</value>
+  <data name="EnterEmailAddress" xml:space="preserve">
+    <value>Enter Email Address</value>
   </data>
-  <data name="Title3" xml:space="preserve">
-    <value>CO2 calculation, takes its name</value>
+  <data name="EnterMessage" xml:space="preserve">
+    <value>Enter Message</value>
   </data>
-  <data name="Title4" xml:space="preserve">
-    <value>View All</value>
+  <data name="EnterSubject" xml:space="preserve">
+    <value>Enter Subject</value>
   </data>
-  <data name="Title5" xml:space="preserve">
-    <value>Learn More</value>
+  <data name="EnterYourName" xml:space="preserve">
+    <value>Enter Your Name</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="SendMessage" xml:space="preserve">
+    <value>Send Message</value>
+  </data>
+  <data name="Text1" xml:space="preserve">
+    <value>Mon to Fri 9am to 6 pm</value>
+  </data>
+  <data name="Text2" xml:space="preserve">
+    <value>Send us your query anytime!</value>
   </data>
 </root>

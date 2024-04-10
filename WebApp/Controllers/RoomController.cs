@@ -40,10 +40,30 @@ namespace WebApp.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        //[Route("room-details/{id}")]
-        [Route("blog-details")]
-        public IActionResult RoomDetails(int id)
+        [Route("room-details/{id}")]
+        public async Task<IActionResult> RoomDetails(int id)
         {
+            var result = await roomsService.GetById(id);
+
+            if (result.Succeeded)
+            {
+                return View(result.Data);
+            }
+            else
+            {
+                return View("Error"); 
+            }
+        }
+
+        /// <summary>
+        /// List Rooms
+        /// </summary>
+        ///<param name="request"></param>
+        /// <returns></returns>
+        [Route("room/list-room")]
+        public async Task<IActionResult> ListRooms(RoomsRequest request)
+        {
+            
             return View();
         }
     }

@@ -117,37 +117,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Title1" xml:space="preserve">
-    <value>Hãy liên hệ với chúng tôi</value>
+  <data name="AboutUs" xml:space="preserve">
+    <value>Về chúng tôi</value>
   </data>
-  <data name="Title10" xml:space="preserve">
-    <value>Miêu tả</value>
+  <data name="Blog" xml:space="preserve">
+    <value>Blog</value>
   </data>
-  <data name="Title11" xml:space="preserve">
-    <value>Gửi</value>
+  <data name="Contact" xml:space="preserve">
+    <value>Liên hệ</value>
   </data>
-  <data name="Title2" xml:space="preserve">
-    <value>Vui lòng liên hệ với chúng tôi hoặc gửi email cho chúng tôi. Chúng tôi muốn nghe về dự án của bạn và chia sẻ cách chúng tôi có thể trợ giúp.</value>
+  <data name="Elemests" xml:space="preserve">
+    <value>Yếu tố</value>
   </data>
-  <data name="Title3" xml:space="preserve">
-    <value>Thành phố Đà Nẵng, Việt Nam</value>
+  <data name="Gallery" xml:space="preserve">
+    <value>Phòng trưng bày</value>
   </data>
-  <data name="Title4" xml:space="preserve">
-    <value>Tên của bạn</value>
+  <data name="Home" xml:space="preserve">
+    <value>Trang chủ</value>
   </data>
-  <data name="Title5" xml:space="preserve">
-    <value>Địa chỉ email</value>
+  <data name="MyAccount" xml:space="preserve">
+    <value>Tài khoản của tôi</value>
   </data>
-  <data name="Title6" xml:space="preserve">
-    <value>Chúng tôi hỗ trợ những dịch vụ nào?</value>
+  <data name="MyBooking" xml:space="preserve">
+    <value>Booking của tôi</value>
   </data>
-  <data name="Title7" xml:space="preserve">
-    <value>Tên công ty</value>
+  <data name="Room" xml:space="preserve">
+    <value>Phòng</value>
   </data>
-  <data name="Title8" xml:space="preserve">
-    <value>Dịch vụ</value>
+  <data name="SignIn" xml:space="preserve">
+    <value>Đăng nhập</value>
   </data>
-  <data name="Title9" xml:space="preserve">
-    <value>Hãy cho chúng tôi biết một chút về những gì bạn đang tìm kiếm?</value>
+  <data name="SignOut" xml:space="preserve">
+    <value>Đăng xuất</value>
+  </data>
+  <data name="SignUp" xml:space="preserve">
+    <value>Đăng ký</value>
   </data>
 </root>

@@ -1,0 +1,27 @@
+﻿@model BusinessLogic.Dtos.Rooms.ClientRoomsResponse
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Title"] = Localizer["ListRoom"];
+    var httpContext = ViewContext.HttpContext;
+    string appDomain = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}";
+}
+
+@section Scripts {
+
+}
+
+<!--================Breadcrumb Area =================-->
+<section class="breadcrumb_area">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+    <div class="container">
+        <div class="page-cover text-center">
+            <h2 class="page-cover-tittle">@Localizer["ListRoom"]</h2>
+            <ol class="breadcrumb">
+                <li><a href="/home">@Localizer["Home"]</a></li>
+                <li class="active">@Localizer["ListRoom"]</li>
+            </ol>
+        </div>
+    </div>
+</section>
+<!--================Breadcrumb Area =================-->

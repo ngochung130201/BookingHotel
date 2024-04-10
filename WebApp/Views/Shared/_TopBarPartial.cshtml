@@ -1,8 +1,9 @@
 ﻿@using WebApp.Extensions
 @using Microsoft.AspNetCore.Builder
 @using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
 @using Microsoft.Extensions.Options
-
+@inject IViewLocalizer Localizer
 @inject IOptions<RequestLocalizationOptions> LocOptions
 
 @{
@@ -30,13 +31,13 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                 <ul class="nav navbar-nav menu_nav ml-auto">
-                    <li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/about-us">About us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/room">Room</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/#">Gallery</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/blog">Blog</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/#">Elemests</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/home">@Localizer["Home"]</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/about-us">@Localizer["AboutUs"]</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/room">@Localizer["Room"]</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/#">@Localizer["Gallery"]</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/blog">@Localizer["Blog"]</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/#">@Localizer["Elemests"]</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/contact">@Localizer["Contact"]</a></li>
                     <li class="nav-item dropdown custom-dropdown notification-list">
                         <div class="selected-option nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span id="selected-value"><img src="~/assets/images/unitedStates.webp" width="24px" height="24px" alt="unitedStates" /></span>
@@ -75,19 +76,19 @@
                                 <!-- item-->
                                 <a href="#" class="dropdown-item notify-item">
                                     <i class="remixicon-account-circle-line"></i>
-                                    <span>My Booking </span>
+                                    <span>@Localizer["MyBooking"]</span>
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <!-- item-->
                                 <a href="/my-account?UserId=@User.GetSpecificClaim("UserId")" class="dropdown-item notify-item">
                                     <i class="remixicon-account-circle-line"></i>
-                                    <span>My Account</span>
+                                    <span>@Localizer["MyAccount"]</span>
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <!-- item-->
                                 <a href="javascript:void(0);" onclick="logout();" class="dropdown-item notify-item">
                                     <i class="remixicon-logout-box-line"></i>
-                                    <span>Logout</span>
+                                    <span>@Localizer["SignOut"]</span>
                                 </a>
                             </div>
                         </li>
@@ -95,7 +96,10 @@
                     else
                     {
                         <li class="nav-item">
-                            <a class="nav-link" href="/identity/login">Login</a>
+                            <a class="nav-link" href="/identity/login">@Localizer["SignIn"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/identity/register">@Localizer["SignUp"]</a>
                         </li>
                     }
                 </ul>

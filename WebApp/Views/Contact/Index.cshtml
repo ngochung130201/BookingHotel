@@ -1,5 +1,7 @@
-﻿@{
-    ViewData["Title"] = "Contact";
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Title"] = Localizer["Contact"];
 }
 
 @section Scripts {
@@ -18,10 +20,10 @@
     <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
     <div class="container">
         <div class="page-cover text-center">
-            <h2 class="page-cover-tittle">Contact Us</h2>
+            <h2 class="page-cover-tittle">@Localizer["ContactUs"]</h2>
             <ol class="breadcrumb">
-                <li><a href="/home">Home</a></li>
-                <li class="active">Contact Us</li>
+                <li><a href="/home">@Localizer["Home"]</a></li>
+                <li class="active">@Localizer["ContactUs"]</li>
             </ol>
         </div>
     </div>
@@ -49,12 +51,12 @@
                     <div class="info_item">
                         <i class="lnr lnr-phone-handset"></i>
                         <h6><a href="#">038 368 1047</a></h6>
-                        <p>Mon to Fri 9am to 6 pm</p>
+                        <p>@Localizer["Text1"]</p>
                     </div>
                     <div class="info_item">
                         <i class="lnr lnr-envelope"></i>
                         <h6><a href="#">support@royalhotel.com</a></h6>
-                        <p>Send us your query anytime!</p>
+                        <p>@Localizer["Text2"]</p>
                     </div>
                 </div>
             </div>
@@ -62,22 +64,22 @@
                 <form class="row contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="@Localizer["EnterYourName"]">
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email address">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="@Localizer["EnterEmailAddress"]">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="subject" name="subject" placeholder="Enter Subject">
+                            <input type="text" class="form-control" id="subject" name="subject" placeholder="@Localizer["EnterSubject"]">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <textarea class="form-control" name="message" id="message" rows="1" placeholder="Enter Message"></textarea>
+                            <textarea class="form-control" name="message" id="message" rows="1" placeholder="@Localizer["EnterMessage"]"></textarea>
                         </div>
                     </div>
                     <div class="col-md-12 text-right">
-                        <button type="submit" value="submit" class="btn theme_btn button_hover">Send Message</button>
+                        <button type="submit" value="submit" class="btn theme_btn button_hover">@Localizer["SendMessage"]</button>
                     </div>
                 </form>
             </div>

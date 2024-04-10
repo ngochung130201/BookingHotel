@@ -1,8 +1,308 @@
-﻿@{
-    ViewData["Title"] = "Room Details";
+﻿@model BusinessLogic.Dtos.Rooms.RoomsDto
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Title"] = Localizer["RoomDetails"];
+    var httpContext = ViewContext.HttpContext;
+    string appDomain = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}";
 }
 
 @section Scripts {
+    <link rel="stylesheet" href="~/assets/client/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="~/assets/client/css/animate.css">
 
+    <link rel="stylesheet" href="~/assets/client/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/assets/client/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/assets/client/css/magnific-popup.css">
+
+    <link rel="stylesheet" href="~/assets/client/css/aos.css">
+
+    <link rel="stylesheet" href="~/assets/client/css/ionicons.min.css">
+
+    <link rel="stylesheet" href="~/assets/client/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="~/assets/client/css/jquery.timepicker.css">
+
+
+    <link rel="stylesheet" href="~/assets/client/css/flaticon.css">
+    <link rel="stylesheet" href="~/assets/client/css/icomoon.css">
+    <link rel="stylesheet" href="~/assets/client/css/style.css">
+
+    <script src="~/assets/client/js/jquery.min.js"></script>
+    <script src="~/assets/client/js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="~/assets/client/js/popper.min.js"></script>
+    <script src="~/assets/client/js/bootstrap.min.js"></script>
+    <script src="~/assets/client/js/jquery.easing.1.3.js"></script>
+    <script src="~/assets/client/js/jquery.waypoints.min.js"></script>
+    <script src="~/assets/client/js/jquery.stellar.min.js"></script>
+    <script src="~/assets/client/js/owl.carousel.min.js"></script>
+    <script src="~/assets/client/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/assets/client/js/aos.js"></script>
+    <script src="~/assets/client/js/jquery.animateNumber.min.js"></script>
+    <script src="~/assets/client/js/bootstrap-datepicker.js"></script>
+    <script src="~/assets/client/js/jquery.timepicker.min.js"></script>
+    <script src="~/assets/client/js/scrollax.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="~/assets/client/js/google-map.js"></script>
+    <script src="~/assets/client/js/main.js"></script>
 }
+<!--================Breadcrumb Area =================-->
+<section class="breadcrumb_area">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+    <div class="container">
+        <div class="page-cover text-center">
+            <h2 class="page-cover-tittle">@Localizer["RoomDetails"]</h2>
+        </div>
+    </div>
+</section>
+<!--================Breadcrumb Area =================-->
 
+<section class="ftco-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="row">
+                    <div class="col-md-12 ftco-animate">
+                        <h2 class="mb-4">@Model.Name</h2>
+                        <div class="single-slider owl-carousel">
+                            <div class="item">
+                                <div class="room-img" style="background-image: url('@Model.Thumbnail');"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 room-single mt-4 mb-5 ftco-animate">
+                        <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
+                        <div class="d-md-flex mt-5 mb-5">
+                            <ul class="list">
+                                <li><span>Max:</span> 3 Persons</li>
+                                <li><span>Size:</span> 45 m2</li>
+                            </ul>
+                            <ul class="list ml-md-5">
+                                <li><span>View:</span> Sea View</li>
+                                <li><span>Bed:</span> 1</li>
+                            </ul>
+                        </div>
+                        <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
+                    </div>
+
+                    <div class="col-md-12 properties-single ftco-animate mb-5 mt-4">
+                        <h4 class="mb-4">Review &amp; Ratings</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <form method="post" class="star-rating">
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                        <label class="form-check-label" for="exampleCheck1">
+                                            <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i> 100 Ratings</span></p>
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                        <label class="form-check-label" for="exampleCheck1">
+                                            <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i> 30 Ratings</span></p>
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                        <label class="form-check-label" for="exampleCheck1">
+                                            <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i> 5 Ratings</span></p>
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                        <label class="form-check-label" for="exampleCheck1">
+                                            <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i> 0 Ratings</span></p>
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                        <label class="form-check-label" for="exampleCheck1">
+                                            <p class="rate"><span><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i> 0 Ratings</span></p>
+                                        </label>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- .col-md-8 -->
+
+            <div class="col-lg-4 sidebar ftco-animate">
+                <div class="sidebar-box ftco-animate">
+                    <div class="categories">
+                        <h3>Categories</h3>
+                        <li><a href="#">Properties <span>(12)</span></a></li>
+                        <li><a href="#">Home <span>(22)</span></a></li>
+                        <li><a href="#">House <span>(37)</span></a></li>
+                        <li><a href="#">Villa <span>(42)</span></a></li>
+                        <li><a href="#">Apartment <span>(14)</span></a></li>
+                        <li><a href="#">Condominium <span>(140)</span></a></li>
+                    </div>
+                </div>
+
+                <div class="sidebar-box ftco-animate">
+                    <h3>Recent Blog</h3>
+                    <div class="block-21 mb-4 d-flex">
+                        <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
+                        <div class="text">
+                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+                            <div class="meta">
+                                <div><a href="#"><span class="icon-calendar"></span> July 12, 2018</a></div>
+                                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="block-21 mb-4 d-flex">
+                        <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
+                        <div class="text">
+                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+                            <div class="meta">
+                                <div><a href="#"><span class="icon-calendar"></span> July 12, 2018</a></div>
+                                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="block-21 mb-4 d-flex">
+                        <a class="blog-img mr-4" style="background-image: url(images/image_3.jpg);"></a>
+                        <div class="text">
+                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+                            <div class="meta">
+                                <div><a href="#"><span class="icon-calendar"></span> July 12, 2018</a></div>
+                                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-box ftco-animate">
+                    <h3>Tag Cloud</h3>
+                    <div class="tagcloud">
+                        <a href="#" class="tag-cloud-link">dish</a>
+                        <a href="#" class="tag-cloud-link">menu</a>
+                        <a href="#" class="tag-cloud-link">food</a>
+                        <a href="#" class="tag-cloud-link">sweet</a>
+                        <a href="#" class="tag-cloud-link">tasty</a>
+                        <a href="#" class="tag-cloud-link">delicious</a>
+                        <a href="#" class="tag-cloud-link">desserts</a>
+                        <a href="#" class="tag-cloud-link">drinks</a>
+                    </div>
+                </div>
+
+                <div class="sidebar-box ftco-animate">
+                    <h3>Paragraph</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
+                </div>
+            </div>
+        </div>
+        <div class="comments-area">
+            <h4>05 Comments</h4>
+            <div class="comment-list">
+                <div class="single-comment justify-content-between d-flex">
+                    <div class="user justify-content-between d-flex">
+                        <div class="thumb">
+                            <img src="~/assets/landing-page/image/blog/c1.jpg" alt="">
+                        </div>
+                        <div class="desc">
+                            <h5><a href="#">Emilly Blunt</a></h5>
+                            <p class="date">December 4, 2017 at 3:12 pm </p>
+                            <p class="comment">
+                                Never say goodbye till the end comes!
+                            </p>
+                        </div>
+                    </div>
+                    <div class="reply-btn">
+                        <a href="" class="btn-reply text-uppercase">reply</a>
+                    </div>
+                </div>
+            </div>
+            <div class="comment-list left-padding">
+                <div class="single-comment justify-content-between d-flex">
+                    <div class="user justify-content-between d-flex">
+                        <div class="thumb">
+                            <img src="~/assets/landing-page/image/blog/c2.jpg" alt="">
+                        </div>
+                        <div class="desc">
+                            <h5><a href="#">Elsie Cunningham</a></h5>
+                            <p class="date">December 4, 2017 at 3:12 pm </p>
+                            <p class="comment">
+                                Never say goodbye till the end comes!
+                            </p>
+                        </div>
+                    </div>
+                    <div class="reply-btn">
+                        <a href="" class="btn-reply text-uppercase">reply</a>
+                    </div>
+                </div>
+            </div>
+            <div class="comment-list left-padding">
+                <div class="single-comment justify-content-between d-flex">
+                    <div class="user justify-content-between d-flex">
+                        <div class="thumb">
+                            <img src="~/assets/landing-page/image/blog/c3.jpg" alt="">
+                        </div>
+                        <div class="desc">
+                            <h5><a href="#">Annie Stephens</a></h5>
+                            <p class="date">December 4, 2017 at 3:12 pm </p>
+                            <p class="comment">
+                                Never say goodbye till the end comes!
+                            </p>
+                        </div>
+                    </div>
+                    <div class="reply-btn">
+                        <a href="" class="btn-reply text-uppercase">reply</a>
+                    </div>
+                </div>
+            </div>
+            <div class="comment-list">
+                <div class="single-comment justify-content-between d-flex">
+                    <div class="user justify-content-between d-flex">
+                        <div class="thumb">
+                            <img src="~/assets/landing-page/image/blog/c4.jpg" alt="">
+                        </div>
+                        <div class="desc">
+                            <h5><a href="#">Maria Luna</a></h5>
+                            <p class="date">December 4, 2017 at 3:12 pm </p>
+                            <p class="comment">
+                                Never say goodbye till the end comes!
+                            </p>
+                        </div>
+                    </div>
+                    <div class="reply-btn">
+                        <a href="" class="btn-reply text-uppercase">reply</a>
+                    </div>
+                </div>
+            </div>
+            <div class="comment-list">
+                <div class="single-comment justify-content-between d-flex">
+                    <div class="user justify-content-between d-flex">
+                        <div class="thumb">
+                            <img src="~/assets/landing-page/image/blog/c5.jpg" alt="">
+                        </div>
+                        <div class="desc">
+                            <h5><a href="#">Ina Hayes</a></h5>
+                            <p class="date">December 4, 2017 at 3:12 pm </p>
+                            <p class="comment">
+                                Never say goodbye till the end comes!
+                            </p>
+                        </div>
+                    </div>
+                    <div class="reply-btn">
+                        <a href="" class="btn-reply text-uppercase">reply</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="comment-form">
+            <h4>Leave a Reply</h4>
+            <form>
+                <div class="form-group">
+                    <textarea class="form-control mb-10" rows="5" name="message" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
+                </div>
+                <a href="#" class="primary-btn button_hover">Post Comment</a>
+            </form>
+        </div>
+    </div>
+</section> <!-- .section -->
