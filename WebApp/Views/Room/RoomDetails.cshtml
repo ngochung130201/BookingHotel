@@ -1,4 +1,4 @@
-﻿@model BusinessLogic.Dtos.Rooms.RoomsDto
+﻿@model BusinessLogic.Dtos.Rooms.ClientRoomDetailResponse
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
 @{
@@ -62,10 +62,10 @@
             <div class="col-lg-8">
                 <div class="row">
                     <div class="col-md-12 ftco-animate">
-                        <h2 class="mb-4">@Model.Name</h2>
+                        <h2 class="mb-4">@Model.Room.Name</h2>
                         <div class="single-slider owl-carousel">
                             <div class="item">
-                                <div class="room-img" style="background-image: url('@Model.Thumbnail');"></div>
+                                <div class="room-img" style="background-image: url('@Model.Room.Thumbnail');"></div>
                             </div>
                         </div>
                     </div>
@@ -198,101 +198,50 @@
         </div>
         <div class="comments-area">
             <h4>05 Comments</h4>
-            <div class="comment-list">
-                <div class="single-comment justify-content-between d-flex">
-                    <div class="user justify-content-between d-flex">
-                        <div class="thumb">
-                            <img src="~/assets/landing-page/image/blog/c1.jpg" alt="">
+            @foreach (var comment in Model.Comments)
+            {
+                <div class="comment-list">
+                    <div class="single-comment justify-content-between d-flex">
+                        <div class="user justify-content-between d-flex">
+                            <div class="thumb">
+                                <img src="@appDomain@comment.Avatar" alt="">
+                            </div>
+                            <div class="desc">
+                                <h5><a href="#">@appDomain@comment.FullName</a></h5>
+                                <p class="date">@appDomain@comment.CreatedOn </p>
+                                <p class="comment">
+                                    @appDomain@comment.Content
+                                </p>
+                            </div>
                         </div>
-                        <div class="desc">
-                            <h5><a href="#">Emilly Blunt</a></h5>
-                            <p class="date">December 4, 2017 at 3:12 pm </p>
-                            <p class="comment">
-                                Never say goodbye till the end comes!
-                            </p>
+                        <div class="reply-btn">
+                            <a href="" class="btn-reply text-uppercase">reply</a>
                         </div>
-                    </div>
-                    <div class="reply-btn">
-                        <a href="" class="btn-reply text-uppercase">reply</a>
                     </div>
                 </div>
-            </div>
-            <div class="comment-list left-padding">
-                <div class="single-comment justify-content-between d-flex">
-                    <div class="user justify-content-between d-flex">
-                        <div class="thumb">
-                            <img src="~/assets/landing-page/image/blog/c2.jpg" alt="">
-                        </div>
-                        <div class="desc">
-                            <h5><a href="#">Elsie Cunningham</a></h5>
-                            <p class="date">December 4, 2017 at 3:12 pm </p>
-                            <p class="comment">
-                                Never say goodbye till the end comes!
-                            </p>
-                        </div>
-                    </div>
-                    <div class="reply-btn">
-                        <a href="" class="btn-reply text-uppercase">reply</a>
-                    </div>
-                </div>
-            </div>
-            <div class="comment-list left-padding">
-                <div class="single-comment justify-content-between d-flex">
-                    <div class="user justify-content-between d-flex">
-                        <div class="thumb">
-                            <img src="~/assets/landing-page/image/blog/c3.jpg" alt="">
-                        </div>
-                        <div class="desc">
-                            <h5><a href="#">Annie Stephens</a></h5>
-                            <p class="date">December 4, 2017 at 3:12 pm </p>
-                            <p class="comment">
-                                Never say goodbye till the end comes!
-                            </p>
+                @foreach (var reply in Model.Replies)
+                {
+                    <div class="comment-list left-padding">
+                        <div class="single-comment justify-content-between d-flex">
+                            <div class="user justify-content-between d-flex">
+                                <div class="thumb">
+                                    <img src="@appDomain@reply.Avatar" alt="">
+                                </div>
+                                <div class="desc">
+                                    <h5><a href="#">@appDomain@reply.FullName</a></h5>
+                                    <p class="date">@appDomain@reply.CreatedOn</p>
+                                    <p class="comment">
+                                        @appDomain@reply.Content
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="reply-btn">
+                                <a href="" class="btn-reply text-uppercase">reply</a>
+                            </div>
                         </div>
                     </div>
-                    <div class="reply-btn">
-                        <a href="" class="btn-reply text-uppercase">reply</a>
-                    </div>
-                </div>
-            </div>
-            <div class="comment-list">
-                <div class="single-comment justify-content-between d-flex">
-                    <div class="user justify-content-between d-flex">
-                        <div class="thumb">
-                            <img src="~/assets/landing-page/image/blog/c4.jpg" alt="">
-                        </div>
-                        <div class="desc">
-                            <h5><a href="#">Maria Luna</a></h5>
-                            <p class="date">December 4, 2017 at 3:12 pm </p>
-                            <p class="comment">
-                                Never say goodbye till the end comes!
-                            </p>
-                        </div>
-                    </div>
-                    <div class="reply-btn">
-                        <a href="" class="btn-reply text-uppercase">reply</a>
-                    </div>
-                </div>
-            </div>
-            <div class="comment-list">
-                <div class="single-comment justify-content-between d-flex">
-                    <div class="user justify-content-between d-flex">
-                        <div class="thumb">
-                            <img src="~/assets/landing-page/image/blog/c5.jpg" alt="">
-                        </div>
-                        <div class="desc">
-                            <h5><a href="#">Ina Hayes</a></h5>
-                            <p class="date">December 4, 2017 at 3:12 pm </p>
-                            <p class="comment">
-                                Never say goodbye till the end comes!
-                            </p>
-                        </div>
-                    </div>
-                    <div class="reply-btn">
-                        <a href="" class="btn-reply text-uppercase">reply</a>
-                    </div>
-                </div>
-            </div>
+                }
+            }
         </div>
 
         <div class="comment-form">
@@ -301,7 +250,7 @@
                 <div class="form-group">
                     <textarea class="form-control mb-10" rows="5" name="message" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
                 </div>
-                <a href="#" class="primary-btn button_hover">Post Comment</a>
+                <button class="primary-btn button_hover">Post Comment</button>
             </form>
         </div>
     </div>

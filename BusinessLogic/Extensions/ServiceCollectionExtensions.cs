@@ -46,6 +46,10 @@ namespace BusinessLogic.Extensions
             services.AddTransient<IBookingService, BookingService>();
             // SpecialDayRatesService
             services.AddTransient<ISpecialDayRatesService, SpecialDayRatesService>();
+            // ReplyCommentService
+            services.AddTransient<IReplyCommentService, ReplyCommentService>();
+            // CommentService
+            services.AddTransient<ICommentService, CommentService>();
             services.AddAuthorizationCore(options =>
             {
                 options.AddPolicy("Admin", policy =>

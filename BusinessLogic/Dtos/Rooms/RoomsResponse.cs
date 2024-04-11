@@ -1,4 +1,5 @@
-﻿using BusinessLogic.Dtos.RoomTypes;
+﻿using BusinessLogic.Dtos.Comment;
+using BusinessLogic.Dtos.RoomTypes;
 
 namespace BusinessLogic.Dtos.Rooms
 {
@@ -41,5 +42,12 @@ namespace BusinessLogic.Dtos.Rooms
     {
         public List<RoomsResponse> Rooms { get; set; } = new();
         public List<RoomTypesResponse> RoomTypes { get; set; } = new();
+    }
+
+    public class ClientRoomDetailResponse
+    {
+        public RoomsDto Room { get; set; } = new();
+        public List<CommentResponse> Comments { get; set; } = new();
+        public List<ReplyCommentResponse> Replies { get; set; } = new();
     }
 }

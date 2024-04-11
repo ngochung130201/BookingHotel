@@ -6,7 +6,7 @@ namespace BusinessLogic.Entities
     {
         public int CommentId { get; set; }
 
-        public string? Reply { get; set; } 
+        public string? Content { get; set; } 
 
         public string? UserId { get; set; }
     }
