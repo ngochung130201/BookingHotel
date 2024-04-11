@@ -41,9 +41,13 @@
     <script src="~/assets/client/js/bootstrap-datepicker.js"></script>
     <script src="~/assets/client/js/jquery.timepicker.min.js"></script>
     <script src="~/assets/client/js/scrollax.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-    <script src="~/assets/client/js/google-map.js"></script>
     <script src="~/assets/client/js/main.js"></script>
+
+    <script src="~/client-app/controllers/roomDetail/index.js" asp-append-version="true"></script>
+    <script>
+        var roomDetailObj = new RoomDetailController();
+        roomDetailObj.initialize();
+    </script>
 }
 <!--================Breadcrumb Area =================-->
 <section class="breadcrumb_area">
@@ -197,7 +201,7 @@
             </div>
         </div>
         <div class="comments-area">
-            <h4>05 Comments</h4>
+            <h4>@Model.Comments.Count() Comments</h4>
             @foreach (var comment in Model.Comments)
             {
                 <div class="comment-list">
@@ -257,7 +261,7 @@
                     <input type="hidden" id="RoomId" value=@appDomain@Model.Room.Id />
                     <textarea class="form-control mb-10" rows="5" id="txtContent" name="message" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
                 </div>
-                <button class="primary-btn button_hover btn-postComment">Post Comment</button>
+                <button class="primary-btn button_hover" id="btn-postComment">Post Comment</button>
             </form>
         </div>
     </div>

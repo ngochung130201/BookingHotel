@@ -3,6 +3,7 @@ using BusinessLogic.Dtos.Rooms;
 using BusinessLogic.Dtos.RoomTypes;
 using BusinessLogic.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace WebApp.Controllers
 {
@@ -74,6 +75,33 @@ namespace WebApp.Controllers
         public async Task<IActionResult> ListRooms(RoomsRequest request)
         {
             return View();
+        }
+
+
+        /// <summary>
+        /// Save entity
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> SaveEntity(CommentDto request)
+        {
+            if (!ModelState.IsValid)
+            {
+                IEnumerable<ModelError> allErrors = ModelState.Values.SelectMany(v => v.Errors);
+                return new BadRequestObjectResult(allErrors);
+            }
+
+            if (request.Id == 0)
+            {
+                var result = await commentService.Add(request);
+                return Json(result);
+            }
+            else
+            {
+                var result = await commentService.Update(request);
+                return Json(result);
+            }
         }
     }
 }

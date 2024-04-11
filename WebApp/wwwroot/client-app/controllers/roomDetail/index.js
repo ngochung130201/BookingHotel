@@ -1,5 +1,5 @@
 ﻿
-var NewsController = function () {
+var RoomDetailController = function () {
     this.initialize = function () {
         loadData();
         registerEvents();
@@ -45,9 +45,9 @@ var NewsController = function () {
         });
 
         // Event save
-        $('.btn-postComment').on('click', function (e) {
+        $('#btn-postComment').on('click', function (e) {
             e.preventDefault();
-            saveData(false);
+            saveData();
         });
 
         // Event button delete
@@ -107,7 +107,6 @@ var NewsController = function () {
                 },
                 dataType: "json",
                 beforeSend: function () {
-                    base.startLoading();
                 },
                 success: function (response) {
                     if (response.succeeded) {
