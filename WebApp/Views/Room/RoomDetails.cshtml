@@ -42,12 +42,6 @@
     <script src="~/assets/client/js/jquery.timepicker.min.js"></script>
     <script src="~/assets/client/js/scrollax.min.js"></script>
     <script src="~/assets/client/js/main.js"></script>
-
-    <script src="~/client-app/controllers/roomDetail/index.js" asp-append-version="true"></script>
-    <script>
-        var roomDetailObj = new RoomDetailController();
-        roomDetailObj.initialize();
-    </script>
 }
 <!--================Breadcrumb Area =================-->
 <section class="breadcrumb_area">
@@ -242,26 +236,28 @@
                         </div>
                     </div>
                 }
-                <div class="form-group">
-                    <input type="hidden" id="hidRId" value="0" />
-                    <input type="hidden" id="CommentId" value=@appDomain@comment.Id />
-                    <textarea class="form-control mb-10" rows="5" id="txtReplyContent" name="message" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
-                </div>          
-                <div class="reply-btn">
-                    <button class="btn-reply text-uppercase">reply</button>
-                </div>
+                <form class="group-form" asp-controller="Room" asp-action="ReplyCommentPost" method="post">
+                    <div class="form-group">
+                        <input type="hidden" name="Id" value="0" />
+                        <input type="hidden" name="CommentId" value="@appDomain@comment.Id" />
+                        <textarea class="form-control mb-10" rows="5" id="txtReplyContent" name="Content" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
+                    </div>
+                    <div class="reply-btn">
+                        <button class="btn-reply text-uppercase" type="submit">reply</button>
+                    </div>
+                </form>
             }
         </div>
 
         <div class="comment-form">
             <h4>Leave a Reply</h4>
-            <form id="formMaintainance">
+            <form class="group-form" asp-controller="Room" asp-action="CommentPost" method="post">
                 <div class="form-group">
-                    <input type="hidden" id="hidId" value="0" />
-                    <input type="hidden" id="RoomId" value=@appDomain@Model.Room.Id />
-                    <textarea class="form-control mb-10" rows="5" id="txtContent" name="message" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
+                    <input type="hidden" name="Id" value="0" />
+                    <input type="hidden" name="RoomId" value=@appDomain@Model.Room.Id />
+                    <textarea class="form-control mb-10" rows="5" id="txtContent" name="Content" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
                 </div>
-                <button class="primary-btn button_hover" id="btn-postComment">Post Comment</button>
+                <button class="primary-btn button_hover" type="submit" id="btn-postComment">Post Comment</button>
             </form>
         </div>
     </div>

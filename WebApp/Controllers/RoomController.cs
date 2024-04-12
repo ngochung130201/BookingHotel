@@ -79,12 +79,12 @@ namespace WebApp.Controllers
 
 
         /// <summary>
-        /// Save entity
+        /// Save entity Comment
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [HttpPost]
-        public async Task<IActionResult> SaveEntity(CommentDto request)
+        [HttpPost("CommentPost")]
+        public async Task<IActionResult> CommentPost(CommentDto request)
         {
             if (!ModelState.IsValid)
             {
@@ -102,6 +102,33 @@ namespace WebApp.Controllers
                 var result = await commentService.Update(request);
                 return Json(result);
             }
+        }
+
+        /// <summary>
+        /// Save entity Reply Comment
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost("ReplyCommentPost")]
+        public async Task<IActionResult> ReplyCommentPost(ReplyCommentDto request)
+        {
+            if (!ModelState.IsValid)
+            {
+                IEnumerable<ModelError> allErrors = ModelState.Values.SelectMany(v => v.Errors);
+                return new BadRequestObjectResult(allErrors);
+            }
+
+            if (request.Id == 0)
+            {
+                var result = await replyCommentService.Add(request);
+                return Json(result);
+            }
+            else
+            {
+                var result = await replyCommentService.Update(request);
+                return Json(result);
+            }
+
         }
     }
 }

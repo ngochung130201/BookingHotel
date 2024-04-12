@@ -61,21 +61,21 @@
                 </div>
             </div>
             <div class="col-md-9">
-                <form class="row contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+                <form class="row contact_form" asp-controller="Contact" asp-action="PostFeedback" method="post" id="contactForm" novalidate="novalidate">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="@Localizer["EnterYourName"]">
+                            <input type="text" class="form-control" id="name" name="Name" placeholder="@Localizer["EnterYourName"]">
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control" id="email" name="email" placeholder="@Localizer["EnterEmailAddress"]">
+                            <input type="email" class="form-control" id="email" name="Email" placeholder="@Localizer["EnterEmailAddress"]">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="subject" name="subject" placeholder="@Localizer["EnterSubject"]">
+                            <input type="text" class="form-control" id="subject" name="Title" placeholder="@Localizer["EnterSubject"]">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <textarea class="form-control" name="message" id="message" rows="1" placeholder="@Localizer["EnterMessage"]"></textarea>
+                            <textarea class="form-control" name="Content" id="message" rows="1" placeholder="@Localizer["EnterMessage"]"></textarea>
                         </div>
                     </div>
                     <div class="col-md-12 text-right">

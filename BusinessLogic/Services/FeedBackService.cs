@@ -18,8 +18,6 @@ namespace BusinessLogic.Services
 
         Task<IResult> Add(FeedBacksDto request);
 
-        Task<IResult> Update(FeedBacksDto request);
-
         Task<IResult> Delete(int id);
     }
 
@@ -82,34 +80,12 @@ namespace BusinessLogic.Services
 
                 await _dbContext.FeedBacks.AddAsync(result);
                 await _dbContext.SaveChangesAsync();
-                return await Result.SuccessAsync(MessageConstants.AddSuccess);
+                return await Result.SuccessAsync(string.Format(MessageConstants.ClientAddSuccess, "Your response was sent"));
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Lỗi khi tạo mới: {Id}", request.Id);
-                return await Result.FailAsync(MessageConstants.AddFail);
-            }
-        }
-
-        public async Task<IResult> Update(FeedBacksDto request)
-        {
-            try
-            {
-                var feedBacks = await _dbContext.FeedBacks.Where(x => !x.IsDeleted && x.Id == request.Id).FirstOrDefaultAsync();
-
-                if (feedBacks == null) return await Result.FailAsync(MessageConstants.NotFound);
-
-                var updateFeedBacks = _mapper.Map(request, feedBacks);
-
-                _dbContext.FeedBacks.Update(updateFeedBacks);
-                await _dbContext.SaveChangesAsync();
-
-                return await Result.SuccessAsync(MessageConstants.UpdateSuccess);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Lỗi khi update: {Id}", request.Id);
-                return await Result.FailAsync(MessageConstants.UpdateFail);
+                return await Result.FailAsync(string.Format(MessageConstants.ClientAddFail, "Your response was sent"));
             }
         }
 
