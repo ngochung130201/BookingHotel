@@ -2,25 +2,22 @@
 {
     public static class MessageConstants
     {
-        public const string NotFound = "Data not found.";
-        public const string UpdateSuccess = "Edited successfully.";
-        public const string UpdateFail = "Editing failed.";
-        public const string AddSuccess = "Added successfully.";
-        public const string AddFail = "New add failed.";
-        public const string DeleteSuccess = "Delete successfully.";
-        public const string DeleteFail = "Deletion failed.";
-        public const string IsInvalidEmail = "Invalid email.";
-        public const string PasswordIsInCorrect = "Current password is incorrect.";
-        public const string PasswordNotMatch = "Passwords do not match.";
-        public const string ChangePasswordWasFail = "Password change failed.";
-        public const string ImportSuccess = "Imported data successfully.";
-        public const string ImportFail = "Data import failed.";
-        public const string CheckExists = "{0} already exist.";
-        public const string DoesNotExists = "{0} does not exist.";
-        public const string CheckDuplicate = "{0} overlap with {1}.";
-        public const string RequireField = "Please enter this field.";
-
-        public const string ClientAddSuccess = "{0} successfully.";
-        public const string ClientAddFail = "{0} unsuccessfully.";
+        public const string NotFound = "Dữ liệu không tìm thấy.";
+        public const string UpdateSuccess = "Chỉnh sửa thành công.";
+        public const string UpdateFail = "Chỉnh sửa không thành công.";
+        public const string AddSuccess = "Thêm mới thành công.";
+        public const string AddFail = "Thêm mới không thành công.";
+        public const string DeleteSuccess = "Xoá thành công.";
+        public const string DeleteFail = "Xoá không thành công.";
+        public const string IsInvalidEmail = "Email không hợp lệ.";
+        public const string PasswordIsInCorrect = "Mật khẩu hiện tại không đúng.";
+        public const string PasswordNotMatch = "Mật khẩu không trùng khớp.";
+        public const string ChangePasswordWasFail = "Thay đổi mật khẩu không thành công.";
+        public const string ImportSuccess = "Import dữ liệu thành công.";
+        public const string ImportFail = "Import dữ liệu không thành công.";
+        public const string CheckExists = "{0} đã tồn tại.";
+        public const string DoesNotExists = "{0} không tồn tại.";
+        public const string CheckDuplicate = "{0} trùng với {1}.";
+        public const string RequireField = "Vui lòng nhập trường này.";
     }
 }

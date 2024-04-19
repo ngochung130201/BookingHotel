@@ -1,12 +1,8 @@
-﻿using BusinessLogic.Dtos.Comment;
-using BusinessLogic.Dtos.FeedBacks;
-using BusinessLogic.Services;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace WebApp.Controllers
 {
-    public class ContactController(IFeedBackService feedBackService) : Controller
+    public class ContactController() : Controller
     { /// <summary>
       /// Contact
       /// </summary>
@@ -15,25 +11,6 @@ namespace WebApp.Controllers
         public IActionResult Index()
         {
             return View();
-        }
-
-        /// <summary>
-        /// Save entity Feedback
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
-        [HttpPost("PostFeedback")]
-        public async Task<IActionResult> PostFeedback(FeedBacksDto request)
-        {
-            if (!ModelState.IsValid)
-            {
-                IEnumerable<ModelError> allErrors = ModelState.Values.SelectMany(v => v.Errors);
-                return new BadRequestObjectResult(allErrors);
-            }
-                
-            var result = await feedBackService.Add(request);
-                
-            return Json(result);
         }
     }
 }
