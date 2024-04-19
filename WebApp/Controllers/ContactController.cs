@@ -1,11 +1,11 @@
-﻿using BusinessLogic.Dtos.FeedBacks;
+using BusinessLogic.Dtos.FeedBacks;
 using BusinessLogic.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace WebApp.Controllers
 {
-    public class ContactController(IFeedBackService feedBackService) : Controller
+    public class ContactController() : Controller
     { /// <summary>
       /// Contact
       /// </summary>

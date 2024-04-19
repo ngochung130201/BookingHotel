@@ -1,11 +1,7 @@
-﻿@model BusinessLogic.Dtos.News.ClientNewsDetailResponse
-@using Microsoft.AspNetCore.Mvc.Localization
-@inject IViewLocalizer Localizer
-@{
-    ViewData["Title"] = Localizer["BlogDetails"];
-    var httpContext = ViewContext.HttpContext;
-    string appDomain = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}";
+﻿@{
+    ViewData["Title"] = "Blog Details";
 }
+
 @section Scripts {
 
 }
@@ -120,7 +116,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="comments-area">
                     <h4>05 Comments</h4>
                     <div class="comment-list">
