@@ -61,7 +61,7 @@
                 </div>
             </div>
             <div class="col-md-9">
-                <form class="row contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+                <form class="row contact_form" asp-controller="Contact" asp-action="PostFeedback" method="post" novalidate="novalidate">
                     <div class="col-md-6">
                         <div class="form-group">
                             <input type="text" class="form-control" id="name" name="name" placeholder="@Localizer["EnterYourName"]">
@@ -82,8 +82,26 @@
                         <button type="submit" value="submit" class="btn theme_btn button_hover">@Localizer["SendMessage"]</button>
                     </div>
                 </form>
+                @if (TempData["SuccessMessage"] != null)
+                {
+                    <div id="successAlert" class="alert alert-success" role="alert">
+                        @TempData["SuccessMessage"]
+                    </div>
+                }
             </div>
         </div>
     </div>
 </section>
 <!--================Contact Area =================-->
+<script>
+    // Đợi cho toàn bộ trang được tải xong
+    $(document).ready(function () {
+        // Xác định thông báo thành công
+        var successAlert = $("#successAlert");
+
+        // Ẩn thông báo khi người dùng nhấp vào
+        successAlert.click(function () {
+            successAlert.hide();
+        });
+    });
+</script>
