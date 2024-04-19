@@ -1,5 +1,4 @@
-﻿using BusinessLogic.Dtos.Comment;
-using BusinessLogic.Dtos.FeedBacks;
+﻿using BusinessLogic.Dtos.FeedBacks;
 using BusinessLogic.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -32,8 +31,10 @@ namespace WebApp.Controllers
             }
                 
             var result = await feedBackService.Add(request);
-                
-            return Json(result);
+
+            TempData["SuccessMessage"] = "Your feedback has been submitted successfully!";
+
+            return RedirectToAction("Index");
         }
     }
 }

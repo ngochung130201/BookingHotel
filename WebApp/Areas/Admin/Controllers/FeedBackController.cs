@@ -37,32 +37,6 @@ namespace WebApp.Areas.Admin.Controllers
         }
 
         /// <summary>
-        /// Save entity
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public async Task<IActionResult> SaveEntity(FeedBacksDto request)
-        {
-            if (!ModelState.IsValid)
-            {
-                IEnumerable<ModelError> allErrors = ModelState.Values.SelectMany(v => v.Errors);
-                return new BadRequestObjectResult(allErrors);
-            }
-
-            if (request.Id == 0)
-            {
-                var result = await feedBackService.Add(request);
-                return Json(result);
-            }
-            else
-            {
-                var result = await feedBackService.Update(request);
-                return Json(result);
-            }
-        }
-
-        /// <summary>
         /// Delete by Id
         /// </summary>
         /// <param name="id"></param>
