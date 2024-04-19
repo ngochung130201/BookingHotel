@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace WebApp.Controllers
 {
-    public class ContactController() : Controller
+    public class ContactController(IFeedBackService feedBackService) : Controller
     { /// <summary>
       /// Contact
       /// </summary>

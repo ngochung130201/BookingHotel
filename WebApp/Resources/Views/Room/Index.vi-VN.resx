@@ -120,11 +120,26 @@
   <data name="/night" xml:space="preserve">
     <value>/đêm</value>
   </data>
+  <data name="Adult" xml:space="preserve">
+    <value>Người lớn</value>
+  </data>
+  <data name="ArrivalDate" xml:space="preserve">
+    <value>Ngày nhận phòng</value>
+  </data>
   <data name="BookNow" xml:space="preserve">
+    <value>Đặt bây giờ</value>
+  </data>
+  <data name="BookNow1" xml:space="preserve">
     <value>Đặt bây giờ</value>
   </data>
   <data name="BookYourRoom" xml:space="preserve">
     <value>Đặt&lt;br&gt; Phòng của bạn</value>
+  </data>
+  <data name="Child" xml:space="preserve">
+    <value>Trẻ em</value>
+  </data>
+  <data name="DepartureDate" xml:space="preserve">
+    <value>Ngày trả phòng</value>
   </data>
   <data name="Home" xml:space="preserve">
     <value>Trang chủ</value>

@@ -118,42 +118,48 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="/night" xml:space="preserve">
-    <value>/night</value>
+    <value>/đêm</value>
   </data>
   <data name="Adult" xml:space="preserve">
-    <value>Adult</value>
+    <value>Người lớn</value>
   </data>
   <data name="ArrivalDate" xml:space="preserve">
-    <value>Arrival Date</value>
+    <value>Ngày nhận phòng</value>
   </data>
   <data name="BookNow" xml:space="preserve">
-    <value>Book Now</value>
+    <value>Đặt bây giờ</value>
+  </data>
+  <data name="BookNow1" xml:space="preserve">
+    <value>Đặt bây giờ</value>
   </data>
   <data name="BookYourRoom" xml:space="preserve">
-    <value>Book&lt;br&gt; Your Room</value>
+    <value>Đặt&lt;br&gt; Phòng của bạn</value>
   </data>
   <data name="Child" xml:space="preserve">
-    <value>Child</value>
+    <value>Trẻ em</value>
   </data>
   <data name="DepartureDate" xml:space="preserve">
-    <value>Departure Date</value>
+    <value>Ngày trả phòng</value>
   </data>
   <data name="Home" xml:space="preserve">
-    <value>Home</value>
+    <value>Trang chủ</value>
   </data>
   <data name="Room" xml:space="preserve">
-    <value>Room</value>
+    <value>Phòng</value>
+  </data>
+  <data name="RoomDetails" xml:space="preserve">
+    <value>Chi tiết phòng</value>
   </data>
   <data name="RoomTypes" xml:space="preserve">
-    <value>Room Types</value>
+    <value>Loại phòng</value>
   </data>
   <data name="Text1" xml:space="preserve">
-    <value>Types of rooms available at the hotel</value>
+    <value>Các loại phòng hiện có tại khách sạn</value>
   </data>
   <data name="Text2" xml:space="preserve">
-    <value>All Rooms At The Hotel</value>
+    <value>Tất cả các phòng tại khách sạn</value>
   </data>
   <data name="Text3" xml:space="preserve">
-    <value>We all live in an age that belongs to the young at heart. Life that is becoming extremely fast</value>
+    <value>Tất cả chúng ta đều sống trong một thời đại thuộc về tâm hồn người trẻ. Cuộc sống đang trở nên cực kỳ nhanh chóng</value>
   </data>
 </root>

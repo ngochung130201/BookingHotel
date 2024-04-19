@@ -95,13 +95,40 @@ namespace WebApp.Controllers
             if (request.Id == 0)
             {
                 var result = await commentService.Add(request);
-                return Json(result);
+                return Redirect($"/room-details/{request.RoomId}");
             }
             else
             {
                 var result = await commentService.Update(request);
-                return Json(result);
+                return Redirect($"/room-details/{request.RoomId}");
             }
+        }
+
+        /// <summary>
+        /// Save entity reply
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> SaveEntityReply(ReplyCommentDto request)
+        {
+            if (!ModelState.IsValid)
+            {
+                IEnumerable<ModelError> allErrors = ModelState.Values.SelectMany(v => v.Errors);
+                return new BadRequestObjectResult(allErrors);
+            }
+
+            if (request.Id == 0)
+            {
+                var result = await replyCommentService.Add(request);
+            }
+            else
+            {
+                var result = await replyCommentService.Update(request);
+            }
+            string currentUrl = HttpContext.Request.Path;
+
+            return Redirect(currentUrl);
         }
     }
 }

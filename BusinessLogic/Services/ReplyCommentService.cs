@@ -43,11 +43,10 @@ namespace BusinessLogic.Services
 
         public async Task<PaginatedResult<ReplyCommentResponse>> GetPagination(ReplyCommentRequest request)
         {
-            var query = from rl in _dbContext.ReplyComment
+            var query = from rl in _dbContext.ReplyComment.Where(rl => rl.CommentId == request.CommentId)
                         join u in _dbContext.Users on rl.UserId equals u.Id
                         where !rl.IsDeleted && (string.IsNullOrEmpty(request.Keyword)
-                            || u.FullName!.ToLower().Contains(request.Keyword!.ToLower())
-                            || ( rl.CommentId == request.CommentId ))
+                            || u.FullName!.ToLower().Contains(request.Keyword!.ToLower()))
                         select new ReplyCommentResponse
                         {
                             Id = rl.Id,

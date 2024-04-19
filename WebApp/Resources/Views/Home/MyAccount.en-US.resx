@@ -117,43 +117,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="/night" xml:space="preserve">
-    <value>/night</value>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
   </data>
-  <data name="Adult" xml:space="preserve">
-    <value>Adult</value>
+  <data name="Change" xml:space="preserve">
+    <value>Change</value>
   </data>
-  <data name="ArrivalDate" xml:space="preserve">
-    <value>Arrival Date</value>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirm Password</value>
   </data>
-  <data name="BookNow" xml:space="preserve">
-    <value>Book Now</value>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Current Password</value>
   </data>
-  <data name="BookYourRoom" xml:space="preserve">
-    <value>Book&lt;br&gt; Your Room</value>
-  </data>
-  <data name="Child" xml:space="preserve">
-    <value>Child</value>
-  </data>
-  <data name="DepartureDate" xml:space="preserve">
-    <value>Departure Date</value>
+  <data name="FullName" xml:space="preserve">
+    <value>FullName</value>
   </data>
   <data name="Home" xml:space="preserve">
     <value>Home</value>
   </data>
-  <data name="Room" xml:space="preserve">
-    <value>Room</value>
+  <data name="MyAccount" xml:space="preserve">
+    <value>My Account</value>
   </data>
-  <data name="RoomTypes" xml:space="preserve">
-    <value>Room Types</value>
+  <data name="NewPassword" xml:space="preserve">
+    <value>New Password</value>
   </data>
-  <data name="Text1" xml:space="preserve">
-    <value>Types of rooms available at the hotel</value>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
   </data>
-  <data name="Text2" xml:space="preserve">
-    <value>All Rooms At The Hotel</value>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Phone Number</value>
   </data>
-  <data name="Text3" xml:space="preserve">
-    <value>We all live in an age that belongs to the young at heart. Life that is becoming extremely fast</value>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="UserInformation" xml:space="preserve">
+    <value>User Information</value>
   </data>
 </root>

@@ -144,6 +144,9 @@
   <data name="Room" xml:space="preserve">
     <value>Room</value>
   </data>
+  <data name="RoomDetails" xml:space="preserve">
+    <value>Room Details</value>
+  </data>
   <data name="RoomTypes" xml:space="preserve">
     <value>Room Types</value>
   </data>

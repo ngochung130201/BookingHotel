@@ -43,11 +43,12 @@
     <script src="~/assets/client/js/scrollax.min.js"></script>
     <script src="~/assets/client/js/main.js"></script>
 
-    <script src="~/client-app/controllers/roomDetail/index.js" asp-append-version="true"></script>
-    <script>
-        var roomDetailObj = new RoomDetailController();
-        roomDetailObj.initialize();
-    </script>
+    <style>
+
+        .form-size {
+            font-size: 12px;
+        }
+    </style>
 }
 <!--================Breadcrumb Area =================-->
 <section class="breadcrumb_area">
@@ -77,11 +78,11 @@
                         <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
                         <div class="d-md-flex mt-5 mb-5">
                             <ul class="list">
-                                <li><span>Max:</span> 3 Persons</li>
-                                <li><span>Size:</span> 45 m2</li>
+                                <li><span>Max:</span> @Model.Room.Adult person</li>
+                                <li><span>Size:</span> @Model.Room.Acreage m2</li>
                             </ul>
                             <ul class="list ml-md-5">
-                                <li><span>View:</span> Sea View</li>
+                                <li><span>View:</span> @Model.Room.Location</li>
                                 <li><span>Bed:</span> 1</li>
                             </ul>
                         </div>
@@ -208,18 +209,15 @@
                     <div class="single-comment justify-content-between d-flex">
                         <div class="user justify-content-between d-flex">
                             <div class="thumb">
-                                <img src="@appDomain@comment.Avatar" alt="">
+                                <img src="@comment.Avatar" alt="" width="50" height="50">
                             </div>
                             <div class="desc">
-                                <h5><a href="#">@appDomain@comment.FullName</a></h5>
-                                <p class="date">@appDomain@comment.CreatedOn </p>
+                                <h5><a href="#">@comment.FullName</a></h5>
+                                <p class="date">@comment.CreatedOn </p>
                                 <p class="comment">
-                                    @appDomain@comment.Content
+                                    @comment.Content
                                 </p>
                             </div>
-                        </div>
-                        <div class="reply-btn">
-                            <a href="" class="btn-reply text-uppercase">reply</a>
                         </div>
                     </div>
                 </div>
@@ -229,39 +227,49 @@
                         <div class="single-comment justify-content-between d-flex">
                             <div class="user justify-content-between d-flex">
                                 <div class="thumb">
-                                    <img src="@appDomain@reply.Avatar" alt="">
+                                    <img src="@reply.Avatar" alt="" width="50" height="50">
                                 </div>
                                 <div class="desc">
-                                    <h5><a href="#">@appDomain@reply.FullName</a></h5>
-                                    <p class="date">@appDomain@reply.CreatedOn</p>
+                                    <h5><a href="#">@reply.FullName</a></h5>
+                                    <p class="date">@reply.CreatedOn</p>
                                     <p class="comment">
-                                        @appDomain@reply.Content
+                                        @reply.Content
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 }
-                <div class="form-group">
-                    <input type="hidden" id="hidRId" value="0" />
-                    <input type="hidden" id="CommentId" value=@appDomain@comment.Id />
-                    <textarea class="form-control mb-10" rows="5" id="txtReplyContent" name="message" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
-                </div>          
-                <div class="reply-btn">
-                    <button class="btn-reply text-uppercase">reply</button>
-                </div>
+                <form asp-controller="Room" asp-action="SaveEntityReply" method="post" novalidate="novalidate">
+                    <div class="form-group">
+                        <input type="hidden" name="Id" id="hidRId" value="0" />
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" name="CommentId" id="CommentId" value="@comment.Id" />
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control mb-10 form-size" rows="3" id="txtContent" name="Content" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
+                    </div>
+                    <div class="reply-btn">
+                        <button type="submit" value="submit" class="btn-reply text-uppercase">reply</button>
+                    </div>
+                </form>
             }
         </div>
 
         <div class="comment-form">
             <h4>Leave a Reply</h4>
-            <form id="formMaintainance">
+            <form id="formMaintainance" asp-controller="Room" asp-action="SaveEntity" method="post" novalidate="novalidate">
                 <div class="form-group">
-                    <input type="hidden" id="hidId" value="0" />
-                    <input type="hidden" id="RoomId" value=@appDomain@Model.Room.Id />
-                    <textarea class="form-control mb-10" rows="5" id="txtContent" name="message" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
+                    <input type="hidden" name="Id" id="hidId" value="0"/>
                 </div>
-                <button class="primary-btn button_hover" id="btn-postComment">Post Comment</button>
+                <div class="form-group">
+                    <input type="hidden" name="RoomId" id="RoomId" value="@Model.Room.Id"/>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control mb-10" rows="5" id="txtContent" name="Content" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
+                </div>
+                <button type="submit" value="submit" class="primary-btn button_hover" id="btn-postComment">Post Comment</button>
             </form>
         </div>
     </div>
