@@ -341,7 +341,7 @@ var RoomsController = function () {
             var kid = $('#txtKid').val();
             var views = $('#txtViews').val();
             var status = $('#ckStatus').prop('checked') == true ? true : false;
-            var description = $('#txtDescription').val();
+            var description = CKEDITOR.instances.txtDescription.getData();
             $.ajax({
                 type: "POST",
                 url: "/Admin/Room/SaveEntity",

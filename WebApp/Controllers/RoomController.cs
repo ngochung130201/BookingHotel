@@ -29,7 +29,7 @@ namespace WebApp.Controllers
             var resultRooms = await roomsService.GetPagination(new RoomsRequest
             {
                 PageNumber = 1,
-                PageSize = 8,
+                PageSize = 20,
             });
 
             result.Rooms = resultRooms.Data;

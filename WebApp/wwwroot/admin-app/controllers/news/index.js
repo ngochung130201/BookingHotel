@@ -346,7 +346,7 @@ var NewsController = function () {
         if ($('#formMaintainance').valid()) {
             var id = $('#hidId').val();
             var title = $('#txtTitle').val();
-            var content = $('#txtContent').val();
+            var content = CKEDITOR.instances.txtContent.getData(); 
             var thumbnail = $('#txtImage').val();
             var status = $('#ckStatus').prop('checked') == true ? true : false;
             var hot = $('#ckHot').prop('checked') == true ? true : false;
