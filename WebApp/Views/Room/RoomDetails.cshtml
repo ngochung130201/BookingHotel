@@ -1,4 +1,5 @@
-﻿@model BusinessLogic.Dtos.Rooms.ClientRoomDetailResponse
+﻿﻿
+@model BusinessLogic.Dtos.Rooms.ClientRoomDetailResponse
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
 @{
@@ -8,21 +9,26 @@
 }
 
 @section Scripts {
+    <link href="~/assets/client1/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/client1/css/layers.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/client1/css/settings.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/client1/css/navigation.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/client1/css/bootstrap-select.min.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/client1/css/animate.min.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/client1/css/famfamfam-flags.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/client1/css/magnific-popup.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/client1/css/owl.carousel.min.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/client1/css/style.css" rel="stylesheet" type="text/css">
+
     <link rel="stylesheet" href="~/assets/client/css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="~/assets/client/css/animate.css">
-
     <link rel="stylesheet" href="~/assets/client/css/owl.carousel.min.css">
     <link rel="stylesheet" href="~/assets/client/css/owl.theme.default.min.css">
     <link rel="stylesheet" href="~/assets/client/css/magnific-popup.css">
-
     <link rel="stylesheet" href="~/assets/client/css/aos.css">
-
     <link rel="stylesheet" href="~/assets/client/css/ionicons.min.css">
-
     <link rel="stylesheet" href="~/assets/client/css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="~/assets/client/css/jquery.timepicker.css">
-
-
     <link rel="stylesheet" href="~/assets/client/css/flaticon.css">
     <link rel="stylesheet" href="~/assets/client/css/icomoon.css">
     <link rel="stylesheet" href="~/assets/client/css/style.css">
@@ -42,7 +48,6 @@
     <script src="~/assets/client/js/jquery.timepicker.min.js"></script>
     <script src="~/assets/client/js/scrollax.min.js"></script>
     <script src="~/assets/client/js/main.js"></script>
-
     <style>
 
         .form-size {
@@ -66,8 +71,10 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="row">
+                    <div class="main_title mt50">
+                        <h2 class="mb-4">  About @Model.Room.Name</h2>
+                    </div>
                     <div class="col-md-12 ftco-animate">
-                        <h2 class="mb-4">@Model.Room.Name</h2>
                         <div class="single-slider owl-carousel">
                             <div class="item">
                                 <div class="room-img" style="background-image: url('@Model.Room.Thumbnail');"></div>
@@ -88,119 +95,161 @@
                         </div>
                         <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
                     </div>
-
-                    <div class="col-md-12 properties-single ftco-animate mb-5 mt-4">
-                        <h4 class="mb-4">Review &amp; Ratings</h4>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <form method="post" class="star-rating">
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1">
-                                            <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i> 100 Ratings</span></p>
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1">
-                                            <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i> 30 Ratings</span></p>
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1">
-                                            <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i> 5 Ratings</span></p>
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1">
-                                            <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i> 0 Ratings</span></p>
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1">
-                                            <p class="rate"><span><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i> 0 Ratings</span></p>
-                                        </label>
-                                    </div>
-                                </form>
-                            </div>
+                </div>
+                <div class="main_title" style="font-size: 10px;">
+                    <h2>ROOM SERVICES</h2>
+                </div>
+                <div class="room_facilitys_list">
+                    <div class="all_facility_list">
+                        <div class="col-sm-4 nopadding">
+                            <ul class="list-unstyled">
+                                <li><i class="fa fa-check"></i>Double Bed</li>
+                                <li><i class="fa fa-check"></i>80 Sq mt</li>
+                                <li><i class="fa fa-check"></i>6 Persons</li>
+                                <li><i class="fa fa-check"></i>Free Internet</li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-4 nopadding">
+                            <ul class="list-unstyled">
+                                <li><i class="fa fa-check"></i>Free Wi-Fi</li>
+                                <li><i class="fa fa-check"></i>Breakfast Include</li>
+                                <li><i class="fa fa-check"></i>Private Balcony</li>
+                                <li class="no"><i class="fa fa-times"></i>Free Newspaper</li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-4 nopadding_left">
+                            <ul class="list-unstyled">
+                                <li class="no"><i class="fa fa-times"></i>Flat Screen Tv</li>
+                                <li><i class="fa fa-check"></i>Full Ac</li>
+                                <li class="no"><i class="fa fa-times"></i>Beach View</li>
+                                <li><i class="fa fa-check"></i>Room Service</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div> <!-- .col-md-8 -->
-
             <div class="col-lg-4 sidebar ftco-animate">
                 <div class="sidebar-box ftco-animate">
-                    <div class="categories">
-                        <h3>Categories</h3>
-                        <li><a href="#">Properties <span>(12)</span></a></li>
-                        <li><a href="#">Home <span>(22)</span></a></li>
-                        <li><a href="#">House <span>(37)</span></a></li>
-                        <li><a href="#">Villa <span>(42)</span></a></li>
-                        <li><a href="#">Apartment <span>(14)</span></a></li>
-                        <li><a href="#">Condominium <span>(140)</span></a></li>
-                    </div>
-                </div>
-
-                <div class="sidebar-box ftco-animate">
-                    <h3>Recent Blog</h3>
-                    <div class="block-21 mb-4 d-flex">
-                        <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
-                        <div class="text">
-                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                            <div class="meta">
-                                <div><a href="#"><span class="icon-calendar"></span> July 12, 2018</a></div>
-                                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                            </div>
+                    <aside class="widget">
+                        <div class="vbf">
+                            <h2 class="form_title"><i class="fa fa-calendar"></i> BOOK ONLINE</h2>
+                            <form id="booking-form" class="inner">
+                                <div class="form-group">
+                                    <input class="form-control" name="booking-name" placeholder="Enter Your Name" type="text">
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" name="booking-email" placeholder="Enter Your Email Address" type="email">
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" name="booking-phone" placeholder="Enter Your Phone Number" type="text">
+                                </div>
+                                <div class="form-group">
+                                    <div class="form_select">
+                                        <select name="booking-roomtype" class="form-control" title="Select Room Type" data-header="Room Type" disabled>
+                                            <option value="Single Room" selected>Single Room</option>
+                                            <option value="Double Room">Double Room</option>
+                                            <option value="Deluxe Room">Deluxe Room</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 col-sm-6 col-xs-12 nopadding">
+                                    <div class="form_select">
+                                        <select name="booking-adults" class="form-control md_noborder_right" title="Adults" data-header="Adults">
+                                            <option value="0">0</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 col-sm-6 col-xs-12 nopadding">
+                                    <div class="form_select">
+                                        <select name="booking-children" class="form-control" title="Children" data-header="Children">
+                                            <option value="0">0</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 col-sm-6 col-xs-12 nopadding">
+                                    <div class="input-group">
+                                        <div class="form_date">
+                                            <input type="text" class="datepicker form-control md_noborder_right" name="booking-checkin" placeholder="Arrival Date">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 col-sm-6 col-xs-12 nopadding">
+                                    <div class="input-group">
+                                        <div class="form_date">
+                                            <input type="text" class="datepicker form-control" name="booking-checkout" placeholder="Departure Date">
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="button btn_lg btn_blue btn_full" type="submit">BOOK A ROOM NOW</button>
+                                <div class="a_center mt10">
+                                    <a href="booking-form.html" class="a_b_f">Advanced Booking Form</a>
+                                </div>
+                            </form>
                         </div>
-                    </div>
-                    <div class="block-21 mb-4 d-flex">
-                        <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
-                        <div class="text">
-                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                            <div class="meta">
-                                <div><a href="#"><span class="icon-calendar"></span> July 12, 2018</a></div>
-                                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                            </div>
+                    </aside>
+                    <aside class="widget">
+                        <h4>NEED HELP?</h4>
+                        <div class="help">
+                            If you have any question please don't hesitate to contact us
+                            <div class="phone"><i class="fa  fa-phone"></i><a href="tel:18475555555"> 1-888-123-4567 </a></div>
+                            <div class="email"><i class="fa  fa-envelope-o "></i><a href="/cdn-cgi/l/email-protection#97f4f8f9e3f6f4e3d7e4fee3f2b9f4f8fa"><span class="__cf_email__" data-cfemail="2f4c40415b4e4c5b6f5c465b4a014c4042">[email&#160;protected]</span></a> or use <a href="contact.html"> contact form</a></div>
                         </div>
-                    </div>
-                    <div class="block-21 mb-4 d-flex">
-                        <a class="blog-img mr-4" style="background-image: url(images/image_3.jpg);"></a>
-                        <div class="text">
-                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                            <div class="meta">
-                                <div><a href="#"><span class="icon-calendar"></span> July 12, 2018</a></div>
-                                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    </aside>
+                </div>             
+            </div>
+        </div>
 
-                <div class="sidebar-box ftco-animate">
-                    <h3>Tag Cloud</h3>
-                    <div class="tagcloud">
-                        <a href="#" class="tag-cloud-link">dish</a>
-                        <a href="#" class="tag-cloud-link">menu</a>
-                        <a href="#" class="tag-cloud-link">food</a>
-                        <a href="#" class="tag-cloud-link">sweet</a>
-                        <a href="#" class="tag-cloud-link">tasty</a>
-                        <a href="#" class="tag-cloud-link">delicious</a>
-                        <a href="#" class="tag-cloud-link">desserts</a>
-                        <a href="#" class="tag-cloud-link">drinks</a>
-                    </div>
+        <div class="similar_rooms">
+            <div class="main_title t_style5 l_blue s_title a_left">
+                <div class="c_inner" style="font-size: 10px;">
+                    <h2 class="c_title">SIMILAR ROOMS</h2>
                 </div>
-
-                <div class="sidebar-box ftco-animate">
-                    <h3>Paragraph</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <article>
+                        <figure>
+                            <a href="room.html" class="hover_effect h_blue h_link"><img src="~/assets/client1/images/double1.jpg" alt="Image" class="img-responsive"></a>
+                            <div class="price">€99<span> night</span></div>
+                            <figcaption>
+                                <h4><a href="room.html">Double Room</a></h4>
+                            </figcaption>
+                        </figure>
+                    </article>
+                </div>
+                <div class="col-md-4">
+                    <article>
+                        <figure>
+                            <a href="room.html" class="hover_effect h_blue h_link"><img src="~/assets/client1/images/double1.jpg" alt="Image" class="img-responsive"></a>
+                            <div class="price">€129<span> night</span></div>
+                            <figcaption>
+                                <h4><a href="room.html">Single Room </a></h4>
+                            </figcaption>
+                        </figure>
+                    </article>
+                </div>
+                <div class="col-md-4">
+                    <article>
+                        <figure>
+                            <a href="room.html" class="hover_effect h_blue h_link"><img src="~/assets/client1/images/double1.jpg" alt="Image" class="img-responsive"></a>
+                            <div class="price">€189<span> night</span></div>
+                            <figcaption>
+                                <h4><a href="room.html">Deluxe Room </a></h4>
+                            </figcaption>
+                        </figure>
+                    </article>
                 </div>
             </div>
         </div>
+
         <div class="comments-area">
             <h4>@Model.Comments.Count() Comments</h4>
             @foreach (var comment in Model.Comments)
