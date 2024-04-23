@@ -1,4 +1,6 @@
-﻿namespace BusinessLogic.Dtos.News
+﻿using BusinessLogic.Dtos.Comment;
+
+namespace BusinessLogic.Dtos.News
 {
     public class NewsResponse
     {
@@ -10,6 +12,10 @@
 
         public string? Content { get; set; }
 
+        public string? NewsType { get; set; }
+
+        public string? Author { get; set; }
+
         public bool? Status { get; set; }
 
         public bool? Hot { get; set; }
@@ -17,5 +23,8 @@
         public DateTime CreatedOn { get; set; }
 
         public string CreatedBy { get; set; } = default!;
+
+        public List<CommentResponse> Comments { get; set; } = new();
+        public List<ReplyCommentResponse> Replies { get; set; } = new();
     }
 }

@@ -250,7 +250,7 @@
         </div>
 
         <div class="comments-area">
-            <h4>@Model.Comments.Count() Comments</h4>
+            <h4>@(Model.Comments.Count() + Model.Replies.Count()) Comments</h4>
             @foreach (var comment in Model.Comments)
             {
                 <div class="comment-list">

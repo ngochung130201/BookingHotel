@@ -9,6 +9,12 @@ namespace BusinessLogic.Entities
         public string? Title { get; set; } // Tiêu đề bài viết
 
         [StringLength(255)]
+        public string? NewsType { get; set; } // Thể loại bài viết
+
+        [StringLength(55)]
+        public string? Author { get; set; } // Tác giả bài viết
+        
+        [StringLength(255)]
         public string? Thumbnail { get; set; } // Ảnh đại diện
 
         public string? Content { get; set; } // Nội dung bài viết

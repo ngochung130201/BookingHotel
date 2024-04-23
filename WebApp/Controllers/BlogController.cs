@@ -1,28 +1,98 @@
-﻿using BusinessLogic.Dtos.News;
+﻿using BusinessLogic.Dtos.Comment;
+using BusinessLogic.Dtos.News;
 using BusinessLogic.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Globalization;
 
 namespace WebApp.Controllers
 {
-    public class BlogController() : Controller
-    {   /// <summary>
-        /// Blog
+    public class BlogController(INewsService newsService,
+                                ICommentService commentService,
+                                IReplyCommentService replyCommentService) : Controller
+    {   
+        /// <summary>
+        /// Blogs
         /// </summary>
         /// <returns></returns>
         [Route("/blog")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var result = await newsService.GetPagination(new NewRequest
+            {
+                PageNumber = 1,
+                PageSize = 5,
+                Status = true,
+            });
+
+            if (!result.Data.Any()) result.Data = new List<NewsResponse>();
+
+            return View(result);
         }
+
+        [HttpGet]
+        [Route("blog/get-data-paging/{page}")]
+        public async Task<IActionResult> GetDataPaging(int page)
+        {
+            var newsRequest = new NewRequest
+            {
+                PageNumber = page,
+                PageSize = 5,
+                Status = true,
+            };
+
+            var resultNews = await newsService.GetPagination(newsRequest);
+
+            // Tạo danh sách các NewsResponse
+            var newsResponses = new List<NewsResponse>();
+
+            foreach (var news in resultNews.Data)
+            {
+                // Tạo một NewsResponse mới cho mỗi tin tức
+                var newsResponse = new NewsResponse
+                {
+                    Id = news.Id,
+                    Title = news.Title,
+                    Thumbnail = news.Thumbnail,
+                    Content = news.Content,
+                    Status = news.Status,
+                    Hot = news.Hot,
+                    CreatedOn = news.CreatedOn,
+                    CreatedBy = news.CreatedBy
+                };
+
+                // Lấy danh sách bình luận cho mỗi tin tức
+                var commentRequest = new CommentRequest
+                {
+                    NewId = news.Id
+                };
+                var resultComment = await commentService.GetPagination(commentRequest);
+                newsResponse.Comments = resultComment.Data;
+
+                // Duyệt qua từng bình luận và lấy danh sách trả lời cho mỗi bình luận
+                foreach (var comment in resultComment.Data)
+                {
+                    var replyCommentRequest = new ReplyCommentRequest
+                    {
+                        CommentId = comment.Id
+                    };
+                    var resultReplyComment = await replyCommentService.GetPagination(replyCommentRequest);
+                    newsResponse.Replies = resultReplyComment.Data;
+                }
+
+                // Thêm NewsResponse vào danh sách
+                newsResponses.Add(newsResponse);
+            }
+
+            // Trả về PartialView với danh sách NewsResponse
+            return PartialView("_BlogPartial", newsResponses);
+        }
+
 
         /// <summary>
         /// Blog details
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        //[Route("blog-details/{id}")]
-        [Route("/blog/blog-details")]
+        [Route("/blog/blog-details/{id}")]
         public IActionResult BlogDetails(int id)
         {
             return View();

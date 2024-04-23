@@ -67,18 +67,6 @@ namespace WebApp.Controllers
         }
 
         /// <summary>
-        /// List Rooms
-        /// </summary>
-        ///<param name="request"></param>
-        /// <returns></returns>
-        [Route("room/list-room")]
-        public async Task<IActionResult> ListRooms(RoomsRequest request)
-        {
-            return View();
-        }
-
-
-        /// <summary>
         /// Save entity
         /// </summary>
         /// <param name="request"></param>
