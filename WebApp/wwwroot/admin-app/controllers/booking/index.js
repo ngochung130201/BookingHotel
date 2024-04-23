@@ -78,6 +78,11 @@
             },
             dataType: "json",
             beforeSend: function () {
+                setTimeout(function () {
+                    $('#spinnerRow').show();
+                    base.startLoading(); 
+                }, 2000);
+                $('#spinnerRow').show();
                 base.startLoading();
             },
             success: function (response) {
@@ -110,6 +115,7 @@
                 } else {
                     $('#tbl-content').html('<tr><td colspan="10" style="text-align: center; vertical-align: middle;">Danh sách trống</td></tr>');
                 }
+                $('#spinnerRow').hide();
                 base.stopLoading();
             },
             error: function (status) {

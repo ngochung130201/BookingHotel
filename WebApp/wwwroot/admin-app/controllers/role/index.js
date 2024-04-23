@@ -151,6 +151,7 @@
             },
             dataType: "json",
             beforeSend: function () {
+                $('#spinnerRow').show();
                 base.startLoading();
             },
             success: function (response) {
@@ -180,6 +181,7 @@
                 else {
                     $('#tbl-content').html('');
                 }
+                $('#spinnerRow').show();
                 base.stopLoading();
             },
             error: function (status) {

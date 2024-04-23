@@ -176,6 +176,7 @@ var RoomsController = function () {
             },
             dataType: "json",
             beforeSend: function () {
+                $('#spinnerRow').show();
                 base.startLoading();
             },
             success: function (response) {
@@ -189,7 +190,7 @@ var RoomsController = function () {
                             Order: stt,
                             Id: item.id,
                             Name: item.name,
-                            Thumbnail: item.thumbnail === undefined || item.thumbnail === null || item.thumbnail === '' ? '<img src="/assets/images/user.png" width=50 />' : '<img src="' + base.getOrigin() + item.thumbnail + '" width=50 />',
+                            Thumbnail: item.thumbnail === undefined || item.thumbnail === null || item.thumbnail === '' ? '<img src="/assets/images/picture.png" width=50 />' : '<img src="' + base.getOrigin() + item.thumbnail + '" width=50 />',
                             RoomCode: item.roomCode,
                             RoomTypeName: item.roomTypeName,
                             Price: item.price,
@@ -208,6 +209,7 @@ var RoomsController = function () {
                 } else {
                     $('#tbl-content').html('<tr><td colspan="10" style="text-align: center; vertical-align: middle;">Danh sách trống</td></tr>');
                 }
+                $('#spinnerRow').show();
                 base.stopLoading();
             },
             error: function (status) {
@@ -242,7 +244,7 @@ var RoomsController = function () {
                 $('#txtViews').val(data.views);
                 $('#ckStatus').val(data.status);
                 $('#txtImage').val(data.thumbnail);
-                $('#imagePreview').attr('src', data.thumbnail != null ? base.getOrigin() + data.thumbnail : "/assets/images/user.png");
+                $('#imagePreview').attr('src', data.thumbnail != null ? base.getOrigin() + data.thumbnail : "/assets/images/picture.png");
                 $('#txtDescription').val(data.description);
 
                 $('#modal-add-edit').modal('show');
@@ -324,7 +326,7 @@ var RoomsController = function () {
         $('#ckStatus').prop('checked', true);
         $('#txtImage').val('');
         $('#txtImageShow').val('');
-        $('#imagePreview').attr('src', '/assets/images/user.png');
+        $('#imagePreview').attr('src', '/assets/images/picture.png');
         $('#txtDescription').val('');
     }
     var saveData = function (continueFlg) {

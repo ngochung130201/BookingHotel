@@ -199,6 +199,7 @@ var NewsController = function () {
             },
             dataType: "json",
             beforeSend: function () {
+                $('#spinnerRow').show();
                 base.startLoading();
             },
             success: function (response) {
@@ -213,7 +214,7 @@ var NewsController = function () {
                             Id: item.id,
                             Title: item.title,
                             Content: item.content,
-                            Thumbnail: item.thumbnail === undefined || item.thumbnail === null || item.thumbnail === '' ? '<img src="/assets/images/user.png" width=50 />' : '<img src="' + base.getOrigin() + item.thumbnail + '" width=50 />',
+                            Thumbnail: item.thumbnail === undefined || item.thumbnail === null || item.thumbnail === '' ? '<img src="/assets/images/picture.png" width=50 />' : '<img src="' + base.getOrigin() + item.thumbnail + '" width=50 />',
                             Status: getStatus(item.status, item.id),
                             Hot: getHot(item.hot, item.id),
                             CreatedBy: item.createdBy,
@@ -230,6 +231,7 @@ var NewsController = function () {
                 } else {
                     $('#tbl-content').html('<tr><td colspan="10" style="text-align: center; vertical-align: middle;">Danh sách trống</td></tr>');
                 }
+                $('#spinnerRow').show();
                 base.stopLoading();
             },
             error: function (status) {
@@ -256,10 +258,9 @@ var NewsController = function () {
                 $('#txtTitle').val(data.title); 
                 $('#txtContent').val(data.content);   
                 $('#txtImage').val(data.thumbnail);
-                $('#imagePreview').attr('src', data.thumbnail != null ? base.getOrigin() + data.thumbnail : "/assets/images/user.png");
+                $('#imagePreview').attr('src', data.thumbnail != null ? base.getOrigin() + data.thumbnail : "/assets/images/picture.png");
                 $('#ckStatus').val(data.status);
                 $('#ckHot').val(data.hot);
-
                 $('#modal-add-edit').modal('show');
                 base.stopLoading();
             },
@@ -338,7 +339,7 @@ var NewsController = function () {
         $('#txtContent').val('');
         $('#txtImage').val('');
         $('#txtImageShow').val('');
-        $('#imagePreview').attr('src', '/assets/images/user.png');
+        $('#imagePreview').attr('src', '/assets/images/picture.png');
         $('#ckStatus').prop('checked', true);
         $('#ckHot').prop('checked', true);
     }

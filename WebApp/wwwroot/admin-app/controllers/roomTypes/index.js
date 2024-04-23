@@ -133,6 +133,7 @@ var RoomTypesController = function () {
             },
             dataType: "json",
             beforeSend: function () {
+                $('#spinnerRow').show();
                 base.startLoading();
             },
             success: function (response) {
@@ -146,7 +147,7 @@ var RoomTypesController = function () {
                             Order: stt,
                             Id: item.id,
                             Name: item.name,
-                            Image: item.image === undefined || item.image === null || item.image === '' ? '<img src="/assets/images/user.png" width=50 />' : '<img src="' + base.getOrigin() + item.image + '" width=50 />',
+                            Image: item.image === undefined || item.image === null || item.image === '' ? '<img src="/assets/images/picture.png" width=50 />' : '<img src="' + base.getOrigin() + item.image + '" width=50 />',
                             Star: item.star,
                             Description: item.description,
                             CreatedBy: item.createdBy,
@@ -163,6 +164,7 @@ var RoomTypesController = function () {
                 } else {
                     $('#tbl-content').html('<tr><td colspan="10" style="text-align: center; vertical-align: middle;">Danh sách trống</td></tr>');
                 }
+                $('#spinnerRow').show();
                 base.stopLoading();
             },
             error: function (status) {
@@ -188,7 +190,7 @@ var RoomTypesController = function () {
                 $('#hidId').val(data.id);
                 $('#txtName').val(data.name);
                 $('#txtImage').val(data.image);
-                $('#imagePreview').attr('src', data.image != null ? base.getOrigin() + data.image : "/assets/images/user.png");
+                $('#imagePreview').attr('src', data.image != null ? base.getOrigin() + data.image : "/assets/images/picture.png");
                 $('#txtStar').val(data.star);
                 $('#txtDescription').val(data.description);
 
@@ -234,6 +236,8 @@ var RoomTypesController = function () {
         $('#hidId').val(0);
         $('#txtName').val('');
         $('#txtImage').val('');
+        $('#txtImageShow').val('');
+        $('#imagePreview').attr('src', '/assets/images/picture.png');
         $('#txtStar').val('');
         $('#txtDescription').val('');
     }

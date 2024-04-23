@@ -101,6 +101,7 @@ var SpecialDayRatesController = function () {
             },
             dataType: "json",
             beforeSend: function () {
+                $('#spinnerRow').show();
                 base.startLoading();
             },
             success: function (response) {
@@ -132,6 +133,7 @@ var SpecialDayRatesController = function () {
                 } else {
                     $('#tbl-content').html('<tr><td colspan="10" style="text-align: center; vertical-align: middle;">Danh sách trống</td></tr>');
                 }
+                $('#spinnerRow').show();
                 base.stopLoading();
             },
             error: function (status) {

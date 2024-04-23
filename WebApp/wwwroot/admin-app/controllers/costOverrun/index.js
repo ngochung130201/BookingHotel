@@ -131,6 +131,7 @@
             },
             dataType: "json",
             beforeSend: function () {
+                $('#spinnerRow').show();
                 base.startLoading();
             },
             success: function (response) {
@@ -145,7 +146,7 @@
                             Id: item.id,
                             Name: item.name,
                             Description: item.description,
-                            Image: item.image === undefined || item.image === null || item.image === '' ? '<img src="/assets/images/user.png" width=50 />' : '<img src="' + base.getOrigin() + item.image + '" width=50 />',
+                            Image: item.image === undefined || item.image === null || item.image === '' ? '<img src="/assets/images/picture.png" width=50 />' : '<img src="' + base.getOrigin() + item.image + '" width=50 />',
                             Price: item.price,
                             CreatedBy: item.createdBy,
                             CreatedOn: base.dateTimeFormatJson(item.createdOn)
@@ -161,6 +162,7 @@
                 } else {
                     $('#tbl-content').html('<tr><td colspan="10" style="text-align: center; vertical-align: middle;">Danh sách trống</td></tr>');
                 }
+                $('#spinnerRow').show();
                 base.stopLoading();
             },
             error: function (status) {
@@ -187,7 +189,7 @@
                 $('#txtName').val(data.name);
                 $('#txtPrice').val(data.price);
                 $('#txtImage').val(data.image);
-                $('#imagePreview').attr('src', data.image != null ? base.getOrigin() + data.image : "/assets/images/user.png");
+                $('#imagePreview').attr('src', data.image != null ? base.getOrigin() + data.image : "/assets/images/picture.png");
                 $('#txtDescription').val(data.description);
 
                 $('#modal-add-edit').modal('show');
@@ -233,7 +235,7 @@
         $('#txtPrice').val('');
         $('#txtImage').val('');
         $('#txtImageShow').val('');
-        $('#imagePreview').attr('src', '/assets/images/user.png');
+        $('#imagePreview').attr('src', '/assets/images/picture.png');
         $('#txtDescription').val('');
     }
     var saveData = function (continueFlg) {
