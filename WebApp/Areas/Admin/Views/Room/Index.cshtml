@@ -57,6 +57,7 @@
                                 <th>Mã phòng</th>
                                 <th>Giá phòng</th>
                                 <th>Trạng thái</th>
+                                <th>Ảnh phòng</th>
                                 <th class="action-columns">Thao tác</th>
                             </tr>
                         </thead>
@@ -87,6 +88,9 @@
         <td>{{RoomCode}}</td>
         <td>{{Price}}</td>
         <td>{{{Status}}}</td>
+        <td>
+            <a href="#" data-id="{{Id}}" class="btn btn-xs btn-info btn-image" ><i class="fe-edit-2"></i>Ảnh Phòng</a>
+        </td>
         <td class="text-center action-columns">
             <a href="#" data-id="{{Id}}" class="btn btn-xs btn-info btn-edit" ><i class="fe-edit-2"></i></a>
             <a href="#" data-id="{{Id}}" class="btn btn-xs btn-danger btn-delete"><i class="fe-trash-2"></i></a>
@@ -95,3 +99,4 @@
 </script>
 
 <partial name="_AddEditModal.cshtml" />
+<partial name="_ListImages.cshtml" />

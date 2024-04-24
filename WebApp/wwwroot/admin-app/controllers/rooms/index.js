@@ -89,6 +89,13 @@ var RoomsController = function () {
             });
         });
 
+        // List images
+        $('body').off('click').on('click', '.btn-image', function (e) {
+            e.preventDefault();
+            $('#modal-list-image').modal('show');
+            $('hidId').val($(this).data('id'));
+        })
+
         // Event click Add New button
         $("#btn-create").on('click', function () {
             base.setTitleModal('add');
