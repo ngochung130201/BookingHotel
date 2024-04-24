@@ -50,9 +50,11 @@ namespace BusinessLogic.Services
                             Title = n.Title,
                             Thumbnail = n.Thumbnail,
                             Content = n.Content,
+                            Summary = n.Summary,
+                            Author = n.Author,
+                            NewsType = n.NewsType,
                             Status = n.Status,
                             Hot = n.Hot,
-                            CreatedBy = n.CreatedBy,
                             CreatedOn = n.CreatedOn
                         };
 

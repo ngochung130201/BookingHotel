@@ -93,9 +93,25 @@ namespace WebApp.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [Route("/blog/blog-details/{id}")]
-        public IActionResult BlogDetails(int id)
-        {
-            return View();
+        public async Task<IActionResult> BlogDetails(int id)
+        {  
+            var result = new ClientNewsDetailsResponse();
+            var resultNewsDetails = await newsService.GetById(id);
+            var resultComment = await commentService.GetPagination(new CommentRequest
+            {
+                NewId = id,
+            });
+            foreach (var comment in resultComment.Data)
+            {
+                var resultReplyComment = await replyCommentService.GetPagination(new ReplyCommentRequest
+                {
+                    CommentId = comment.Id,
+                });
+                result.Replies = resultReplyComment.Data;
+            }
+            result.Comments = resultComment.Data;
+            result.NewsDetail = resultNewsDetails.Data;
+            return View(result);
         }
     }
 }

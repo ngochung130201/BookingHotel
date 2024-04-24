@@ -6,13 +6,16 @@
     string appDomain = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}";
 }
 @inject IViewLocalizer Localizer
+
+@section Scripts {
+}
 @foreach (var item in Model.Data)
 {
     <article class="row blog_item">
         <div class="col-md-3">
             <div class="blog_info text-right">
                 <ul class="blog_meta list_style">
-                    <li><a href="#">Mark wiens<i class="lnr lnr-user"></i></a></li>
+                    <li><a href="#">@item.Author<i class="lnr lnr-user"></i></a></li>
                     <li><a href="#">@item.CreatedOn<i class="lnr lnr-calendar-full"></i></a></li>
                     <li><a href="#">1.2M Views<i class="lnr lnr-eye"></i></a></li>
                     <li><a href="#">@(item.Comments.Count() + item.Replies.Count()) Comments<i class="lnr lnr-bubble"></i></a></li>
@@ -24,7 +27,7 @@
                 <img src="@item.Thumbnail" alt="" width="555" height="280">
                 <div class="blog_details">
                     <a href="#"><h2>@item.Title</h2></a>
-                    <p>@item.Content</p>
+                    <p>@item.Summary</p>
                     <a href="/blog/blog-details/@item.Id" class="view_btn button_hover">View More</a>
                 </div>
             </div>

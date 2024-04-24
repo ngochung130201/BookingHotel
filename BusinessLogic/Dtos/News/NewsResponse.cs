@@ -12,6 +12,8 @@ namespace BusinessLogic.Dtos.News
 
         public string? Content { get; set; }
 
+        public string? Summary { get; set; }
+
         public string? NewsType { get; set; }
 
         public string? Author { get; set; }
@@ -24,6 +26,13 @@ namespace BusinessLogic.Dtos.News
 
         public string CreatedBy { get; set; } = default!;
 
+        public List<CommentResponse> Comments { get; set; } = new();
+        public List<ReplyCommentResponse> Replies { get; set; } = new();
+    }
+
+    public class ClientNewsDetailsResponse
+    {
+        public NewsDto NewsDetail { get; set; } = new();
         public List<CommentResponse> Comments { get; set; } = new();
         public List<ReplyCommentResponse> Replies { get; set; } = new();
     }

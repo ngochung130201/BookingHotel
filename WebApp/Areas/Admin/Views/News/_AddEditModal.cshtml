@@ -8,27 +8,40 @@
             <div class="modal-body">
                 <form class="form-horizontal" role="form" id="formMaintainance">
                     <div class="tab-content">
+                        <div class="form-group">
+                            <input type="hidden" id="hidId" value="0" />
+                            <label for="txtTitle" class="col-sm-auto control-label no-padding-right">Tiêu đề </label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="txtTitle" name="txtTitle" placeholder="Tiêu đề">
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="col-sm-6">
-                                <div class="form-group">
-                                    <input type="hidden" id="hidId" value="0" />
-                                    <label for="txtTitle" class="col-sm-auto control-label no-padding-right">Tiêu đề </label>
-                                    <div class="col-sm-12">
-                                        <input type="text" class="form-control" id="txtTitle" name="txtTitle" placeholder="Tiêu đề">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6">
                                 <div class="form-group col-sm-12">
-                                    <label for="txtNewsType" class="control-label no-padding-right">Loại tin tức <span class="text-danger">*</span></label>
+                                    <label for="txtNewsType" class="control-label no-padding-right">Thể loại </label>
                                     <select class="custom-select" id="txtNewsType" name="txtNewsType">
                                         <option value="">--</option>
                                         <option value="Travel">Du lịch</option>
-                                        <option value="Life">Đời sống</option>
-                                        <option value="Entertainment">Giải trí</option>
+                                        <option value="Life">Đời sống và giải trí</option>
+                                        <option value="Entertainment">Ẩm thực</option>
                                     </select>
                                 </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group col-sm-12">
+                                    <label for="txtAuthor" class="control-label no-padding-right">Tác giả </label>
+                                    <div class="col-sm-12">
+                                        <input type="text" class="form-control" id="txtAuthor" name="txtAuthor" placeholder="Tác giả">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="txtSummary" class="col-sm-auto control-label no-padding-right">Bản tóm tắt </label>
+                            <div class="col-sm-12">
+                                <textarea type="text" class="form-control" id="txtSummary" name="txtSummary" placeholder="Bản tóm tắt"></textarea>
                             </div>
                         </div>
 

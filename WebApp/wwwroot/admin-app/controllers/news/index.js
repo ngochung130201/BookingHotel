@@ -213,11 +213,12 @@ var NewsController = function () {
                             Order: stt,
                             Id: item.id,
                             Title: item.title,
-                            Content: item.content,
+                            Summary: item.summary,
+                            Author: item.author,
+                            NewsType: item.newsType,
                             Thumbnail: item.thumbnail === undefined || item.thumbnail === null || item.thumbnail === '' ? '<img src="/assets/images/picture.png" width=50 />' : '<img src="' + base.getOrigin() + item.thumbnail + '" width=50 />',
                             Status: getStatus(item.status, item.id),
                             Hot: getHot(item.hot, item.id),
-                            CreatedBy: item.createdBy,
                             CreatedOn: base.dateTimeFormatJson(item.createdOn)
                         });
                         stt++;
@@ -256,8 +257,11 @@ var NewsController = function () {
                 var data = response.data;
                 $('#hidId').val(data.id);
                 $('#txtTitle').val(data.title); 
-                $('#txtContent').val(data.content);   
+                $('#txtContent').val(data.content); 
+                $('#txtSummary').val(data.summary);
                 $('#txtImage').val(data.thumbnail);
+                $('#txtAuthor').val(data.author);
+                $('#txtNewsType').val(data.newsType);
                 $('#imagePreview').attr('src', data.thumbnail != null ? base.getOrigin() + data.thumbnail : "/assets/images/picture.png");
                 $('#ckStatus').val(data.status);
                 $('#ckHot').val(data.hot);
@@ -337,6 +341,9 @@ var NewsController = function () {
         $('#hidId').val(0);
         $('#txtTitle').val('');
         $('#txtContent').val('');
+        $('#txtSummary').val(''); 
+        $('#txtAuthor').val('');
+        $('#txtNewsType').val('');
         $('#txtImage').val('');
         $('#txtImageShow').val('');
         $('#imagePreview').attr('src', '/assets/images/picture.png');
@@ -347,7 +354,10 @@ var NewsController = function () {
         if ($('#formMaintainance').valid()) {
             var id = $('#hidId').val();
             var title = $('#txtTitle').val();
+            var author = $('#txtAuthor').val();
+            var newsType = $('#txtNewsType').val();
             var content = CKEDITOR.instances.txtContent.getData(); 
+            var summary = $('#txtSummary').val();
             var thumbnail = $('#txtImage').val();
             var status = $('#ckStatus').prop('checked') == true ? true : false;
             var hot = $('#ckHot').prop('checked') == true ? true : false;
@@ -358,6 +368,9 @@ var NewsController = function () {
                     Id: id,
                     Title: title,
                     Content: content,
+                    Summary: summary,
+                    Author: author,
+                    NewsType: newsType,
                     Thumbnail: thumbnail,
                     Status: status,
                     Hot: hot,

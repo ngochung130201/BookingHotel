@@ -19,6 +19,8 @@ namespace BusinessLogic.Entities
 
         public string? Content { get; set; } // Nội dung bài viết
 
+        public string? Summary { get; set; } // Tóm tắt bài viết
+
         public bool? Status { get; set; } // Trạng thái bài viết
 
         public bool? Hot { get; set; } // Bài viết nổi bật
