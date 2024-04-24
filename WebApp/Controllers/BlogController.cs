@@ -2,6 +2,7 @@
 using BusinessLogic.Dtos.News;
 using BusinessLogic.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace WebApp.Controllers
 {
@@ -112,6 +113,61 @@ namespace WebApp.Controllers
             result.Comments = resultComment.Data;
             result.NewsDetail = resultNewsDetails.Data;
             return View(result);
+        }
+
+        /// <summary>
+        /// Save entity
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> SaveEntity(CommentDto request)
+        {
+            string currentUrl = HttpContext.Request.Path;
+
+            if (!ModelState.IsValid)
+            {
+                IEnumerable<ModelError> allErrors = ModelState.Values.SelectMany(v => v.Errors);
+                return new BadRequestObjectResult(allErrors);
+            }
+
+            if (request.Id == 0)
+            {
+                var result = await commentService.Add(request);
+                return Redirect($"blog/blog-details/{request.NewId}");
+            }
+            else
+            {
+                var result = await commentService.Update(request);
+                return Redirect($"blog/blog-details/{request.NewId}");
+            }
+        }
+
+        /// <summary>
+        /// Save entity reply
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> SaveEntityReply(ReplyCommentDto request)
+        {
+            if (!ModelState.IsValid)
+            {
+                IEnumerable<ModelError> allErrors = ModelState.Values.SelectMany(v => v.Errors);
+                return new BadRequestObjectResult(allErrors);
+            }
+
+            if (request.Id == 0)
+            {
+                var result = await replyCommentService.Add(request);
+            }
+            else
+            {
+                var result = await replyCommentService.Update(request);
+            }
+            string currentUrl = HttpContext.Request.Path;
+
+            return Redirect(currentUrl);
         }
     }
 }
