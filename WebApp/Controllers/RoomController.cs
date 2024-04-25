@@ -1,6 +1,8 @@
-﻿using BusinessLogic.Dtos.Comment;
+﻿using BusinessLogic.Dtos.Booking;
+using BusinessLogic.Dtos.Comment;
 using BusinessLogic.Dtos.Rooms;
 using BusinessLogic.Dtos.RoomTypes;
+using BusinessLogic.Entities;
 using BusinessLogic.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -117,6 +119,24 @@ namespace WebApp.Controllers
             string currentUrl = HttpContext.Request.Path;
 
             return Redirect(currentUrl);
+        }
+
+        /// <summary>
+        /// Get list room
+        /// </summary>
+        /// <param name="RoomTypesId"></param>
+        /// <returns></returns>
+        [Route("list-room/{RoomTypesId}")]
+        public async Task<IActionResult> ListRoom(int RoomTypesId)
+        {
+            var result = await roomsService.GetPagination(new RoomsRequest
+            {
+                PageNumber = 1,
+                PageSize = 20,
+                RoomTypes = RoomTypesId,
+            });
+
+            return View(result);
         }
     }
 }

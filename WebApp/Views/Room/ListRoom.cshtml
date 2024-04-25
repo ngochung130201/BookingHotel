@@ -1,0 +1,50 @@
+﻿﻿
+@model BusinessLogic.Wrapper.PaginatedResult<BusinessLogic.Dtos.Rooms.RoomsResponse>
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Title"] = Localizer["ListRoom"];
+    var httpContext = ViewContext.HttpContext;
+    string appDomain = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}";
+}
+
+<!--================Breadcrumb Area =================-->
+<section class="breadcrumb_area">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+    <div class="container">
+        <div class="page-cover text-center">
+            <h2 class="page-cover-tittle">@Localizer["Room"]</h2>
+            <ol class="breadcrumb">
+                <li><a href="/home">@Localizer["Home"]</a></li>
+                <li class="active">@Localizer["Room"]</li>
+            </ol>
+        </div>
+    </div>
+</section>
+<!--================Breadcrumb Area =================-->
+
+<!--================ Accomodation Area  =================-->
+<section class="accomodation_area section_gap">
+    <div class="container">
+        <div class="section_title text-center">
+            <h2 class="title_color">@Localizer["Text2"]</h2>
+            <p>@Localizer["Text3"]</p>
+        </div>
+        <div class="row accomodation_two">
+            @foreach (var item in Model.Data)
+            {
+                <div class="col-lg-3 col-sm-6">
+                    <div class="accomodation_item text-center">
+                        <div class="hotel_img">
+                            <img src="@appDomain@item.Thumbnail" width="263px" height="270px" alt="post">
+                            <a href="/room-details/@item.Id" class="btn theme_btn button_hover">@Localizer["BookNow"]</a>
+                        </div>
+                        <a href="#"><h4 class="sec_h4">@item.Name</h4></a>
+                        <h5>@string.Format("{0:N0} VND", item.Price)<small>@Localizer["/night"]</small></h5>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<!--================ Accomodation Area  =================-->

@@ -46,10 +46,11 @@ namespace BusinessLogic.Services
         {
             var query = from r in _dbContext.Rooms
                         join rt in _dbContext.RoomTypes.Where(x => !x.IsDeleted) on r.RoomTypeId equals rt.Id
-                        where !r.IsDeleted && (string.IsNullOrEmpty(request.Keyword)
+                        where (!r.IsDeleted && r.Status == true && (string.IsNullOrEmpty(request.Keyword)
                             || r.Name.ToLower().Contains(request.Keyword.ToLower())
                             || rt.Name.ToLower().Contains(request.Keyword.ToLower())
                             || r.RoomCode!.ToLower().Contains(request.Keyword.ToLower()))
+                            && (!request.RoomTypes.HasValue || request.RoomTypes == r.RoomTypeId))
                         select new RoomsResponse
                         {
                             Id = r.Id,

@@ -207,6 +207,9 @@
   <data name="Restaurant" xml:space="preserve">
     <value>Nhà hàng</value>
   </data>
+  <data name="RoomTypes" xml:space="preserve">
+    <value>Loại phòng</value>
+  </data>
   <data name="RoyalFacilities" xml:space="preserve">
     <value>Cơ sở Hoàng gia</value>
   </data>
