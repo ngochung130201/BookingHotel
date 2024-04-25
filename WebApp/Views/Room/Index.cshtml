@@ -7,10 +7,6 @@
     string appDomain = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}";
 }
 
-@section Scripts {
-
-}
-
  <!--================Breadcrumb Area =================-->
 <section class="breadcrumb_area">
     <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
@@ -40,9 +36,9 @@
                     <div class="accomodation_item text-center">
                         <div class="hotel_img">
                             <img src="@appDomain@item.Image" width="263px" height="270px" alt="post">
-                            <a href="#" class="btn theme_btn button_hover">@Localizer["BookNow"]</a>
+                            <a href="/list-room/@item.Id" class="btn theme_btn button_hover">@Localizer["BookNow"]</a>
                         </div>
-                        <a href="#"><h4 class="sec_h4">@item.Name</h4></a>
+                        <a href="/list-room/@item.Id"><h4 class="sec_h4">@item.Name</h4></a>
                     </div>
                 </div>
             } 
@@ -89,6 +85,7 @@
                                         <option value="1">1 adults</option>
                                         <option value="2">2 adults</option>
                                         <option value="3">3 adults</option>
+                                        <option value="4">4 adults</option>
                                     </select>
                                 </div>
                                 <div class="input-group">
@@ -97,6 +94,7 @@
                                         <option value="1">1 Child</option>
                                         <option value="2">2 Child</option>
                                         <option value="3">3 Child</option>
+                                        <option value="4">4 Child</option>
                                     </select>
                                 </div>
                             </div>
@@ -104,14 +102,15 @@
                         <div class="col-md-4">
                             <div class="book_tabel_item">
                                 <div class="input-group">
-                                    <select class="wide">
-                                        <option data-display="Child">@Localizer["RoomTypes"]</option>
-                                        <option value="1">Room 01</option>
-                                        <option value="2">Room 02</option>
-                                        <option value="3">Room 03</option>
+                                    <select class="wide" id="roomTypeSelect">
+                                        <option data-display="@Localizer["RoomTypes"]">@Localizer["RoomTypes"]</option>
+                                        @foreach (var item in Model.RoomTypes)
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
                                     </select>
                                 </div>
-                                <a class="book_now_btn button_hover" href="#">@Localizer["BookNow"]</a>
+                                <a class="book_now_btn button_hover" id="bookNowButton" href="#">@Localizer["BookNow"]</a>
                             </div>
                         </div>
                     </div>
@@ -147,3 +146,16 @@
     </div>
 </section>
 <!--================ Accomodation Area  =================-->
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Xử lý sự kiện khi giá trị của select thay đổi
+            $('#roomTypeSelect').change(function () {
+                // Lấy giá trị được chọn từ select
+                var selectedValue = $(this).val();
+                // Cập nhật href của thẻ <a> với giá trị được chọn
+                $('#bookNowButton').attr('href', '/list-room/' + selectedValue);
+            });
+        });
+    </script>
+}

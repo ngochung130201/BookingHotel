@@ -33,10 +33,10 @@
         <div class="row accomodation_two">
             @foreach (var item in Model.Data)
             {
-                <div class="col-lg-3 col-sm-6">
+                <div class="col-lg-6 col-sm-6">
                     <div class="accomodation_item text-center">
                         <div class="hotel_img">
-                            <img src="@appDomain@item.Thumbnail" width="263px" height="270px" alt="post">
+                            <img src="@appDomain@item.Thumbnail" width="550px" height="550px" alt="post">
                             <a href="/room-details/@item.Id" class="btn theme_btn button_hover">@Localizer["BookNow"]</a>
                         </div>
                         <a href="#"><h4 class="sec_h4">@item.Name</h4></a>

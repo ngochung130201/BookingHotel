@@ -76,7 +76,7 @@
                                 <div class="col-md-4">
                                     <div class="book_tabel_item">
                                         <div class="input-group">
-                                            <select class="wide">
+                                            <select class="wide" id="roomTypeSelect">
                                                 <option data-display="@Localizer["RoomTypes"]">@Localizer["RoomTypes"]</option>
                                                 @foreach (var item in Model.RoomTypes)
                                                 {
@@ -84,7 +84,7 @@
                                                 }
                                             </select>
                                         </div>
-                                        <a class="book_now_btn button_hover" href="/room">@Localizer["BookNow"]</a>
+                                        <a class="book_now_btn button_hover" id="bookNowButton" href="#">@Localizer["BookNow"]</a>
                                     </div>
                                 </div>
                             </div>
@@ -286,3 +286,16 @@
     </div>
 </section>
 <!--================ Recent Area  =================-->
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Xử lý sự kiện khi giá trị của select thay đổi
+            $('#roomTypeSelect').change(function () {
+                // Lấy giá trị được chọn từ select
+                var selectedValue = $(this).val();
+                // Cập nhật href của thẻ <a> với giá trị được chọn
+                $('#bookNowButton').attr('href', '/list-room/' + selectedValue);
+            });
+        });
+    </script>
+}
