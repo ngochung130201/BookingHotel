@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using ImageMagick;
 using Microsoft.AspNetCore.Http;
 
@@ -6,24 +7,24 @@ namespace BusinessLogic.Helpers
 {
     public class FileHelper
     {
-        public static string ConvertFileBase64ToWebp(string folder, string base64, string hotelId, bool isConvertToWebp)
+        public static string ConvertFileBase64ToWebp(string folder, string base64, bool isConvertToWebp)
         {
             try
             {
                 // check folder exist
-                var folderPath = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot/{folder}/{hotelId}");
+                var folderPath = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot/{folder}");
                 if (!Directory.Exists(folderPath))
                 {
                     Directory.CreateDirectory(folderPath);
                 }
                 var data = base64.Split(',');
-                if(data.Length > 1 && IsBase64Webp(data[0]))
+                if (data.Length > 1 && IsBase64Webp(data[0]))
                 {
-                    return SaveFileBase64ToWebp($"{folder}/{hotelId}", data[1]);
+                    return SaveFileBase64ToWebp($"{folder}", data[1]);
                 }
-                
+
                 var fileName = $"{Guid.NewGuid()}.{GetFileExtension(base64)}";
-                var filePath = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot/{folder}/{hotelId}", fileName);
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot/{folder}", fileName);
                 //Ensure file is not in use by another process before proceeding
                 using (var stream = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None))
                 {
@@ -33,7 +34,7 @@ namespace BusinessLogic.Helpers
 
                 if (isConvertToWebp)
                 {
-                    var webpFile = $"{folder}/{hotelId}/{Path.GetFileNameWithoutExtension(fileName)}.webp";
+                    var webpFile = $"{folder}/{Path.GetFileNameWithoutExtension(fileName)}.webp";
                     var webpPath = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot", webpFile);
                     using var image = new MagickImage(filePath);
                     image.Write(webpPath);
@@ -42,9 +43,9 @@ namespace BusinessLogic.Helpers
                     {
                         File.Delete(filePath);
                     }
-                    return webpFile;
+                    return $"/{webpFile}";
                 }
-                return $"{folder}/{hotelId}/{fileName}";
+                return $"/{folder}/{fileName}";
             }
             catch (Exception e)
             {
@@ -76,7 +77,7 @@ namespace BusinessLogic.Helpers
             return base64.Contains("data:image/webp;base64,");
         }
 
-        public static string UploadFileToServer(string folder,string hotelId, IFormFile file)
+        public static string UploadFileToServer(string folder, string hotelId, IFormFile file)
         {
             try
             {
@@ -106,6 +107,23 @@ namespace BusinessLogic.Helpers
             var data = base64.Split(',');
             var extension = data[0].Split('/')[1].Split(';')[0];
             return extension.Contains("svg") ? "svg" : extension;
+        }
+
+        public static bool ValidatePassword(string password)
+        {
+            if (password.Length < 9)
+                return false;
+
+            var uppercaseRegex = new Regex(@"[A-Z]");
+            var lowercaseRegex = new Regex(@"[a-z]");
+            var numberRegex = new Regex(@"[0-9]");
+            var specialCharRegex = new Regex(@"[@$!%*?&]");
+
+            if (!uppercaseRegex.IsMatch(password) || !lowercaseRegex.IsMatch(password) ||
+                !numberRegex.IsMatch(password) || !specialCharRegex.IsMatch(password))
+                return false;
+
+            return true;
         }
     }
 }

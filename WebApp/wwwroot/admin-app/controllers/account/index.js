@@ -53,30 +53,41 @@
             }
         });
 
+        //upload image
         $("#fileInputImage").on('change', function () {
-            var fileUpload = $(this).get(0);
-            var files = fileUpload.files;
-            var data = new FormData();
-            for (var i = 0; i < files.length; i++) {
-                data.append(files[i].name, files[i]);
+            const file = this.files[0];
+            if (file) {
+                let reader = new FileReader();
+                reader.onload = function (event) {
+                    $('#txtImage').val(event.target.result);
+                    $('#showImageMyAccount').attr('src', event.target.result);
+                    $("#txtImage-error").css("display", "none");
+                    var settings = {
+                        "url": "/Admin/Upload/UploadBase64",
+                        "method": "POST",
+                        "timeout": 0,
+                        "headers": {
+                            "Content-Type": "application/json"
+                        },
+                        "data": JSON.stringify({
+                            "base64": event.target.result,
+                            "IsConvertToWebp": true
+                        }),
+                    };
+                    $.ajax(settings)
+                        .done(function (path) {
+                            $('#txtImage').val(path);
+                            var imgElement = document.getElementById('txtImageShow');
+                            var appDomain = document.getElementById('appDomain');
+                            imgElement.src = appDomain.value + path;
+                            base.notify('Uploaded successful!', 'success');
+                        })
+                        .fail(function (xhr, status, error) {
+                            base.notify('Error occurred while uploading!', 'error');
+                        });
+                };
+                reader.readAsDataURL(file);
             }
-            $.ajax({
-                type: "POST",
-                url: "/Admin/Upload/UploadImage",
-                contentType: false,
-                processData: false,
-                data: data,
-                success: function (path) {
-                    $('#txtImage').val(path);
-                    var imgElement = document.getElementById('txtImageShow');
-                    var appDomain = document.getElementById('appDomain');
-                    imgElement.src = appDomain.value + path;
-                    base.notify('Uploaded successful!', 'success');
-                },
-                error: function () {
-                    base.notify('Has an error in progress', 'error');
-                }
-            });
         });
 
         $('.eye_icon').on('click', function () {

@@ -202,87 +202,87 @@
 </style>
 }
 <div class="container">
-<div class="tab-content">
-    <div id="tab1" class="tab active">
-        <div class="row d-flex justify-content-between wrap-conntent-account">
-            <div class="col-6">
-                <h2>Thông tin nhân viên</h2>
-                <form class="form-wrap" id="formAddUser">
-                    <input type="hidden" id="hidId" value="@Model.Id" />
-                    <div class="field upload-image">
-                        @if (Model.AvatarUrl != null)
-                        {
-                            <img src="@(appDomain + Model.AvatarUrl)" id="txtImageShow" alt="" style="width: 320px;">
-                        }
-                        else
-                        {
-                            <img src="~/assets/images/user.png" alt="" id="txtImageShow" style="width: 326px;">
-                        }
+    <div class="tab-content">
+        <div id="tab1" class="tab active">
+            <div class="row d-flex justify-content-between wrap-conntent-account">
+                <div class="col-6">
+                    <h2>Thông tin nhân viên</h2>
+                    <form class="form-wrap" id="formAddUser">
+                        <input type="hidden" id="hidId" value="@Model.Id" />
+                        <div class="field upload-image">
+                            @if (Model.AvatarUrl != null)
+                            {
+                                <img src="@(appDomain + Model.AvatarUrl)" id="txtImageShow" alt="" style="width: 320px;">
+                            }
+                            else
+                            {
+                                <img src="~/assets/images/user.png" alt="" id="txtImageShow" style="width: 326px;">
+                            }
 
-                        <input type="text" class="form-control" id="txtImage" name="txtImage" hidden value="@Model.AvatarUrl" />
-                        <input type="text" class="form-control" id="appDomain" hidden value="@appDomain" />
-                        <input type="file" name="" id="fileInputImage" hidden>
-                        <label for="fileInputImage">Thay đổi</label>
-                    </div>
+                            <input type="text" class="form-control" id="txtImage" name="txtImage" hidden value="@Model.AvatarUrl" />
+                            <input type="text" class="form-control" id="appDomain" hidden value="@appDomain" />
+                            <input type="file" name="" id="fileInputImage" hidden>
+                            <label for="fileInputImage">Thay đổi</label>
+                        </div>
 
-                    <div class="field">
-                        <label for="Roles">Vai trò</label>
-                        <input id="Roles" name="Roles" disabled value="@Model.Roles" type="text" class="form-control">
-                    </div>
-                    <div class="field">
-                        <label for="fullName">Họ và tên</label>
-                        <input id="fullName" name="fullName" value="@Model.FullName" type="text" class="form-control">
-                    </div>
-                    <div class="field">
-                        <label for="email">Email</label>
-                        <input id="email" name="email" value="@Model.Email" disabled type="text" class="form-control">
-                    </div>
-                    <div class="field">
-                        <label for="address">Địa chỉ</label>
-                        <textarea name="address" id="address" value="@Model.Address" class="form-control" >@Model.Address</textarea>
-                    </div>
-                    <div class="field">
-                        <label for="phoneNumber">Số điện thoại</label>
-                        <input id="phoneNumber" name="phoneNumber" type="text" value="@Model.PhoneNumber" class="form-control keypress" >
-                    </div>
-                    <div class="field">
-                        <label for="dateOfBirth">Ngày sinh</label>
-                        <input id="dateOfBirth" name="dateOfBirth" value="@(Model.DateOfBirth != null ? Model.DateOfBirth.Value.ToString("dd/MM/yyyy") : string.Empty)" type="text" class="form-control keypress" >
-                    </div>
-                </form>
+                        <div class="field">
+                            <label for="Roles">Vai trò</label>
+                            <input id="Roles" name="Roles" disabled value="@Model.Roles" type="text" class="form-control">
+                        </div>
+                        <div class="field">
+                            <label for="fullName">Họ và tên</label>
+                            <input id="fullName" name="fullName" value="@Model.FullName" type="text" class="form-control">
+                        </div>
+                        <div class="field">
+                            <label for="email">Email</label>
+                            <input id="email" name="email" value="@Model.Email" disabled type="text" class="form-control">
+                        </div>
+                        <div class="field">
+                            <label for="address">Địa chỉ</label>
+                            <textarea name="address" id="address" value="@Model.Address" class="form-control" >@Model.Address</textarea>
+                        </div>
+                        <div class="field">
+                            <label for="phoneNumber">Số điện thoại</label>
+                            <input id="phoneNumber" name="phoneNumber" type="text" value="@Model.PhoneNumber" class="form-control keypress" >
+                        </div>
+                        <div class="field">
+                            <label for="dateOfBirth">Ngày sinh</label>
+                            <input id="dateOfBirth" name="dateOfBirth" value="@(Model.DateOfBirth != null ? Model.DateOfBirth.Value.ToString("dd/MM/yyyy") : string.Empty)" type="text" class="form-control keypress" >
+                        </div>
+                    </form>
+                </div>
+                <div class="col-6" style="flex: 0 0 47%;">
+                    <h2>Thay đổi mật khẩu</h2>
+                    <form class="form-wrap form-login">
+                        <div class="field">
+                            <label for="currentPassword">Mật khẩu hiện tại</label>
+                            <div class="field-password">
+                                <input id="currentPassword" type="password" class="form-control" placeholder="Password">
+                            </div>
+                            <span class="eye_icon"></span>
+                        </div>
+                        <div class="field">
+                            <label for="passwordNew">Mật khẩu mới</label>
+                            <div class="field-password">
+                                <input id="passwordNew" type="password" class="form-control" placeholder="Password">
+                            </div>
+                            <span class="eye_icon"></span>
+                        </div>
+                        <div class="field">
+                            <label for="confirmPassword">Nhập lại mật khẩu mới</label>
+                            <div class="field-password">
+                                <input id="confirmPassword" type="password" class="form-control" placeholder="Confirm Password">
+                            </div>
+                            <span class="eye_icon"></span>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="col-6" style="flex: 0 0 47%;">
-                <h2>Thay đổi mật khẩu</h2>
-                <form class="form-wrap form-login">
-                    <div class="field">
-                        <label for="currentPassword">Mật khẩu hiện tại</label>
-                        <div class="field-password">
-                            <input id="currentPassword" type="password" class="form-control" placeholder="Password">
-                        </div>
-                        <span class="eye_icon"></span>
-                    </div>
-                    <div class="field">
-                        <label for="passwordNew">Mật khẩu mới</label>
-                        <div class="field-password">
-                            <input id="passwordNew" type="password" class="form-control" placeholder="Password">
-                        </div>
-                        <span class="eye_icon"></span>
-                    </div>
-                    <div class="field">
-                        <label for="confirmPassword">Nhập lại mật khẩu mới</label>
-                        <div class="field-password">
-                            <input id="confirmPassword" type="password" class="form-control" placeholder="Confirm Password">
-                        </div>
-                        <span class="eye_icon"></span>
-                    </div>
-                </form>
+            <div class="submit-button">
+                <button type="button" id="btnSave" class="btn btn-success">Lưu</button>
+                    <button type="button" id="btnCancel" data-dismiss="modal" class="btn btn-danger">Hủy bỏ</button>
             </div>
-        </div>
-        <div class="submit-button">
-            <button type="button" id="btnSave" class="btn btn-success">Lưu</button>
-                <button type="button" id="btnCancel" data-dismiss="modal" class="btn btn-danger">Hủy bỏ</button>
         </div>
     </div>
-</div>
 </div>
     

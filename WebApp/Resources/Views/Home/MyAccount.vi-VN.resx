@@ -117,40 +117,49 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Account" xml:space="preserve">
+    <value>Tài khoản</value>
+  </data>
   <data name="Address" xml:space="preserve">
     <value>Địa chỉ</value>
   </data>
   <data name="Change" xml:space="preserve">
     <value>Thay đổi</value>
   </data>
-  <data name="ConfirmPassword" xml:space="preserve">
+  <data name="Change Password" xml:space="preserve">
+    <value>Thay đổi mật khẩu</value>
+  </data>
+  <data name="Company" xml:space="preserve">
+    <value>Công ty</value>
+  </data>
+  <data name="Confirm Password" xml:space="preserve">
     <value>Xác nhận mật khẩu</value>
   </data>
-  <data name="CurrentPassword" xml:space="preserve">
+  <data name="Current Password" xml:space="preserve">
     <value>Mật khẩu hiện tại</value>
   </data>
-  <data name="FullName" xml:space="preserve">
-    <value>Tên </value>
+  <data name="Full Name" xml:space="preserve">
+    <value>Tên đầy đủ</value>
   </data>
   <data name="Home" xml:space="preserve">
     <value>Trang chủ</value>
   </data>
-  <data name="MyAccount" xml:space="preserve">
-    <value>Tài khoảng của tôi</value>
+  <data name="Information" xml:space="preserve">
+    <value>Thông tin</value>
   </data>
-  <data name="NewPassword" xml:space="preserve">
+  <data name="MyAccount" xml:space="preserve">
+    <value>Tài khoản của tôi</value>
+  </data>
+  <data name="New Password" xml:space="preserve">
     <value>Mật khẩu mới</value>
   </data>
-  <data name="Password" xml:space="preserve">
-    <value>Mật khẩu</value>
-  </data>
-  <data name="PhoneNumber" xml:space="preserve">
+  <data name="Phone Number" xml:space="preserve">
     <value>Số điện thoại</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Lưu</value>
   </data>
-  <data name="UserInformation" xml:space="preserve">
-    <value>Thông tin người dùng</value>
+  <data name="Subscription" xml:space="preserve">
+    <value>Đăng ký</value>
   </data>
 </root>

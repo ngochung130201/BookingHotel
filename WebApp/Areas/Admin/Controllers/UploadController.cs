@@ -1,4 +1,6 @@
 ﻿using System.Net.Http.Headers;
+using BusinessLogic.Helpers;
+using BusinessLogic.Request;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApp.Areas.Admin.Controllers
@@ -79,6 +81,27 @@ namespace WebApp.Areas.Admin.Controllers
                     fs.Flush();
                 }
                 return new OkObjectResult(Path.Combine(imageFolder, filename!).Replace(@"\", @"/"));
+            }
+        }
+
+        // upload file base64 to server
+        [HttpPost]
+        public IActionResult UploadBase64([FromBody] FileRequestParameter file)
+        {
+            DateTime now = DateTime.Now;
+            try
+            {
+                if (string.IsNullOrEmpty(file.Base64))
+                {
+                    return BadRequest("Invalid file");
+                }
+
+                var uploadsFolder = FileHelper.ConvertFileBase64ToWebp($"uploaded/images/{now:yyyyMMdd}", file.Base64, file.IsConvertToWebp);
+                return Ok(uploadsFolder);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
     }

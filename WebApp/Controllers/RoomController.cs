@@ -1,8 +1,6 @@
-﻿using BusinessLogic.Dtos.Booking;
-using BusinessLogic.Dtos.Comment;
+﻿using BusinessLogic.Dtos.Comment;
 using BusinessLogic.Dtos.Rooms;
 using BusinessLogic.Dtos.RoomTypes;
-using BusinessLogic.Entities;
 using BusinessLogic.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;

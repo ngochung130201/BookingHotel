@@ -1,289 +1,110 @@
-﻿@model BusinessLogic.Dtos.Home.MyAccountResponse
-@using Microsoft.AspNetCore.Mvc.Localization
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model BusinessLogic.Dtos.Home.MyAccountResponse
 @inject IViewLocalizer Localizer
 @{
-    ViewData["Title"] = Localizer["My Account"];
+    ViewData["Title"] = Localizer["MyAccount"];
     var httpContext = ViewContext.HttpContext;
     string appDomain = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}";
 }
-@section Scripts {
-    <script src="~/client-app/controllers/home/my-account.js"></script>
-    <style>
-        .my-account-content {
-            padding: 30px;
-            box-shadow: 1px 1px 40px 0px rgba(132, 132, 132, 0.16);
-            border-radius: 8px;
-            margin-bottom: 30px;
-        }
-
-        .breadcrumb-flex {
-            margin-bottom: 30px;
-        }
-
-        .breadcrumb-inner a {
-            display: inline-block;
-            margin-right: 20px;
-            padding-right: 20px;
-            background: url("../img/icon/breadcrumb_arrow.png") no-repeat right center;
-            color: #646464;
-            font-size: 14px;
-        }
-
-        .tabs-body .tab-content .tab {
-            display: none;
-        }
-
-            .tabs-body .tab-content .tab.active {
-                display: block;
-            }
-
-        .tab-links {
-            display: flex;
-            border-bottom: 3px solid #0F723A;
-            margin-bottom: 36px;
-            flex-wrap: wrap;
-        }
-
-            .tab-links li a {
-                padding: 10px 20px;
-                display: block;
-                color: #646464;
-                cursor: pointer;
-                font-weight: bold;
-                transition: 0.2s ease-in-out;
-            }
-
-            .tab-links li.active a {
-                background-color: #0F723A;
-                color: #fff;
-            }
-
-        .wrap-conntent-account {
-            padding: 30px;
-        }
-
-            .wrap-conntent-account h2 {
-                font-size: 24px;
-                margin-bottom: 25px;
-            }
-
-            .wrap-conntent-account .col-6 {
-                width: 45%;
-            }
-
-        .form-wrap input {
-            height: 52px;
-            padding: 0 20px;
-            border: 1px solid #E1E2E3;
-            border-radius: 8px;
-            font-size: 16px;
-            outline: none;
-            margin-bottom: 20px;
-        }
-
-        .form-wrap textarea {
-            padding: 0 20px;
-            border: 1px solid #E1E2E3;
-            border-radius: 8px;
-            font-size: 16px;
-            outline: none;
-            margin-bottom: 20px;
-            width: 100%;
-        }
-
-        .form-wrap .wrap-col2 .input-wrap {
-            margin: 0 10px;
-        }
-
-        .wrap-col2 {
-            margin: 0 -10px;
-        }
-
-        .form-wrap label {
-            font-size: 14px;
-            color: #646464;
-        }
-
-        .form-login .field-password:before {
-            content: "";
-            position: absolute;
-            left: 16px;
-            width: 24px;
-            height: 24px;
-            top: 14px;
-            background: url("../assets/landing-page/img/icon/pass_icon.png");
-        }
-
-        .form-login .field-password {
-            position: relative;
-        }
-
-        .form-login input {
-            padding: 0 56px;
-        }
-
-        .form-login .field {
-            position: relative;
-        }
-
-        .form-login .eye_icon {
-            position: absolute;
-            right: 15px;
-            bottom: 12px;
-            width: 24px;
-            height: 24px;
-            background: url(../assets/landing-page/img/icon/eye_show.svg) no-repeat left center;
-            cursor: pointer;
-        }
-
-            .form-login .eye_icon.active {
-                background: url(../assets/landing-page/img/icon/eye_hide.svg) no-repeat left center;
-            }
-
-        #tab1 {
-            position: relative;
-        }
-
-            #tab1::before {
-                content: "";
-                height: 930px;
-                width: 1px;
-                background-color: #E1E2E3;
-                position: absolute;
-                top: 40px;
-                left: 50%;
-            }
-
-        .submit-button {
-            border-top: 1px solid #E1E2E3;
-            text-align: right;
-            padding: 30px;
-        }
-
-            .submit-button button {
-                border: none;
-                padding: 12px 36px 13px 36px;
-                font-size: 14px;
-                font-weight: bold;
-                display: inline-block;
-                border: 1px solid #E1E2E3;
-                border-radius: 8px;
-            }
-
-                .submit-button button.Save {
-                    background-color: #0F723A;
-                    color: #fff;
-                    border: 1px solid #0F723A;
-                }
-
-        .upload-image {
-            margin-bottom: 20px;
-        }
-
-            .upload-image label {
-                font-weight: bold;
-                font-size: 16px;
-                padding: 10px 20px;
-                background-color: #F2F7F4;
-                border-radius: 7px;
-                color: #000;
-                cursor: pointer;
-                display: block;
-                width: 109px;
-                margin-top: 14px;
-            }
-
-    </style>
+@section Styles {
+    <link href="~/assets/landing-page/css/my-account.css" rel="stylesheet" media="all" />
 }
-<!--================Breadcrumb Area =================-->
-<section class="breadcrumb_area">
-    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
-    <div class="container">
-        <div class="page-cover text-center">
-            <h2 class="page-cover-tittle">@Localizer["UserInformation"]</h2>
-            <ol class="breadcrumb">
-                <li><a asp-controller="Home" asp-action="Index">@Localizer["Home"]</a></li>
-                <li class="active">@Localizer["MyAccount"]</li>
-            </ol>
-        </div>
-    </div>
-</section>
-<!--================Breadcrumb Area =================-->
 <div class="container">
-    <div class="tab-content">
-        <div id="tab1" class="tab active">
-            <div class="row d-flex justify-content-between wrap-conntent-account">
-                <div class="col-6">
-                    <h2>@Localizer["UserInformation"]</h2>
-                    <form class="form-wrap" id="my-account-form">
-                        <div class="field upload-image">
-                            @if (Model.AvatarUrl != null)
-                            {
-                                <img src="@(appDomain + Model.AvatarUrl)" id="txtImageShow" alt="" style="width: 320px;">
-                            }
-                            else
-                            {
-                                <img src="~/assets/images/user.png" alt="" id="txtImageShow" style="width: 326px;">
-                            }
-
-                            <input type="text" class="form-control" id="txtImage" name="txtImage" hidden value="@Model.AvatarUrl" />
-                            <input type="text" class="form-control" id="appDomain" hidden value="@appDomain" />
-                            <input type="file" name="" id="fileInputImage" hidden>
-                            <label for="txtImage" id="btnSelectImg">@Localizer["Change"]</label>
-                        </div>
-
-                        <div class="field">
-                            <label for="fullName">@Localizer["FullName"]</label>
-                            <input id="fullname" type="text" class="form-control" name="fullname" value="@Model.FullName" placeholder="@Localizer["FullName"]">
-                        </div>
-                        <div class="field">
-                            <label for="email">Email</label>
-                            <input id="email" value="@Model.Email" disabled type="text" class="form-control" placeholder="Email">
-                        </div>
-                        <div class="field">
-                            <label for="address">@Localizer["Address"]</label>
-                            <textarea name="" id="address" name="address" cols="30" rows="5">@Model.Address</textarea>
-                        </div>
-                        <div class="field">
-                            <label for="phoneNumber">@Localizer["PhoneNumber"]</label>
-                            <input id="phonenumber" value="@Model.PhoneNumber" name="phonenumber" type="text" class="form-control keypress" placeholder="@Localizer["PhoneNumber"]">
-                        </div>
-                    </form>
-                    <div class="submit-button">
-                        <button class="Save" id="btnMyAccountSave">@Localizer["Save"]</button>
-                    </div>
-                </div>
-
-                <div class="col-6" style="flex: 0 0 47%;">
-                    <h2>@Localizer["CurrentPassword"]</h2>
-                    <form class="form-wrap form-login" id="change-password-form">
-                        <div class="field">
-                            <label for="currentPassword">@Localizer["CurrentPassword"]</label>
-                            <div class="field-password">
-                                <input id="currentpassword" name="currentpassword" type="password" class="form-control" placeholder="@Localizer["Password"]">
+    <div class="my-account-content">
+        <div class="breadcrumb-flex">
+            <div class="breadcrumb-inner">
+                <a asp-controller="Home" asp-action="Index">@Localizer["Home"]</a><span>@Localizer["MyAccount"]</span>
+            </div>
+        </div>
+        <div class="tabs-body">
+            <div class="tabs">
+                <ul class="tab-links">
+                </ul>
+                <div class="tab-content">
+                    <div id="tab1" class="tab active">
+                        <div class="row d-flex justify-content-between wrap-conntent-account">
+                            <div class="col-6">
+                                <h2>@Localizer["Information"]</h2>
+                                <form class="form-wrap" id="my-account-form">
+                                    <div class="field upload-image">
+                                        @if (string.IsNullOrEmpty(Model.AvatarUrl))
+                                        {
+                                            <img width="78px" id="showImageMyAccount" height="78px" src="~/assets/landing-page/img/logo/no-avatar.webp" alt="no-avatar" />
+                                        }
+                                        else
+                                        {
+                                            <img width="78px" id="showImageMyAccount" height="78px" src="@appDomain@Model.AvatarUrl" alt="no-avatar" />
+                                        }
+                                        <input type="file" id="fileInputImage" hidden>
+                                        <input type="text" id="appDomain" value="@appDomain" hidden>
+                                        <input type="text" id="txtImage" name="txtImage" value="@Model.AvatarUrl" hidden>
+                                        <label for="txtImage" id="btnSelectImg">
+                                            @Localizer["Change"]
+                                        </label>
+                                    </div>
+                                    <div class="field">
+                                        <label for="fullname">@Localizer["Full Name"]</label>
+                                        <input id="fullname" type="text" class="form-control" name="fullname" value="@Model.FullName" placeholder="@Localizer["Full Name"]">
+                                    </div>
+                                    <div class="field">
+                                        <label for="email">Email</label>
+                                        <input id="email" value="@Model.Email" disabled type="text" class="form-control" placeholder="Email">
+                                    </div>
+                                    <div class="field">
+                                        <label for="address">@Localizer["Address"]</label>
+                                        <textarea name="" id="address" name="address" cols="30" rows="5">@Model.Address</textarea>
+                                    </div>
+                                    <div class="field">
+                                        <label for="phonenumber">@Localizer["Phone Number"]</label>
+                                        <input id="phonenumber" value="@Model.PhoneNumber" name="phonenumber" type="text" class="form-control keypress" placeholder="@Localizer["Phone Number"]">
+                                    </div>
+                                    <div class="field">
+                                        <label for="company">@Localizer["Company"]</label>
+                                        <input id="company" type="text" class="form-control" value="@Model.CompanyName" name="company" placeholder="@Localizer["Company"]">
+                                    </div>
+                                </form>
+                                <div class="submit-button">
+                                    <button class="Save" id="btnMyAccountSave">@Localizer["Save"]</button>
+                                </div>
                             </div>
-                            <span class="eye_icon"></span>
-                        </div>
-                        <div class="field">
-                            <label for="passwordNew">@Localizer["NewPassword"]</label>
-                            <div class="field-password">
-                                <input id="password" type="password" name="password" class="form-control" placeholder="@Localizer["Password"]">
+                            <div class="col-6">
+                                <h2>@Localizer["Change Password"]</h2>
+                                <div id="error-change-password" style="color:red;"></div>
+                                <form class="form-wrap form-login" id="change-password-form">
+                                    <div class="field">
+                                        <label for="currentpassword">@Localizer["Current Password"]</label>
+                                        <div class="field-password">
+                                            <input id="currentpassword" name="currentpassword" type="password" class="form-control" placeholder="@Localizer["Current Password"]">
+                                        </div>
+                                        <span class="eye_icon"></span>
+                                    </div>
+                                    <div class="field">
+                                        <label for="password">@Localizer["New Password"]</label>
+                                        <div class="field-password">
+                                            <input id="password" type="password" name="password" class="form-control" placeholder="@Localizer["New Password"]">
+                                        </div>
+                                        <span class="eye_icon"></span>
+                                    </div>
+                                    <div class="field">
+                                        <label for="confirmPassword">@Localizer["Confirm Password"]</label>
+                                        <div class="field-password">
+                                            <input id="confirmPassword" type="password" name="confirmPassword" class="form-control" placeholder="@Localizer["Confirm Password"]">
+                                        </div>
+                                        <span class="eye_icon"></span>
+                                    </div>
+                                </form>
+                                <div class="submit-button">
+                                    <button class="Save" id="btnChangePassword">@Localizer["Save"]</button>
+                                </div>
                             </div>
-                            <span class="eye_icon"></span>
                         </div>
-                        <div class="field">
-                            <label for="confirmPassword">@Localizer["ConfirmPassword"]</label>
-                            <div class="field-password">
-                                <input id="confirmPassword" type="password" name="confirmPassword" class="form-control" placeholder="@Localizer["ConfirmPassword"]">
-                            </div>
-                            <span class="eye_icon"></span>
-                        </div>
-                    </form>
-                    <div class="submit-button">
-                        <button class="Save" id="btnChangePassword">@Localizer["Save"]</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@section Scripts
+{
+    <script src="~/client-app/controllers/home/my-account.js"></script>
+}
