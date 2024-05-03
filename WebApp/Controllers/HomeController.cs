@@ -89,7 +89,6 @@ namespace WebApp.Controllers
 
                 if (userWithSameEmail != null)
                 {
-                    result.CompanyName = userWithSameEmail!.CompanyName;
                     result.Address = userWithSameEmail.Address;
                     result.AvatarUrl = userWithSameEmail.AvatarUrl;
                     result.Email = userWithSameEmail.Email!;

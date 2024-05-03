@@ -86,7 +86,6 @@ if (flagMultiLanguageMyAccount == 'en-US') {
     });
 }
 
-
 // Event click Select Img button
 $('#btnSelectImg').on('click', function () {
     $('#fileInputImage').click();
@@ -133,7 +132,6 @@ $('#btnMyAccountSave').on('click', function (e) {
     if ($('#my-account-form').valid()) {
         e.preventDefault();
         var data = {
-            CompanyName: $('#company').val(),
             Address: $('#address').val(),
             AvatarUrl: $('#txtImage').val(),
             Email: $('#email').val(),
@@ -153,6 +151,7 @@ var SaveEntity = function (data) {
         success: function (res) {
             if (res) {
                 alert("Success");
+                resetFormMaintainance();
                 location.reload();
             }
             else {
@@ -171,10 +170,10 @@ $.validator.addMethod("strongPassword", function (value, element) {
     var hasUpperCase = /[A-Z]/.test(value);
     var hasLowerCase = /[a-z]/.test(value);
     var hasDigit = /\d/.test(value);
-    var hasSpecial = /[@$!%*?&]/.test(value);
+    var hasSpecial = /[$!%*?&]/.test(value);
 
     return hasUpperCase && hasLowerCase && hasDigit && hasSpecial;
-}, "Password must contain at least 9 characters, including at least one uppercase letter, one lowercase letter, one number, and one special character (@$!%*?&)");
+}, "Password must contain at least 9 characters, including at least one uppercase letter, one lowercase letter, one number, and one special character ($!%*?&)");
 
 $('#btnChangePassword').on('click', function (e) {
     if ($('#change-password-form').valid()) {
@@ -197,11 +196,18 @@ var ChangePassword = function (data) {
             if (res.succeeded) {
                 $('#error-change-password').text("");
                 alert("Success");
-                location.reload;
+                resetFormMaintainance();
+                location.reload();
             }
             else {
                 $('#error-change-password').text(res.messages);
             }
         }
     })
+}
+
+var resetFormMaintainance = function () {
+    $('#currentpassword').val('');
+    $('#password').val('');
+    $('#confirmPassword').val('');
 }
