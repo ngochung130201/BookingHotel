@@ -93,7 +93,7 @@ namespace WebApp.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [Route("/blog/blog-details/{id}")]
+        [Route("blog-details/{id}")]
         public async Task<IActionResult> BlogDetails(int id)
         {  
             var result = new ClientNewsDetailsResponse();
@@ -134,12 +134,12 @@ namespace WebApp.Controllers
             if (request.Id == 0)
             {
                 var result = await commentService.Add(request);
-                return Redirect($"blog/blog-details/{request.NewId}");
+                return Redirect($"/blog-details/{request.NewId}");
             }
             else
             {
                 var result = await commentService.Update(request);
-                return Redirect($"blog/blog-details/{request.NewId}");
+                return Redirect($"/blog-details/{request.NewId}");
             }
         }
 
