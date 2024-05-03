@@ -9,6 +9,7 @@
 @section Styles {
     <link href="~/assets/landing-page/css/my-account.css" rel="stylesheet" media="all" />
 }
+
 <div class="container">
     <div class="my-account-content">
         <div class="breadcrumb-flex">
@@ -38,7 +39,7 @@
                                         <input type="file" id="fileInputImage" hidden>
                                         <input type="text" id="appDomain" value="@appDomain" hidden>
                                         <input type="text" id="txtImage" name="txtImage" value="@Model.AvatarUrl" hidden>
-                                        <label for="txtImage" id="btnSelectImg">
+                                        <label for="fileInputImage" id="btnSelectImg">
                                             @Localizer["Change"]
                                         </label>
                                     </div>
@@ -51,20 +52,16 @@
                                         <input id="email" value="@Model.Email" disabled type="text" class="form-control" placeholder="Email">
                                     </div>
                                     <div class="field">
-                                        <label for="address">@Localizer["Address"]</label>
-                                        <textarea name="" id="address" name="address" cols="30" rows="5">@Model.Address</textarea>
-                                    </div>
-                                    <div class="field">
                                         <label for="phonenumber">@Localizer["Phone Number"]</label>
                                         <input id="phonenumber" value="@Model.PhoneNumber" name="phonenumber" type="text" class="form-control keypress" placeholder="@Localizer["Phone Number"]">
                                     </div>
                                     <div class="field">
-                                        <label for="company">@Localizer["Company"]</label>
-                                        <input id="company" type="text" class="form-control" value="@Model.CompanyName" name="company" placeholder="@Localizer["Company"]">
+                                        <label for="address">@Localizer["Address"]</label>
+                                        <textarea name="" id="address" name="address" cols="30" rows="5">@Model.Address</textarea>
                                     </div>
                                 </form>
                                 <div class="submit-button">
-                                    <button class="Save" id="btnMyAccountSave">@Localizer["Save"]</button>
+                                    <button type="button" class="Save" id="btnMyAccountSave">@Localizer["Save"]</button>
                                 </div>
                             </div>
                             <div class="col-6">
@@ -94,7 +91,7 @@
                                     </div>
                                 </form>
                                 <div class="submit-button">
-                                    <button class="Save" id="btnChangePassword">@Localizer["Save"]</button>
+                                    <button type="button" class="Save" id="btnChangePassword">@Localizer["Save"]</button>
                                 </div>
                             </div>
                         </div>
@@ -104,7 +101,7 @@
         </div>
     </div>
 </div>
-@section Scripts
-{
-    <script src="~/client-app/controllers/home/my-account.js"></script>
+
+@section Scripts {
+    <script src="~/client-app/controllers/home/myAccount.js" asp-append-version="true"></script>
 }
