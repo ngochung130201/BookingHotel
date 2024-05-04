@@ -7,8 +7,7 @@
     var httpContext = ViewContext.HttpContext;
     string appDomain = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}";
 }
-
-@section Scripts {
+@section Styles {
     <link href="~/assets/client1/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="~/assets/client1/css/layers.css" rel="stylesheet" type="text/css" />
     <link href="~/assets/client1/css/settings.css" rel="stylesheet" type="text/css" />
@@ -32,6 +31,15 @@
     <link rel="stylesheet" href="~/assets/client/css/flaticon.css">
     <link rel="stylesheet" href="~/assets/client/css/icomoon.css">
     <link rel="stylesheet" href="~/assets/client/css/style.css">
+    <style>
+
+        .form-size {
+            font-size: 12px;
+        }
+    </style>
+}
+@section Scripts {
+    <script src="~/client-app/controllers/room/roomDetail.js" asp-append-version="true"></script>
 
     <script src="~/assets/client/js/jquery.min.js"></script>
     <script src="~/assets/client/js/jquery-migrate-3.0.1.min.js"></script>
@@ -48,12 +56,6 @@
     <script src="~/assets/client/js/jquery.timepicker.min.js"></script>
     <script src="~/assets/client/js/scrollax.min.js"></script>
     <script src="~/assets/client/js/main.js"></script>
-    <style>
-
-        .form-size {
-            font-size: 12px;
-        }
-    </style>
 }
 <!--================Breadcrumb Area =================-->
 <section class="breadcrumb_area">
@@ -269,55 +271,22 @@
                         </div>
                     </div>
                 </div>
-                @foreach (var reply in Model.Replies)
-                {
-                    <div class="comment-list left-padding">
-                        <div class="single-comment justify-content-between d-flex">
-                            <div class="user justify-content-between d-flex">
-                                <div class="thumb">
-                                    <img src="@reply.Avatar" alt="" width="50" height="50">
-                                </div>
-                                <div class="desc">
-                                    <h5><a href="#">@reply.FullName</a></h5>
-                                    <p class="date">@reply.CreatedOn</p>
-                                    <p class="comment">
-                                        @reply.Content
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                }
-                <form asp-controller="Room" asp-action="SaveEntityReply" method="post" novalidate="novalidate">
-                    <div class="form-group">
-                        <input type="hidden" name="Id" id="hidRId" value="0" />
-                    </div>
-                    <div class="form-group">
-                        <input type="hidden" name="CommentId" id="CommentId" value="@comment.Id" />
-                    </div>
-                    <div class="form-group">
-                        <textarea class="form-control mb-10 form-size" rows="3" id="txtContent" name="Content" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
-                    </div>
-                    <div class="reply-btn">
-                        <button type="submit" value="submit" class="btn-reply text-uppercase">reply</button>
-                    </div>
-                </form>
             }
         </div>
 
         <div class="comment-form">
             <h4>Leave a Reply</h4>
-            <form id="formMaintainance" asp-controller="Room" asp-action="SaveEntity" method="post" novalidate="novalidate">
+            <form id="formMaintainance" method="post" novalidate="novalidate">
                 <div class="form-group">
-                    <input type="hidden" name="Id" id="hidId" value="0"/>
+                    <input type="hidden" name="Id" id="hidId" value="0" />
                 </div>
                 <div class="form-group">
-                    <input type="hidden" name="RoomId" id="RoomId" value="@Model.Room.Id"/>
+                    <input type="hidden" name="RoomId" id="RoomId" value="@Model.Room.Id" />
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control mb-10" rows="5" id="txtContent" name="Content" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
+                    <textarea class="form-control mb-10" rows="5" id="txtContent" name="Content" placeholder="Message" required></textarea>
                 </div>
-                <button type="submit" value="submit" class="primary-btn button_hover" id="btn-postComment">Post Comment</button>
+                <button type="submit" class="primary-btn button_hover" id="btn-postComment">Post Comment</button>
             </form>
         </div>
     </div>

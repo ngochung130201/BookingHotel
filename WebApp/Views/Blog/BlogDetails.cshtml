@@ -8,6 +8,7 @@
     string appDomain = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}";
 }
 @section Scripts {
+    <script src="~/client-app/controllers/news/index.js" asp-append-version="true"></script>
     <style>
         .blog_info {
             text-align: left;
@@ -51,7 +52,7 @@
                 </div>
 
                 <div class="comments-area">
-                    <h4>@(Model.Comments.Count() + Model.Replies.Count()) Comments</h4>
+                    <h4>@(Model.Comments.Count()) Comments</h4>
                     @foreach (var comment in Model.Comments)
                     {
                         <div class="comment-list">
@@ -70,45 +71,12 @@
                                 </div>
                             </div>
                         </div>
-                        @foreach (var reply in Model.Replies)
-                        {
-                            <div class="comment-list left-padding">
-                                <div class="single-comment justify-content-between d-flex">
-                                    <div class="user justify-content-between d-flex">
-                                        <div class="thumb">
-                                            <img src="@reply.Avatar" alt="" width="50" height="50">
-                                        </div>
-                                        <div class="desc">
-                                            <h5><a href="#">@reply.FullName</a></h5>
-                                            <p class="date">@reply.CreatedOn</p>
-                                            <p class="comment">
-                                                @reply.Content
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                        <form asp-controller="Blog" asp-action="SaveEntityReply" method="post" novalidate="novalidate">
-                            <div class="form-group">
-                                <input type="hidden" name="Id" id="hidRId" value="0" />
-                            </div>
-                            <div class="form-group">
-                                <input type="hidden" name="CommentId" id="CommentId" value="@comment.Id" />
-                            </div>
-                            <div class="form-group">
-                                <textarea class="form-control mb-10 form-size" rows="3" id="txtContent" name="Content" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
-                            </div>
-                            <div class="reply-btn">
-                                <button type="submit" value="submit" class="btn-reply text-uppercase">reply</button>
-                            </div>
-                        </form>
                     }
                 </div>
 
                 <div class="comment-form">
                     <h4>Leave a Reply</h4>
-                    <form id="formMaintainance" asp-controller="Blog" asp-action="SaveEntity" method="post" novalidate="novalidate">
+                    <form id="formMaintainance" method="post" novalidate="novalidate">
                         <div class="form-group">
                             <input type="hidden" name="Id" id="hidId" value="0" />
                         </div>
@@ -131,7 +99,7 @@
                                 <li><a href="#"><i class="lnr lnr-user"></i> @Model.NewsDetail.Author</a></li>
                                 <li><a href="#"><i class="lnr lnr-calendar-full"></i> @Model.NewsDetail.CreatedOn</a></li>
                                 <li><a href="#"><i class="lnr lnr-eye"></i> 1.2M Views</a></li>
-                                <li><a href="#"><i class="lnr lnr-bubble"></i> @(Model.Comments.Count() + Model.Replies.Count()) Comments></a></li>
+                                <li><a href="#"><i class="lnr lnr-bubble"></i> @(Model.Comments.Count()) Comments></a></li>
                                 </ul>
                                 <ul class="social-links">
                                     <li><a href="#"><i class="fa fa-facebook"></i></a></li>
