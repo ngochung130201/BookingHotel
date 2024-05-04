@@ -13,6 +13,8 @@
     <script src="~/assets/landing-page/js/jquery.validate.min.js"></script>
     <script src="~/assets/landing-page/js/contact.js"></script>
     <script src="~/assets/landing-page/js/custom.js"></script>
+
+    <script src="~/client-app/controllers/contact/index.js" asp-append-version="true"></script>
 }
 
 <!--================Breadcrumb Area =================-->
@@ -61,47 +63,29 @@
                 </div>
             </div>
             <div class="col-md-9">
-                <form class="row contact_form" asp-controller="Contact" asp-action="PostFeedback" method="post" novalidate="novalidate">
+                <form class="row contact_form" id="formContact">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="name" name="Name" placeholder="@Localizer["EnterYourName"]">
+                            <input type="text" class="form-control" id="nameContact" name="Name" placeholder="@Localizer["EnterYourName"]">
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control" id="email" name="Email" placeholder="@Localizer["EnterEmailAddress"]">
+                            <input type="email" class="form-control" id="emailContact" name="Email" placeholder="@Localizer["EnterEmailAddress"]">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="subject" name="Title" placeholder="@Localizer["EnterSubject"]">
+                            <input type="text" class="form-control" id="titleContact" name="Title" placeholder="@Localizer["EnterSubject"]">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <textarea class="form-control" name="Content" id="message" rows="1" placeholder="@Localizer["EnterMessage"]"></textarea>
+                            <textarea class="form-control" name="Content" id="contentContact" rows="1" placeholder="@Localizer["EnterMessage"]"></textarea>
                         </div>
                     </div>
                     <div class="col-md-12 text-right">
-                        <button type="submit" value="submit" class="btn theme_btn button_hover">@Localizer["SendMessage"]</button>
+                        <button type="submit" value="submit" class="btn theme_btn button_hover" id="btnContact">@Localizer["SendMessage"]</button>
                     </div>
                 </form>
-                @if (TempData["SuccessMessage"] != null)
-                {
-                    <div id="successAlert" class="alert alert-success" role="alert">
-                        @TempData["SuccessMessage"]
-                    </div>
-                }
             </div>
         </div>
     </div>
 </section>
 <!--================Contact Area =================-->
-<script>
-    // Đợi cho toàn bộ trang được tải xong
-    $(document).ready(function () {
-        // Xác định thông báo thành công
-        var successAlert = $("#successAlert");
-
-        // Ẩn thông báo khi người dùng nhấp vào
-        successAlert.click(function () {
-            successAlert.hide();
-        });
-    });
-</script>

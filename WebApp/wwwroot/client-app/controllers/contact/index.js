@@ -3,21 +3,18 @@
     ignore: [],
     lang: 'en',
     rules: {
-        name : {
+        nameContact : {
             required: true
         },
-        email: {
+        emailContact: {
             required: true
         },
-        service: {
+        titleContact: {
             required: true
         },
-        company: {
+        contentContact: {
             required: true
         },
-        description: {
-            required: true
-        }
     }
 });
 $('#btnContact').on('click', function (e) {
@@ -26,9 +23,8 @@ $('#btnContact').on('click', function (e) {
         var data = {
             name: $('#nameContact').val(),
             email: $('#emailContact').val(),
-            service: $('#serviceContact').val(),
-            company: $('#companyContact').val(),
-            description: $('#descriptionContact').val(),
+            title: $('#titleContact').val(),
+            content: $('#contentContact').val(),
         }
         sendContact(data);
     }
@@ -38,7 +34,7 @@ var sendContact = function (data) {
         type: 'POST',
         data: { request: data },
         dataType: 'json',
-        url: '/send-contact',
+        url: '/PostFeedback',
         success: function (res) {
             if (res) {
                 alert("Send contact success");

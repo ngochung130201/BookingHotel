@@ -32,9 +32,7 @@ namespace WebApp.Controllers
                 
             var result = await feedBackService.Add(request);
 
-            TempData["SuccessMessage"] = "Your feedback has been submitted successfully!";
-
-            return RedirectToAction("Index");
+            return Json(result);
         }
     }
 }

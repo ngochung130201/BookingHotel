@@ -86,6 +86,7 @@ var FeedBackController = function () {
                         render += Mustache.render(template, {
                             Order: stt,
                             Id: item.id,
+                            Name: item.name,
                             Email: item.email,
                             Title: item.title,
                             Content: item.content,

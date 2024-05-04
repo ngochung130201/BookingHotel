@@ -44,6 +44,7 @@ namespace BusinessLogic.Services
                         select new FeedBacksResponse
                         {
                             Id = f.Id,
+                            Name = f.Name,
                             Title = f.Title,
                             Content = f.Content,
                             Email = f.Email,
