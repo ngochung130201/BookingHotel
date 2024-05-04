@@ -34,6 +34,5 @@ namespace BusinessLogic.Dtos.News
     {
         public NewsDto NewsDetail { get; set; } = new();
         public List<CommentResponse> Comments { get; set; } = new();
-        public List<ReplyCommentResponse> Replies { get; set; } = new();
     }
 }

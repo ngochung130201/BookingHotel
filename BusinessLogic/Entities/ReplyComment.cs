@@ -4,7 +4,7 @@ namespace BusinessLogic.Entities
 {
     public class ReplyComment : AuditableBaseEntity<int>
     {
-        public int CommentId { get; set; }
+        public int? CommentId { get; set; }
 
         public string? Content { get; set; } 
 

@@ -68,17 +68,6 @@ namespace WebApp.Controllers
                 var resultComment = await commentService.GetPagination(commentRequest);
                 newsResponse.Comments = resultComment.Data;
 
-                // Duyệt qua từng bình luận và lấy danh sách trả lời cho mỗi bình luận
-                foreach (var comment in resultComment.Data)
-                {
-                    var replyCommentRequest = new ReplyCommentRequest
-                    {
-                        CommentId = comment.Id
-                    };
-                    var resultReplyComment = await replyCommentService.GetPagination(replyCommentRequest);
-                    newsResponse.Replies = resultReplyComment.Data;
-                }
-
                 // Thêm NewsResponse vào danh sách
                 newsResponses.Add(newsResponse);
             }
@@ -102,14 +91,7 @@ namespace WebApp.Controllers
             {
                 NewId = id,
             });
-            foreach (var comment in resultComment.Data)
-            {
-                var resultReplyComment = await replyCommentService.GetPagination(new ReplyCommentRequest
-                {
-                    CommentId = comment.Id,
-                });
-                result.Replies = resultReplyComment.Data;
-            }
+
             result.Comments = resultComment.Data;
             result.NewsDetail = resultNewsDetails.Data;
             return View(result);
@@ -134,40 +116,13 @@ namespace WebApp.Controllers
             if (request.Id == 0)
             {
                 var result = await commentService.Add(request);
-                return Redirect($"/blog-details/{request.NewId}");
+                return Json(result);
             }
             else
             {
                 var result = await commentService.Update(request);
-                return Redirect($"/blog-details/{request.NewId}");
+                return Json(result);
             }
-        }
-
-        /// <summary>
-        /// Save entity reply
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public async Task<IActionResult> SaveEntityReply(ReplyCommentDto request)
-        {
-            if (!ModelState.IsValid)
-            {
-                IEnumerable<ModelError> allErrors = ModelState.Values.SelectMany(v => v.Errors);
-                return new BadRequestObjectResult(allErrors);
-            }
-
-            if (request.Id == 0)
-            {
-                var result = await replyCommentService.Add(request);
-            }
-            else
-            {
-                var result = await replyCommentService.Update(request);
-            }
-            string currentUrl = HttpContext.Request.Path;
-
-            return Redirect(currentUrl);
-        }
+        } 
     }
 }
