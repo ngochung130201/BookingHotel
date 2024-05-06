@@ -44,11 +44,11 @@ namespace BusinessLogic.Services
 
         public async Task<PaginatedResult<BookingResponse>> GetPagination(BookingRequest request)
         {
-            var query = from b in _dbContext.Bookings
+            var query = from b in _dbContext.Bookings.Where(b => !b.IsDeleted && (request.UserId == null || b.UserId == request.UserId))
                         join u in _dbContext.Users.Where(x => !x.IsDeleted) on b.UserId equals u.Id
                         join sb in _dbContext.SpecialDayBooking.Where(x => !x.IsDeleted) on b.Id equals sb.BookingId
                         join pm in _dbContext.PriceManager.Where(x => !x.IsDeleted) on sb.SpecialDayId equals pm.Id
-                        where !b.IsDeleted && (string.IsNullOrEmpty(request.Keyword)
+                        where (string.IsNullOrEmpty(request.Keyword)
                             || u.FullName.ToLower().Contains(request.Keyword.ToLower())
                             || b.Status!.HasValue && request.Status != null && request.Status == b.Status)
                         select new BookingResponse
@@ -69,7 +69,8 @@ namespace BusinessLogic.Services
                                                where !c.IsDeleted
                                                select c).Count(),
                             TotalAmount = b.TotalAmount,
-                            Status = b.Status
+                            Status = b.Status,
+                            CreatedOn = b.CreatedOn,
                         };
 
             var totalRecord = query.Count();
@@ -110,6 +111,7 @@ namespace BusinessLogic.Services
                                                          select new BookingDetailDto()
                                                          {
                                                              RoomId = r.Id,
+                                                             Image = r.Thumbnail,
                                                              Name = r.Name,
                                                              Price = r.Price,
                                                          }).ToList(),
@@ -119,6 +121,7 @@ namespace BusinessLogic.Services
                                                        select new CostBookingDto()
                                                        {
                                                            CostId = c.Id,
+                                                           Image = c.Image,
                                                            Name = c.Name,
                                                            Price = c.Price,
                                                        }).ToList(),
