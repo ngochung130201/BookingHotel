@@ -139,13 +139,13 @@
     <value>Phòng Gym</value>
   </data>
   <data name="HomeText1" xml:space="preserve">
-    <value>Nếu bạn đang xem các băng cassette trống trên web, bạn có thể rất bối rối trước&lt;br&gt; sự chênh lệch về giá. Bạn có thể thấy một số với giá thấp nhất là 0,17 USD mỗi cái.</value>
+    <value>Nằm bên bờ biển, Khách Sạn Royal tạo ra không gian sang trọng và thư giãn với kiến trúc hiện đại và dịch vụ chuyên nghiệp. Với phòng nghỉ tiện nghi và đội ngũ nhân viên nhiệt tình, đây là điểm đến lý tưởng cho một kỳ nghỉ đáng nhớ. Cho dù bạn muốn thư giãn hay khám phá, đây là địa điểm hoàn hảo để trải nghiệm.</value>
   </data>
   <data name="HomeText10" xml:space="preserve">
-    <value>Việc sử dụng Internet ngày càng trở nên phổ biến hơn do sự tiến bộ nhanh chóng của công nghệ và sức mạnh.</value>
+    <value>Trang thiết bị hiện đại, không gian rộng rãi, hướng dẫn viên chuyên nghiệp, giúp du khách duy trì phong độ và sức khỏe trong suốt kỳ nghỉ của mình.</value>
   </data>
   <data name="HomeText11" xml:space="preserve">
-    <value>Việc sử dụng Internet ngày càng trở nên phổ biến hơn do sự tiến bộ nhanh chóng của công nghệ và sức mạnh.</value>
+    <value>Không gian lịch lãm và thư giãn, với các loại đồ uống đặc biệt và cocktail, kèm theo không gian âm nhạc, tạo nên trải nghiệm thú vị và độc đáo cho du khách.</value>
   </data>
   <data name="HomeText12" xml:space="preserve">
     <value>Giới thiệu về chúng tôi &lt;br&gt;Lịch sử của chúng tôi&lt;br&gt;Sứ mệnh và tầm nhìn</value>
@@ -175,19 +175,19 @@
     <value>Tất cả chúng ta đều sống trong một thời đại thuộc về tâm hồn người trẻ. Cuộc sống đang trở nên cực kỳ nhanh chóng</value>
   </data>
   <data name="HomeText5" xml:space="preserve">
-    <value>Những người cực kỳ yêu thích hệ thống thân thiện với môi trường.</value>
+    <value>Cung cấp các tiện nghi và dịch vụ hoàn hảo, chú trọng trải nghiệm của khách hàng tại khách sạn.</value>
   </data>
   <data name="HomeText6" xml:space="preserve">
-    <value>Việc sử dụng Internet ngày càng trở nên phổ biến hơn do sự tiến bộ nhanh chóng của công nghệ và sức mạnh.</value>
+    <value>Nhà hàng của khách sạn là nơi kết hợp hương vị độc đáo với không gian sang trọng và ấm cúng. Với đội ngũ đầu bếp tài năng và dịch vụ chuyên nghiệp.</value>
   </data>
   <data name="HomeText7" xml:space="preserve">
-    <value>Việc sử dụng Internet ngày càng trở nên phổ biến hơn do sự tiến bộ nhanh chóng của công nghệ và sức mạnh.</value>
+    <value>Cung cấp không gian tập luyện hiện đại và các hoạt động thể thao đa dạng, giúp du khách tận hưởng một kỳ nghỉ hoàn hảo và năng động.</value>
   </data>
   <data name="HomeText8" xml:space="preserve">
-    <value>Việc sử dụng Internet ngày càng trở nên phổ biến hơn do sự tiến bộ nhanh chóng của công nghệ và sức mạnh.</value>
+    <value>Hồ bơi của khách sạn là điểm nhấn cho sự thư giãn và giải trí, với dịch vụ tại bể bơi và không gian tươi mới, đảm bảo trải nghiệm thú vị cho du khách.</value>
   </data>
   <data name="HomeText9" xml:space="preserve">
-    <value>Việc sử dụng Internet ngày càng trở nên phổ biến hơn do sự tiến bộ nhanh chóng của công nghệ và sức mạnh.</value>
+    <value>Tiện ích linh hoạt, cung cấp các loại phương tiện đa dạng và chất lượng, giúp du khách dễ dàng khám phá địa điểm một cách thoải mái và tiện lợi.</value>
   </data>
   <data name="HomeTitle1" xml:space="preserve">
     <value>Rời xa cuộc sống đơn điệu</value>
@@ -211,7 +211,7 @@
     <value>Loại phòng</value>
   </data>
   <data name="RoyalFacilities" xml:space="preserve">
-    <value>Cơ sở Hoàng gia</value>
+    <value>Bên trong Royal</value>
   </data>
   <data name="SportsCLub" xml:space="preserve">
     <value>Câu lạc bộ thể thao</value>

@@ -1,6 +1,7 @@
 ﻿﻿
 @model BusinessLogic.Dtos.News.ClientNewsDetailsResponse
 @using Microsoft.AspNetCore.Mvc.Localization
+@using WebApp.Extensions
 @inject IViewLocalizer Localizer
 @{
     ViewData["Title"] = Localizer["NewsDetail"];
@@ -73,22 +74,33 @@
                         </div>
                     }
                 </div>
-
-                <div class="comment-form">
-                    <h4>Leave a Reply</h4>
-                    <form id="formMaintainance" method="post" novalidate="novalidate">
-                        <div class="form-group">
-                            <input type="hidden" name="Id" id="hidId" value="0" />
-                        </div>
-                        <div class="form-group">
-                            <input type="hidden" name="NewId" id="NewId" value="@Model.NewsDetail.Id" />
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-control mb-10" rows="5" id="txtContent" name="Content" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
-                        </div>
-                        <button type="submit" value="submit" class="primary-btn button_hover" id="btn-postComment">Post Comment</button>
-                    </form>
-                </div>
+                @{
+                    bool isLoggedIn = !string.IsNullOrEmpty(User.GetSpecificClaim("UserId"));
+                } 
+                @if (isLoggedIn)
+                {
+                    <div class="comment-form">
+                        <h4>Leave a Reply</h4>
+                        <form id="formMaintainance" method="post" novalidate="novalidate">
+                            <div class="form-group">
+                                <input type="hidden" name="Id" id="hidId" value="0" />
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" name="NewId" id="NewId" value="@Model.NewsDetail.Id" />
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control mb-10" rows="5" id="txtContent" name="Content" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
+                            </div>
+                            <button type="submit" value="submit" class="primary-btn button_hover" id="btn-postComment">Post Comment</button>
+                        </form>
+                    </div>
+                }
+                else
+                {
+                    <div class="comment-form">
+                        <a href="/identity/login" type="submit" class="primary-btn button_hover">Please log in to comment</a>
+                    </div>
+                }              
             </div>
 
             <div class="col-lg-4">
