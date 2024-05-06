@@ -1,0 +1,133 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model BusinessLogic.Dtos.Booking.BookingDto
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Title"] = Localizer["MyBookingDetail"];
+    var httpContext = ViewContext.HttpContext;
+    string appDomain = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}";
+}
+
+<!--================Breadcrumb Area =================-->
+<section class="breadcrumb_area blog_banner_two">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+    <div class="container">
+        <div class="page-cover text-center">
+            <h2 class="page-cover-tittle f_48">My Booking Details</h2>
+            <ol class="breadcrumb">
+                <li><a href="/home">Home</a></li>
+                <li><a href="/my-booking">My Booking</a></li>
+                <li><a href="#">My Booking Details</a></li>
+            </ol>
+        </div>
+    </div>
+</section>
+<!--================Breadcrumb Area =================-->
+<section class="accomodation_area section_gap">
+    <div class="container">
+        <div class="section_title text-center">
+            <h2 class="title_color">@Localizer["My Booking Details"]</h2>
+            <p>@Localizer["See details of your booking here"]</p>
+        </div>
+        <div class="card-box">
+            <h4 class="header-title">Detail Room</h4>
+            <div class="table-responsive">
+                <table class="table mb-0">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Room name</th>
+                            <th>Room Image</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbl-content">
+                        @{
+                            int i = 1;
+                        }
+                        @foreach (var item in Model.BookingDetailDto!)
+                        {
+                            <tr>
+                                <td>@i++</td>
+                                <td>@item.Name</td>
+                                <td>@item.Image</td>
+                                <td>@item.Price</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card-box">
+            <h4 class="header-title">Detail Services Arising</h4>
+            <div class="table-responsive">
+                <table class="table mb-0">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Service name</th>
+                            <th>Service Image</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbl-content">
+                        @{
+                            int j = 1;
+                        }
+                        @if (Model.CostBookingDto == null)
+                        {
+                            <tr>
+                                <td colspan="6" style="text-align: center; vertical-align: middle;">@Localizer["Orders do not include additional services and fees"]</td>
+                            </tr>
+                        }
+                        else
+                        {
+                            foreach (var item in Model.CostBookingDto)
+                            {
+                                <tr>
+                                    <td>@j++</td>
+                                    <td>@item.Name</td>
+                                    <td>@item.Image</td>
+                                    <td>@item.Price</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>   
+        </div>
+
+        <div class="card-box">
+            <h4 class="header-title">Promotion</h4>
+            <div class="table-responsive">
+                <table class="table mb-0">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Discount</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbl-content">
+                        @if (Model.SpecialDayBookingDto != null)
+                        {
+                            <tr>
+                                <td>@Model.SpecialDayBookingDto.Title</td>
+                                <td>@Model.SpecialDayBookingDto.PercentDiscount</td>
+                                <td>@Model.SpecialDayBookingDto.Description</td>
+                            </tr>
+                        }
+                        else{
+                            <tr>
+                                <td colspan="6" style="text-align: center; vertical-align: middle;">@Localizer["This booking does not apply to promotions"]</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+}

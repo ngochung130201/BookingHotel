@@ -1,14 +1,18 @@
-﻿using BusinessLogic.Dtos.Home;
+﻿using BusinessLogic.Dtos.Booking;
+using BusinessLogic.Dtos.Home;
 using BusinessLogic.Dtos.News;
+using BusinessLogic.Dtos.Rooms;
 using BusinessLogic.Dtos.RoomTypes;
 using BusinessLogic.Entities.Identity;
 using BusinessLogic.Services;
+using BusinessLogic.Services.Common;
 using BusinessLogic.Services.Identity;
 using BusinessLogic.Wrapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Org.BouncyCastle.Asn1.Ocsp;
 using System.Globalization;
 
 namespace WebApp.Controllers
@@ -18,7 +22,9 @@ namespace WebApp.Controllers
                                 ITokenService tokenService,
                                 IUserClaimsPrincipalFactory<AppUser> userClaimsPrincipalFactory,
                                 SignInManager<AppUser> signInManager,
-                                UserManager<AppUser> userManager) : Controller
+                                UserManager<AppUser> userManager,
+                                IBookingService bookingService,
+                                ICurrentUserService currentUserService) : Controller
     {
         /// <summary>
         /// Home
@@ -138,5 +144,42 @@ namespace WebApp.Controllers
 
             return Json(Result.FailAsync("Change Password Fail"));
         }
+
+        /// <summary>
+        /// my booking
+        /// </summary>
+        /// <returns></returns>
+        [Route("my-booking")]
+        [Authorize]
+        public async Task<IActionResult> MyBooking()
+        {
+            var userId = currentUserService.UserId;
+            var result = await bookingService.GetPagination(new BookingRequest()
+            {
+                UserId = userId,
+            });
+            return View(result);
+        }
+
+        /// <summary>
+        /// my booking details
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Route("my-booking-details/{id}")]
+        [Authorize]
+        public async Task<IActionResult> MyBookingDetails(int id)
+        {
+            var result = await bookingService.GetById(id); 
+            if (result.Succeeded)
+            {
+                return View(result.Data); 
+            }
+            else
+            {
+                return View("ErrorView"); 
+            }
+        }
+
     }
 }

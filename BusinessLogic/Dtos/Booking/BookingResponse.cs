@@ -21,5 +21,7 @@
         public int BookedRoomNumber { get; set; }
 
         public int ServicesArising { get; set;}
+
+        public DateTime? CreatedOn { get; set; }
     }
 }

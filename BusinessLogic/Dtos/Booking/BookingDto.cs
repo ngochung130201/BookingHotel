@@ -43,6 +43,8 @@
     {
         public int? CostId { get; set; }
 
+        public string? Image { get; set; }
+
         public string? Name { get; set; }
 
         public decimal? Price { get; set; } 
@@ -50,6 +52,8 @@
 
     public class BookingDetailDto
     {
+        public string? Image { get; set; }
+
         public int? RoomId { get; set; }
 
         public string? Name { get; set; }

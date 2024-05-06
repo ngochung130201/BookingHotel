@@ -74,21 +74,18 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right profile-dropdown">
                                 <!-- item-->
-                                <a href="#" class="dropdown-item notify-item">
-                                    <i class="remixicon-account-circle-line"></i>
-                                    <span>@Localizer["MyBooking"]</span>
+                                <a href="/my-booking?UserId=@User.GetSpecificClaim("UserId")" class="dropdown-item notify-item">
+                                    <i class="remixicon-shopping-bag-3-line"></i> <span>@Localizer["MyBooking"]</span>
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <!-- item-->
                                 <a href="/my-account?UserId=@User.GetSpecificClaim("UserId")" class="dropdown-item notify-item">
-                                    <i class="remixicon-account-circle-line"></i>
-                                    <span>@Localizer["MyAccount"]</span>
+                                    <i class="remixicon-account-circle-line"></i> <span>@Localizer["MyAccount"]</span>
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <!-- item-->
                                 <a href="javascript:void(0);" onclick="logout();" class="dropdown-item notify-item">
-                                    <i class="remixicon-logout-box-line"></i>
-                                    <span>@Localizer["SignOut"]</span>
+                                    <i class="remixicon-logout-box-line"></i> <span>@Localizer["SignOut"]</span>
                                 </a>
                             </div>
                         </li>

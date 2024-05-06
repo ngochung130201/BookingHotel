@@ -1,0 +1,70 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model BusinessLogic.Wrapper.PaginatedResult<BusinessLogic.Dtos.Booking.BookingResponse>
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Title"] = Localizer["MyBooking"];
+    var httpContext = ViewContext.HttpContext;
+    string appDomain = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}";
+}
+
+<!--================Breadcrumb Area =================-->
+<section class="breadcrumb_area blog_banner_two">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+    <div class="container">
+        <div class="page-cover text-center">
+            <h2 class="page-cover-tittle f_48">My Booking</h2>
+            <ol class="breadcrumb">
+                <li><a href="/home">Home</a></li>
+                <li><a href="#">My Booking</a></li>
+            </ol>
+        </div>
+    </div>
+</section>
+<!--================Breadcrumb Area =================-->
+<section class="accomodation_area section_gap">
+    <div class="container">
+        <div class="section_title text-center">
+            <h2 class="title_color">@Localizer["History Purchase"]</h2>
+            <p>@Localizer["See all your bookings here"]</p>
+        </div>
+        <div class="card-box">
+            <div class="table-responsive">
+                <table class="table mb-0">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Booking Code</th>
+                            <th>Date Of Booking</th>
+                            <th>Booking Status</th>
+                            <th>Total Price</th>
+                            <th>Booking Details</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbl-content">
+                        @{int i = 1;}
+                        @foreach(var item in Model.Data){
+                            <tr>
+                                <td>@i++</td>
+                                <td>@item.BookingCode</td>
+                                <td>@item.TransactionDate<td>
+                                <td>@item.Status</td>
+                                <td>@item.TotalAmount</td>
+                                <td class="text-center action-columns">
+                                    <a href="#" data-id="@item.Id">See details</a>
+                                </td>                              
+                            </tr>
+                        }
+                        @if(i == 1){
+                            <tr>
+                                <td colspan="6" style="text-align: center; vertical-align: middle;">@Localizer["You dont have any bookings yet"]</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div> <!-- end card-box -->
+    </div>
+</section>
+
+@section Scripts {
+}
