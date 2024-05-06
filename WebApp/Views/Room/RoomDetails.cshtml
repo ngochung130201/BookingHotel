@@ -1,6 +1,7 @@
 ﻿﻿
 @model BusinessLogic.Dtos.Rooms.ClientRoomDetailResponse
 @using Microsoft.AspNetCore.Mvc.Localization
+@using WebApp.Extensions
 @inject IViewLocalizer Localizer
 @{
     ViewData["Title"] = Localizer["RoomDetails"];
@@ -146,46 +147,30 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="form_select">
-                                        <select name="booking-roomtype" class="form-control" title="Select Room Type" data-header="Room Type" disabled>
-                                            <option value="Single Room" selected>Single Room</option>
-                                            <option value="Double Room">Double Room</option>
-                                            <option value="Deluxe Room">Deluxe Room</option>
-                                        </select>
+                                        <input class="form-control" name="booking-phone" value="@Model.Room.Name" type="text" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12 nopadding">
                                     <div class="form_select">
-                                        <select name="booking-adults" class="form-control md_noborder_right" title="Adults" data-header="Adults">
-                                            <option value="0">0</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                        </select>
+                                        <input class="form-control" name="booking-phone" value="@Model.Room.Adult Adult" type="text" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12 nopadding">
                                     <div class="form_select">
-                                        <select name="booking-children" class="form-control" title="Children" data-header="Children">
-                                            <option value="0">0</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                        </select>
+                                        <input class="form-control" name="booking-phone" value="@Model.Room.Kid Child" type="text" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12 nopadding">
                                     <div class="input-group">
                                         <div class="form_date">
-                                            <input type="text" class="datepicker form-control md_noborder_right" name="booking-checkin" placeholder="Arrival Date">
+                                            <input type="date" class="datepicker form-control md_noborder_right" name="booking-checkin" placeholder="Arrival Date">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12 nopadding">
                                     <div class="input-group">
                                         <div class="form_date">
-                                            <input type="text" class="datepicker form-control" name="booking-checkout" placeholder="Departure Date">
+                                            <input type="date" class="datepicker form-control" name="booking-checkout" placeholder="Departure Date">
                                         </div>
                                     </div>
                                 </div>
@@ -273,21 +258,32 @@
                 </div>
             }
         </div>
-
-        <div class="comment-form">
-            <h4>Leave a Reply</h4>
-            <form id="formMaintainance" method="post" novalidate="novalidate">
-                <div class="form-group">
-                    <input type="hidden" name="Id" id="hidId" value="0" />
-                </div>
-                <div class="form-group">
-                    <input type="hidden" name="RoomId" id="RoomId" value="@Model.Room.Id" />
-                </div>
-                <div class="form-group">
-                    <textarea class="form-control mb-10" rows="5" id="txtContent" name="Content" placeholder="Message" required></textarea>
-                </div>
-                <button type="submit" class="primary-btn button_hover" id="btn-postComment">Post Comment</button>
-            </form>
-        </div>
+        @{
+            bool isLoggedIn = !string.IsNullOrEmpty(User.GetSpecificClaim("UserId"));
+        }
+        @if (isLoggedIn)
+        {
+            <div class="comment-form">
+                <h4>Leave a Reply</h4>
+                <form id="formMaintainance" method="post" novalidate="novalidate">
+                    <div class="form-group">
+                        <input type="hidden" name="Id" id="hidId" value="0" />
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" name="RoomId" id="RoomId" value="@Model.Room.Id" />
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control mb-10" rows="5" id="txtContent" name="Content" placeholder="Message" required></textarea>
+                    </div>
+                    <button type="submit" class="primary-btn button_hover" id="btn-postComment">Post Comment</button>
+                </form>
+            </div>
+        }
+        else
+        {
+            <div class="comment-form">
+                <a href="/identity/login" type="submit" class="primary-btn button_hover">Please log in to comment</a>
+            </div>
+        }    
     </div>
 </section> <!-- .section -->
