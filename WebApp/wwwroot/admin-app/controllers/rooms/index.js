@@ -7,6 +7,17 @@ var RoomsController = function () {
     }
 
     var registerEvents = function () {
+        $('#downloadTemplateLink').on('click', function (e) {
+            e.preventDefault();
+            // call ajax to download file
+            window.location.href = '/Admin/Room/DownloadTemplate';
+
+        });
+        $('#excelFileInput').on('change', function () {
+            var fileName = $(this).val().split('\\').pop();
+            $(this).next('.custom-file-label').addClass("selected").html(fileName);
+        });
+
         //Init validation
         $('#formMaintainance').validate({
             errorClass: 'text-danger',
@@ -95,6 +106,77 @@ var RoomsController = function () {
             $('#modal-list-image').modal('show');
             $('hidId').val($(this).data('id'));
         })
+
+        //event click btn-exportExcel 
+        $('#btn-exportExcel').on('click', function (e) {
+            e.preventDefault();
+            var keyword = $('#txtKeyword').val();
+            window.location.href = '/Admin/Room/ExportExcel?keyword=' + keyword;
+        });
+
+        $('#importExcelButton').on('click', function (e) {
+            // Reset form
+            $('#importExcelForm')[0].reset();
+            $('.custom-file-label').removeClass('selected').html('Chọn file...');
+
+            // Ẩn thông báo lỗi
+            $('#importErrorContainer').hide();
+            $('#importErrorTable tbody').empty();
+        });
+
+        $('#submitImport').on('click', function (e) {
+            e.preventDefault();
+            //get file to param form data
+            var file = $('#excelFileInput').get(0).files;
+            if (file.length === 0) {
+                base.notify('Vui lòng chọn tệp để nhập', 'error');
+                return false;
+            }
+            // set file to form data
+            var data = new FormData();
+            data.append('file', file[0]);
+
+            // call ajax to import data
+            $.ajax({
+                type: "POST",
+                url: "/Admin/Room/ImportData",
+                data: data,
+                contentType: false,
+                processData: false,
+                beforeSend: function () {
+                    base.startLoading();
+                },
+                success: function (response) {
+                    base.stopLoading();
+                    $('#excelFileInput').val(''); // Reset input file
+                    $('#excelFileInput').next('.custom-file-label').html('Chọn file...'); // Reset label
+
+                    if (response.succeeded) {
+                        base.notify(response.message, 'success');
+                        $('#importExcelModal').modal('hide'); // Đóng modal sau khi gửi dữ liệu thành công
+                        loadData(true); // Tải lại dữ liệu sau khi import thành công
+                    } else {
+                        var errorTableBody = $("#importErrorTable tbody");
+                        errorTableBody.empty(); // Xóa các dòng hiện có
+
+                        response.errors.forEach(function (error) {
+                            var row = $("<tr></tr>");
+                            row.append($("<td></td>").text(error));
+                            errorTableBody.append(row);
+                        });
+
+                        $("#importErrorContainer").show();
+                    }
+                },
+                error: function () {
+                    base.notify('Đã xảy ra lỗi trong quá trình import.', 'error');
+                    base.stopLoading();
+                    $('#importExcelModal').modal('hide');
+                    $('#excelFileInput').val(''); // Reset input file
+                    $('#excelFileInput').next('.custom-file-label').html('Chọn file...'); // Reset label
+                }
+            });
+        });
 
         // Event click Add New button
         $("#btn-create").on('click', function () {
