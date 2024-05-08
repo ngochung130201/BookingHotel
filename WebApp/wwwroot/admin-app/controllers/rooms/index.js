@@ -220,11 +220,13 @@ var RoomsController = function () {
         });
     }
 
-    // Event change status 
-    $('body').on('click', '.btn-active', function (e) {
-        e.preventDefault();
-        var id = $(this).data('id');
-        changeUserStatus(id);
+    $(document).ready(function () {
+        // Event change status 
+        $('body').on('click', '.btn-active', function (e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            changeUserStatus(id);
+        });
     });
 
     var changeUserStatus = function (id) {
@@ -252,6 +254,13 @@ var RoomsController = function () {
                 console.log(status);
             }
         });
+    }
+
+    var getStatus = function (status, id) {
+        if (status == true)
+            return '<button class="btn btn-sm btn-success btn-active" data-id="' + id + '">Kích hoạt</button>';
+        else
+            return '<button class="btn btn-sm btn-danger btn-active" data-id="' + id + '">Chặn</button>';
     }
 
     var loadData = function (isPageChanged) {
@@ -372,13 +381,6 @@ var RoomsController = function () {
                 base.stopLoading();
             }
         });
-    }
-
-    var getStatus = function (status, id) {
-        if (status == true)
-            return '<button class="btn btn-sm btn-success btn-active" data-id="' + id + '">Kích hoạt</button>';
-        else
-            return '<button class="btn btn-sm btn-danger btn-active" data-id="' + id + '">Chặn</button>';
     }
 
     var registerControls = function () {

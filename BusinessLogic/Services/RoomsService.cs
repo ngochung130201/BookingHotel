@@ -56,11 +56,12 @@ namespace BusinessLogic.Services
         {
             var query = from r in _dbContext.Rooms
                         join rt in _dbContext.RoomTypes.Where(x => !x.IsDeleted) on r.RoomTypeId equals rt.Id
-                        where (!r.IsDeleted && r.Status == true && (string.IsNullOrEmpty(request.Keyword)
+                        where (!r.IsDeleted && (string.IsNullOrEmpty(request.Keyword)
                             || r.Name.ToLower().Contains(request.Keyword.ToLower())
                             || rt.Name.ToLower().Contains(request.Keyword.ToLower())
                             || r.RoomCode!.ToLower().Contains(request.Keyword.ToLower()))
                             && (!request.RoomTypes.HasValue || request.RoomTypes == r.RoomTypeId))
+                            && (!request.Status.HasValue || request.Status == r.Status)
                         select new RoomsResponse
                         {
                             Id = r.Id,
@@ -322,15 +323,28 @@ namespace BusinessLogic.Services
                     var worksheet = workbook.Worksheets.Add("Rooms");
 
                     // Thiết lập các tiêu đề cột
-                    worksheet.Cell(1, 1).Value = "Tên thương hiệu (*)";
-                    worksheet.Cell(1, 2).Value = "Mã thương hiệu cha";
-                    worksheet.Cell(1, 3).Value = "Mô tả";
+                    worksheet.Cell(1, 1).Value = "Mã Loại Phòng (*)";
+                    worksheet.Cell(1, 2).Value = "Tên Phòng (*)";
+                    worksheet.Cell(1, 3).Value = "Mã Phòng";
+                    worksheet.Cell(1, 4).Value = "Giá Phòng (*)";
+                    worksheet.Cell(1, 5).Value = "Địa Điểm";
+                    worksheet.Cell(1, 6).Value = "Diện tích (m2)";
+                    worksheet.Cell(1, 7).Value = "Người Lớn";
+                    worksheet.Cell(1, 8).Value = "Trẻ em";
+                    worksheet.Cell(1, 9).Value = "Lượt xem";
+                    worksheet.Cell(1, 10).Value = "Mô tả";
 
                     // Thiết lập kiểu dữ liệu của cột
-                    worksheet.Column(1).Style.NumberFormat.Format = "@";
-                    worksheet.Column(2).Style.NumberFormat.Format = "0";
+                    worksheet.Column(1).Style.NumberFormat.Format = "0";
+                    worksheet.Column(2).Style.NumberFormat.Format = "@";
                     worksheet.Column(3).Style.NumberFormat.Format = "@";
-
+                    worksheet.Column(4).Style.NumberFormat.Format = "0.00";
+                    worksheet.Column(5).Style.NumberFormat.Format = "@";
+                    worksheet.Column(6).Style.NumberFormat.Format = "@";
+                    worksheet.Column(7).Style.NumberFormat.Format = "0";
+                    worksheet.Column(8).Style.NumberFormat.Format = "0";
+                    worksheet.Column(9).Style.NumberFormat.Format = "0";
+                    worksheet.Column(10).Style.NumberFormat.Format = "@";
                     // Auto adjust column width
                     worksheet.Columns().AdjustToContents();
 
@@ -342,23 +356,23 @@ namespace BusinessLogic.Services
                     // Tạo sheet thứ 2 để mô tả cách sử dụng
                     var worksheet2 = workbook.Worksheets.Add("Hướng dẫn");
                     worksheet2.Cell(1, 1).Value = "Hướng dẫn sử dụng";
-                    worksheet2.Cell(2, 1).Value = "Cột 1: Tên thương hiệu (Bắt buộc)";
-                    worksheet2.Cell(3, 1).Value = "Cột 2: Mã thương hiệu cha (Nếu không có thương hiệu cha thì để trống) ";
-                    worksheet2.Cell(4, 1).Value = "Cột 3: Mô tả";
+                    worksheet2.Cell(2, 1).Value = "Các cột có dấu (*) là các cột bắt buộc nhập";
 
-                    var brands = await _dbContext.Rooms.Where(x => !x.IsDeleted).Select(n => new RoomsResponse()
+                    var roomTypes = await _dbContext.RoomTypes.Where(x => !x.IsDeleted).Select(n => new RoomTypesResponse()
                     {
+                        Id = n.Id,
                         Name = n.Name,
                     }).ToListAsync();
 
-                    worksheet2.Cell(1, 3).Value = "Mã loại thương hiệu cha (Cột 2)";
-                    worksheet2.Cell(1, 4).Value = "Tên loại thương hiệu cha";
+                    worksheet2.Cell(1, 3).Value = "Mã Loại Phòng (Cột 1)";
+                    worksheet2.Cell(1, 4).Value = "Loại Phòng";
 
-                    if (brands.Any())
+                    if (roomTypes.Any())
                     {
                         short i = 2;
-                        foreach (var item in brands)
+                        foreach (var item in roomTypes)
                         {
+                            worksheet2.Cell(i, 3).Value = item.Id;
                             worksheet2.Cell(i, 4).Value = item.Name;
                             i++;
                         }
@@ -384,61 +398,91 @@ namespace BusinessLogic.Services
         {
             try
             {
-                var query = from b in _dbContext.Rooms
-                            where !b.IsDeleted
-                            select new RoomsResponse 
+                var query = from r in _dbContext.Rooms
+                            join rt in _dbContext.RoomTypes.Where(x => !x.IsDeleted) on r.RoomTypeId equals rt.Id
+                            where (!r.IsDeleted && (string.IsNullOrEmpty(request.Keyword)
+                                || r.Name.ToLower().Contains(request.Keyword.ToLower())
+                                || rt.Name.ToLower().Contains(request.Keyword.ToLower())
+                                || r.RoomCode!.ToLower().Contains(request.Keyword.ToLower()))
+                                && (!request.RoomTypes.HasValue || request.RoomTypes == r.RoomTypeId))
+                                && (!request.Status.HasValue || request.Status == r.Status)
+                            select new RoomsResponse
                             {
-                                Id = b.Id,
-                                Name = b.Name,
-                                Description = b.Description,
-                                CreatedBy = b.CreatedBy,
-                                CreatedOn = b.CreatedOn
+                                Id = r.Id,
+                                Name = r.Name,
+                                Thumbnail = r.Thumbnail,
+                                Acreage = r.Acreage,
+                                RoomTypeName = rt != null ? rt.Name : null,
+                                RoomCode = r.RoomCode,
+                                Price = r.Price,
+                                Status = r.Status,
+                                CreatedBy = r.CreatedBy,
+                                CreatedOn = r.CreatedOn,
                             };
-                var brands = query.OrderBy(request.OrderBy).ToList();
+                var rooms = query.OrderBy(request.OrderBy).ToList();
                 using (var workbook = new XLWorkbook())
                 {
-                    var worksheet = workbook.Worksheets.Add("Brands");
+                    var worksheet = workbook.Worksheets.Add("Rooms");
                     worksheet.Cell(1, 1).Value = "Số";
-                    worksheet.Cell(1, 2).Value = "Mã thương hiệu";
-                    worksheet.Cell(1, 3).Value = "Tên thương hiệu";
-                    worksheet.Cell(1, 4).Value = "Mã thương hiệu cha";
-                    worksheet.Cell(1, 5).Value = "Tên thương hiệu cha";
-                    worksheet.Cell(1, 6).Value = "Mô tả";
-                    worksheet.Cell(1, 7).Value = "Người tạo";
-                    worksheet.Cell(1, 8).Value = "Ngày tạo";
+                    worksheet.Cell(1, 2).Value = "Loại Phòng";
+                    worksheet.Cell(1, 3).Value = "Tên Phòng";
+                    worksheet.Cell(1, 4).Value = "Mã Phòng";
+                    worksheet.Cell(1, 5).Value = "Giá Phòng";
+                    worksheet.Cell(1, 6).Value = "Địa Điểm";
+                    worksheet.Cell(1, 7).Value = "Diện Tích (m2)";
+                    worksheet.Cell(1, 8).Value = "Người Lớn";
+                    worksheet.Cell(1, 9).Value = "Trẻ Em";
+                    worksheet.Cell(1, 10).Value = "Lượt Xem";
+                    worksheet.Cell(1, 11).Value = "Mô Tả";
+                    worksheet.Cell(1, 12).Value = "Url Ảnh Phòng";
 
                     // Thiết lập kiểu dữ liệu của cột
                     worksheet.Column(1).Style.NumberFormat.Format = "0";
-                    worksheet.Column(2).Style.NumberFormat.Format = "0";
+                    worksheet.Column(2).Style.NumberFormat.Format = "@";
                     worksheet.Column(3).Style.NumberFormat.Format = "@";
-                    worksheet.Column(4).Style.NumberFormat.Format = "0";
-                    worksheet.Column(5).Style.NumberFormat.Format = "@";
+                    worksheet.Column(4).Style.NumberFormat.Format = "@";
+                    worksheet.Column(5).Style.NumberFormat.Format = "0.00";
                     worksheet.Column(6).Style.NumberFormat.Format = "@";
                     worksheet.Column(7).Style.NumberFormat.Format = "@";
-                    worksheet.Column(8).Style.NumberFormat.Format = "dd/MM/yyyy HH:mm:ss";
+                    worksheet.Column(8).Style.NumberFormat.Format = "0";
+                    worksheet.Column(9).Style.NumberFormat.Format = "0";
+                    worksheet.Column(10).Style.NumberFormat.Format = "0";
+                    worksheet.Column(11).Style.NumberFormat.Format = "@";
+                    worksheet.Column(12).Style.NumberFormat.Format = "@";
 
                     // Bôi màu tiêu đề màu xanh chỉ bôi màu các ô có tiêu đề
                     worksheet.Range("A1:G1").Style.Fill.BackgroundColor = XLColor.AliceBlue;
 
-                    for (int i = 0; i < brands.Count; i++)
+                    for (int i = 0; i < rooms.Count; i++)
                     {
                         worksheet.Cell(i + 2, 1).Value = i + 1;
-                        worksheet.Cell(i + 2, 2).Value = brands[i].Id;
-                        worksheet.Cell(i + 2, 3).Value = brands[i].Name;
-                        worksheet.Cell(i + 2, 6).Value = brands[i].Description;
-                        worksheet.Cell(i + 2, 7).Value = brands[i].CreatedBy;
-                        worksheet.Cell(i + 2, 8).Value = brands[i].CreatedOn;
+                        worksheet.Cell(i + 2, 2).Value = rooms[i].RoomTypeName;
+                        worksheet.Cell(i + 2, 3).Value = rooms[i].Name;
+                        worksheet.Cell(i + 2, 4).Value = rooms[i].RoomCode;
+                        worksheet.Cell(i + 2, 5).Value = rooms[i].Price;
+                        worksheet.Cell(i + 2, 6).Value = rooms[i].Location;
+                        worksheet.Cell(i + 2, 7).Value = rooms[i].Acreage;
+                        worksheet.Cell(i + 2, 8).Value = rooms[i].Adult;
+                        worksheet.Cell(i + 2, 9).Value = rooms[i].Kid;
+                        worksheet.Cell(i + 2, 10).Value = rooms[i].Views;
+                        worksheet.Cell(i + 2, 11).Value = rooms[i].Description;
+                        worksheet.Cell(i + 2, 12).Value = rooms[i].Thumbnail;
                     }
 
                     // số căn phải của từng cột, chữ căn trái của từng cột, ngày giờ căn giữa
                     worksheet.Column(1).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
-                    worksheet.Column(2).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Right;
+                    worksheet.Column(2).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Left;
                     worksheet.Column(3).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Left;
-                    worksheet.Column(4).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Right;
+                    worksheet.Column(4).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Left;
                     worksheet.Column(5).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Left;
-                    worksheet.Column(6).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Left;
+                    worksheet.Column(6).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Right;
                     worksheet.Column(7).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Left;
-                    worksheet.Column(8).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                    worksheet.Column(8).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Right;
+                    worksheet.Column(9).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Right;
+                    worksheet.Column(10).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Right;
+                    worksheet.Column(11).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Right;
+                    worksheet.Column(12).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Left;
+                    worksheet.Column(13).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Left;
 
                     worksheet.Columns().AdjustToContents();
 
