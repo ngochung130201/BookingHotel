@@ -1,6 +1,7 @@
 ﻿using BusinessLogic.Dtos.Rooms;
 using BusinessLogic.Dtos.RoomTypes;
 using BusinessLogic.Services;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
@@ -83,7 +84,6 @@ namespace WebApp.Areas.Admin.Controllers
             return Json(result);
         }
 
-
         /// <summary>
         /// Change Status
         /// </summary>
@@ -93,6 +93,43 @@ namespace WebApp.Areas.Admin.Controllers
         {
             var result = await roomsService.ChangeStatusAsync(id);
             return Json(result);
+        }
+
+        /// <summary>
+        /// Import data from excel
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> ImportData(IFormFile file)
+        {
+            var result = await roomsService.ImportData(file);
+            if (!result.Succeeded)
+            {
+                return Json(new { succeeded = false, errors = result.Messages });
+            }
+
+            return Json(new { succeeded = true, message = "Import thành công!" });
+        }
+
+        /// <summary>
+        /// Download file template
+        /// </summary>
+        /// <returns></returns>        
+        [HttpGet]
+        public async Task<IActionResult> DownloadTemplate()
+        {
+            var content = await roomsService.CreateTemplate();
+            if (content == null) return NotFound();
+            return File(content, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "RoomTemplate.xlsx");
+        }
+
+        [HttpGet]
+        public IActionResult ExportExcel(RoomsRequest request)
+        {
+            var result = roomsService.ExportExcel(request);
+            if (result == null) return NotFound();
+            return File(result, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Room.xlsx");
         }
     }
 }

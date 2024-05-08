@@ -50,6 +50,8 @@ namespace BusinessLogic.Extensions
             services.AddTransient<IReplyCommentService, ReplyCommentService>();
             // CommentService
             services.AddTransient<ICommentService, CommentService>();
+            // ExcelService
+            services.AddTransient<IExcelService, ExcelService>();
             services.AddAuthorizationCore(options =>
             {
                 options.AddPolicy("Admin", policy =>

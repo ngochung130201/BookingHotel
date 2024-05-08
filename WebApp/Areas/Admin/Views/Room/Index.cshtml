@@ -30,21 +30,25 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <div class="row">
-                    <div class="col-12 col-lg-6 col-md-4 col-sm-12 form-group d-flex flex-wrap align-items-center">
+                <div class="row justify-content-between align-items-center">
+                    <div class="col-12 col-lg-6 col-md-4 col-sm-12 form-group row">
                         <label class="col-sm-auto col-12 col-form-label" for="txtKeyword">Tìm kiếm</label>
                         <div class="col-sm-6 col-lg-6 col-12">
                             <input type="text" id="txtKeyword" class="form-control" placeholder="Tên phòng, loại phòng, mã phòng">
                         </div>
                     </div>
-
-                    <div class=" col-12 col-lg-6  col-md-8 col-sm-12 text-lg-right text-md-right text-sm-left list-btn">
+                    <div class="col-lg-6 col-md-8 col-sm-12 form-group text-lg-right text-md-right text-sm-left d-flex justify-content-end">
                         <button type="submit" class="btn btn-primary mr-2" id="btn-create">
                             <i class="fe-plus-circle"></i> Thêm mới
                         </button>
+                        <button type="button" class="btn btn-primary mr-2" id="importExcelButton" data-toggle="modal" data-target="#importExcelModal">
+                            <i class="fe-upload"></i> Nhập Excel
+                        </button>
+                        <button type="button" class="btn btn-primary" id="btn-exportExcel">
+                            <i class="fe-download"></i> Xuất Excel
+                        </button>
                     </div>
-                </div>
-
+                </div>               
                 <div class="table-wrap">
                     <table id="datatable-buttons" class="table table-striped dt-responsive nowrap">
                         <thead>
@@ -99,3 +103,4 @@
 
 <partial name="_AddEditModal.cshtml" />
 <partial name="_ListImages.cshtml" />
+<partial name="Components/_ImportExcelModal" />

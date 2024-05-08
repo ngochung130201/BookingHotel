@@ -1,0 +1,40 @@
+﻿<!-- Modal Import Excel -->
+<div class="modal fade" id="importExcelModal" tabindex="-1" role="dialog" aria-labelledby="importExcelModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="importExcelModalLabel">Nhập Dữ Liệu Từ Excel</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Bước 1: Tải xuống mẫu file và điền thông tin cần nhập.</p>
+                <a href="#" id="downloadTemplateLink" class="btn btn-primary mb-3">Tải Xuống Mẫu</a>
+                <p>Bước 2: Chọn file đã điền thông tin để tải lên.</p>
+                <!-- Form upload file Excel -->
+                <form id="importExcelForm">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="excelFileInput" name="excelFile" required>
+                        <label class="custom-file-label" for="excelFileInput">Chọn file...</label>
+                    </div>
+                </form>
+                <!-- Thêm bảng lỗi ở đây -->
+                <div id="importErrorContainer" style="display: none;">
+                    <div id="importErrorTableWrapper" class="table-responsive">
+                        <div id="importErrorHeader" class="alert alert-danger">Thông báo lỗi</div> <!-- Dòng thông báo lỗi cố định -->
+                        <table id="importErrorTable" class="table table-bordered table-striped">
+                            <tbody>
+                                <!-- Các dòng lỗi sẽ được thêm vào đây bằng JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-success" id="submitImport">Nhập Dữ Liệu</button>
+            </div>
+        </div>
+    </div>
+</div>
