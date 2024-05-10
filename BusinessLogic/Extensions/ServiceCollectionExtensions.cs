@@ -30,6 +30,7 @@ namespace BusinessLogic.Extensions
             services.AddTransient<IDashboardService, DashboardService>();
             // RoomTypesService
             services.AddTransient<IRoomTypesService, RoomTypesService>();
+            services.AddTransient<ICheckInOutService, CheckInOutService>();
             // ServicesServices
             services.AddTransient<IServicesServices, ServicesServices>();
             // RoomsServices

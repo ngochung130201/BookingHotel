@@ -21,5 +21,13 @@ namespace WebApp.Areas.Admin.Controllers
             var result = await bookingService.GetPagination(request);
             return Json(result);
         }
+
+        [HttpGet]
+        public IActionResult ExportExcel(BookingRequest request)
+        {
+            var result = bookingService.ExportExcel(request);
+            if (result == null) return NotFound();
+            return File(result, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Bookings.xlsx");
+        }
     }
 }

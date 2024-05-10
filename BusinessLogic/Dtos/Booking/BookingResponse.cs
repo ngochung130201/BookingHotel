@@ -10,6 +10,8 @@
 
         public DateTime? CheckInDate { get; set; }
 
+        public DateTime? CheckOutDate { get; set; }
+
         public short? Status { get; set; }
 
         public decimal TotalAmount { get; set; }
