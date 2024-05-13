@@ -5,6 +5,7 @@ using BusinessLogic.Dtos.Booking;
 using BusinessLogic.Entities;
 using BusinessLogic.Services.Common;
 using BusinessLogic.Wrapper;
+using ClosedXML.Excel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Linq.Dynamic.Core;
@@ -24,6 +25,8 @@ namespace BusinessLogic.Services
         Task<IResult> Delete(int id);
 
         Task<IResult> ChangeStatusAsync(int id);
+
+        byte[]? ExportExcel(BookingRequest request);
     }
 
     public class BookingService : IBookingService
@@ -33,8 +36,8 @@ namespace BusinessLogic.Services
         private readonly ILogger<BookingService> _logger;
         private readonly ICurrentUserService _currentUserService;
 
-
-        public BookingService(ApplicationDbContext dbContext, IMapper mapper, ILogger<BookingService> logger, ICurrentUserService currentUserService)
+        public BookingService(ApplicationDbContext dbContext, IMapper mapper, ILogger<BookingService> logger, ICurrentUserService currentUserService,
+            IExcelService excelService)
         {
             _dbContext = dbContext;
             _mapper = mapper;
@@ -58,6 +61,7 @@ namespace BusinessLogic.Services
                             BookingCode = b.BookingCode,
                             TransactionDate = b.TransactionDate,
                             CheckInDate = b.CheckInDate,
+                            CheckOutDate = b.CheckOutDate,
                             BookedRoomNumber = (from r in _dbContext.Rooms
                                                 join br in _dbContext.BookingDetail.Where(x => !x.IsDeleted) on r.Id equals br.RoomId
                                                 join rb in _dbContext.Bookings.Where(x => !x.IsDeleted) on br.BookingId equals rb.Id
@@ -264,6 +268,107 @@ namespace BusinessLogic.Services
             _dbContext.Bookings.Update(booking);
             await _dbContext.SaveChangesAsync();
             return await Result.SuccessAsync(MessageConstants.UpdateSuccess);
+        }
+
+        public byte[]? ExportExcel(BookingRequest request)
+        {
+            try
+            {
+                var query = from b in _dbContext.Bookings.Where(b => !b.IsDeleted && (request.UserId == null || b.UserId == request.UserId))
+                            join u in _dbContext.Users.Where(x => !x.IsDeleted) on b.UserId equals u.Id
+                            join sb in _dbContext.SpecialDayBooking.Where(x => !x.IsDeleted) on b.Id equals sb.BookingId
+                            join pm in _dbContext.PriceManager.Where(x => !x.IsDeleted) on sb.SpecialDayId equals pm.Id
+                            where (string.IsNullOrEmpty(request.Keyword)
+                                || u.FullName.ToLower().Contains(request.Keyword.ToLower())
+                                || b.Status!.HasValue && request.Status != null && request.Status == b.Status)
+                            select new BookingResponse
+                            {
+                                Id = b.Id,
+                                FullName = u != null ? u.FullName : null,
+                                BookingCode = b.BookingCode,
+                                TransactionDate = b.TransactionDate,
+                                CheckInDate = b.CheckInDate,
+                                CheckOutDate = b.CheckOutDate,
+                                BookedRoomNumber = (from r in _dbContext.Rooms
+                                                    join br in _dbContext.BookingDetail.Where(x => !x.IsDeleted) on r.Id equals br.RoomId
+                                                    join rb in _dbContext.Bookings.Where(x => !x.IsDeleted) on br.BookingId equals rb.Id
+                                                    where !r.IsDeleted
+                                                    select r).Count(),
+                                ServicesArising = (from c in _dbContext.CostOverrun
+                                                   join cb in _dbContext.CostBooking.Where(x => !x.IsDeleted) on c.Id equals cb.CostId
+                                                   join bc in _dbContext.Bookings.Where(x => !x.IsDeleted) on cb.BookingId equals bc.Id
+                                                   where !c.IsDeleted
+                                                   select c).Count(),
+                                TotalAmount = b.TotalAmount,
+                                Status = b.Status,
+                                CreatedOn = b.CreatedOn,
+                            };
+                var bookings = query.OrderBy(request.OrderBy).ToList();
+                using (var workbook = new XLWorkbook())
+                {
+                    var worksheet = workbook.Worksheets.Add("Rooms");
+                    worksheet.Cell(1, 1).Value = "Số";
+                    worksheet.Cell(1, 2).Value = "Khách hàng";
+                    worksheet.Cell(1, 3).Value = "Mã đặt phòng";
+                    worksheet.Cell(1, 4).Value = "Ngày nhận phòng";
+                    worksheet.Cell(1, 5).Value = "Ngày trả Phòng";
+                    worksheet.Cell(1, 6).Value = "Số phòng";
+                    worksheet.Cell(1, 7).Value = "Dịch vụ";
+                    worksheet.Cell(1, 8).Value = "Tổng hóa đơn";
+                    worksheet.Cell(1, 9).Value = "Ngày đặt phòng";
+
+                    // Thiết lập kiểu dữ liệu của cột
+                    worksheet.Column(1).Style.NumberFormat.Format = "0";
+                    worksheet.Column(2).Style.NumberFormat.Format = "@";
+                    worksheet.Column(3).Style.NumberFormat.Format = "@";
+                    worksheet.Column(4).Style.NumberFormat.Format = "@";
+                    worksheet.Column(5).Style.NumberFormat.Format = "@";
+                    worksheet.Column(6).Style.NumberFormat.Format = "0";
+                    worksheet.Column(7).Style.NumberFormat.Format = "0";
+                    worksheet.Column(8).Style.NumberFormat.Format = "0.00";
+                    worksheet.Column(9).Style.NumberFormat.Format = "@";
+
+                    // Bôi màu tiêu đề màu xanh chỉ bôi màu các ô có tiêu đề
+                    worksheet.Range("A1:I1").Style.Fill.BackgroundColor = XLColor.AliceBlue;
+
+                    for (int i = 0; i < bookings.Count; i++)
+                    {
+                        worksheet.Cell(i + 2, 1).Value = i + 1;
+                        worksheet.Cell(i + 2, 2).Value = bookings[i].FullName;
+                        worksheet.Cell(i + 2, 3).Value = bookings[i].BookingCode;
+                        worksheet.Cell(i + 2, 4).Value = bookings[i].CheckInDate;
+                        worksheet.Cell(i + 2, 5).Value = bookings[i].CheckOutDate;
+                        worksheet.Cell(i + 2, 6).Value = bookings[i].BookedRoomNumber;
+                        worksheet.Cell(i + 2, 7).Value = bookings[i].ServicesArising;
+                        worksheet.Cell(i + 2, 8).Value = bookings[i].TotalAmount;
+                        worksheet.Cell(i + 2, 9).Value = bookings[i].TransactionDate;
+                    }
+
+                    // số căn phải của từng cột, chữ căn trái của từng cột, ngày giờ căn giữa
+                    worksheet.Column(1).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                    worksheet.Column(2).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Left;
+                    worksheet.Column(3).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Left;
+                    worksheet.Column(4).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Left;
+                    worksheet.Column(5).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Left;
+                    worksheet.Column(6).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Right;
+                    worksheet.Column(7).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Right;
+                    worksheet.Column(8).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Right;
+                    worksheet.Column(9).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+
+                    worksheet.Columns().AdjustToContents();
+
+                    using (var stream = new MemoryStream())
+                    {
+                        workbook.SaveAs(stream);
+                        return stream.ToArray();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Lỗi khi xuất file excel");
+                return null;
+            }
         }
     }
 }

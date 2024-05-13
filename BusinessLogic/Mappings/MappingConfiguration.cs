@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BusinessLogic.Dtos.Booking;
+using BusinessLogic.Dtos.CheckInOut;
 using BusinessLogic.Dtos.Comment;
 using BusinessLogic.Dtos.CostOverrun;
 using BusinessLogic.Dtos.FeedBacks;
@@ -51,6 +52,7 @@ namespace BusinessLogic.Mappings
             CreateMap<Comment, CommentResponse>().ReverseMap();
             CreateMap<ReplyComment, ReplyCommentDto>().ReverseMap();
             CreateMap<ReplyComment, ReplyCommentResponse>().ReverseMap();
+            CreateMap<Rooms, CheckInOutResponse>().ReverseMap();
         }
     }
 }

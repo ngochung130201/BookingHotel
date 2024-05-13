@@ -5,7 +5,6 @@ namespace BusinessLogic.Entities
 {
     public class Rooms : AuditableBaseEntity<int>
     {
-
         [Required]
         [StringLength(255)]
         public string Name { get; set; } = default!;
@@ -36,5 +35,7 @@ namespace BusinessLogic.Entities
 
         [StringLength(255)]
         public string? Views { get; set; }
+
+        public short? StatusRoom { get; set; }
     }
 }

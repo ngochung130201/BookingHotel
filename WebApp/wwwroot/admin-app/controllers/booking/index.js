@@ -1,4 +1,4 @@
-﻿var VoteBookingController = function () {
+﻿var BookingController = function () {
     this.initialize = function () {
         loadData();
         registerEvents();
@@ -22,6 +22,13 @@
             base.configs.pageSize = $(this).val();
             base.configs.pageIndex = 1;
             loadData(true);
+        });
+
+        //event click btn-exportExcel 
+        $('#btn-exportExcel').on('click', function (e) {
+            e.preventDefault();
+            var keyword = $('#txtKeyword').val();
+            window.location.href = '/Admin/Booking/ExportExcel?keyword=' + keyword;
         });
 
         // Event button delete
