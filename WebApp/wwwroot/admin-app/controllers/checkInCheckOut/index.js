@@ -16,6 +16,10 @@
                 loadData(true);
             }
         });
+        // Event search by role
+        $("#searchRoomStatus").on('change', function () {
+            loadData(true);
+        });
 
         // Event select page size
         $("#ddl-show-page").on('change', function () {
@@ -34,7 +38,6 @@
         $('body').on('click', '.btn-edit', function (e) {
             e.preventDefault();
             var id = $(this).data('id');
-            $('#btnSaveAndContinue').hide();
             base.setTitleModal('edit');
             $("#formMaintainance").validate().resetForm();
             loadDetail(id);
@@ -47,6 +50,7 @@
             url: "/Admin/CheckInCheckOut/GetAllPaging",
             data: {
                 keyword: $('#txtKeyword').val(),
+                StatusRoom: $('#searchRoomStatus').val(),
                 pageNumber: base.configs.pageIndex,
                 pageSize: base.configs.pageSize
             },
@@ -68,7 +72,7 @@
                             Name: item.name,
                             RoomTypes: item.roomTypes,
                             Location: item.location,
-                            StatusRoom: item.statusRoom,
+                            StatusRoom: getRoomStatus(item.statusRoom, item.id),
                             CreatedOn: base.dateTimeFormatJson(item.createdOn)
                         });
                         stt++;
@@ -142,6 +146,7 @@
                         base.notify(response.messages[0], 'success');
                         resetFormMaintainance();
                         base.stopLoading();
+                        $('#modal-add-edit').modal('hide');
                         loadData(true);
                     } else {
                         base.notify(response.messages[0], 'error');
@@ -154,5 +159,14 @@
             });
             return false;
         }
+    }
+
+    var getRoomStatus = function (status, id) {
+        if (status == 0)
+            return '<button class="btn btn-sm btn-success btn-memberStatus" data-id="' + id + '" data-status="1">Sẳn sàng phục vụ</button>';
+        else if (status == 1)
+            return '<button class="btn btn-sm btn-warning btn-memberStatus" data-id="' + id + '" data-status="2">Đang phục vụ</button>';
+        else if (status == 2)
+            return '<button class="btn btn-sm btn-danger btn-memberStatus" data-id="' + id + '" data-status="3">Đang kiểm tra</button>';
     }
 }

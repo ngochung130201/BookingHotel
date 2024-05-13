@@ -30,13 +30,24 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <div class="row justify-content-between align-items-center">
-                    <div class="col-12 col-lg-6 col-md-4 col-sm-12 form-group row">
-                        <label class="col-sm-auto col-12 col-form-label" for="txtKeyword">Tìm kiếm</label>
-                        <div class="col-sm-6 col-lg-6 col-12">
-                            <input type="text" id="txtKeyword" class="form-control" placeholder="Tên phòng, loại phòng">
+                <div class="row">
+                    <div class="col-sm-10 form-group row">
+                        <label class="col-sm-auto col-form-label" for="searchRoleName">Tên vai trò</label>
+                        <div class="col-sm-3">
+                            <select class="custom-select" id="searchRoomStatus">
+                                <option value="">Trạng thái phòng</option>
+                                <option value="0">Sẳn sàng phục vụ</option>
+                                <option value="1">Đang phục vụ</option>
+                                <option value="2">Đang kiểm tra</option>
+                            </select>
                         </div>
-                    </div>                 
+                        <div class="col-12 col-lg-6 col-md-4 col-sm-12 form-group d-flex flex-wrap align-items-center">
+                            <label class="col-sm-auto col-12 col-form-label" for="txtKeyword">Tìm kiếm</label>
+                            <div class="col-sm-6 col-lg-6 col-12">
+                                <input type="text" id="txtKeyword" class="form-control" placeholder="Tên phòng, loại phòng">
+                            </div>
+                        </div>
+                    </div>                
                 </div>
                 <div class="table-wrap">
                     <table id="datatable-buttons" class="table table-striped dt-responsive nowrap">

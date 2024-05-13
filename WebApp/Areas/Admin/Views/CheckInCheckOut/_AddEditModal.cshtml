@@ -1,4 +1,4 @@
-﻿<div id="modal-add-edit" class="modal fade modal-darkorange in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="position: absolute; left: 38%; top: 49%; transform: translate(-50%, -50%);">
+﻿<div id="modal-add-edit" class="modal fade modal-darkorange in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="position: fixed; left: 38%; top: 49%; transform: translate(-50%, -50%);">
     <div class="modal-dialog modal-sm">
         <div class="modal-content" style="width: 50rem">
             <div class="modal-header">
@@ -7,46 +7,19 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" role="form" id="formMaintainance">
-                    <div class="tab-content">                     
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group col-sm-12">
-                                    <input type="hidden" id="hidId" value="0" />
-                                    <label for="txtStatusRoom" class="control-label no-padding-right">Trạng thái phòng <span class="text-danger">*</span></label>
-                                    <select class="custom-select" id="txtStatusRoom" name="txtStatusRoom">
-                                        <option value="0">Sẳn sàng phục vụ</option>
-                                        <option value="1">Đang phục vụ</option>
-                                        <option value="2">Đang kiểm tra</option>
-                                    </select>
-                                </div>
+                    <div class="tab-content">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <input type="hidden" id="hidId" value="0" />
+                                <label for="txtStatusRoom" class="control-label no-padding-right">Trạng thái phòng <span class="text-danger">*</span></label>
+                                <select class="custom-select" id="txtStatusRoom" name="txtStatusRoom">
+                                    <option value="">Trạng thái phòng</option>
+                                    <option value="0">Sẳn sàng phục vụ</option>
+                                    <option value="1">Đang phục vụ</option>
+                                    <option value="2">Đang kiểm tra</option>
+                                </select>
                             </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="txtFullName" class="col-sm-auto control-label no-padding-right">Khách hàng </label>
-                                    <div class="col-sm-12">
-                                        <input type="text" class="form-control" id="txtFullName" name="txtFullName" readonly></input>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="txtCheckIn" class="col-sm-auto control-label no-padding-right">Ngày nhận phòng </label>
-                                    <div class="col-sm-12">
-                                        <input type="text" class="form-control" id="txtCheckIn" name="txtCheckIn" readonly></input>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="txtCheckIOut" class="col-sm-auto control-label no-padding-right">Ngày trả phòng </label>
-                                    <div class="col-sm-12">
-                                        <input type="text" class="form-control" id="txtCheckOut" name="txtCheckOut" readonly></input>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        </div>                          
                     </div>
                 </form>
             </div>
