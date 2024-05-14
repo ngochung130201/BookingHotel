@@ -21,4 +21,24 @@
             }
         });
     });
+
+    $('#booking-form').submit(function (e) {
+        e.preventDefault(); 
+
+        var formData = $(this).serialize();
+
+        $.ajax({
+            type: 'POST',
+            url: '/Room/SaveBooking',
+            data: formData,
+            success: function (response) {
+                console.log(response);
+                alert("Booking success!");
+                location.reload();
+            },
+            error: function () {
+                alert("Failed to booking!");
+            }
+        });
+    });
 });

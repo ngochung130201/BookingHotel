@@ -1,7 +1,9 @@
-﻿using BusinessLogic.Dtos.Comment;
+﻿using BusinessLogic.Dtos.Booking;
+using BusinessLogic.Dtos.Comment;
 using BusinessLogic.Dtos.Rooms;
 using BusinessLogic.Dtos.RoomTypes;
 using BusinessLogic.Services;
+using BusinessLogic.Services.Common;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
@@ -10,7 +12,9 @@ namespace WebApp.Controllers
     public class RoomController(IRoomTypesService roomTypesService,
                                 IRoomsService roomsService,
                                 ICommentService commentService,
-                                IReplyCommentService replyCommentService) : Controller
+                                IReplyCommentService replyCommentService,
+                                IBookingService bookingService,
+                                ICurrentUserService currentUserService) : Controller
     {
         /// <summary>
         /// Room
@@ -47,6 +51,10 @@ namespace WebApp.Controllers
         {
             var result = new ClientRoomDetailResponse();
             var resultRoomDetail = await roomsService.GetById(id);
+            var fullName = currentUserService.FullName;
+            var email = currentUserService.Email;
+            var phoneNumber = currentUserService.PhoneNumber;
+            var userId = currentUserService.UserId;
             var resultComment = await commentService.GetPagination(new CommentRequest
             {
                 RoomId = id,
@@ -62,8 +70,38 @@ namespace WebApp.Controllers
 
             result.Comments = resultComment.Data;
             result.Room = resultRoomDetail.Data;
+            result.Email = email;
+            result.PhoneNumber = phoneNumber;
+            result.FullName = fullName;
+            result.UserId = userId;
 
             return View(result);
+        }
+
+        /// <summary>
+        /// Save entity booking
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> SaveBooking(BookingDto request)
+        {
+            if (!ModelState.IsValid)
+            {
+                IEnumerable<ModelError> allErrors = ModelState.Values.SelectMany(v => v.Errors);
+                return new BadRequestObjectResult(allErrors);
+            }
+
+            if (request.Id == 0)
+            {
+                var result = await bookingService.Add(request);
+                return Json(result);
+            }
+            else
+            {
+                var result = await bookingService.Update(request);
+                return Json(result);
+            }
         }
 
         /// <summary>

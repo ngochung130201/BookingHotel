@@ -36,8 +36,7 @@ namespace BusinessLogic.Services
         private readonly ILogger<BookingService> _logger;
         private readonly ICurrentUserService _currentUserService;
 
-        public BookingService(ApplicationDbContext dbContext, IMapper mapper, ILogger<BookingService> logger, ICurrentUserService currentUserService,
-            IExcelService excelService)
+        public BookingService(ApplicationDbContext dbContext, IMapper mapper, ILogger<BookingService> logger, ICurrentUserService currentUserService)
         {
             _dbContext = dbContext;
             _mapper = mapper;
@@ -145,6 +144,11 @@ namespace BusinessLogic.Services
 
         public async Task<IResult> Add(BookingDto request)
         {
+            var userId = _currentUserService.UserId;
+
+            request.UserId = userId;
+            request.TransactionDate = DateTime.Now;
+
             var result = _mapper.Map<Bookings>(request);
 
             var percentDiscount = await (from sb in _dbContext.SpecialDayBooking
@@ -202,8 +206,7 @@ namespace BusinessLogic.Services
             {
                 await transaction.DisposeAsync();
             }
-        }
-    
+        }  
 
         public async Task<IResult> Update(BookingDto request)
         {
