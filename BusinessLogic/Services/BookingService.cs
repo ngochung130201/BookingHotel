@@ -151,49 +151,22 @@ namespace BusinessLogic.Services
 
             var result = _mapper.Map<Bookings>(request);
 
-            var percentDiscount = await (from sb in _dbContext.SpecialDayBooking
-                                         join pm in _dbContext.PriceManager.Where(x => !x.IsDeleted) on sb.SpecialDayId equals pm.Id
-                                         where !sb.IsDeleted && (pm.SinceDay.AddHours(7) >= request.CheckInDate && pm.ToDay.AddHours(7) >= request.CheckOutDate)
-                                         select new PriceManager() { PercentDiscount = pm.PercentDiscount, Id = pm.Id }).FirstOrDefaultAsync();
-
             await using var transaction = await _dbContext.Database.BeginTransactionAsync();
             try
             {
-                foreach (var id in request.RoomId!)
-                {
-                    var roomsPrice = await (from r in _dbContext.Rooms.Where(x => !x.IsDeleted && x.Id == id) select r.Price).FirstOrDefaultAsync();
-                    result.TotalAmount += roomsPrice;
-                }
-
-                result.TotalAmount = (decimal)(result.TotalAmount * (percentDiscount!.PercentDiscount!/100));
-
-                result.DownPayment = (result.TotalAmount * (decimal)0.3);
-
                 await _dbContext.Bookings.AddAsync(result);
                 await _dbContext.SaveChangesAsync();
-                if (request.RoomId != null)
-                {
-                    foreach (var id in request.RoomId)
-                    {
-                        var bookingDetail = new BookingDetail()
-                        {
-                            RoomId = id,
-                            BookingId = result.Id,
-                        };
-                        await _dbContext.BookingDetail.AddAsync(bookingDetail);
-                    }
-                }
-                if (percentDiscount != null)
-                {
-                    var SpecialDayBooking = new SpecialDayBooking()
-                    {
-                        BookingId = result.Id,
-                        SpecialDayId = percentDiscount.Id,
-                    };
-                    await _dbContext.SpecialDayBooking.AddAsync(SpecialDayBooking);
-                }
 
+                var bookingDetail = new BookingDetail()
+                {
+                    BookingId = result.Id,
+                    RoomId = request.RoomId
+                };
+
+                await _dbContext.BookingDetail.AddAsync(bookingDetail);
                 await _dbContext.SaveChangesAsync();
+                await transaction.CommitAsync();
+
                 return await Result.SuccessAsync(MessageConstants.AddSuccess);
             }
             catch (Exception ex)
@@ -206,26 +179,100 @@ namespace BusinessLogic.Services
             {
                 await transaction.DisposeAsync();
             }
-        }  
+        }
+
+        //public async Task<IResult> Add(BookingDto request)
+        //{
+        //    var userId = _currentUserService.UserId;
+
+        //    request.UserId = userId;
+        //    request.TransactionDate = DateTime.Now;
+
+        //    var result = _mapper.Map<Bookings>(request);
+
+        //    var percentDiscount = await (from sb in _dbContext.SpecialDayBooking
+        //                                 join pm in _dbContext.PriceManager.Where(x => !x.IsDeleted) on sb.SpecialDayId equals pm.Id
+        //                                 where !sb.IsDeleted && (pm.SinceDay.AddHours(7) >= request.CheckInDate && pm.ToDay.AddHours(7) >= request.CheckOutDate)
+        //                                 select new PriceManager() { PercentDiscount = pm.PercentDiscount, Id = pm.Id }).FirstOrDefaultAsync();
+
+        //    await using var transaction = await _dbContext.Database.BeginTransactionAsync();
+        //    try
+        //    {
+        //        foreach (var id in request.RoomId!)
+        //        {
+        //            var roomsPrice = await (from r in _dbContext.Rooms.Where(x => !x.IsDeleted && x.Id == id) select r.Price).FirstOrDefaultAsync();
+        //            result.TotalAmount += roomsPrice;
+        //        }
+
+        //        result.TotalAmount = (decimal)(result.TotalAmount * (percentDiscount!.PercentDiscount!/100));
+
+        //        result.DownPayment = (result.TotalAmount * (decimal)0.3);
+
+        //        await _dbContext.Bookings.AddAsync(result);
+        //        await _dbContext.SaveChangesAsync();
+        //        if (request.RoomId != null)
+        //        {
+        //            foreach (var id in request.RoomId)
+        //            {
+        //                var bookingDetail = new BookingDetail()
+        //                {
+        //                    RoomId = id,
+        //                    BookingId = result.Id,
+        //                };
+        //                await _dbContext.BookingDetail.AddAsync(bookingDetail);
+        //            }
+        //        }
+        //        if (percentDiscount != null)
+        //        {
+        //            var SpecialDayBooking = new SpecialDayBooking()
+        //            {
+        //                BookingId = result.Id,
+        //                SpecialDayId = percentDiscount.Id,
+        //            };
+        //            await _dbContext.SpecialDayBooking.AddAsync(SpecialDayBooking);
+        //        }
+
+        //        await _dbContext.SaveChangesAsync();
+        //        return await Result.SuccessAsync(MessageConstants.AddSuccess);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        await transaction.RollbackAsync();
+        //        _logger.LogError(ex, "Lỗi khi tạo mới: {Id}", request.Id);
+        //        return await Result.FailAsync(MessageConstants.AddFail);
+        //    }
+        //    finally
+        //    {
+        //        await transaction.DisposeAsync();
+        //    }
+        //}  
 
         public async Task<IResult> Update(BookingDto request)
         {
             var booking = await _dbContext.Bookings.Where(b => !b.IsDeleted && b.Id == request.Id).FirstOrDefaultAsync();
             if (booking == null) { return await Result.FailAsync(MessageConstants.NotFound); };
 
+            var bookingDetail = await _dbContext.BookingDetail.Where(bd => !bd.IsDeleted && bd.BookingId == booking.Id).FirstOrDefaultAsync();
+
             await using var transaction = await _dbContext.Database.BeginTransactionAsync();
             try
             {
-                if (request.RoomId != null)
+                if (request.Status == 0)
                 {
-                    foreach (var id in request.RoomId)
-                    {
-                        var roomsPrice = await (from r in _dbContext.Rooms.Where(x => !x.IsDeleted && x.Id == id) select r.Price).FirstOrDefaultAsync();
-                        booking.TotalAmount += roomsPrice;
-                    }
+                    bookingDetail!.RoomId = request.RoomId;
+                    _dbContext.BookingDetail.Update(bookingDetail);
+
+                    var updateBooking = _mapper.Map(request, booking);
+                    _dbContext.Bookings.Update(updateBooking);
+                }
+                else
+                {
+                    return await Result.FailAsync(MessageConstants.UpdateFail);
                 }
 
+                await _dbContext.SaveChangesAsync();
                 await transaction.CommitAsync();
+
                 return await Result.SuccessAsync(MessageConstants.AddSuccess);
             }
             catch (Exception e)

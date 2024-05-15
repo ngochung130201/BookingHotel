@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+    // Xử lý formMaintainance submit
     $('#formMaintainance').submit(function (e) {
         e.preventDefault(); // Ngăn chặn gửi form mặc định
 
@@ -22,11 +23,22 @@
         });
     });
 
+    // Xử lý booking-form submit
     $('#booking-form').submit(function (e) {
-        e.preventDefault(); 
+        e.preventDefault(); // Ngăn chặn gửi form mặc định
 
-        var formData = $(this).serialize();
+        // Lấy dữ liệu từ form và gán vào một đối tượng formData
+        var formData = {
+            Id: $('#hidId').val(),
+            TotalAmount: $('#txtTotalAmount').val(),
+            RoomId: $('#txtRoomId').val(),
+            Adult: $('#Adult').val(),
+            Kid: $('#Kid').val(),
+            CheckInDate: $('#CheckInDate').val(),
+            CheckOutDate: $('#CheckOutDate').val()
+        };
 
+        // Gửi AJAX request
         $.ajax({
             type: 'POST',
             url: '/Room/SaveBooking',

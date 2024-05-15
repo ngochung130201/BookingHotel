@@ -28,7 +28,7 @@
 
         public string? FullName { get; set; }
 
-        public int[]? RoomId { get; set; }
+        public int RoomId { get; set; }
 
         public decimal? DownPayment { get; set; }
 
