@@ -12,7 +12,22 @@
                         <div class="imageList">
 
                         </div>
-                        <input type="button" id="txtUrlImage" class="btn btn-primary" name="name" value="Chọn ảnh" />
+                        <div class="form-group">
+                            <label for="txtImage" class="col-sm-2 control-label no-padding-right">Hình ảnh</label>
+                            <div class="d-flex">
+                                <div class="col-sm-10" style="display:none">
+                                    <input type="text" class="form-control" id="txtImageShow" disabled />
+                                    <input type="text" class="form-control" id="txtImage" name="txtImage" hidden />
+                                    <input type="file" id="fileInputImage" style="display:none" />
+                                </div>
+                                <div class="col-sm-2">
+                                    <img id="imagePreview" src="~/assets/images/picture.png" alt="Preview" style="max-width: 100px; max-height: 100px;" />
+                                </div>
+                            </div>
+                            <div class="col-sm-2 mt-1">
+                                <input type="button" style="width:100px" id="btnSelectImgRoom" class="btn btn-primary" value="Chọn ảnh" />
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>

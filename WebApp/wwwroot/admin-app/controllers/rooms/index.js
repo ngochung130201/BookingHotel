@@ -63,6 +63,10 @@ var RoomsController = function () {
             $('#fileInputImage').click();
         });
 
+        $('#btnSelectImgRoom').on('click', function () {
+            $('#fileInputImage').click();
+        });
+
         $("#fileInputImage").on('change', function () {
             var fileUpload = $(this).get(0);
             var files = fileUpload.files;
