@@ -1,21 +1,20 @@
-﻿using BusinessLogic.Constants.Messages;
+﻿using AutoMapper;
+using BusinessLogic.Constants.Messages;
 using BusinessLogic.Contexts;
 using BusinessLogic.Entities;
+using BusinessLogic.Request;
 using BusinessLogic.Wrapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using System.Linq.Dynamic.Core;
 
 namespace BusinessLogic.Services
 {
     public interface IRoomsImageService
     {
-        Task<List<RoomImages>> GetPagination();
+        Task<PaginatedResult<RoomImagesResponse>> GetPagination(RoomImageRequest request);
 
-        Task<Result<RoomImages>> GetById(int id);
-
-        Task<IResult> Add(RoomImages request);
-
-        Task<IResult> Update(RoomImages request);
+        Task<IResult> Add(RoomImageDto request);
 
         Task<IResult> Delete(int id);
     }
@@ -24,44 +23,48 @@ namespace BusinessLogic.Services
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly ILogger<RoomsImageService> _logger;
+        private readonly IMapper _mapper;
 
-        public RoomsImageService(ApplicationDbContext dbContext, ILogger<RoomsImageService> logger)
+        public RoomsImageService(ApplicationDbContext dbContext, ILogger<RoomsImageService> logger, IMapper mapper)
         {
             _dbContext = dbContext;
             _logger = logger;
+            _mapper = mapper;
         }
 
-        public async Task<List<RoomImages>> GetPagination()
+        public async Task<PaginatedResult<RoomImagesResponse>> GetPagination(RoomImageRequest request)
         {
-            var query = await (from ri in _dbContext.RoomImages
+            var query = from ri in _dbContext.RoomImages
                         join r in _dbContext.Rooms.Where(r => !r.IsDeleted) on ri.RoomId equals r.Id
-                        where !ri.IsDeleted
-                        select new RoomImages
+                        where !ri.IsDeleted && r.Id == request.RoomId
+                        select new RoomImagesResponse
                         {
                             Id = ri.Id,
                             UrlImage = ri.UrlImage,
-                            CreatedBy = ri.CreatedBy,
                             CreatedOn = ri.CreatedOn,
-                        }).ToListAsync();
-            return query;
+                        };
+
+            var totalRecord = query.Count();
+
+            var roomsImageList = await query.OrderBy(request.OrderBy)
+                                .Skip((request.PageNumber - 1) * request.PageSize)
+                                .Take(request.PageSize)
+                                .ToListAsync();
+
+            var result = _mapper.Map<List<RoomImagesResponse>>(roomsImageList);
+
+            return PaginatedResult<RoomImagesResponse>.Success(result, totalRecord, request.PageNumber, request.PageSize);
         }
 
-        public Task<Result<RoomImages>> GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<IResult> Add(RoomImages request)
+        public async Task<IResult> Add(RoomImageDto request)
         {
             try
             {
-                var roomImages = new RoomImages()
-                {
-                    RoomId = request.Id,
-                    UrlImage = request.UrlImage,
-                };
-                await _dbContext.RoomImages.AddAsync(roomImages);
+                var result = _mapper.Map<RoomImages>(request);
+
+                await _dbContext.RoomImages.AddAsync(result);
                 await _dbContext.SaveChangesAsync();
+
                 return await Result.SuccessAsync(MessageConstants.AddSuccess);
             }
             catch (Exception ex)
@@ -69,28 +72,6 @@ namespace BusinessLogic.Services
                 _logger.LogError(ex, "Lỗi khi tạo mới: {Id}", request.Id);
                 return await Result.FailAsync(MessageConstants.AddFail);
             }
-        }
-
-        public async Task<IResult> Update(RoomImages request)
-        {
-            try
-            {
-                var roomImages = await _dbContext.RoomImages.Where(x => !x.IsDeleted && x.Id == request.Id).FirstOrDefaultAsync();
-
-                if (roomImages == null) return await Result.FailAsync(MessageConstants.NotFound);
-
-                roomImages.UrlImage = request.UrlImage;
-
-                _dbContext.RoomImages.Update(roomImages);
-                await _dbContext.SaveChangesAsync();
-
-                return await Result.SuccessAsync(MessageConstants.UpdateSuccess);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Lỗi khi update: {Id}", request.Id);
-                return await Result.FailAsync(MessageConstants.UpdateFail);
-            }  
         }
 
         public async Task<IResult> Delete(int id)
@@ -112,5 +93,24 @@ namespace BusinessLogic.Services
                 return await Result.FailAsync(MessageConstants.DeleteFail);
             }
         }
+    }
+
+    public class RoomImageRequest : RequestParameter
+    {
+        public int? RoomId { get; set; }
+    }
+
+    public class RoomImageDto 
+    {
+        public int Id { get; set; }
+        public int RoomId { get; set; }
+        public string? UrlImage { get; set; }
+    }
+    public class RoomImagesResponse
+    {
+        public int Id { get; set; }
+        public int RoomId { get; set; }
+        public string? UrlImage { get; set; }
+        public DateTime CreatedOn { get; set; }
     }
 }

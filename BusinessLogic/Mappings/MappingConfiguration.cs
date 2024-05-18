@@ -15,6 +15,7 @@ using BusinessLogic.Dtos.User;
 using BusinessLogic.Dtos.VoteBooking;
 using BusinessLogic.Entities;
 using BusinessLogic.Entities.Identity;
+using BusinessLogic.Services;
 
 namespace BusinessLogic.Mappings
 {
@@ -53,6 +54,8 @@ namespace BusinessLogic.Mappings
             CreateMap<ReplyComment, ReplyCommentDto>().ReverseMap();
             CreateMap<ReplyComment, ReplyCommentResponse>().ReverseMap();
             CreateMap<Rooms, CheckInOutResponse>().ReverseMap();
+            CreateMap<RoomImages, RoomImageDto>().ReverseMap();
+            CreateMap<RoomImages, RoomImagesResponse>().ReverseMap();
         }
     }
 }

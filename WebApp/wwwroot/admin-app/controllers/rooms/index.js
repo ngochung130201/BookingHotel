@@ -2,6 +2,7 @@
 var RoomsController = function () {
     this.initialize = function () {
         loadData();
+        loadDataRoomImage();
         registerEvents();
         registerControls();
     }
@@ -38,6 +39,17 @@ var RoomsController = function () {
                 },
             }
         });
+        $('#formRoomImage').validate({
+            errorClass: 'text-danger',
+            ignore: [],
+            lang: 'en',
+            rules: {
+                txtImageRoom: {
+                    required: true,
+                    maxlength: 255,
+                }
+            }
+        });
 
         // Event search 
         $('#txtKeyword').on('focusout', function (e) {
@@ -62,11 +74,6 @@ var RoomsController = function () {
         $('#btnSelectImg').on('click', function () {
             $('#fileInputImage').click();
         });
-
-        $('#btnSelectImgRoom').on('click', function () {
-            $('#fileInputImage').click();
-        });
-
         $("#fileInputImage").on('change', function () {
             var fileUpload = $(this).get(0);
             var files = fileUpload.files;
@@ -91,6 +98,34 @@ var RoomsController = function () {
             });
         });
 
+        // Image room
+        $('#btnSelectImgRoom').on('click', function () {
+            $('#fileInputImageRoom').click();
+        });
+        $("#fileInputImageRoom").on('change', function () {
+            var fileUpload = $(this).get(0);
+            var files = fileUpload.files;
+            var data = new FormData();
+            for (var i = 0; i < files.length; i++) {
+                data.append(files[i].name, files[i]);
+            }
+            $.ajax({
+                type: "POST",
+                url: "/Admin/Upload/UploadImage",
+                contentType: false,
+                processData: false,
+                data: data,
+                success: function (path) {
+                    $('#txtImageRoom').val(path);
+                    $('#txtImageShowRoom').val(path);
+                    base.notify('Cập nhật thành công!', 'success');
+                },
+                error: function () {
+                    base.notify('Đang xảy ra lỗi!', 'error');
+                }
+            });
+        });
+
         $(document).ready(function () {
             $('#fileInputImage').change(function () {
                 var file = this.files[0];
@@ -102,14 +137,37 @@ var RoomsController = function () {
                 };
                 reader.readAsDataURL(file);
             });
+
+            $('#fileInputImageRoom').change(function () {
+                var file = this.files[0];
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#txtImageShowRoom').val(file.name);
+                    $('#txtImageRoom').val(e.target.result);
+                    $('#imagePreviewRoom').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(file);
+            });
         });
 
         // List images
-        $('body').off('click').on('click', '.btn-image', function (e) {
+        $('body').on('click', '.btn-image', function (e) {
             e.preventDefault();
+            var id = $(this).data('id');
+            $('#roomId').val(id); 
             $('#modal-list-image').modal('show');
-            $('hidId').val($(this).data('id'));
-        })
+            resetFormMaintainanceImage();
+            loadDataRoomImage(true);
+        });
+
+        // Event images delete
+        $('body').on('click', '.btn-deleteImage', function (e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            base.confirm('Bạn có chắc chắn muốn xóa?', function () {
+                deteleImageRoom(id);
+            });
+        });
 
         //event click btn-exportExcel 
         $('#btn-exportExcel').on('click', function (e) {
@@ -197,12 +255,11 @@ var RoomsController = function () {
             saveData(false);
         });
 
-        // Event save
-        $('#btnSaveAndContinue').on('click', function (e) {
+        // Event save image
+        $('#btnSaveAndContinueImage').on('click', function (e) {
             e.preventDefault();
-            saveData(true);
+            saveDataImageRoom(true);
         });
-
 
         // Event button edit
         $('body').on('click', '.btn-edit', function (e) {
@@ -320,7 +377,6 @@ var RoomsController = function () {
         });
     }
 
-
     var loadDetail = function (id) {
         $.ajax({
             type: "GET",
@@ -363,6 +419,73 @@ var RoomsController = function () {
         $.ajax({
             type: "POST",
             url: "/Admin/Room/Delete",
+            data: {
+                id: id
+            },
+            dataType: "json",
+            beforeSend: function () {
+                base.startLoading();
+            },
+            success: function (response) {
+                if (response.succeeded) {
+                    base.notify(response.messages[0], 'success');
+                    base.stopLoading();
+                    loadData(true);
+                } else {
+                    base.notify(response.messages[0], 'error');
+                    base.stopLoading();
+                }
+            },
+            error: function (status) {
+                base.notify('Đang xảy ra lỗi!', 'error');
+                base.stopLoading();
+            }
+        });
+    }
+
+    // Room Images
+    var loadDataRoomImage = function (isPageChanged) {
+        $.ajax({
+            type: "GET",
+            url: "/Admin/Room/GetRoomImagePagination",
+            data: {
+                roomId: $('#roomId').val(),
+                pageNumber: base.configs.pageIndex,
+                pageSize: base.configs.pageSize
+            },
+            dataType: "json",
+            success: function (response) {
+                var template = $('#table-template-image').html();
+                var render = "";
+                $("#lbl-total-records-image").text(response.totalCount);
+                if (response.totalCount > 0) {
+                    $.each(response.data, function (i, item) {
+                        render += Mustache.render(template, {
+                            Id: item.id,
+                            UrlImage: item.urlImage === undefined || item.urlImage === null || item.urlImage === '' ? '<img src="/assets/images/picture.png" width=50 />' : '<img src="' + base.getOrigin() + item.urlImage + '" width=50 />',
+                            CreatedOn: base.dateTimeFormatJson(item.createdOn)
+                        });
+                    });
+                    if (render !== undefined) {
+                        $('#tbl-content-image').html(render);
+                    }
+                    base.wrapPaging(response.totalCount, function () {
+                        loadDataRoomImage();
+                    }, isPageChanged);
+                } else {
+                    $('#tbl-content-image').html('<tr><td colspan="10" style="text-align: center; vertical-align: middle;">Danh sách trống</td></tr>');
+                }
+                base.stopLoading();
+            },
+            error: function (status) {
+                console.log(status);
+            }
+        });
+    }
+    var deteleImageRoom = function (id) {
+        $.ajax({
+            type: "POST",
+            url: "/Admin/Room/DeleteRoomImage",
             data: {
                 id: id
             },
@@ -466,6 +589,49 @@ var RoomsController = function () {
                         base.notify(response.messages[0], 'success');
                         (continueFlg === true) ? resetFormMaintainance() : $('#modal-add-edit').modal('hide');
                         resetFormMaintainance();
+                        base.stopLoading();
+                        loadData(true);
+                    } else {
+                        base.notify(response.messages[0], 'error');
+                    }
+                },
+                error: function () {
+                    base.notify('Đang xảy ra lỗi!', 'error');
+                    base.stopLoading();
+                }
+            });
+            return false;
+        }
+    }
+
+    var resetFormMaintainanceImage = function () {
+        $('#hidIdRoom').val(0);
+        $('#txtImageRoom').val('');
+        $('#txtImageShowRoom').val('');
+        $('#imagePreviewRoom').attr('src', '/assets/images/picture.png');
+    }
+    var saveDataImageRoom = function (continueFlg) {
+        if ($('#formRoomImage').valid()) {
+            var id = $('#hidIdRoom').val();
+            var roomId = $('#roomId').val();
+            var urlImage = $('#txtImageRoom').val();
+            $.ajax({
+                type: "POST",
+                url: "/Admin/Room/SaveRoomImage",
+                data: {
+                    Id: id,
+                    RoomId: roomId,
+                    UrlImage: urlImage,
+                },
+                dataType: "json",
+                beforeSend: function () {
+                    base.startLoading();
+                },
+                success: function (response) {
+                    if (response.succeeded) {
+                        base.notify(response.messages[0], 'success');
+                        (continueFlg === true) ? resetFormMaintainanceImage() : $('#modal-list-image').modal('hide');
+                        resetFormMaintainanceImage();
                         base.stopLoading();
                         loadData(true);
                     } else {

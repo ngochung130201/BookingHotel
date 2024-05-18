@@ -53,6 +53,9 @@ namespace BusinessLogic.Extensions
             services.AddTransient<ICommentService, CommentService>();
             // ExcelService
             services.AddTransient<IExcelService, ExcelService>();
+            // RoomImageService
+            services.AddTransient<IRoomsImageService, RoomsImageService>();
+
             services.AddAuthorizationCore(options =>
             {
                 options.AddPolicy("Admin", policy =>

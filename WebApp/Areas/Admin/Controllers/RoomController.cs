@@ -6,12 +6,13 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace WebApp.Areas.Admin.Controllers
 {
-    public class RoomController(IRoomsService roomsService) : AdminBaseController
+    public class RoomController(IRoomsService roomsService,
+                                IRoomsImageService roomsImageService) : AdminBaseController
     {
         public async Task<IActionResult> IndexAsync()
         {
             var result = await roomsService.GetRoomTypesName();
-            if (result.Data == null) { return View(new List<RoomTypesResponse>()); }
+            if (result.Data == null) { return View(new List<RoomTypesResponse>());  }
             return View(result.Data);
         }
 
@@ -129,6 +130,52 @@ namespace WebApp.Areas.Admin.Controllers
             var result = roomsService.ExportExcel(request);
             if (result == null) return NotFound();
             return File(result, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Room.xlsx");
+        }
+
+        /// <summary>
+        /// Get Rooms Image Pagination
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> GetRoomImagePagination(RoomImageRequest request)
+        {
+            var result = await roomsImageService.GetPagination(request);
+            return Json(result);
+        }
+
+        /// <summary>
+        /// Save Room Image
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> SaveRoomImage(RoomImageDto request)
+        {
+            if (!ModelState.IsValid)
+            {
+                IEnumerable<ModelError> allErrors = ModelState.Values.SelectMany(v => v.Errors);
+                return new BadRequestObjectResult(allErrors);
+            }
+            var result = await roomsImageService.Add(request);
+            return Json(result);
+        }
+
+        /// <summary>
+        /// Delete by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> DeleteRoomImage(short id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return new BadRequestObjectResult(ModelState);
+            }
+
+            var result = await roomsImageService.Delete(id);
+
+            return Json(result);
         }
     }
 }

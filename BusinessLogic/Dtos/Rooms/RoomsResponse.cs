@@ -1,5 +1,6 @@
 ﻿using BusinessLogic.Dtos.Comment;
 using BusinessLogic.Dtos.RoomTypes;
+using BusinessLogic.Services;
 
 namespace BusinessLogic.Dtos.Rooms
 {

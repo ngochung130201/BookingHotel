@@ -27,7 +27,6 @@
     <link rel="stylesheet" href="~/assets/client/css/icomoon.css">
     <link rel="stylesheet" href="~/assets/client/css/style.css">
     <style>
-
         .form-size {
             font-size: 12px;
         }
@@ -51,6 +50,21 @@
     <script src="~/assets/client/js/jquery.timepicker.min.js"></script>
     <script src="~/assets/client/js/scrollax.min.js"></script>
     <script src="~/assets/client/js/main.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Hiển thị ảnh phóng to khi click vào
+            $('.room-img').click(function () {
+                var imageUrl = $(this).css('background-image').replace(/^url\(['"](.+)['"]\)/, '$1');
+                $('#enlarged-image').attr('src', imageUrl);
+                $('.overlay').fadeIn();
+            });
+
+            // Đóng overlay khi click nút đóng hoặc bên ngoài ảnh
+            $('.overlay, .close-btn').click(function () {
+                $('.overlay').fadeOut();
+            });
+        });
+    </script>
 }
 <!--================Breadcrumb Area =================-->
 <section class="breadcrumb_area">
@@ -73,8 +87,21 @@
                             <div class="item">
                                 <div class="room-img" style="background-image: url('@Model.Room.Thumbnail');"></div>
                             </div>
+                            @foreach (var image in Model.Room.RoomImages!)
+                            {
+                                <div class="item">
+                                    <div class="room-img" style="background-image: url('@image.UrlImage')"></div>
+                                </div>
+                            }
                         </div>
                     </div>
+
+                    <!-- Overlay và ảnh phóng to -->
+                    <div class="overlay">
+                        <span class="close-btn">&times;</span>
+                        <img class="enlarged-image" id="enlarged-image" src="" alt="Enlarged Image">
+                    </div>
+
                     <div class="col-md-12 room-single mt-4 mb-5 ftco-animate">
                         <div class="main_title" style="font-size: 10px;">
                             <h2>  About @Model.Room.Name</h2>

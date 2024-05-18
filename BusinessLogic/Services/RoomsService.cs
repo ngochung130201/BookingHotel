@@ -92,7 +92,11 @@ namespace BusinessLogic.Services
         {
             var room = await _dbContext.Rooms.Where(x => !x.IsDeleted && x.Id == id).FirstOrDefaultAsync();
 
+            var roomImage = await _dbContext.RoomImages.Where(im => !im.IsDeleted && im.RoomId == room!.Id).ToListAsync();
+
             var result = _mapper.Map<RoomsDto>(room);
+
+            result.RoomImages = roomImage;
 
             return await Result<RoomsDto>.SuccessAsync(result ?? new RoomsDto());
         }

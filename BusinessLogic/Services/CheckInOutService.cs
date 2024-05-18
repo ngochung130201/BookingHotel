@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using BusinessLogic.Constants.Messages;
 using BusinessLogic.Contexts;
-using BusinessLogic.Dtos.Booking;
 using BusinessLogic.Dtos.CheckInOut;
-using BusinessLogic.Dtos.Comment;
 using BusinessLogic.Wrapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;

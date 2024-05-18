@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using BusinessLogic.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace BusinessLogic.Dtos.Rooms
 {
@@ -29,5 +30,7 @@ namespace BusinessLogic.Dtos.Rooms
         public bool Status { get; set; }
 
         public string? Views { get; set; }
+
+        public List<RoomImages>? RoomImages { get; set; }
     }
 }

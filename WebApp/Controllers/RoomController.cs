@@ -14,7 +14,8 @@ namespace WebApp.Controllers
                                 ICommentService commentService,
                                 IReplyCommentService replyCommentService,
                                 IBookingService bookingService,
-                                ICurrentUserService currentUserService) : Controller
+                                ICurrentUserService currentUserService,
+                                IRoomsImageService roomsImageService) : Controller
     {
         /// <summary>
         /// Room
@@ -55,6 +56,7 @@ namespace WebApp.Controllers
             var email = currentUserService.Email;
             var phoneNumber = currentUserService.PhoneNumber;
             var userId = currentUserService.UserId;
+
             var resultComment = await commentService.GetPagination(new CommentRequest
             {
                 RoomId = id,
