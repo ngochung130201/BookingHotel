@@ -3,6 +3,9 @@ using BusinessLogic.Dtos.RoomTypes;
 using BusinessLogic.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using QRCoder;
+using System.Drawing.Imaging;
+using System.Drawing;
 
 namespace WebApp.Areas.Admin.Controllers
 {
@@ -12,7 +15,20 @@ namespace WebApp.Areas.Admin.Controllers
         public async Task<IActionResult> IndexAsync()
         {
             var result = await roomsService.GetRoomTypesName();
-            if (result.Data == null) { return View(new List<RoomTypesResponse>());  }
+            using (MemoryStream ms = new MemoryStream())
+            {  
+                string code = "http://localhost:5045/room-details/8";
+                QRCodeGenerator qrGenerator = new QRCodeGenerator();
+                QRCodeData qrCodeData = qrGenerator.CreateQrCode(code, QRCodeGenerator.ECCLevel.Q);
+                QRCode qrCode = new QRCode(qrCodeData);
+                using (Bitmap bitMap = qrCode.GetGraphic(20))
+                {
+                    bitMap.Save(ms, ImageFormat.Png);
+                    ViewBag.QrCodeImage = "data:image/png;base64," + Convert.ToBase64String(ms.ToArray());
+                }
+            }
+
+            if (result.Data == null) { return View(new List<RoomTypesResponse>()); }
             return View(result.Data);
         }
 
