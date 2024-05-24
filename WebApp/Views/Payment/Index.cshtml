@@ -1,0 +1,16 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using BusinessLogic.Constants.Application
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Title"] = Localizer["Payment"];
+    var httpContext = ViewContext.HttpContext;
+    string appDomain = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}";
+}
+<!--================Breadcrumb Area =================-->
+<section class="breadcrumb_area">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+</section>
+<!--================Breadcrumb Area =================-->
+<form asp-action="CheckOut" method="post">
+    <button type="submit" name="payment" value="VnPay" class="btn border-secondary">Thanh toán</button>
+</form>
