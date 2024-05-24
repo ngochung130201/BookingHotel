@@ -1,7 +1,6 @@
 ﻿using BusinessLogic.Dtos.Booking;
 using BusinessLogic.Dtos.Home;
 using BusinessLogic.Dtos.News;
-using BusinessLogic.Dtos.Rooms;
 using BusinessLogic.Dtos.RoomTypes;
 using BusinessLogic.Entities.Identity;
 using BusinessLogic.Services;
@@ -12,7 +11,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
-using Org.BouncyCastle.Asn1.Ocsp;
 using System.Globalization;
 
 namespace WebApp.Controllers

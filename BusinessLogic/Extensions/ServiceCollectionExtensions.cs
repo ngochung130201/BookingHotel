@@ -55,7 +55,8 @@ namespace BusinessLogic.Extensions
             services.AddTransient<IExcelService, ExcelService>();
             // RoomImageService
             services.AddTransient<IRoomsImageService, RoomsImageService>();
-
+            // PaymentService
+            services.AddSingleton<IVnPayService, VnPayService>();
             services.AddAuthorizationCore(options =>
             {
                 options.AddPolicy("Admin", policy =>
