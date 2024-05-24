@@ -50,21 +50,6 @@
     <script src="~/assets/client/js/jquery.timepicker.min.js"></script>
     <script src="~/assets/client/js/scrollax.min.js"></script>
     <script src="~/assets/client/js/main.js"></script>
-    <script>
-        $(document).ready(function () {
-            // Hiển thị ảnh phóng to khi click vào
-            $('.room-img').click(function () {
-                var imageUrl = $(this).css('background-image').replace(/^url\(['"](.+)['"]\)/, '$1');
-                $('#enlarged-image').attr('src', imageUrl);
-                $('.overlay').fadeIn();
-            });
-
-            // Đóng overlay khi click nút đóng hoặc bên ngoài ảnh
-            $('.overlay, .close-btn').click(function () {
-                $('.overlay').fadeOut();
-            });
-        });
-    </script>
 }
 <!--================Breadcrumb Area =================-->
 <section class="breadcrumb_area">
@@ -126,26 +111,25 @@
                     <div class="all_facility_list">
                         <div class="col-sm-4 nopadding">
                             <ul class="list-unstyled">
-                                <li><i class="fa fa-check"></i>Double Bed</li>
-                                <li><i class="fa fa-check"></i>80 Sq mt</li>
-                                <li><i class="fa fa-check"></i>6 Persons</li>
-                                <li><i class="fa fa-check"></i>Free Internet</li>
+                                @for(int i = 0; i < 4; i++){
+                                    <li><i class="fa fa-check"></i>@Model.Services[i].Name</li>
+                                }
                             </ul>
                         </div>
                         <div class="col-sm-4 nopadding">
                             <ul class="list-unstyled">
-                                <li><i class="fa fa-check"></i>Free Wi-Fi</li>
-                                <li><i class="fa fa-check"></i>Breakfast Include</li>
-                                <li><i class="fa fa-check"></i>Private Balcony</li>
-                                <li class="no"><i class="fa fa-times"></i>Free Newspaper</li>
+                                @for (int i = 4; i < 8; i++)
+                                {
+                                    <li><i class="fa fa-check"></i>@Model.Services[i].Name</li>
+                                }
                             </ul>
                         </div>
                         <div class="col-sm-4 nopadding_left">
                             <ul class="list-unstyled">
-                                <li class="no"><i class="fa fa-times"></i>Flat Screen Tv</li>
-                                <li><i class="fa fa-check"></i>Full Ac</li>
-                                <li class="no"><i class="fa fa-times"></i>Beach View</li>
-                                <li><i class="fa fa-check"></i>Room Service</li>
+                                @for (int i = 8; i < 12; i++)
+                                {
+                                    <li><i class="fa fa-check"></i>@Model.Services[i].Name</li>
+                                }
                             </ul>
                         </div>
                     </div>

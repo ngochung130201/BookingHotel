@@ -2,6 +2,9 @@
 @{
     ViewData["Title"] = "Quản lý Nhận/Trả phòng";
 }
+@section Styles {
+    <link href="~/assets/admin/css/responsive.css" rel="stylesheet" />
+}
 @section Scripts {
     <script src="~/admin-app/controllers/checkInCheckOut/index.js" asp-append-version="true"></script>
     <script>
@@ -49,30 +52,32 @@
                         </div>
                     </div>                
                 </div>
-                <div class="table-wrap">
-                    <table id="datatable-buttons" class="table table-striped dt-responsive nowrap">
-                        <thead>
-                            <tr class="font-weight-bold text-dark">
-                                <th>Stt</th>
-                                <th>Phòng</th>
-                                <th>Loại phòng</th>
-                                <th>Địa điểm phòng</th>
-                                <th>Trạng thái Phòng</th>
-                                <th class="action-columns">Thao tác</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbl-content">
-                            <tr id="spinnerRow">
-                                <td colspan="10" style="text-align: center;">
-                                    <div id="spinner" class="spinner-border text-primary" role="status">
-                                        <div class="loader"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <partial name="_PaginationPartial" />
+                <div class="scroll-table">
+                    <div class="table-wrap">
+                        <table id="datatable-buttons" class="table table-striped dt-responsive nowrap">
+                            <thead>
+                                <tr class="font-weight-bold text-dark">
+                                    <th>Stt</th>
+                                    <th>Phòng</th>
+                                    <th>Loại phòng</th>
+                                    <th>Địa điểm phòng</th>
+                                    <th>Trạng thái Phòng</th>
+                                    <th class="action-columns">Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbl-content">
+                                <tr id="spinnerRow">
+                                    <td colspan="10" style="text-align: center;">
+                                        <div id="spinner" class="spinner-border text-primary" role="status">
+                                            <div class="loader"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
+                <partial name="_PaginationPartial" />
             </div> <!-- end card body-->
         </div> <!-- end card -->
     </div><!-- end col-->

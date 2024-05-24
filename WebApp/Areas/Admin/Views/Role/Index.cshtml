@@ -3,6 +3,7 @@
 }
 @section Styles {
     <link href="~/lib/jquery-treegrid/css/jquery.treegrid.css" rel="stylesheet" />
+    <link href="~/assets/admin/css/responsive.css" rel="stylesheet" />
 }
 @section Scripts {
     <script src="~/lib/jquery-treegrid/js/jquery.treegrid.js"></script>
@@ -12,7 +13,6 @@
         roleObj.initialize();
     </script>
 }
-
 <!-- start page title -->
 <div class="row">
     <div class="col-12">
@@ -47,29 +47,29 @@
                         </button>
                     </div>
                 </div>
-
-                <table id="datatable-buttons" class="table table-striped dt-responsive nowrap">
-                    <thead>
-                        <tr class="font-weight-bold text-dark">
-                            <th>Stt</th>
-                            <th>Vai trò</th>
-                            <th>Mô tả</th>
-                            <th>Người tạo</th>
-                            <th>Ngày tạo</th>
-                            <th class="action-columns">Hành động</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbl-content">
-                        <tr id="spinnerRow">
-                            <td colspan="10" style="text-align: center;">
-                                <div id="spinner" class="spinner-border text-primary" role="status">
-                                    <div class="loader"></div>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
+                <div class="scroll-table">
+                    <table id="datatable-buttons" class="table table-striped dt-responsive nowrap">
+                        <thead>
+                            <tr class="font-weight-bold text-dark">
+                                <th>Stt</th>
+                                <th>Vai trò</th>
+                                <th>Mô tả</th>
+                                <th>Người tạo</th>
+                                <th>Ngày tạo</th>
+                                <th class="action-columns">Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbl-content">
+                            <tr id="spinnerRow">
+                                <td colspan="10" style="text-align: center;">
+                                    <div id="spinner" class="spinner-border text-primary" role="status">
+                                        <div class="loader"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <partial name="_PaginationPartial" />
             </div> <!-- end card body-->
         </div> <!-- end card -->

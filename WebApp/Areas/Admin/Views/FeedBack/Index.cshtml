@@ -1,7 +1,9 @@
 ﻿@{
     ViewData["Title"] = "Quản lý phản hồi";
 }
-
+@section Styles {
+    <link href="~/assets/admin/css/responsive.css" rel="stylesheet" />
+}
 @section Scripts {
     <script src="~/admin-app/controllers/feedBack/index.js" asp-append-version="true"></script>
     <script>
@@ -25,8 +27,6 @@
     </div>
 </div>
 <!-- end page title -->
-
-
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -39,31 +39,32 @@
                         </div>
                     </div>
                 </div>
-
-                <table id="datatable-buttons" class="table table-striped dt-responsive nowrap">
-                    <thead>
-                        <tr class="font-weight-bold text-dark">
-                            <th>Stt</th>
-                            <th>Tên</th>
-                            <th>Email</th>
-                            <th>Tiêu đề</th>
-                            <th>Nội dung</th>
-                            <th>Trả lời</th>
-                            <th>Người trả lời</th>
-                            <th>Ngày tạo</th>
-                            <th class="action-columns">Thao tác</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbl-content">
-                        <tr id="spinnerRow">
-                            <td colspan="10" style="text-align: center;">
-                                <div id="spinner" class="spinner-border text-primary" role="status">
-                                    <div class="loader"></div>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="scroll-table">
+                    <table id="datatable-buttons" class="table table-striped dt-responsive nowrap">
+                        <thead>
+                            <tr class="font-weight-bold text-dark">
+                                <th>Stt</th>
+                                <th>Tên</th>
+                                <th>Email</th>
+                                <th>Tiêu đề</th>
+                                <th>Nội dung</th>
+                                <th>Trả lời</th>
+                                <th>Người trả lời</th>
+                                <th>Ngày tạo</th>
+                                <th class="action-columns">Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbl-content">
+                            <tr id="spinnerRow">
+                                <td colspan="10" style="text-align: center;">
+                                    <div id="spinner" class="spinner-border text-primary" role="status">
+                                        <div class="loader"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <partial name="_PaginationPartial" />
             </div> <!-- end card body-->
         </div> <!-- end card -->

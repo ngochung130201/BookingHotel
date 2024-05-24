@@ -1,7 +1,9 @@
 ﻿@{
     ViewData["Title"] = "Quản lý loại phòng";
 }
-
+@section Styles {
+    <link href="~/assets/admin/css/responsive.css" rel="stylesheet" />
+}
 @section Scripts {
     <script src="~/admin-app/controllers/roomTypes/index.js" asp-append-version="true"></script>
     <script>
@@ -9,7 +11,6 @@
         roomTypesObj.initialize();
     </script>
 }
-
 <!-- start page title -->
 <div class="row">
     <div class="col-12">
@@ -25,8 +26,6 @@
     </div>
 </div>
 <!-- end page title -->
-
-
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -38,7 +37,6 @@
                             <input type="text" id="txtKeyword" class="form-control" placeholder="Tên loại phòng">
                         </div>
                     </div>
-
                     <div class="col-sm-2 text-right pb-3">
                         <button type="submit" class="btn btn-primary" id="btn-create" data-animation="fadein">
                             <i class="fe-plus-circle"></i>
@@ -46,30 +44,31 @@
                         </button>
                     </div>
                 </div>
-
-                <table id="datatable-buttons" class="table table-striped dt-responsive nowrap">
-                    <thead>
-                        <tr class="font-weight-bold text-dark">
-                            <th>Stt</th>
-                            <th>Loại phòng</th>
-                            <th>Hình ảnh</th>
-                            <th>Số sao</th>
-                            <th>Mô tả</th>
-                            <th>Người tạo</th>
-                            <th>Ngày tạo</th>
-                            <th class="action-columns">Thao tác</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbl-content">
-                        <tr id="spinnerRow">
-                            <td colspan="10" style="text-align: center;">
-                                <div id="spinner" class="spinner-border text-primary" role="status">
-                                    <div class="loader"></div>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="scroll-table">
+                    <table id="datatable-buttons" class="table table-striped dt-responsive nowrap">
+                        <thead>
+                            <tr class="font-weight-bold text-dark">
+                                <th>Stt</th>
+                                <th>Loại phòng</th>
+                                <th>Hình ảnh</th>
+                                <th>Số sao</th>
+                                <th>Mô tả</th>
+                                <th>Người tạo</th>
+                                <th>Ngày tạo</th>
+                                <th class="action-columns">Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbl-content">
+                            <tr id="spinnerRow">
+                                <td colspan="10" style="text-align: center;">
+                                    <div id="spinner" class="spinner-border text-primary" role="status">
+                                        <div class="loader"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <partial name="_PaginationPartial" />
             </div> <!-- end card body-->
         </div> <!-- end card -->
@@ -92,5 +91,4 @@
         </td>
     </tr>
 </script>
-
 <partial name="_AddEditModal.cshtml" />

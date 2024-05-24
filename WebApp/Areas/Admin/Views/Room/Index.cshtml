@@ -2,6 +2,9 @@
 @{
     ViewData["Title"] = "Quản lý phòng";
 }
+@section Styles {
+    <link href="~/assets/admin/css/responsive.css" rel="stylesheet" />
+}
 @section Scripts {
     <script src="~/admin-app/controllers/rooms/index.js" asp-append-version="true"></script>
     <script>
@@ -9,7 +12,6 @@
         roomsObj.initialize();
     </script>
 }
-
 <!-- start page title -->
 <div class="row">
     <div class="col-12">
@@ -25,7 +27,6 @@
     </div>
 </div>
 <!-- end page title -->
-
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -48,8 +49,8 @@
                             <i class="fe-download"></i> Xuất Excel
                         </button>
                     </div>
-                </div>               
-                <div class="table-wrap">
+                </div>
+                <div class="scroll-table">
                     <table id="datatable-buttons" class="table table-striped dt-responsive nowrap">
                         <thead>
                             <tr class="font-weight-bold text-dark">
@@ -74,8 +75,8 @@
                             </tr>
                         </tbody>
                     </table>
-                    <partial name="_PaginationPartial" />
                 </div>
+                <partial name="_PaginationPartial" />
             </div> <!-- end card body-->
         </div> <!-- end card -->
     </div><!-- end col-->

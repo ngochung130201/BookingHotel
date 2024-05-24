@@ -1,0 +1,125 @@
+﻿@media only screen and (max-width: 1440px) {
+    .scroll-table {
+        overflow: scroll;
+    }
+
+    .page-link {
+        position: relative;
+        display: block;
+        padding: .25rem .5rem;
+        margin-left: -1px;
+        line-height: 1.25;
+        color: #323a46;
+        background-color: #fff;
+        border: 1px solid #dee2e6;
+    }
+
+    .dataTables_paginate {
+        text-align: center;
+    }
+
+    ul#paginationUL {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .responsiveResult {
+        min-width: 156px;
+    }
+
+    .responsiveTotal {
+        min-width: 137px;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .scroll-table {
+        overflow: scroll;
+    }
+
+    .page-link {
+        position: relative;
+        display: block;
+        padding: .25rem .5rem;
+        margin-left: -1px;
+        line-height: 1.25;
+        color: #323a46;
+        background-color: #fff;
+        border: 1px solid #dee2e6;
+    }
+
+    .dataTables_paginate {
+        text-align: center;
+    }
+    ul#paginationUL {
+        justify-content: center; 
+        flex-wrap: wrap;
+    }
+    .responsiveResult{
+        min-width: 156px;
+    }
+    .responsiveTotal {
+        min-width: 137px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .responsiveResult {
+        min-width: 156px;
+    }
+
+    .responsiveTotal {
+        min-width: 183px;
+    }
+
+    .btnAddProduct{
+        padding-top: 2px;
+    }
+    .productCategory {
+        padding-bottom: 10px
+    }
+}
+
+@media only screen and (max-width: 375px) {
+    .responsiveResult {
+        font-size: 13px;
+        min-width: 120px;
+        padding :0;
+    }
+
+    .responsiveTotal {
+        min-width: calc(100% - 120px);
+        font-size: 13px;
+        padding-right: 0;
+    }
+    .responsiveP {
+        padding-right: 0;
+    }
+    .font-size-order{
+        font-size:13px
+    }
+}
+
+.font-weight-bold{
+    font-weight:bold;
+}
+
+.responsive-100 {
+    min-width: 100px
+}
+
+.responsive-150 {
+    min-width: 150px;
+}
+
+.responsive-200 {
+    min-width: 200px;
+}
+
+.responsive-175 {
+    min-width: 175px;
+}
+
+.scroll-table {
+    overflow-y: auto;
+}

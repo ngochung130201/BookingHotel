@@ -2,6 +2,7 @@
 using BusinessLogic.Dtos.Comment;
 using BusinessLogic.Dtos.Rooms;
 using BusinessLogic.Dtos.RoomTypes;
+using BusinessLogic.Dtos.Service;
 using BusinessLogic.Services;
 using BusinessLogic.Services.Common;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +16,7 @@ namespace WebApp.Controllers
                                 IReplyCommentService replyCommentService,
                                 IBookingService bookingService,
                                 ICurrentUserService currentUserService,
-                                IRoomsImageService roomsImageService) : Controller
+                                IServicesServices servicesServices) : Controller
     {
         /// <summary>
         /// Room
@@ -70,6 +71,13 @@ namespace WebApp.Controllers
                 result.Replies = resultReplyComment.Data;
             }
 
+            var resultServices = await servicesServices.GetPagination(new ServiceRequest
+            {
+                PageNumber = 1,
+                PageSize = 12
+            });
+
+            result.Services = resultServices.Data;
             result.Comments = resultComment.Data;
             result.Room = resultRoomDetail.Data;
             result.Email = email;
