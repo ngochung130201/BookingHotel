@@ -4,7 +4,8 @@
     {
         NewBooking = 1, // Đơn mới
         DownPayment = 2, // Đã đặt cọc
-        CheckIn = 3, // Đã nhận phòng
-        CheckOut = 4 // Đã trả phòng
+        Payment = 3, // Đã thanh toán
+        CheckIn = 4, // Đã nhận phòng
+        CheckOut = 5 // Đã trả phòng
     }
 }
