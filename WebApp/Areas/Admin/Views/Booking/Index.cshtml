@@ -91,10 +91,11 @@
         <td>{{TransactionDate}}</td>
         <td>{{{Status}}}</td>
         <td class="text-center action-columns">
-            <a href="#" data-id="{{Id}}" class="btn btn-xs btn-info btn-edit" ><i class="fe-edit-2"></i></a>
+            <a href="#" data-id="{{Id}}" class="btn btn-xs btn-info btn-view"><i class="fe-eye"></i></a>
+            <a href="#" data-id="{{Id}}" class="btn btn-xs btn-info btn-edit"><i class="fe-edit-2"></i></a>
             <a href="#" data-id="{{Id}}" class="btn btn-xs btn-danger btn-delete"><i class="fe-trash-2"></i></a>
         </td>
     </tr>
 </script>
-
+<partial name="_ViewBookingModal.cshtml" />
 <partial name="Components/_ImportExcelModal" />

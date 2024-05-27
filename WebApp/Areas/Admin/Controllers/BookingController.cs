@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.Dtos.Booking;
+using BusinessLogic.Dtos.Rooms;
 using BusinessLogic.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,6 +21,18 @@ namespace WebApp.Areas.Admin.Controllers
         {
             var result = await bookingService.GetPagination(request);
             return Json(result);
+        }
+
+        /// <summary>
+        /// Get by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<IActionResult> GetById(int id)
+        {
+            var result = await bookingService.GetById(id);
+
+            return View(result);
         }
 
         [HttpGet]

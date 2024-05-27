@@ -108,12 +108,16 @@ namespace BusinessLogic.Services
                                      Payment = b.Payment,
                                      Message = b.Message,
                                      FullName = u != null ? u.FullName : null,
+                                     Email = u != null ? u.Email : null,
+                                     Address = u != null ? u.Address : null,
+                                     Avatar = u != null ? u.AvatarUrl : null,
                                      BookingDetailDto = (from bd in _dbContext.BookingDetail
                                                          join r in _dbContext.Rooms.Where(x => !x.IsDeleted) on bd.RoomId equals r.Id
+                                                         join rt in _dbContext.RoomTypes.Where(x => !x.IsDeleted) on r.RoomTypeId equals rt.Id
                                                          where !bd.IsDeleted && bd.BookingId == b.Id
                                                          select new BookingDetailDto()
                                                          {
-                                                             RoomId = r.Id,
+                                                             RoomType = rt.Name,
                                                              Image = r.Thumbnail,
                                                              Name = r.Name,
                                                              Price = r.Price,

@@ -31,6 +31,12 @@
             window.location.href = '/Admin/Booking/ExportExcel?keyword=' + keyword;
         });
 
+        $('body').on('click', '.btn-view', function (e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            $('#booking-detail-modal').modal('show');
+        });
+
         // Event button delete
         $('body').on('click', '.btn-delete', function (e) {
             e.preventDefault();
