@@ -14,6 +14,7 @@
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description">
     <meta content="Coderthemes" name="author">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="~/assets/landing-page/image/favicon.png" type="image/png">
     <!-- App favicon -->
     <link rel="shortcut icon" href="assets\images\favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@600;700&family=Inter:wght@500;600&display=swap"
@@ -57,7 +58,12 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="emailaddress">Email address</label>
+                                    <label for="phonenumber">Phone Number</label>
+                                    <input id="Email" type="text" class="form-control" placeholder="Phone Number" asp-for="PhoneNumber" value="@Model.PhoneNumber">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="emailaddress">Email Address</label>
                                     <input id="Email" type="text" class="form-control" placeholder="Email" asp-for="Email" value="@Model.Email">
                                 </div>
 
