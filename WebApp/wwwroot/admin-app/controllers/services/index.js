@@ -38,48 +38,6 @@ var ServicesController = function () {
             loadData(true);
         });
 
-        // Image
-        $('#btnSelectImg').on('click', function () {
-            $('#fileInputImage').click();
-        });
-
-        $("#fileInputImage").on('change', function () {
-            var fileUpload = $(this).get(0);
-            var files = fileUpload.files;
-            var data = new FormData();
-            for (var i = 0; i < files.length; i++) {
-                data.append(files[i].name, files[i]);
-            }
-            $.ajax({
-                type: "POST",
-                url: "/Admin/Upload/UploadImage",
-                contentType: false,
-                processData: false,
-                data: data,
-                success: function (path) {
-                    $('#txtImage').val(path);
-                    $('#txtImageShow').val(path);
-                    base.notify('Uploaded successful!', 'success');
-                },
-                error: function () {
-                    base.notify('Has an error in progress', 'error');
-                }
-            });
-        });
-
-        $(document).ready(function () {
-            $('#fileInputImage').change(function () {
-                var file = this.files[0];
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $('#txtImageShow').val(file.name);
-                    $('#txtImage').val(e.target.result);
-                    $('#imagePreview').attr('src', e.target.result);
-                };
-                reader.readAsDataURL(file);
-            });
-        });
-
         // Event click Add New button
         $("#btn-create").on('click', function () {
             base.setTitleModal('add');
@@ -147,7 +105,7 @@ var ServicesController = function () {
                             Order: stt,
                             Id: item.id,
                             Name: item.name,
-                            Image: item.image === undefined || item.image === null || item.image === '' ? '<img src="/assets/images/picture.png" width=50 />' : '<img src="' + base.getOrigin() + item.image + '" width=50 />',
+                            Image: '<i class="' + item.image + '"></i>',
                             Description: item.description,
                             CreatedBy: item.createdBy,
                             CreatedOn: base.dateTimeFormatJson(item.createdOn)
@@ -189,7 +147,6 @@ var ServicesController = function () {
                 $('#hidId').val(data.id);
                 $('#txtName').val(data.name);
                 $('#txtImage').val(data.image);
-                $('#imagePreview').attr('src', data.image != null ? base.getOrigin() + data.image : "/assets/images/picture.png");
                 $('#txtDescription').val(data.description);
 
                 $('#modal-add-edit').modal('show');
@@ -234,8 +191,6 @@ var ServicesController = function () {
         $('#hidId').val(0);
         $('#txtName').val('');
         $('#txtImage').val('');
-        $('#txtImageShow').val('');
-        $('#imagePreview').attr('src', '/assets/images/picture.png');
         $('#txtDescription').val('');
     }
     var saveData = function (continueFlg) {

@@ -13,7 +13,7 @@
     <link href="~/assets/client1/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="~/assets/client1/css/navigation.css" rel="stylesheet" type="text/css" />
     <link href="~/assets/client1/css/style.css" rel="stylesheet" type="text/css">
-
+    <link href="~/assets/admin/css/icons.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="~/assets/client/css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="~/assets/client/css/animate.css">
     <link rel="stylesheet" href="~/assets/client/css/owl.carousel.min.css">
@@ -112,7 +112,7 @@
                         <div class="col-sm-4 nopadding">
                             <ul class="list-unstyled">
                                 @for(int i = 0; i < 4; i++){
-                                    <li><i class="fa fa-check"></i>@Model.Services[i].Name</li>
+                                    <li><i class="@Model.Services[i].Image"></i>@Model.Services[i].Name</li>
                                 }
                             </ul>
                         </div>
@@ -120,7 +120,7 @@
                             <ul class="list-unstyled">
                                 @for (int i = 4; i < 8; i++)
                                 {
-                                    <li><i class="fa fa-check"></i>@Model.Services[i].Name</li>
+                                    <li><i class="@Model.Services[i].Image"></i>@Model.Services[i].Name</li>
                                 }
                             </ul>
                         </div>
@@ -128,7 +128,7 @@
                             <ul class="list-unstyled">
                                 @for (int i = 8; i < 12; i++)
                                 {
-                                    <li><i class="fa fa-check"></i>@Model.Services[i].Name</li>
+                                    <li><i class="@Model.Services[i].Image"></i>@Model.Services[i].Name</li>
                                 }
                             </ul>
                         </div>
