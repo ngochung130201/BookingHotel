@@ -405,6 +405,8 @@ var RoomsController = function () {
                 $('#imagePreview').attr('src', data.thumbnail != null ? base.getOrigin() + data.thumbnail : "/assets/images/picture.png");
                 $('#txtDescription').val(data.description);
 
+                $('#qrCodeImage').attr('src', data.roomCode);
+
                 $('#modal-add-edit').modal('show');
                 base.stopLoading();
             },
@@ -553,7 +555,7 @@ var RoomsController = function () {
             var name = $('#txtName').val();
             var thumbnail = $('#txtImage').val();
             var roomTypeId = $('#txtRoomTypeId').val();
-            var roomCode = $('#txtRoomCode').val();
+            //var roomCode = $('#txtRoomCode').val();
             var price = $('#txtPrice').val();
             var location = $('#txtLocation').val();
             var acreage = $('#txtAcreage').val();
@@ -570,7 +572,7 @@ var RoomsController = function () {
                     Name: name,
                     Thumbnail: thumbnail,
                     RoomTypeId: roomTypeId,
-                    RoomCode: roomCode,
+                    //RoomCode: roomCode,
                     Price: price,
                     Location: location,
                     Acreage: acreage,

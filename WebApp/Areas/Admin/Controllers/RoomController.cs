@@ -3,10 +3,6 @@ using BusinessLogic.Dtos.RoomTypes;
 using BusinessLogic.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using QRCoder;
-using System.Drawing.Imaging;
-using System.Drawing;
-
 namespace WebApp.Areas.Admin.Controllers
 {
     public class RoomController(IRoomsService roomsService,
@@ -15,19 +11,6 @@ namespace WebApp.Areas.Admin.Controllers
         public async Task<IActionResult> IndexAsync()
         {
             var result = await roomsService.GetRoomTypesName();
-            using (MemoryStream ms = new MemoryStream())
-            {  
-                string code = "http://localhost:5045/room-details/8";
-                QRCodeGenerator qrGenerator = new QRCodeGenerator();
-                QRCodeData qrCodeData = qrGenerator.CreateQrCode(code, QRCodeGenerator.ECCLevel.Q);
-                QRCode qrCode = new QRCode(qrCodeData);
-                using (Bitmap bitMap = qrCode.GetGraphic(20))
-                {
-                    bitMap.Save(ms, ImageFormat.Png);
-                    ViewBag.QrCodeImage = "data:image/png;base64," + Convert.ToBase64String(ms.ToArray());
-                }
-            }
-
             if (result.Data == null) { return View(new List<RoomTypesResponse>()); }
             return View(result.Data);
         }
@@ -52,6 +35,10 @@ namespace WebApp.Areas.Admin.Controllers
         public async Task<IActionResult> GetById(short id)
         {
             var result = await roomsService.GetById(id);
+
+            ViewBag.QrCodeImage = QRCodeHelper.GenerateQrCodeBase64Async(result.Data.RoomCode!);
+
+            result.Data.RoomCode = ViewBag.QrCodeImage;
 
             return Json(result);
         }

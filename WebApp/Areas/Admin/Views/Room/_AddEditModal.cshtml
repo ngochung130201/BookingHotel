@@ -107,14 +107,7 @@
                                 <div class="form-group">
                                     <label for="txtRoomCodes" class="col-sm-auto control-label no-padding-right">Mã phòng </label>
                                     <div class="col-sm-12">
-                                        @if (!string.IsNullOrEmpty(ViewBag.QrCodeImage))
-                                        {
-                                            <img src="@ViewBag.QrCodeImage" alt="QR Code Image" width="100" height="100" />
-                                        }
-                                        else
-                                        {
-                                            <p>Không có mã QR.</p>
-                                        }
+                                        <img id="qrCodeImage" alt="QR Code Image" width="100" height="100" />
                                     </div>
                                 </div>
                             </div>

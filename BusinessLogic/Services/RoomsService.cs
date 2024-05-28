@@ -44,13 +44,15 @@ namespace BusinessLogic.Services
         private readonly IMapper _mapper;
         private readonly ILogger<RoomsService> _logger;
         private readonly IExcelService _excelService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public RoomsService(ApplicationDbContext dbContext, IMapper mapper, ILogger<RoomsService> logger, IExcelService excelService)
+        public RoomsService(ApplicationDbContext dbContext, IMapper mapper, ILogger<RoomsService> logger, IExcelService excelService, IHttpContextAccessor httpContextAccessor)
         {
             _dbContext = dbContext;
             _mapper = mapper;
             _logger = logger;
             _excelService = excelService;
+            _httpContextAccessor=httpContextAccessor;
         }
 
         public async Task<PaginatedResult<RoomsResponse>> GetPagination(RoomsRequest request)
@@ -112,8 +114,14 @@ namespace BusinessLogic.Services
                 }
 
                 var result = _mapper.Map<Rooms>(request);
-
                 await _dbContext.Rooms.AddAsync(result);
+                await _dbContext.SaveChangesAsync();
+
+                string baseUrl = GetBaseUrl();
+                string url = $"{baseUrl}/room-details/{result.Id}";
+                result.RoomCode = url;
+
+                _dbContext.Rooms.Update(result);
                 await _dbContext.SaveChangesAsync();
                 return await Result.SuccessAsync(MessageConstants.AddSuccess);
             }
@@ -122,6 +130,12 @@ namespace BusinessLogic.Services
                 _logger.LogError(ex, "Lỗi khi tạo mới: {Id}", request.Id);
                 return await Result.FailAsync(MessageConstants.AddFail);
             }
+        }
+        private string GetBaseUrl()
+        {
+            var request = _httpContextAccessor.HttpContext.Request;
+            string baseUrl = $"{request.Scheme}://{request.Host}"; 
+            return baseUrl;
         }
 
         public async Task<IResult> Update(RoomsDto request)
