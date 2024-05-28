@@ -109,6 +109,7 @@
                                     <div class="col-sm-12">
                                         <img id="qrCodeImage" alt="QR Code Image" width="100" height="100" />
                                     </div>
+                                    @* <button type="button" class="btn btn-success" onclick="saveBase64Image()">Lưu hình ảnh</button> *@
                                 </div>
                             </div>
                         </div>
@@ -130,3 +131,21 @@
         </div>
     </div>
 </div>
+@* <script>
+    function saveBase64Image() {
+        var imgElement = document.getElementById('qrCodeImage');
+        var base64Image = imgElement.src;
+
+        // Tạo một thẻ a ẩn để tải xuống
+        var link = document.createElement('a');
+        link.href = base64Image;
+        link.download = 'qr_code.png'; // Tên file tải xuống, bạn có thể thay đổi tên file tại đây
+
+        // Bấm vào liên kết để tải xuống
+        document.body.appendChild(link);
+        link.click();
+
+        // Xóa thẻ a khi đã tải xuống xong
+        document.body.removeChild(link);
+    }
+</script> *@

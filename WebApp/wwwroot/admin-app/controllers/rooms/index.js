@@ -555,7 +555,6 @@ var RoomsController = function () {
             var name = $('#txtName').val();
             var thumbnail = $('#txtImage').val();
             var roomTypeId = $('#txtRoomTypeId').val();
-            //var roomCode = $('#txtRoomCode').val();
             var price = $('#txtPrice').val();
             var location = $('#txtLocation').val();
             var acreage = $('#txtAcreage').val();
@@ -572,7 +571,6 @@ var RoomsController = function () {
                     Name: name,
                     Thumbnail: thumbnail,
                     RoomTypeId: roomTypeId,
-                    //RoomCode: roomCode,
                     Price: price,
                     Location: location,
                     Acreage: acreage,

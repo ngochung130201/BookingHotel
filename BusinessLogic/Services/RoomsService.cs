@@ -153,6 +153,8 @@ namespace BusinessLogic.Services
                     return await Result.FailAsync(string.Format(MessageConstants.CheckExists, "Tên phòng"));
                 }
 
+                request.RoomCode = rooms.RoomCode;
+
                 var updateRooms = _mapper.Map(request, rooms);
 
                 _dbContext.Rooms.Update(updateRooms);
