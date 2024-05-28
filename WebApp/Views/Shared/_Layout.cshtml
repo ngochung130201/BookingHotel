@@ -6,6 +6,8 @@
     ViewData["Title"] = Localizer["Layout"];
     var httpContext = ViewContext.HttpContext;
     string appDomain = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}";
+    bool isLoggedIn = !string.IsNullOrEmpty(User.GetSpecificClaim("UserId"));
+    string userName = isLoggedIn ? User.GetSpecificClaim("FullName") : string.Empty;
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -39,13 +41,34 @@
 
     @RenderBody()
 
-<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
-<df-messenger
-  intent="WELCOME"
-  chat-title="Royal_Hotel_chat"
-  agent-id="411c2fd7-b5ad-4113-98b5-560f85c37215"
-  language-code="en">
-</df-messenger>
+    @if (!isLoggedIn)
+    {
+        <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+        <df-messenger intent="WELCOME"
+                      chat-title="Royal_Hotel_chat"
+                      agent-id="411c2fd7-b5ad-4113-98b5-560f85c37215"
+                      language-code="en">
+        </df-messenger>
+    }
+    else
+    {
+        <!--Start of Tawk.to Script-->
+        <script type="text/javascript">
+            var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+            Tawk_API.visitor = {
+                name: "@Html.Raw(userName)"
+            };
+            (function () {
+                var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+                s1.async = true;
+                s1.src = 'https://embed.tawk.to/6655400e9a809f19fb35d324/1huug4eeh';
+                s1.charset = 'UTF-8';
+                s1.setAttribute('crossorigin', '*');
+                s0.parentNode.insertBefore(s1, s0);
+            })();
+        </script>
+        <!--End of Tawk.to Script-->
+    }
 
     <!--================ start footer Area  =================-->
     <footer class="footer-area section_gap">
