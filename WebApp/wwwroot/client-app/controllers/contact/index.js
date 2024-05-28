@@ -37,11 +37,20 @@ var sendContact = function (data) {
         url: '/PostFeedback',
         success: function (res) {
             if (res) {
-                alert("Send contact success");
+                base.notify('Send contact success!', 'success');
+                resetFormMaintainance();
             }
             else {
-                alert("Send contact error");
+                base.notify('Send contact error!', 'error');
             }
         }
     })
+}
+
+var resetFormMaintainance = function () {
+    $('#hidId').val(0);
+    $('#nameContact').val('');
+    $('#emailContact').val('');
+    $('#titleContact').val('');
+    $('#contentContact').val('');
 }
