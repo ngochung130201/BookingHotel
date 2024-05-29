@@ -1,5 +1,7 @@
-﻿@using Microsoft.AspNetCore.Mvc.Localization
+﻿@using BusinessLogic.Helpers
+@using Microsoft.AspNetCore.Mvc.Localization
 @model BusinessLogic.Wrapper.PaginatedResult<BusinessLogic.Dtos.Booking.BookingResponse>
+
 @inject IViewLocalizer Localizer
 @{
     ViewData["Title"] = Localizer["MyBooking"];
@@ -44,17 +46,20 @@
                         @{int i = 1;}
                         @foreach(var item in Model.Data){
                             <tr>
-                                <td>@i++</td>
+                                <td>@i</td>
                                 <td>@item.BookingCode</td>
-                                <td>@item.TransactionDate<td>
-                                <td>@item.Status</td>
+                                <td>@(item.TransactionDate.HasValue ? item.TransactionDate.Value.Date.ToString("dd-MM-yyyy") : "")</td>
+                                <td>@StringHelper.GetBookingStatusDescription(item.Status ?? null)</td>
                                 <td>@item.TotalAmount</td>
                                 <td class="text-center action-columns">
-                                    <a href="#" data-id="@item.Id">See details</a>
-                                </td>                              
+                                    <a href="my-booking-details/@item.Id">See details</a>
+                                </td>
+                                @{
+                                    i++;
+                                }                              
                             </tr>
                         }
-                        @if(i == 1){
+                        @if(!Model.Data.Any()){
                             <tr>
                                 <td colspan="6" style="text-align: center; vertical-align: middle;">@Localizer["You dont have any bookings yet"]</td>
                             </tr>

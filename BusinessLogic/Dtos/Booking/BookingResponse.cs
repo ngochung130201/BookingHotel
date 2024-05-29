@@ -22,8 +22,13 @@
 
         public int BookedRoomNumber { get; set; }
 
-        public int ServicesArising { get; set;}
+        public List<ServiceData>? ServicesArising { get; set; }
 
         public DateTime? CreatedOn { get; set; }
+    }
+    public class ServiceData
+    {
+        public int BookingId { get; set; }
+        public string Name { get; set; }
     }
 }

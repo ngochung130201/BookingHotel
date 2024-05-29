@@ -1,0 +1,123 @@
+﻿<div id="modal-add-edit" class="modal fade modal-darkorange in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%);">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="width: 60rem">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit Booking</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" id="formMaintainance">
+                    <input type="hidden" id="hidId" name="hidId" value="0" />
+                    <input type="hidden" id="txtUserId" name="UserId" value="0" />
+                    <input type="hidden" id="txtRoomId" name="RoomId" value="0" />
+                    @* FullName *@
+                     @* <div class="form-group row">
+                        <label for="txtFullName" class="col-sm-3 control-label">Tên khách hàng <span class="text-danger">*</span></label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="txtFullName" name="FullName"  />
+                        </div>
+                    </div> *@
+                    <div class="form-group row">
+                        <label for="txtBookingCode" class="col-sm-3 control-label">Mã đơn đặt phòng <span class="text-danger">*</span></label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="txtBookingCode" name="BookingCode"  />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="txtTransactionDate" class="col-sm-3 control-label">Ngày thực hiện đặt phòng</label>
+                        <div class="col-sm-9">
+                            <input type="date" class="form-control" id="txtTransactionDate" name="TransactionDate" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="txtCheckInDate" class="col-sm-3 control-label">Ngày nhận phòng</label>
+                        <div class="col-sm-9">
+                            <input type="date" class="form-control" id="txtCheckInDate" name="CheckInDate" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="txtCheckOutDate" class="col-sm-3 control-label">Ngày trả phòng</label>
+                        <div class="col-sm-9">
+                            <input type="date" class="form-control" id="txtCheckOutDate" name="CheckOutDate" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="txtStatus" class="col-sm-3 control-label">Trạng thái đơn đặt phòng <span class="text-danger">*</span></label>
+                        <div class="col-sm-9">
+                            <select class="custom-select" id="txtStatus" name="Status" required>
+                                <option value="1">Đơn mới</option>
+                                <option value="2">Đã đặt cọc</option>
+                                <option value="3">Đã thanh toán</option>
+                                <option value="4">Đã nhận phòng</option>
+                                <option value="5">Đã trả phòng</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="txtAdult" class="col-sm-3 control-label">Số lượng người lớn</label>
+                        <div class="col-sm-9">
+                            <input type="number" class="form-control" id="txtAdult" name="Adult" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="txtKid" class="col-sm-3 control-label">Số lượng trẻ em</label>
+                        <div class="col-sm-9">
+                            <input type="number" class="form-control" id="txtKid" name="Kid" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="txtTotalAmount" class="col-sm-3 control-label">Tổng tiền đơn đặt phòng <span class="text-danger">*</span></label>
+                        <div class="col-sm-9">
+                            <input type="number" class="form-control" id="txtTotalAmount" name="TotalAmount" required />
+                        </div>
+                    </div>
+                     <div class="form-group row">
+                        <label for="txtDownPayment" class="col-sm-3 control-label">Tiền đặt cọc phòng</label>
+                        <div class="col-sm-9">
+                            <input type="number" class="form-control" id="txtDownPayment" name="DownPayment" />
+                        </div>
+                    </div>
+                    @* <div class="form-group row">
+                        <label for="txtDownPayment" class="col-sm-3 control-label">Tiền đặt cọc phòng</label>
+                        <div class="col-sm-9">
+                            <input type="number" class="form-control" id="txtDownPayment" name="DownPayment" />
+                        </div>
+                    </div> *@
+
+                    <div class="form-group row">
+                        <label for="txtPayment" class="col-sm-3 control-label">Hình thức thanh toán</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="txtPayment" name="Payment" maxlength="255" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="txtMessage" class="col-sm-3 control-label">Lời nhắn</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" id="txtMessage" name="Message" maxlength="255"></textarea>
+                        </div>
+                    </div>
+
+                    @* <div class="form-group row">
+                        <label for="txtUserId" class="col-sm-3 control-label">Id tài khoản đặt phòng <span class="text-danger">*</span></label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="txtUserId" name="UserId" required maxlength="255" />
+                        </div>
+                    </div> *@
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnSave" class="btn btn-success">Lưu</button>
+                <button type="button" id="btnCancel" data-dismiss="modal" class="btn btn-danger">Hủy bỏ</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -26,7 +26,7 @@
     // Xử lý booking-form submit
     $('#booking-form').submit(function (e) {
         e.preventDefault(); // Ngăn chặn gửi form mặc định
-
+        
         // Lấy dữ liệu từ form và gán vào một đối tượng formData
         var formData = {
             Id: $('#hidId').val(),
@@ -35,7 +35,19 @@
             Adult: $('#Adult').val(),
             Kid: $('#Kid').val(),
             CheckInDate: $('#CheckInDate').val(),
-            CheckOutDate: $('#CheckOutDate').val()
+            CheckOutDate: $('#CheckOutDate').val(),
+            PhoneNumber: $('[name="PhoneNumber"]').val(),
+            RoomName: $('[name="RoomName"]').val(),
+            Adult: $('#Adult').val(),
+            Kid: $('#Kid').val(),
+            CheckInDate: $('#CheckInDate').val(),
+            CheckOutDate: $('#CheckOutDate').val(),
+            // Lấy giá trị của các checkbox đã chọn
+            SelectedCostIds: $('input[name="SelectedCostIds[]"]:checked').map(function() {
+               
+                return $(this).val();
+            }).get()
+
         };
 
         // Gửi AJAX request

@@ -14,6 +14,7 @@ namespace WebApp.Controllers
                                 IRoomsService roomsService,
                                 ICommentService commentService,
                                 IReplyCommentService replyCommentService,
+                                ICostBookingService costBookingService,
                                 IBookingService bookingService,
                                 ICurrentUserService currentUserService,
                                 IServicesServices servicesServices) : Controller
@@ -57,7 +58,13 @@ namespace WebApp.Controllers
             var email = currentUserService.Email;
             var phoneNumber = currentUserService.PhoneNumber;
             var userId = currentUserService.UserId;
-
+            var resultCostBooking = await costBookingService.GetPagination(new BusinessLogic.Dtos.CostOverrun.CostOverrunRequest
+            {
+                PageNumber = 1,
+                PageSize = 12,
+                IsExport = false,
+                
+            });
             var resultComment = await commentService.GetPagination(new CommentRequest
             {
                 RoomId = id,
@@ -78,13 +85,14 @@ namespace WebApp.Controllers
             });
 
             result.Services = resultServices.Data;
+            result.CostOverruns = resultCostBooking.Data;
             result.Comments = resultComment.Data;
             result.Room = resultRoomDetail.Data;
             result.Email = email;
             result.PhoneNumber = phoneNumber;
             result.FullName = fullName;
             result.UserId = userId;
-
+            
             return View(result);
         }
 

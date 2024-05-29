@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using BusinessLogic.Enums;
 
 namespace BusinessLogic.Helpers
 {
@@ -82,6 +83,28 @@ namespace BusinessLogic.Helpers
         public static string FormatPercentageChange(decimal change)
         {
             return string.Format("{0:0.00}%", change);
+        }
+        public static string GetBookingStatusDescription(short? status)
+        {
+            if (status == null)
+            {
+                return "Unknown status";
+            }
+            switch ((StatusBooking)status)
+            {
+                case StatusBooking.NewBooking:
+                    return nameof(StatusBooking.NewBooking); // New Booking
+                case StatusBooking.DownPayment:
+                    return nameof(StatusBooking.DownPayment); // Down Payment
+                case StatusBooking.Payment:
+                    return nameof(StatusBooking.Payment); // Payment
+                case StatusBooking.CheckIn:
+                    return nameof(StatusBooking.CheckIn); // Check-In
+                case StatusBooking.CheckOut:
+                    return nameof(StatusBooking.CheckOut); // Check-Out
+                default:
+                    return "Unknown status"; // Fallback for unknown values
+            }
         }
     }
 }

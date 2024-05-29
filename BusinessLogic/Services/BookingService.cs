@@ -3,6 +3,7 @@ using BusinessLogic.Constants.Messages;
 using BusinessLogic.Contexts;
 using BusinessLogic.Dtos.Booking;
 using BusinessLogic.Entities;
+using BusinessLogic.Enums;
 using BusinessLogic.Services.Common;
 using BusinessLogic.Wrapper;
 using ClosedXML.Excel;
@@ -27,6 +28,7 @@ namespace BusinessLogic.Services
         Task<IResult> ChangeStatusAsync(int id);
 
         byte[]? ExportExcel(BookingRequest request);
+        Task<int> GetNotification();
     }
 
     public class BookingService : IBookingService
@@ -48,11 +50,7 @@ namespace BusinessLogic.Services
         {
             var query = from b in _dbContext.Bookings.Where(b => !b.IsDeleted && (request.UserId == null || b.UserId == request.UserId))
                         join u in _dbContext.Users.Where(x => !x.IsDeleted) on b.UserId equals u.Id
-                        join sb in _dbContext.SpecialDayBooking.Where(x => !x.IsDeleted) on b.Id equals sb.BookingId
-                        join pm in _dbContext.PriceManager.Where(x => !x.IsDeleted) on sb.SpecialDayId equals pm.Id
-                        where (string.IsNullOrEmpty(request.Keyword)
-                            || u.FullName.ToLower().Contains(request.Keyword.ToLower())
-                            || b.Status!.HasValue && request.Status != null && request.Status == b.Status)
+
                         select new BookingResponse
                         {
                             Id = b.Id,
@@ -66,16 +64,23 @@ namespace BusinessLogic.Services
                                                 join rb in _dbContext.Bookings.Where(x => !x.IsDeleted) on br.BookingId equals rb.Id
                                                 where !r.IsDeleted
                                                 select r).Count(),
-                            ServicesArising = (from c in _dbContext.CostOverrun
-                                               join cb in _dbContext.CostBooking.Where(x => !x.IsDeleted) on c.Id equals cb.CostId
-                                               join bc in _dbContext.Bookings.Where(x => !x.IsDeleted) on cb.BookingId equals bc.Id
-                                               where !c.IsDeleted
-                                               select c).Count(),
+                            ServicesArising = (from k in _dbContext.CostBooking
+                                               join c in _dbContext.CostOverrun.Where(x => !x.IsDeleted) on k.CostId equals c.Id
+                                               where !k.IsDeleted && k.BookingId == b.Id
+                                               select new ServiceData()
+                                               {
+                                                   BookingId = k.BookingId,
+                                                   Name = c.Name,
+                                               }).ToList(),
                             TotalAmount = b.TotalAmount,
                             Status = b.Status,
                             CreatedOn = b.CreatedOn,
-                        };
+                            UserId = b.UserId,
 
+                        };
+          
+
+  
             var totalRecord = query.Count();
 
             var roomsList = await query.OrderBy(request.OrderBy)
@@ -92,8 +97,7 @@ namespace BusinessLogic.Services
         {
             var booking = await (from b in _dbContext.Bookings
                                  join u in _dbContext.Users.Where(x => !x.IsDeleted) on b.UserId equals u.Id
-                                 join sb in _dbContext.SpecialDayBooking.Where(x => !x.IsDeleted) on b.Id equals sb.BookingId
-                                 join pm in _dbContext.PriceManager.Where(x => !x.IsDeleted) on sb.SpecialDayId equals pm.Id
+            
                                  where !b.IsDeleted 
                                  select new BookingDto()
                                  {
@@ -108,38 +112,59 @@ namespace BusinessLogic.Services
                                      Payment = b.Payment,
                                      Message = b.Message,
                                      FullName = u != null ? u.FullName : null,
-                                     BookingDetailDto = (from bd in _dbContext.BookingDetail
-                                                         join r in _dbContext.Rooms.Where(x => !x.IsDeleted) on bd.RoomId equals r.Id
-                                                         where !bd.IsDeleted && bd.BookingId == b.Id
-                                                         select new BookingDetailDto()
-                                                         {
-                                                             RoomId = r.Id,
-                                                             Image = r.Thumbnail,
-                                                             Name = r.Name,
-                                                             Price = r.Price,
-                                                         }).ToList(),
-                                     CostBookingDto = (from cb in _dbContext.CostBooking
-                                                       join c in _dbContext.CostOverrun.Where(x => !x.IsDeleted) on cb.CostId equals c.Id
-                                                       where !cb.IsDeleted && cb.BookingId == b.Id
-                                                       select new CostBookingDto()
-                                                       {
-                                                           CostId = c.Id,
-                                                           Image = c.Image,
-                                                           Name = c.Name,
-                                                           Price = c.Price,
-                                                       }).ToList(),
-                                     SpecialDayBookingDto = new SpecialDayBookingDto()
-                                     {
-                                         Id = pm.Id,
-                                         Title = pm.Title,
-                                         PercentDiscount = pm.PercentDiscount,
-                                         Description = pm.Description,
-                                     }
+                                     UserId = b.UserId,
+                                     Id = b.Id,
+                                     DownPayment = b.DownPayment,
+                                     SelectedCostIds = (from cb in _dbContext.CostBooking.Where(x => !x.IsDeleted) where cb.BookingId == id select cb.CostId).ToList(),
+                                                       
                                  }).FirstOrDefaultAsync();
+            //  join sb in _dbContext.SpecialDayBooking.Where(x => !x.IsDeleted) on b.Id equals sb.BookingId
+            //  join pm in _dbContext.PriceManager.Where(x => !x.IsDeleted) on sb.SpecialDayId equals pm.Id
+            var bc = (from bd in _dbContext.BookingDetail
+                      join r in _dbContext.Rooms.Where(x => !x.IsDeleted) on bd.RoomId equals r.Id
+                      where !bd.IsDeleted && bd.BookingId == id
+                      select new BookingDetailDto()
+                      {
+                          RoomId = r.Id,
+                          Image = r.Thumbnail,
+                          Name = r.Name,
+                          Price = r.Price,
+                      }).ToList();
+            var sd = (from sb in _dbContext.SpecialDayBooking
+                      join pm in _dbContext.PriceManager.Where(x => !x.IsDeleted) on sb.SpecialDayId equals pm.Id
+                      where !sb.IsDeleted && sb.BookingId == id
+                      select new SpecialDayBookingDto()
+                      {
+                          Id = pm.Id,
+                          Title = pm.Title,
+                          PercentDiscount = pm.PercentDiscount,
+                          Description = pm.Description,
+                      }).FirstOrDefault();
+            var cb = (from k in _dbContext.CostBooking
+                      join c in _dbContext.CostOverrun.Where(x => !x.IsDeleted) on k.CostId equals c.Id
+                      where !k.IsDeleted && k.BookingId == id
+                      select new CostBookingDto()
+                      {
+                          CostId = c.Id,
+                          Image = c.Image,
+                          Name = c.Name,
+                          Price = c.Price,
+                      }).ToList();
 
+            booking.BookingDetailDto = bc;
+            booking.SpecialDayBookingDto = sd;
+            booking.CostBookingDto = cb;
+            booking.RoomId = (int)bc.Select(x => x.RoomId).FirstOrDefault(); 
             var result = _mapper.Map<BookingDto>(booking);
 
             return await Result<BookingDto>.SuccessAsync(result ?? new BookingDto());
+        }
+        public DateTime ConvertDateTimeToDateTimeUtc(DateTime? dateTime)
+        {
+            if(dateTime.HasValue){
+                return DateTime.SpecifyKind(dateTime.Value, DateTimeKind.Utc);
+            }
+            return DateTime.UtcNow;
         }
 
         public async Task<IResult> Add(BookingDto request)
@@ -147,19 +172,54 @@ namespace BusinessLogic.Services
             var userId = _currentUserService.UserId;
 
             request.UserId = userId;
-            request.TransactionDate = DateTime.Now;
+            request.TransactionDate = DateTime.UtcNow.Date;
 
             var result = _mapper.Map<Bookings>(request);
 
             await using var transaction = await _dbContext.Database.BeginTransactionAsync();
             try
             {
-                await _dbContext.Bookings.AddAsync(result);
+                var booking = new Bookings()
+                {
+                    UserId = request.UserId,
+                    BookingCode = request.BookingCode ?? string.Empty,
+                    TransactionDate = ConvertDateTimeToDateTimeUtc(request.TransactionDate),
+                    CheckInDate = ConvertDateTimeToDateTimeUtc(request.CheckInDate),
+                    CheckOutDate = ConvertDateTimeToDateTimeUtc(request.CheckOutDate),
+                    Adult = request.Adult,
+                    Kid = request.Kid,
+                    TotalAmount = request.TotalAmount ?? 0,
+                    Payment = request.Payment,
+                    Message = request.Message,
+                    Status = (short)StatusBooking.NewBooking,
+                    DownPayment = request.DownPayment ?? 0,
+                    CreatedBy = request.UserId,
+                    CreatedOn = DateTime.UtcNow,
+                    IsDeleted = false,
+                    LastModifiedBy = DateTime.UtcNow.Date.ToString(),
+                    LastModifiedOn = DateTime.UtcNow.Date,
+                };
+                // after result is created, we change dateTime to dateTimeutc
+                await _dbContext.Bookings.AddAsync(booking);
                 await _dbContext.SaveChangesAsync();
+                // Add CostBooking
+                if (request.SelectedCostIds != null)
+                {
+                    foreach (var costId in request.SelectedCostIds)
+                    {
+                        var costBooking = new CostBooking()
+                        {
+                            BookingId = booking.Id,
+                            CostId = costId,
+                        };
+                        await _dbContext.CostBooking.AddAsync(costBooking);
+                    }
+
+                }
 
                 var bookingDetail = new BookingDetail()
                 {
-                    BookingId = result.Id,
+                    BookingId = booking.Id,
                     RoomId = request.RoomId
                 };
 
@@ -257,23 +317,16 @@ namespace BusinessLogic.Services
             await using var transaction = await _dbContext.Database.BeginTransactionAsync();
             try
             {
-                if (request.Status == 0)
-                {
-                    bookingDetail!.RoomId = request.RoomId;
-                    _dbContext.BookingDetail.Update(bookingDetail);
-
-                    var updateBooking = _mapper.Map(request, booking);
-                    _dbContext.Bookings.Update(updateBooking);
-                }
-                else
-                {
-                    return await Result.FailAsync(MessageConstants.UpdateFail);
-                }
-
+                var updateBooking = _mapper.Map(request, booking);
+                updateBooking.CheckInDate = ConvertDateTimeToDateTimeUtc(updateBooking.CheckInDate);
+                updateBooking.CheckOutDate = ConvertDateTimeToDateTimeUtc(updateBooking.CheckOutDate);
+                updateBooking.TransactionDate = ConvertDateTimeToDateTimeUtc(updateBooking.TransactionDate);
+                updateBooking.BookingCode = string.IsNullOrEmpty(request.BookingCode) ? "" : request.BookingCode;
+                _dbContext.Bookings.Update(updateBooking);
                 await _dbContext.SaveChangesAsync();
                 await transaction.CommitAsync();
+                return await Result.SuccessAsync(MessageConstants.UpdateSuccess);
 
-                return await Result.SuccessAsync(MessageConstants.AddSuccess);
             }
             catch (Exception e)
             {
@@ -312,8 +365,13 @@ namespace BusinessLogic.Services
             var booking = await _dbContext.Bookings.Where(x => !x.IsDeleted && x.Id == id).FirstOrDefaultAsync();
 
             if (booking == null) return await Result.FailAsync(MessageConstants.NotFound);
-
-            booking.Status = 1;   
+            
+            if(booking.Status == 1){
+                booking.Status = 5;
+            }
+            else {
+                booking.Status = 1;
+            }
 
             _dbContext.Bookings.Update(booking);
             await _dbContext.SaveChangesAsync();
@@ -344,12 +402,14 @@ namespace BusinessLogic.Services
                                                     join rb in _dbContext.Bookings.Where(x => !x.IsDeleted) on br.BookingId equals rb.Id
                                                     where !r.IsDeleted
                                                     select r).Count(),
-                                ServicesArising = (from c in _dbContext.CostOverrun
-                                                   join cb in _dbContext.CostBooking.Where(x => !x.IsDeleted) on c.Id equals cb.CostId
-                                                   join bc in _dbContext.Bookings.Where(x => !x.IsDeleted) on cb.BookingId equals bc.Id
-                                                   where !c.IsDeleted
-                                                   select c).Count(),
-                                TotalAmount = b.TotalAmount,
+                                     ServicesArising = (from k in _dbContext.CostBooking
+                                               join c in _dbContext.CostOverrun.Where(x => !x.IsDeleted) on k.CostId equals c.Id
+                                               where !k.IsDeleted && k.BookingId == b.Id
+                                               select new ServiceData()
+                                               {
+                                                   BookingId = k.BookingId,
+                                                   Name = c.Name,
+                                               }).ToList(),
                                 Status = b.Status,
                                 CreatedOn = b.CreatedOn,
                             };
@@ -389,7 +449,7 @@ namespace BusinessLogic.Services
                         worksheet.Cell(i + 2, 4).Value = bookings[i].CheckInDate;
                         worksheet.Cell(i + 2, 5).Value = bookings[i].CheckOutDate;
                         worksheet.Cell(i + 2, 6).Value = bookings[i].BookedRoomNumber;
-                        worksheet.Cell(i + 2, 7).Value = bookings[i].ServicesArising;
+                        worksheet.Cell(i + 2, 7).Value = string.Join(", ", bookings[i].ServicesArising);
                         worksheet.Cell(i + 2, 8).Value = bookings[i].TotalAmount;
                         worksheet.Cell(i + 2, 9).Value = bookings[i].TransactionDate;
                     }
@@ -419,6 +479,13 @@ namespace BusinessLogic.Services
                 _logger.LogError(ex, "Lỗi khi xuất file excel");
                 return null;
             }
+        }
+
+        public async Task<int> GetNotification()
+        {
+            var totalBooking = await _dbContext.Bookings.Where(x=>x.Status == (short)StatusBooking.NewBooking
+                                                                && x.TransactionDate.Value.Date == DateTime.UtcNow.Date && x.IsDeleted == false).CountAsync();
+            return totalBooking;
         }
     }
 }

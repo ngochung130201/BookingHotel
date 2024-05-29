@@ -1,4 +1,10 @@
-﻿@using WebApp.Extensions
+﻿ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <style>
+    .slimScrollDiv {
+        width: 100% !important;
+    }
+ </style>
+@using WebApp.Extensions
 @{
     var httpContext = ViewContext.HttpContext;
     string appDomain = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}";
@@ -22,9 +28,10 @@
         </li>
 
         <li class="dropdown notification-list">
-            <a class="nav-link dropdown-toggle  waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+            <a class="nav-link dropdown-toggle  waves-effect waves-light" data-toggle="dropdown" href="#" role="button"
+                aria-haspopup="false" aria-expanded="false">
                 <i class="fe-bell noti-icon"></i>
-                <span class="badge badge-danger rounded-circle noti-icon-badge">4</span>
+          <span id="notificationBadge" class="badge badge-danger rounded-circle noti-icon-badge">0</span>
             </a>
             <div class="dropdown-menu dropdown-menu-right dropdown-lg">
 
@@ -32,16 +39,17 @@
                 <div class="dropdown-item noti-title">
                     <h5 class="m-0">
                         <span class="float-right">
-                            <a href="" class="text-dark">
-                                <small>Clear All</small>
-                            </a>
+                               <button id="clearAllButton" class="btn btn-secondary">Clear All</button>
                         </span>Notification
                     </h5>
                 </div>
+                @* <div class="dropdown-menu dropdown-menu-right" id="notificationDropdown">
+                    <!-- Notifications will be dynamically inserted here -->
+                </div> *@
 
-                <div class="slimscroll noti-scroll">
+                <div class="slimscroll noti-scroll" id="notificationDropdown" style="width: 100% !important;">
 
-                    <!-- item-->
+                    @* <!-- item-->
                     <a href="javascript:void(0);" class="dropdown-item notify-item active">
                         <div class="notify-icon bg-soft-primary text-primary">
                             <i class="mdi mdi-comment-account-outline"></i>
@@ -63,27 +71,6 @@
                         </p>
                     </a>
 
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <div class="notify-icon">
-                            <img src="~/assets/admin/images/users/avatar-4.jpg" class="img-fluid rounded-circle" alt="">
-                        </div>
-                        <p class="notify-details">Karen Robinson</p>
-                        <p class="text-muted mb-0 user-msg">
-                            <small>Wow ! this admin looks good and awesome design</small>
-                        </p>
-                    </a>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <div class="notify-icon bg-soft-warning text-warning">
-                            <i class="mdi mdi-account-plus"></i>
-                        </div>
-                        <p class="notify-details">
-                            New user registered.
-                            <small class="text-muted">5 hours ago</small>
-                        </p>
-                    </a>
 
                     <!-- item-->
                     <a href="javascript:void(0);" class="dropdown-item notify-item">
@@ -106,7 +93,7 @@
                             <b>Admin</b>
                             <small class="text-muted">13 days ago</small>
                         </p>
-                    </a>
+                    </a> *@
                 </div>
 
                 <!-- All-->
@@ -119,7 +106,8 @@
         </li>
 
         <li class="dropdown notification-list">
-            <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+            <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#"
+                role="button" aria-haspopup="false" aria-expanded="false">
                 @if (!string.IsNullOrEmpty(User.GetSpecificClaim("Avatar")))
                 {
                     <img src="@appDomain@User.GetSpecificClaim("Avatar")" alt="user-image" class="rounded-circle">
@@ -178,8 +166,12 @@
         </li>
     </ul>
 </div>
-
 <script>
+      function clearNotifications() {
+            $('#notificationDropdown').html('');
+             $('#notificationBadge').text('0');
+        }
+
     function logout() {
         $.ajax({
             type: "POST",
@@ -188,5 +180,49 @@
                 window.location.href = "/Admin/Login";
             }
         });
-    };
+    }
+
+    function loadNotifications() {
+        $.ajax({
+            type: "GET",
+            url: "/Admin/Booking/Notification",
+            dataType: "json",
+            success: function (response) {
+                var notificationHtml = '';
+                var orderCount = response; // The response should be the count of new bookings
+
+                if (orderCount > 0) {
+                    notificationHtml = `
+                        <a href="javascript:void(0);" class="dropdown-item notify-item active">
+                        <div class="notify-icon bg-soft-primary text-primary">
+                            <i class="mdi mdi-comment-account-outline"></i>
+                        </div>
+                        <p class="notify-details">
+                            Have ${orderCount} orders that need confirmation today
+                        </p>
+                    </a>
+                    `;
+                } else {
+                    notificationHtml = '<p>No pending orders</p>';
+                }
+
+                $('#notificationDropdown').html(notificationHtml);
+                  $('#notificationBadge').text(orderCount);
+            },
+            error: function () {
+                $('#notificationDropdown').html('<p>Error loading notifications</p>');
+            }
+        });
+    }
+
+    // Call the function to load notifications on page load
+    $(document).ready(function() {
+        loadNotifications();
+
+        // Optionally, refresh notifications periodically (e.g., every 30 seconds)
+        setInterval(loadNotifications, 30000);
+           $('#clearAllButton').click(function() {
+                clearNotifications();
+            });
+    });
 </script>

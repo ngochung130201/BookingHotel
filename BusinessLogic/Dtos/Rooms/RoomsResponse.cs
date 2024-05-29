@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.Dtos.Comment;
+using BusinessLogic.Dtos.CostOverrun;
 using BusinessLogic.Dtos.RoomTypes;
 using BusinessLogic.Dtos.Service;
 using BusinessLogic.Services;
@@ -52,6 +53,7 @@ namespace BusinessLogic.Dtos.Rooms
         public List<CommentResponse> Comments { get; set; } = new();
         public List<ReplyCommentResponse> Replies { get; set; } = new();
         public List<ServiceResponse> Services { get; set; } = new();
+        public List<CostOverrunResponse> CostOverruns { get; set; } = new();
         public string? FullName { get; set; }
         public string? PhoneNumber { get; set; }
         public string? Email { get; set; }

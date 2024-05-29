@@ -1,4 +1,6 @@
-﻿namespace BusinessLogic.Dtos.Booking
+﻿using BusinessLogic.Dtos.CostOverrun;
+
+namespace BusinessLogic.Dtos.Booking
 {
     public class BookingDto
     {
@@ -31,17 +33,23 @@
         public int RoomId { get; set; }
 
         public decimal? DownPayment { get; set; }
+        public List<int> SelectedCostIds { get; set; } = new List<int>();
 
+         // Các thuộc tính khác của BookingDto
+    
+        public List<CostOverrunDto> CostOverruns { get; set; } = new List<CostOverrunDto>();
+        public List<CostBookingDto>? CostBookingDto { get; set; }
         public List<BookingDetailDto>? BookingDetailDto { get; set; }
 
-        public List<CostBookingDto>? CostBookingDto { get; set; }
 
         public SpecialDayBookingDto? SpecialDayBookingDto { get; set; }
     }
+     
 
     public class CostBookingDto
     {
         public int? CostId { get; set; }
+        public int? BookingId { get; set; }
 
         public string? Image { get; set; }
 

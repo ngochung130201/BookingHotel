@@ -143,49 +143,85 @@
                             <form id="booking-form" class="inner">
                                 <div class="form-group">
                                     <input type="hidden" name="Id" id="hidId" value="0" />
-                                    <input type="hidden" name="TotalAmount" id="txtTotalAmount" value="@Model.Room.Price" />
+                                    <input type="hidden" name="TotalAmount" id="txtTotalAmount"
+                                        value="@Model.Room.Price" />
                                     <input type="hidden" name="RoomId" id="txtRoomId" value="@Model.Room.Id" />
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" name="FullName" value="@Model.FullName" placeholder="Enter Your Name" type="text">
+                                    <input class="form-control" name="FullName" value="@Model.FullName"
+                                        placeholder="Enter Your Name" type="text">
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" name="Email" value="@Model.Email" placeholder="Enter Your Email Address" type="email">
+                                    <input class="form-control" name="Email" value="@Model.Email"
+                                        placeholder="Enter Your Email Address" type="email">
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" name="PhoneNumber" value="@Model.PhoneNumber" placeholder="Enter Your Phone Number" type="text">
+                                    <input class="form-control" name="PhoneNumber" value="@Model.PhoneNumber"
+                                        placeholder="Enter Your Phone Number" type="text">
                                 </div>
                                 <div class="form-group">
                                     <div class="form_select">
-                                        <input class="form-control" name="RoomName" value="@Model.Room.Name" type="text" readonly>
+                                        <input class="form-control" name="RoomName" value="@Model.Room.Name" type="text"
+                                            readonly>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12 nopadding">
                                     <div class="form_select">
-                                        <input class="form-control" name="Adult" id="Adult" value="@Model.Room.Adult" type="text" readonly>
+                                        <input class="form-control" name="Adult" id="Adult" value="@Model.Room.Adult"
+                                            type="text" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12 nopadding">
                                     <div class="form_select">
-                                        <input class="form-control" name="Kid" id="Kid" value="@Model.Room.Kid" type="text" readonly>
+                                        <input class="form-control" name="Kid" id="Kid" value="@Model.Room.Kid"
+                                            type="text" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12 nopadding">
                                     <div class="input-group">
                                         <div class="form_date">
-                                            <input type="date" class="datepicker form-control md_noborder_right" name="CheckInDate" id="CheckInDate" placeholder="Arrival Date" required>
+                                            <input type="date" class="datepicker form-control md_noborder_right"
+                                                name="CheckInDate" id="CheckInDate" placeholder="Arrival Date" required>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12 nopadding">
                                     <div class="input-group">
                                         <div class="form_date">
-                                            <input type="date" class="datepicker form-control" name="CheckOutDate" id="CheckOutDate" placeholder="Departure Date" required>
+                                            <input type="date" class="datepicker form-control" name="CheckOutDate"
+                                                id="CheckOutDate" placeholder="Departure Date" required>
                                         </div>
                                     </div>
                                 </div>
-                                <button class="button btn_lg btn_blue btn_full" id="btn-booking" type="submit">BOOK A ROOM NOW</button>
+                                @* Cost Booking *@
+                                <div class="container mt-5">
+                                    <h2 class="mb-4">Services Arising</h2>
+                                    <ul class="list-group">
+                                        <!-- Example Product Item -->
+                                        @if (Model.CostOverruns != null && Model.CostOverruns.Any())
+                                        {
+                                            foreach (var item in Model.CostOverruns)
+                                            {
+                                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                    <div class="form-check" style="display: flex; align-content: center">
+                                                        <input class="form-check-input" value="@item.Id" type="checkbox"
+                                                            id="SelectedCostIds@(item.Id)" name="SelectedCostIds[]">
+                                                        <label class="form-check-label" style="margin-left: 4px;"
+                                                            for="SelectedCostIds@(item.Id)">
+                                                            @item.Name
+                                                        </label>
+                                                    </div>
+                                                    <span class="badge badge-primary badge-pill">@item.Price.ToString("F2")</span>
+                                                </li>
+                                            }
+                                        }
+                                        <!-- Add more product items as needed -->
+                                    </ul>
+                                </div>
+                                <button class="button btn_lg btn_blue btn_full" id="btn-booking" type="submit">BOOK A
+                                    ROOM NOW</button>
                             </form>
+
                         </div>
                     </aside>
                     <aside class="widget">

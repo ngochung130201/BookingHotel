@@ -44,14 +44,18 @@
                         @{
                             int i = 1;
                         }
-                        @foreach (var item in Model.BookingDetailDto!)
+                        @foreach (var item in Model.BookingDetailDto)
                         {
                             <tr>
-                                <td>@i++</td>
+                                <td>@i</td>
                                 <td>@item.Name</td>
-                                <td>@item.Image</td>
+                                <td><img src="@appDomain@item.Image" alt="" srcset=""></td>
                                 <td>@item.Price</td>
                             </tr>
+                            {
+                                i++;
+                            
+                            }
                         }
                     </tbody>
                 </table>
@@ -85,11 +89,14 @@
                             foreach (var item in Model.CostBookingDto)
                             {
                                 <tr>
-                                    <td>@j++</td>
+                                    <td>@j</td>
                                     <td>@item.Name</td>
                                     <td>@item.Image</td>
                                     <td>@item.Price</td>
                                 </tr>
+                                {
+                                    j++;
+                                }
                             }
                         }
                     </tbody>
