@@ -32,11 +32,11 @@ $(document).ready(function () {
             success: function (response) {
                 // Xử lý response ở đây nếu cần
                 console.log(response);
-                alert("Send comment success");
+                base.notify('Send comment success', 'success');
                 location.reload();
             },
             error: function () {
-                alert("Failed to send comment");
+                base.notify('Failed to send comment', 'error');
             }
         });
     });

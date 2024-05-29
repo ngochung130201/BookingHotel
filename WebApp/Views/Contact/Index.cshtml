@@ -5,9 +5,6 @@
 }
 
 @section Scripts {
-    <!--gmaps Js-->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
-    <script src="~/assets/landing-page/js/gmaps.min.js"></script>
     <!-- contact js -->
     <script src="~/assets/landing-page/js/jquery.form.js"></script>
     <script src="~/assets/landing-page/js/jquery.validate.min.js"></script>
@@ -16,7 +13,27 @@
 
     <script src="~/client-app/controllers/contact/index.js" asp-append-version="true"></script>
 }
+@section Styles {
+    <style>
+        /* Đặt khung chứa iframe có chiều rộng 100% và chiều cao tự động */
+        .map-container {
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* Tỷ lệ khung hình 16:9 */
+            position: relative;
+        }
 
+        /* Đặt iframe có chiều rộng và chiều cao 100%, với vị trí tuyệt đối */
+        .map-container iframe {
+            width: 100%;
+            height: 80%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border: 0;
+        }
+    </style>
+}
 <!--================Breadcrumb Area =================-->
 <section class="breadcrumb_area">
     <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
@@ -34,13 +51,8 @@
 <!--================Contact Area =================-->
 <section class="contact_area section_gap">
     <div class="container">
-        <div id="mapBox" class="mapBox"
-             data-lat="16.073867"
-             data-lon="108.147314"
-             data-zoom="13"
-             data-info="54 Nguyễn Lương Bằng, Hòa Khánh, Liên Chiểu, Đà Nẵng, Việt Nam."
-             data-mlat="16.073867"
-             data-mlon="108.147314">
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3833.8385242243926!2d108.1473139757603!3d16.07386703931251!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314218d68e8ccb03%3A0x64dc2cb3e38bbdaf!2zNTQgTmd1eeG7hW4gTMawxqFuZyBC4bqxbmcsIEhvw6AgS2jDoW5oIELhuq9jLCBMacOqbiBDaGnhu4N1LCDEkMOgIE7hurVuZyA1NTAwMDAsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1716947523703!5m2!1svi!2s" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
         <div class="row">
             <div class="col-md-3">
